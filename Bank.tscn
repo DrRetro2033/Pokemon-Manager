@@ -1,0 +1,905 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://pkm.gd" type="Script" id=1]
+[ext_resource path="res://Futura Condensed Extra Bold.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://pokemon-gen7x/regular/abomasnow.png" type="Texture" id=3]
+[ext_resource path="res://Move.gd" type="Script" id=4]
+[ext_resource path="res://Essentiarum Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://bank_manager.gd" type="Script" id=6]
+[ext_resource path="res://Bank_Layout.gd" type="Script" id=7]
+[ext_resource path="res://Box.tscn" type="PackedScene" id=8]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Panel
+
+const path = \"res://pokemon-gen7x/regular/\"
+onready var sprite = $TextureRect
+onready var type1_color = $Type1
+onready var type2_color = $Type2
+onready var type1 = $Type1/Label
+onready var type2 = $Type2/Label
+onready var one_type = $OnlyOneType/Label
+onready var one_type_color = $OnlyOneType
+onready var text = $RichTextLabel
+onready var poke_name = $Name
+onready var species = $Species
+onready var gender = $Gender/Label
+onready var gender_color = $Gender
+enum types {
+	NULL,
+	NORMAL,
+	FIRE,
+	WATER,
+	GRASS,
+	ELECTRIC,
+	ICE,
+	FIGHTING,
+	POISON,
+	GROUND,
+	FLYING,
+	PSYCHIC,
+	BUG,
+	ROCK,
+	GHOST,
+	DARK,
+	DRAGON,
+	STEEL,
+	FAIRY
+}
+
+
+func _on_Back_pressed():
+	visible = false
+
+func types(var type, var node):
+	match type: #sets the text and color for the type2
+		types.NULL:
+			node.get_child(0).text = \"n/a\"
+			node.color = Color8(66,66,66,255)
+		types.NORMAL:
+			node.get_child(0).text = \"c\"
+			node.color = Color(\"#c3c2a4\")
+		types.FIRE:
+			node.get_child(0).text = \"r\"
+			node.color = Color(\"#df2c04\")
+		types.WATER:
+			node.get_child(0).text = \"w\"
+			node.color = Color(\"#3578f4\")
+		types.GRASS:
+			node.get_child(0).text = \"g\"
+			node.color = Color(\"#57a031\")
+		types.ELECTRIC:
+			node.get_child(0).text = \"l\"
+			node.color = Color(\"#f8c81d\")
+		types.ICE:
+			node.get_child(0).text = \"i\"
+			node.color = Color(\"#81e0e5\")
+		types.FIGHTING:
+			node.get_child(0).text = \"f\"
+			node.color = Color(\"#6d2818\")
+		types.POISON:
+			node.get_child(0).text = \"o\"
+			node.color = Color(\"#9345b3\")
+		types.GROUND:
+			node.get_child(0).text = \"a\"
+			node.color = Color(\"#d1b85e\")
+		types.FLYING:
+			node.get_child(0).text = \"v\"
+			node.color = Color(\"#84afff\")
+		types.PSYCHIC:
+			node.get_child(0).text = \"p\"
+			node.color = Color(\"#ff398b\")
+		types.BUG:
+			node.get_child(0).text = \"b\"
+			node.color = Color(\"#bdc45b\")
+		types.ROCK:
+			node.get_child(0).text = \"k\"
+			node.color = Color(\"#b29e59\")
+		types.GHOST:
+			node.get_child(0).text = \"h\"
+			node.color = Color(\"#5d66a6\")
+		types.DARK:
+			node.get_child(0).text = \"d\"
+			node.color = Color(\"#442d04\")
+		types.DRAGON:
+			node.get_child(0).text = \"n\"
+			node.color = Color(\"#8c79dc\")
+		types.STEEL:
+			node.get_child(0).text = \"m\"
+			node.color = Color(\"#b7b7ce\")
+		types.FAIRY:
+			node.get_child(0).text = \"y\"
+			node.color = Color(\"#f0aee1\")
+
+
+func open(info):
+	visible = true
+	types(info[0][1],type1_color)
+	one_type_color.color = type1_color.color
+	one_type.text = type1.text
+	types(info[0][2],type2_color)
+	if type2.text == \"n/a\":
+		one_type_color.visible = true
+		type1_color.visible = false
+		type2_color.visible = false
+	else:
+		one_type_color.visible = false
+		type1_color.visible = true
+		type2_color.visible = true
+	poke_name.text = info[1][1]
+	var species_name = info[0][0]
+	species_name[0] = species_name.left(1).to_upper()
+	species.text = species_name
+	match info[1][2]:
+		0:
+			gender.text = \"male\"
+			gender_color.color = Color(\"#12a7da\")
+		2:
+			gender.text = \"female\"
+			gender_color.color = Color(\"#fc92ff\")
+		4:
+			gender.text = \"n/a\"
+			gender_color.color = Color(\"#424242\")
+	var moves = 4
+	while moves > 0:
+		var move
+		var child
+		match moves:
+			1:
+				move = info[1][4][0]
+				child = get_node(\"GridContainer/Move1\")
+			2:
+				move = info[1][4][1]
+				child = get_node(\"GridContainer/Move2\")
+			3:
+				move = info[1][4][2]
+				child = get_node(\"GridContainer/Move3\")
+			4:
+				move = info[1][4][3]
+				child = get_node(\"GridContainer/Move4\")
+		child.move(move[0],move[1],move[2],move[3],move[4])
+		moves -= 1
+	text.text = info[2][0]
+	var path_name = info[0][0]
+	var temp_path = path+path_name.to_lower()+\".png\"
+	sprite.set_texture(load(temp_path))
+	print(info)
+"
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 48
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 20
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=8]
+font_data = ExtResource( 2 )
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends Panel
+
+
+var text = {
+	\"api\":\"Fetching info from the web...\",
+	\"reading\":\"Reading bank file...\",
+	\"layout\":\"Organizing the bank...\",
+}
+
+func _ready():
+	pass # Replace with function body.
+
+func switch(x):
+	$Label.text = text[x]
+
+
+"
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tab_align = 0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box1" parent="TabContainer" instance=ExtResource( 8 )]
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -256.0
+margin_bottom = 256.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="Type1" type="ColorRect" parent="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -240.0
+margin_top = 316.0
+margin_right = -136.0
+margin_bottom = 352.0
+color = Color( 0.258824, 0.258824, 0.258824, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/Type1"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -52.0
+margin_top = -18.0
+margin_right = 52.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 6 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="Type2" type="ColorRect" parent="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -120.0
+margin_top = 316.0
+margin_right = -16.0
+margin_bottom = 352.0
+color = Color( 0.258824, 0.258824, 0.258824, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/Type2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -52.0
+margin_top = -18.0
+margin_right = 52.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 6 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="OnlyOneType" type="ColorRect" parent="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -240.0
+margin_top = 316.0
+margin_right = -16.0
+margin_bottom = 352.0
+color = Color( 0.258824, 0.258824, 0.258824, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/OnlyOneType"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -52.0
+margin_top = -18.0
+margin_right = 52.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 6 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="Gender" type="ColorRect" parent="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -240.0
+margin_top = 256.0
+margin_right = -16.0
+margin_bottom = 292.0
+color = Color( 0.988235, 0.572549, 1, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/Gender"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -52.0
+margin_top = -18.0
+margin_right = 52.0
+margin_bottom = 18.0
+text = "n/a"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Back" type="Button" parent="Panel"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -64.0
+margin_right = 168.0
+margin_bottom = -8.0
+text = "Back"
+
+[node name="Name" type="Label" parent="Panel"]
+margin_left = 64.0
+margin_top = 24.0
+margin_right = 576.0
+margin_bottom = 112.0
+custom_fonts/font = SubResource( 3 )
+text = "Name"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Species" type="Label" parent="Panel"]
+margin_left = 64.0
+margin_top = 112.0
+margin_right = 576.0
+margin_bottom = 160.0
+custom_fonts/font = SubResource( 4 )
+text = "Species"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -248.0
+margin_top = 360.0
+margin_right = -8.0
+margin_bottom = 592.0
+columns = 2
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Move1" type="VBoxContainer" parent="Panel/GridContainer"]
+margin_right = 118.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Panel/GridContainer/Move1"]
+margin_right = 118.0
+margin_bottom = 53.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Panel/GridContainer/Move1"]
+margin_top = 57.0
+margin_right = 118.0
+margin_bottom = 83.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Panel/GridContainer/Move1/Row1"]
+margin_right = 57.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Panel/GridContainer/Move1/Row1"]
+margin_left = 61.0
+margin_right = 118.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Panel/GridContainer/Move1"]
+margin_top = 87.0
+margin_right = 118.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="ColorRect" parent="Panel/GridContainer/Move1/Row2"]
+margin_right = 57.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.53125, 0.149414, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/GridContainer/Move1/Row2/Type"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -30.5
+margin_top = -13.5
+margin_right = 30.5
+margin_bottom = 13.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 5 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="ColorRect" parent="Panel/GridContainer/Move1/Row2"]
+margin_left = 61.0
+margin_right = 118.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.53125, 0.149414, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/GridContainer/Move1/Row2/Form"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -30.5
+margin_top = -13.5
+margin_right = 30.5
+margin_bottom = 13.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Form"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move2" type="VBoxContainer" parent="Panel/GridContainer"]
+margin_left = 122.0
+margin_right = 240.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Panel/GridContainer/Move2"]
+margin_right = 118.0
+margin_bottom = 53.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move2"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Panel/GridContainer/Move2"]
+margin_top = 57.0
+margin_right = 118.0
+margin_bottom = 83.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Panel/GridContainer/Move2/Row1"]
+margin_right = 57.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Panel/GridContainer/Move2/Row1"]
+margin_left = 61.0
+margin_right = 118.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Panel/GridContainer/Move2"]
+margin_top = 87.0
+margin_right = 118.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="ColorRect" parent="Panel/GridContainer/Move2/Row2"]
+margin_right = 57.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.529412, 0.14902, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/GridContainer/Move2/Row2/Type"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -30.5
+margin_top = -13.5
+margin_right = 30.5
+margin_bottom = 13.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 5 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="ColorRect" parent="Panel/GridContainer/Move2/Row2"]
+margin_left = 61.0
+margin_right = 118.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.53125, 0.149414, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/GridContainer/Move2/Row2/Form"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -30.5
+margin_top = -13.5
+margin_right = 30.5
+margin_bottom = 13.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Form"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move3" type="VBoxContainer" parent="Panel/GridContainer"]
+margin_top = 118.0
+margin_right = 118.0
+margin_bottom = 232.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Panel/GridContainer/Move3"]
+margin_right = 118.0
+margin_bottom = 53.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move3"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Panel/GridContainer/Move3"]
+margin_top = 57.0
+margin_right = 118.0
+margin_bottom = 83.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Panel/GridContainer/Move3/Row1"]
+margin_right = 57.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Panel/GridContainer/Move3/Row1"]
+margin_left = 61.0
+margin_right = 118.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Panel/GridContainer/Move3"]
+margin_top = 87.0
+margin_right = 118.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="ColorRect" parent="Panel/GridContainer/Move3/Row2"]
+margin_right = 57.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.53125, 0.149414, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/GridContainer/Move3/Row2/Type"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -30.5
+margin_top = -13.5
+margin_right = 30.5
+margin_bottom = 13.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 5 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="ColorRect" parent="Panel/GridContainer/Move3/Row2"]
+margin_left = 61.0
+margin_right = 118.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.53125, 0.149414, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/GridContainer/Move3/Row2/Form"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -30.5
+margin_top = -13.5
+margin_right = 30.5
+margin_bottom = 13.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Form"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move4" type="VBoxContainer" parent="Panel/GridContainer"]
+margin_left = 122.0
+margin_top = 118.0
+margin_right = 240.0
+margin_bottom = 232.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Panel/GridContainer/Move4"]
+margin_right = 118.0
+margin_bottom = 53.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move4"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Panel/GridContainer/Move4"]
+margin_top = 57.0
+margin_right = 118.0
+margin_bottom = 83.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Panel/GridContainer/Move4/Row1"]
+margin_right = 57.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Panel/GridContainer/Move4/Row1"]
+margin_left = 61.0
+margin_right = 118.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Panel/GridContainer/Move4"]
+margin_top = 87.0
+margin_right = 118.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="ColorRect" parent="Panel/GridContainer/Move4/Row2"]
+margin_right = 57.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.53125, 0.149414, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/GridContainer/Move4/Row2/Type"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -30.5
+margin_top = -13.5
+margin_right = 30.5
+margin_bottom = 13.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 5 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="ColorRect" parent="Panel/GridContainer/Move4/Row2"]
+margin_left = 61.0
+margin_right = 118.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.321569, 0.321569, 0.321569, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/GridContainer/Move4/Row2/Form"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -30.5
+margin_top = -13.5
+margin_right = 30.5
+margin_bottom = 13.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Form"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+margin_left = 64.0
+margin_top = 176.0
+margin_right = 404.0
+margin_bottom = 530.0
+custom_fonts/normal_font = SubResource( 8 )
+meta_underlined = false
+text = "This is for the pokedex's entry"
+
+[node name="PokemonRequest" type="HTTPRequest" parent="."]
+
+[node name="MoveRequest" type="HTTPRequest" parent="."]
+
+[node name="Bank Manager" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="Loading Screen" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="Loading Screen"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 191.0
+margin_top = -7.0
+margin_right = -191.0
+margin_bottom = 7.0
+step = 1.0
+
+[node name="Label" type="Label" parent="Loading Screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -272.0
+margin_top = -126.0
+margin_right = 272.0
+margin_bottom = -54.0
+text = "Please Wait..."
+align = 1
+valign = 1
+
+[node name="SpeciesRequest" type="HTTPRequest" parent="."]
+
+[connection signal="pressed" from="Panel/Back" to="Panel" method="_on_Back_pressed"]
+[connection signal="request_completed" from="PokemonRequest" to="." method="_on_PokemonRequest_request_completed"]
+[connection signal="request_completed" from="MoveRequest" to="." method="_on_MoveRequest_request_completed"]
+[connection signal="request_completed" from="SpeciesRequest" to="." method="_on_SpeciesRequest_request_completed"]

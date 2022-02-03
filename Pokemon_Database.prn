@@ -1,0 +1,836 @@
+,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,FALSE
+Bulbasaur,Grass,Poison,Overgrow,—,Chlorophyll,Monster,Grass,021,5355,45,49,49,65,65,45,318,53.00,FALSE
+Ivysaur,Grass,Poison,Overgrow,—,Chlorophyll,Monster,Grass,021,5355,60,62,63,80,80,60,405,67.50,FALSE
+Venusaur,Grass,Poison,Overgrow,—,Chlorophyll,Monster,Grass,021,5355,80,82,83,100,100,80,525,87.50,FALSE
+Charmander,Fire,—,Blaze,—,Solar Power,Monster,Dragon,021,5355,39,52,43,60,50,65,309,51.50,FALSE
+Charmeleon,Fire,—,Blaze,—,Solar Power,Monster,Dragon,021,5355,58,64,58,80,65,80,405,67.50,FALSE
+Charizard,Fire,Flying,Blaze,—,Solar Power,Monster,Dragon,021,5355,78,84,78,109,85,100,534,89.00,FALSE
+Squirtle,Water,—,Torrent,—,Rain Dish,Monster,Water 1,021,5355,44,48,65,50,64,43,314,52.33,FALSE
+Wartortle,Water,—,Torrent,—,Rain Dish,Monster,Water 1,021,5355,59,63,80,65,80,58,405,67.50,FALSE
+Blastoise,Water,—,Torrent,—,Rain Dish,Monster,Water 1,021,5355,79,83,100,85,105,78,530,88.33,FALSE
+Caterpie,Bug,—,Shield Dust,—,Run Away,Bug,—,011,2805,45,30,35,20,20,45,195,32.50,FALSE
+Metapod,Bug,—,Shed Skin,—,—,Bug,—,011,2805,50,20,55,25,25,30,205,34.17,FALSE
+Butterfree,Bug,Flying,Compound Eyes,—,Tinted Lens,Bug,—,011,2805,60,45,50,90,80,70,395,65.83,FALSE
+Weedle,Bug,Poison,Shield Dust,—,Run Away,Bug,—,011,2805,40,35,30,20,20,50,195,32.50,FALSE
+Kakuna,Bug,Poison,Shed Skin,—,—,Bug,—,011,2805,45,25,50,25,25,35,205,34.17,FALSE
+Beedrill,Bug,Poison,Swarm,—,Sniper,Bug,—,011,2805,65,90,40,45,80,75,395,65.83,FALSE
+Pidgey,Normal,Flying,Keen Eye,Tangled Feet*,Big Pecks,Flying,—,016,4080,40,45,40,35,35,56,251,41.83,FALSE
+Pidgeotto,Normal,Flying,Keen Eye,Tangled Feet*,Big Pecks,Flying,—,016,4080,63,60,55,50,50,71,349,58.17,FALSE
+Pidgeot,Normal,Flying,Keen Eye,Tangled Feet*,Big Pecks,Flying,—,016,4080,83,80,75,70,70,101,479,79.83,FALSE
+Rattata,Normal,—,Run Away,Guts,Hustle,Field,—,016,4080,30,56,35,25,35,72,253,42.17,FALSE
+Rattata (Alolan),Dark,Normal,Gluttony,Hustle,Thick Fat,Field,—,016,4080,30,56,35,25,35,72,253,42.17,TRUE
+Raticate,Normal,—,Run Away,Guts,Hustle,Field,—,016,4080,55,81,60,50,70,97,413,68.83,FALSE
+Raticate (Alolan),Dark,Normal,Gluttony,Hustle,Thick Fat,Field,—,016,4080,75,71,70,40,80,77,413,68.83,TRUE
+Spearow,Normal,Flying,Keen Eye,—,Sniper,Flying,—,016,4080,40,60,30,31,31,70,262,43.67,FALSE
+Fearow,Normal,Flying,Keen Eye,—,Sniper,Flying,—,016,4080,65,90,65,61,61,100,442,73.67,FALSE
+Ekans,Poison,—,Intimidate,Shed Skin,Unnerve,Field,Dragon,021,5355,35,60,44,40,54,55,288,48.00,FALSE
+Arbok,Poison,—,Intimidate,Shed Skin,Unnerve,Field,Dragon,021,5355,60,95,69,65,79,80,448,74.67,FALSE
+Pikachu,Electric,—,Static,—,Lightning Rod,Field,Fairy,021,5355,35,55,40,50,50,90,320,53.33,FALSE
+Raichu,Electric,—,Static,—,Lightning Rod,Field,Fairy,021,5355,60,90,55,90,80,110,485,80.83,FALSE
+Raichu (Alolan),Electric,Psychic,Surge Surfer,—,—,Field,Fairy,021,5355,60,85,50,95,85,110,485,80.83,TRUE
+Sandshrew,Ground,—,Sand Veil,—,Sand Rush,Field,—,021,5355,50,75,85,20,30,40,300,50.00,FALSE
+Sandshrew (Alolan),Ice,Steel,Snow Cloak,—,Slush Rush,Field,—,021,5355,50,75,90,10,35,40,300,50.00,TRUE
+Sandslash,Ground,—,Sand Veil,—,Sand Rush,Field,—,021,5355,75,100,110,45,55,65,450,75.00,FALSE
+Sandslash (Alolan),Ice,Steel,Snow Cloak,—,Slush Rush,Field,—,021,5355,75,100,120,25,65,65,450,75.00,TRUE
+Nidoran♀,Poison,—,Poison Point,Rivalry*,Hustle,Monster,Field,021,5355,55,47,52,40,40,41,275,45.83,FALSE
+Nidorina,Poison,—,Poison Point,Rivalry*,Hustle,Undiscovered,—,021,5355,70,62,67,55,55,56,365,60.83,FALSE
+Nidoqueen,Poison,Ground,Poison Point,Rivalry*,Sheer Force,Undiscovered,—,021,5355,90,92,87,75,85,76,505,84.17,FALSE
+Nidoran♂,Poison,—,Poison Point,Rivalry*,Hustle,Monster,Field,021,5355,46,57,40,40,40,50,273,45.50,FALSE
+Nidorino,Poison,—,Poison Point,Rivalry*,Hustle,Monster,Field,021,5355,61,72,57,55,55,65,365,60.83,FALSE
+Nidoking,Poison,Ground,Poison Point,Rivalry*,Sheer Force,Monster,Field,021,5355,81,102,77,85,75,85,505,84.17,FALSE
+Clefairy,Fairy,—,Cute Charm,Magic Guard*,Friend Guard,Fairy,—,021,5355,70,45,48,60,65,35,323,53.83,FALSE
+Clefable,Fairy,—,Cute Charm,Magic Guard*,Unaware,Fairy,—,021,5355,95,70,73,95,90,60,483,80.50,FALSE
+Vulpix,Fire,—,Flash Fire,—,Drought,Field,—,021,5355,38,41,40,50,65,65,299,49.83,FALSE
+Vulpix (Alolan),Ice,—,Snow Cloak,—,Snow Warning,Field,—,021,5355,38,41,40,50,65,65,299,49.83,TRUE
+Ninetales,Fire,—,Flash Fire,—,Drought,Field,—,021,5355,73,76,75,81,100,100,505,84.17,FALSE
+Ninetales (Alolan),Ice,Fairy,Snow Cloak,—,Snow Warning,Field,—,021,5355,73,67,75,81,100,109,505,84.17,TRUE
+Jigglypuff,Normal,Fairy,Cute Charm,Competitive*,Friend Guard,Fairy,—,021,5355,115,45,20,45,25,20,270,45.00,FALSE
+Wigglytuff,Normal,Fairy,Cute Charm,Competitive*,Frisk,Fairy,—,021,5355,140,70,45,85,50,45,435,72.50,FALSE
+Zubat,Poison,Flying,Inner Focus,—,Infiltrator,Flying,—,016,4080,40,45,35,30,40,55,245,40.83,FALSE
+Golbat,Poison,Flying,Inner Focus,—,Infiltrator,Flying,—,016,4080,75,80,70,65,75,90,455,75.83,FALSE
+Oddish,Grass,Poison,Chlorophyll,—,Run Away,Grass,—,021,5355,45,50,55,75,65,30,320,53.33,FALSE
+Gloom,Grass,Poison,Chlorophyll,—,Stench,Grass,—,021,5355,60,65,70,85,75,40,395,65.83,FALSE
+Vileplume,Grass,Poison,Chlorophyll,—,Effect Spore,Grass,—,021,5355,75,80,85,110,90,50,490,81.67,FALSE
+Paras,Bug,Grass,Effect Spore,Dry Skin*,Damp,Bug,Grass,021,5355,35,70,55,45,55,25,285,47.50,FALSE
+Parasect,Bug,Grass,Effect Spore,Dry Skin*,Damp,Bug,Grass,021,5355,60,95,80,60,80,30,405,67.50,FALSE
+Venonat,Bug,Poison,Compound Eyes,Tinted Lens*,Run Away,Bug,—,021,5355,60,55,50,40,55,45,305,50.83,FALSE
+Venomoth,Bug,Poison,Shield Dust,Tinted Lens*,Wonder Skin,Bug,—,021,5355,70,65,60,90,75,90,450,75.00,FALSE
+Diglett,Ground,—,Sand Veil,Arena Trap,Sand Force,Field,—,021,5355,10,55,25,35,45,95,265,44.17,FALSE
+Diglett (Alolan),Ground,Steel,Sand Veil,Tangling Hair,Sand Force,Field,—,021,5355,10,55,30,35,45,90,265,44.17,TRUE
+Dugtrio,Ground,—,Sand Veil,Arena Trap,Sand Force,Field,—,021,5355,35,100,50,50,70,120,425,70.83,FALSE
+Dugtrio (Alolan),Ground,Steel,Sand Veil,Tangling Hair,Sand Force,Field,—,021,5355,35,100,60,50,70,110,425,70.83,TRUE
+Meowth,Normal,—,Pickup,Technician,Unnerve,Field,—,021,5355,40,45,35,40,40,90,290,48.33,FALSE
+Meowth (Alolan),Dark,—,Pickup,Technician,Rattled,Field,—,021,5355,40,35,35,50,40,90,290,48.33,TRUE
+Persian,Normal,—,Limber,Technician,Unnerve,Field,—,021,5355,65,70,60,65,65,115,440,73.33,FALSE
+Persian (Alolan),Dark,—,Fur Coat,Technician,Rattled,Field,—,021,5355,65,60,60,75,65,115,440,73.33,TRUE
+Psyduck,Water,—,Damp,Cloud Nine,Swift Swim,Water 1,Field,021,5355,50,52,48,65,50,55,320,53.33,FALSE
+Golduck,Water,—,Damp,Cloud Nine,Swift Swim,Water 1,Field,021,5355,80,82,78,95,80,85,500,83.33,FALSE
+Mankey,Fighting,—,Vital Spirit,Anger Point*,Defiant,Field,—,021,5355,40,80,35,35,45,70,305,50.83,FALSE
+Primeape,Fighting,—,Vital Spirit,Anger Point*,Defiant,Field,—,021,5355,65,105,60,60,70,95,455,75.83,FALSE
+Growlithe,Fire,—,Intimidate,Flash Fire,Justified,Field,—,021,5355,55,70,45,70,50,60,350,58.33,FALSE
+Arcanine,Fire,—,Intimidate,Flash Fire,Justified,Field,—,021,5355,90,110,80,100,80,95,555,92.50,FALSE
+Poliwag,Water,—,Water Absorb,Damp,Swift Swim,Water 1,—,021,5355,40,50,40,40,40,90,300,50.00,FALSE
+Poliwhirl,Water,—,Water Absorb,Damp,Swift Swim,Water 1,—,021,5355,65,65,65,50,50,90,385,64.17,FALSE
+Poliwrath,Water,Fighting,Water Absorb,Damp,Swift Swim,Water 1,—,021,5355,90,95,95,70,90,70,510,85.00,FALSE
+Abra,Psychic,—,Synchronize,Inner Focus,Magic Guard,Human-Like,—,021,5355,25,20,15,105,55,90,310,51.67,FALSE
+Kadabra,Psychic,—,Synchronize,Inner Focus,Magic Guard,Human-Like,—,021,5355,40,35,30,120,70,105,400,66.67,FALSE
+Alakazam,Psychic,—,Synchronize,Inner Focus,Magic Guard,Human-Like,—,021,5355,55,50,45,135,95,120,500,83.33,FALSE
+Alakazam (Mega),Psychic,—,Synchronize,Inner Focus,Magic Guard,Human-Like,—,021,5355,55,50,65,175,105,150,600,100.00,TRUE
+Machop,Fighting,—,Guts,No Guard*,Steadfast,Human-Like,—,021,5355,70,80,50,35,35,35,305,50.83,FALSE
+Machoke,Fighting,—,Guts,No Guard*,Steadfast,Human-Like,—,021,5355,80,100,70,50,60,45,405,67.50,FALSE
+Machamp,Fighting,—,Guts,No Guard*,Steadfast,Human-Like,—,021,5355,90,130,80,65,85,55,505,84.17,FALSE
+Bellsprout,Grass,Poison,Chlorophyll,—,Gluttony,Grass,—,021,5355,50,75,35,70,30,40,300,50.00,FALSE
+Weepinbell,Grass,Poison,Chlorophyll,—,Gluttony,Grass,—,021,5355,65,90,50,85,45,55,390,65.00,FALSE
+Victreebel,Grass,Poison,Chlorophyll,—,Gluttony,Grass,—,021,5355,80,105,65,100,70,70,490,81.67,FALSE
+Tentacool,Water,Poison,Clear Body,Liquid Ooze,Rain Dish,Water 3,—,021,5355,40,40,35,50,100,70,335,55.83,FALSE
+Tentacruel,Water,Poison,Clear Body,Liquid Ooze,Rain Dish,Water 3,—,021,5355,80,70,65,80,120,100,515,85.83,FALSE
+Geodude,Rock,Ground,Rock Head,Sturdy,Sand Veil,Mineral,—,016,4080,40,80,100,30,30,20,300,50.00,FALSE
+Geodude (Alolan),Rock,Electric,Magnet Pull,Sturdy,Galvanize,Mineral,—,016,4080,40,80,100,30,30,20,300,50.00,TRUE
+Graveler,Rock,Ground,Rock Head,Sturdy,Sand Veil,Mineral,—,016,4080,55,95,115,45,45,35,390,65.00,FALSE
+Graveler (Alolan),Rock,Electric,Magnet Pull,Sturdy,Galvanize,Mineral,—,016,4080,55,95,115,45,45,35,390,65.00,TRUE
+Golem,Rock,Ground,Rock Head,Sturdy,Sand Veil,Mineral,—,016,4080,80,120,130,55,65,45,495,82.50,FALSE
+Golem (Alolan),Rock,Electric,Magnet Pull,Sturdy,Galvanize,Mineral,—,016,4080,80,120,130,55,65,45,495,82.50,TRUE
+Ponyta,Fire,—,Run Away,Flash Fire,Flame Body,Field,—,021,5355,50,85,55,65,65,90,410,68.33,FALSE
+Rapidash,Fire,—,Run Away,Flash Fire,Flame Body,Field,—,021,5355,65,100,70,80,80,105,500,83.33,FALSE
+Slowpoke,Water,Psychic,Oblivious,Own Tempo,Regenerator,Monster,Water 1,021,5355,90,65,65,40,40,15,315,52.50,FALSE
+Slowbro,Water,Psychic,Oblivious,Own Tempo,Regenerator,Monster,Water 1,021,5355,95,75,110,100,80,30,490,81.67,FALSE
+Magnemite,Electric,Steel,Magnet Pull,Sturdy,Analytic,Mineral,—,021,5355,25,35,70,95,55,45,325,54.17,FALSE
+Magneton,Electric,Steel,Magnet Pull,Sturdy,Analytic,Mineral,—,021,5355,50,60,95,120,70,70,465,77.50,FALSE
+Farfetch'd,Normal,Flying,Keen Eye,Inner Focus,Defiant,Flying,Field,021,5355,52,90,55,58,62,60,377,62.83,FALSE
+Doduo,Normal,Flying,Run Away,Early Bird,Tangled Feet,Flying,—,021,5355,35,85,45,35,35,75,310,51.67,FALSE
+Dodrio,Normal,Flying,Run Away,Early Bird,Tangled Feet,Flying,—,021,5355,60,110,70,60,60,110,470,78.33,FALSE
+Seel,Water,—,Thick Fat,Hydration*,Ice Body,Water 1,Field,021,5355,65,45,55,45,70,45,325,54.17,FALSE
+Dewgong,Water,Ice,Thick Fat,Hydration*,Ice Body,Water 1,Field,021,5355,90,70,80,70,95,70,475,79.17,FALSE
+Grimer,Poison,—,Stench,Sticky Hold,Poison Touch,Amorphous,—,021,5120,80,80,50,40,50,25,325,54.17,FALSE
+Grimer (Alolan),Poison,Dark,Poison Touch,Gluttony,Power of Alchemy,Amorphous,—,021,5120,80,80,50,40,50,25,325,54.17,TRUE
+Muk,Poison,—,Stench,Sticky Hold,Poison Touch,Amorphous,—,021,5120,105,105,75,65,100,50,500,83.33,FALSE
+Muk (Alolan),Poison,Dark,Poison Touch,Gluttony,Power of Alchemy,Amorphous,—,021,5120,105,105,75,65,100,50,500,83.33,TRUE
+Shellder,Water,—,Shell Armor,Skill Link*,Overcoat,Water 3,—,021,5355,30,65,100,45,25,40,305,50.83,FALSE
+Cloyster,Water,Ice,Shell Armor,Skill Link*,Overcoat,Water 3,—,021,5355,50,95,180,85,45,70,525,87.50,FALSE
+Gastly,Ghost,Poison,Levitate,—,—,Amorphous,—,021,5355,30,35,30,100,35,80,310,51.67,FALSE
+Haunter,Ghost,Poison,Levitate,—,—,Amorphous,—,021,5355,45,50,45,115,55,95,405,67.50,FALSE
+Gengar,Ghost,Poison,Levitate,—,—,Amorphous,—,021,5355,60,65,60,130,75,110,500,83.33,FALSE
+Onix,Rock,Ground,Rock Head,Sturdy,Weak Armor,Mineral,—,026,6630,35,45,160,30,45,70,385,64.17,FALSE
+Drowzee,Psychic,—,Insomnia,Forewarn*,Inner Focus,Human-Like,—,021,5355,60,48,45,43,90,42,328,54.67,FALSE
+Hypno,Psychic,—,Insomnia,Forewarn*,Inner Focus,Human-Like,—,021,5355,85,73,70,73,115,67,483,80.50,FALSE
+Krabby,Water,—,Hyper Cutter,Shell Armor,Sheer Force,Water 3,—,021,5355,30,105,90,25,25,50,325,54.17,FALSE
+Kingler,Water,—,Hyper Cutter,Shell Armor,Sheer Force,Water 3,—,021,5355,55,130,115,50,50,75,475,79.17,FALSE
+Voltorb,Electric,—,Soundproof,Static,Aftermath,Mineral,—,021,5355,40,30,50,55,55,100,330,55.00,FALSE
+Electrode,Electric,—,Soundproof,Static,Aftermath,Mineral,—,021,5355,60,50,70,80,80,150,490,81.67,FALSE
+Exeggcute,Grass,Psychic,Chlorophyll,—,Harvest,Grass,—,021,5120,60,40,80,60,45,40,325,54.17,FALSE
+Exeggutor,Grass,Psychic,Chlorophyll,—,Harvest,Grass,—,021,5120,95,95,85,125,75,55,530,88.33,FALSE
+Exeggutor (Alolan),Grass,Dragon,Frisk,—,Harvest,Grass,—,021,5120,95,105,85,125,75,45,530,88.33,TRUE
+Cubone,Ground,—,Rock Head,Lightning Rod,Battle Armor,Monster,—,021,5120,50,50,95,40,50,35,320,53.33,FALSE
+Marowak,Ground,—,Rock Head,Lightning Rod,Battle Armor,Monster,—,021,5120,60,80,110,50,80,45,425,70.83,FALSE
+Marowak,Fire,Ghost,Cursed Body,Lightning Rod,Rock Head,Monster,—,021,5120,60,80,110,50,80,45,425,70.83,TRUE
+Hitmonlee,Fighting,—,Limber,Reckless*,Unburden,Human-Like,—,026,6630,50,120,53,35,110,87,455,75.83,FALSE
+Hitmonchan,Fighting,—,Keen Eye,Iron Fist*,Inner Focus,Human-Like,—,026,6630,50,105,79,35,110,76,455,75.83,FALSE
+Lickitung,Normal,—,Own Tempo,Oblivious,Cloud Nine,Monster,—,021,5355,90,55,75,60,75,30,385,64.17,FALSE
+Koffing,Poison,—,Levitate,—,—,Amorphous,—,021,5355,40,65,95,60,45,35,340,56.67,FALSE
+Weezing,Poison,—,Levitate,—,—,Amorphous,—,021,5355,65,90,120,85,70,60,490,81.67,FALSE
+Rhyhorn,Ground,Rock,Lightning Rod,Rock Head,Reckless,Monster,Field,021,5355,80,85,95,30,30,25,345,57.50,FALSE
+Rhydon,Ground,Rock,Lightning Rod,Rock Head,Reckless,Monster,Field,021,5355,105,130,120,45,45,40,485,80.83,FALSE
+Chansey,Normal,—,Natural Cure,Serene Grace,Healer,Fairy,—,041,10455,250,5,5,35,105,50,450,75.00,FALSE
+Tangela,Grass,—,Chlorophyll,Leaf Guard*,Regenerator,Grass,—,021,5355,65,55,115,100,40,60,435,72.50,FALSE
+Kangaskhan,Normal,—,Early Bird,Scrappy*,Inner Focus,Monster,—,021,5355,105,95,80,40,80,90,490,81.67,FALSE
+Horsea,Water,—,Swift Swim,Sniper*,Damp,Water 1,Dragon,021,5355,30,40,70,70,25,60,295,49.17,FALSE
+Seadra,Water,—,Poison Point,Sniper*,Damp,Water 1,Dragon,021,5355,55,65,95,95,45,85,440,73.33,FALSE
+Goldeen,Water,—,Swift Swim,Water Veil,Lightning Rod,Water 2,—,021,5355,45,67,60,35,50,63,320,53.33,FALSE
+Seaking,Water,—,Swift Swim,Water Veil,Lightning Rod,Water 2,—,021,5355,80,92,65,65,80,68,450,75.00,FALSE
+Staryu,Water,—,Illuminate,Natural Cure,Analytic,Water 3,—,021,5355,30,45,55,70,55,85,340,56.67,FALSE
+Starmie,Water,Psychic,Illuminate,Natural Cure,Analytic,Water 3,—,021,5355,60,75,85,100,85,115,520,86.67,FALSE
+Mr. Mime,Psychic,Fairy,Soundproof,Filter*,Technician,Human-Like,—,026,6630,40,45,65,100,120,90,460,76.67,FALSE
+Scyther,Bug,Flying,Swarm,Technician*,Steadfast,Bug,—,026,6630,70,110,80,55,80,105,500,83.33,FALSE
+Jynx,Ice,Psychic,Oblivious,Forewarn*,Dry Skin,Human-Like,—,026,6630,65,50,35,115,95,95,455,75.83,FALSE
+Electabuzz,Electric,—,Static,—,Vital Spirit,Human-Like,—,026,6630,65,83,57,95,85,105,490,81.67,FALSE
+Magmar,Fire,—,Flame Body,—,Vital Spirit,Human-Like,—,026,6630,65,95,57,100,85,93,495,82.50,FALSE
+Pinsir,Bug,—,Hyper Cutter,Mold Breaker*,Moxie,Bug,—,026,6630,65,125,100,55,70,85,500,83.33,FALSE
+Tauros,Normal,—,Intimidate,Anger Point*,Sheer Force,Field,—,021,5355,75,100,95,40,70,110,490,81.67,FALSE
+Magikarp,Water,—,Swift Swim,—,Rattled,Water 2,Dragon,006,1530,20,10,55,15,20,80,200,33.33,FALSE
+Gyarados,Water,Flying,Intimidate,—,Moxie,Water 2,Dragon,006,1530,95,125,79,60,100,81,540,90.00,FALSE
+Lapras,Water,Ice,Water Absorb,Shell Armor,Hydration,Monster,Water 1,041,10455,130,85,80,85,95,60,535,89.17,FALSE
+Ditto,Normal,—,Limber,—,Imposter,Ditto,—,021,5355,48,48,48,48,48,48,288,48.00,FALSE
+Eevee,Normal,—,Run Away,Adaptability*,Anticipation,Field,—,036,9180,55,55,50,45,65,55,325,54.17,FALSE
+Vaporeon,Water,—,Water Absorb,—,Hydration,Field,—,036,9180,130,65,60,110,95,65,525,87.50,FALSE
+Jolteon,Electric,—,Volt Absorb,—,Quick Feet,Field,—,036,9180,65,65,60,110,95,130,525,87.50,FALSE
+Flareon,Fire,—,Flash Fire,—,Guts,Field,—,036,9180,65,130,60,95,110,65,525,87.50,FALSE
+Porygon,Normal,—,Trace,Download*,Analytic,Mineral,—,021,5355,65,60,70,85,75,40,395,65.83,FALSE
+Omanyte,Rock,Water,Swift Swim,Shell Armor,Weak Armor,Water 1,Water 3,031,7905,35,40,100,90,55,35,355,59.17,FALSE
+Omastar,Rock,Water,Swift Swim,Shell Armor,Weak Armor,Water 1,Water 3,031,7905,70,60,125,115,70,55,495,82.50,FALSE
+Kabuto,Rock,Water,Swift Swim,Battle Armor,Weak Armor,Water 1,Water 3,031,7905,30,80,90,55,45,55,355,59.17,FALSE
+Kabutops,Rock,Water,Swift Swim,Battle Armor,Weak Armor,Water 1,Water 3,031,7905,60,115,105,65,70,80,495,82.50,FALSE
+Aerodactyl,Rock,Flying,Rock Head,Pressure,Unnerve,Flying,—,031,7905,80,105,65,60,75,130,515,85.83,FALSE
+Snorlax,Normal,—,Immunity,Thick Fat,Gluttony,Monster,—,041,10455,160,110,65,65,110,30,540,90.00,FALSE
+Articuno,Ice,Flying,Pressure,—,Snow Cloak,Undiscovered,—,081,20655,90,85,100,95,125,85,580,96.67,FALSE
+Zapdos,Electric,Flying,Pressure,—,Static,Undiscovered,—,081,20655,90,90,85,125,90,100,580,96.67,FALSE
+Moltres,Fire,Flying,Pressure,—,Flame Body,Undiscovered,—,081,20655,90,100,90,125,85,90,580,96.67,FALSE
+Dratini,Dragon,—,Shed Skin,—,Marvel Scale,Water 1,Dragon,041,10455,41,64,45,50,50,50,300,50.00,FALSE
+Dragonair,Dragon,—,Shed Skin,—,Marvel Scale,Water 1,Dragon,041,10455,61,84,65,70,70,70,420,70.00,FALSE
+Dragonite,Dragon,Flying,Inner Focus,—,Multiscale,Water 1,Dragon,041,10455,91,134,95,100,100,80,600,100.00,FALSE
+Mewtwo,Psychic,—,Pressure,—,Unnerve,Undiscovered,—,121,30855,106,110,90,154,90,130,680,113.33,FALSE
+Mew,Psychic,—,Synchronize,—,—,Undiscovered,—,121,30855,100,100,100,100,100,100,600,100.00,FALSE
+Chikorita,Grass,—,Overgrow,—,Leaf Guard,Monster,Grass,021,5355,45,49,65,49,65,45,318,53.00,FALSE
+Bayleef,Grass,—,Overgrow,—,Leaf Guard,Monster,Grass,021,5355,60,62,80,63,80,60,405,67.50,FALSE
+Meganium,Grass,—,Overgrow,—,Leaf Guard,Monster,Grass,021,5355,80,82,100,83,100,80,525,87.50,FALSE
+Cyndaquil,Fire,—,Blaze,—,Flash Fire,Field,—,021,5355,39,52,43,60,50,65,309,51.50,FALSE
+Quilava,Fire,—,Blaze,—,Flash Fire,Field,—,021,5355,58,64,58,80,65,80,405,67.50,FALSE
+Typhlosion,Fire,—,Blaze,—,Flash Fire,Field,—,021,5355,78,84,78,109,85,100,534,89.00,FALSE
+Totodile,Water,—,Torrent,—,Sheer Force,Monster,Water 1,021,5355,50,65,64,44,48,43,314,52.33,FALSE
+Croconaw,Water,—,Torrent,—,Sheer Force,Monster,Water 1,021,5355,65,80,80,59,63,58,405,67.50,FALSE
+Feraligatr,Water,—,Torrent,—,Sheer Force,Monster,Water 1,021,5355,85,105,100,79,83,78,530,88.33,FALSE
+Sentret,Normal,—,Run Away,Keen Eye,Frisk,Field,—,016,4080,35,46,34,35,45,20,215,35.83,FALSE
+Furret,Normal,—,Run Away,Keen Eye,Frisk,Field,—,016,4080,85,76,64,45,55,90,415,69.17,FALSE
+Hoothoot,Normal,Flying,Insomnia,Keen Eye,Tinted Lens,Flying,—,016,4080,60,30,30,36,56,50,262,43.67,FALSE
+Noctowl,Normal,Flying,Insomnia,Keen Eye,Tinted Lens,Flying,—,016,4080,100,50,50,86,96,70,452,75.33,FALSE
+Ledyba,Bug,Flying,Swarm,Early Bird,Rattled,Bug,—,016,4080,40,20,30,40,80,55,265,44.17,FALSE
+Ledian,Bug,Flying,Swarm,Early Bird,Iron Fist,Bug,—,016,4080,55,35,50,55,110,85,390,65.00,FALSE
+Spinarak,Bug,Poison,Swarm,Insomnia,Sniper,Bug,—,016,4080,40,60,40,40,40,30,250,41.67,FALSE
+Ariados,Bug,Poison,Swarm,Insomnia,Sniper,Bug,—,016,4080,70,90,70,60,70,40,400,66.67,FALSE
+Crobat,Poison,Flying,Inner Focus,—,Infiltrator,Flying,—,016,4080,85,90,80,70,80,130,535,89.17,FALSE
+Chinchou,Water,Electric,Volt Absorb,Illuminate,Water Absorb,Water 2,—,021,5355,75,38,38,56,56,67,330,55.00,FALSE
+Lanturn,Water,Electric,Volt Absorb,Illuminate,Water Absorb,Water 2,—,021,5355,125,58,58,76,76,67,460,76.67,FALSE
+Pichu,Electric,—,Static,—,Lightning Rod,Undiscovered,—,021,5355,20,40,15,35,35,60,205,34.17,FALSE
+Cleffa,Fairy,—,Cute Charm,Magic Guard*,Friend Guard,Undiscovered,—,021,5355,50,25,28,45,55,15,218,36.33,FALSE
+Igglybuff,Normal,Fairy,Cute Charm,Competitive*,Friend Guard,Undiscovered,—,021,5355,90,30,15,40,20,15,210,35.00,FALSE
+Togepi,Fairy,—,Hustle,Serene Grace,Super Luck,Undiscovered,—,011,2805,35,20,65,40,65,20,245,40.83,FALSE
+Togetic,Fairy,Flying,Hustle,Serene Grace,Super Luck,Flying,Fairy,011,2805,55,40,85,80,105,40,405,67.50,FALSE
+Natu,Psychic,Flying,Synchronize,Early Bird,Magic Bounce,Flying,—,021,5355,40,50,45,70,45,70,320,53.33,FALSE
+Xatu,Psychic,Flying,Synchronize,Early Bird,Magic Bounce,Flying,—,021,5355,65,75,70,95,70,95,470,78.33,FALSE
+Mareep,Electric,—,Static,—,Plus,Monster,Field,021,5355,55,40,40,65,45,35,280,46.67,FALSE
+Flaaffy,Electric,—,Static,—,Plus,Monster,Field,021,5355,70,55,55,80,60,45,365,60.83,FALSE
+Ampharos,Electric,—,Static,—,Plus,Monster,Field,021,5355,90,75,85,115,90,55,510,85.00,FALSE
+Bellossom,Grass,—,Chlorophyll,—,Healer,Grass,—,021,5355,75,80,95,90,100,50,490,81.67,FALSE
+Marill,Water,Fairy,Thick Fat,Huge Power,Sap Sipper,Water 1,Fairy,011,2805,70,20,50,20,50,40,250,41.67,FALSE
+Azumarill,Water,Fairy,Thick Fat,Huge Power,Sap Sipper,Water 1,Fairy,011,2805,100,50,80,60,80,50,420,70.00,FALSE
+Sudowoodo,Rock,—,Sturdy,Rock Head,Rattled,Mineral,—,021,5355,70,100,115,30,65,30,410,68.33,FALSE
+Politoed,Water,—,Water Absorb,Damp,Drizzle,Water 1,—,021,5355,90,75,75,90,100,70,500,83.33,FALSE
+Hoppip,Grass,Flying,Chlorophyll,Leaf Guard*,Infiltrator,Fairy,Grass,021,5355,35,35,40,35,55,50,250,41.67,FALSE
+Skiploom,Grass,Flying,Chlorophyll,Leaf Guard*,Infiltrator,Fairy,Grass,021,5355,55,45,50,45,65,80,340,56.67,FALSE
+Jumpluff,Grass,Flying,Chlorophyll,Leaf Guard*,Infiltrator,Fairy,Grass,021,5355,75,55,70,55,95,110,460,76.67,FALSE
+Aipom,Normal,—,Run Away,Pickup,Skill Link,Field,—,021,5355,55,70,55,40,55,85,360,60.00,FALSE
+Sunkern,Grass,—,Chlorophyll,Solar Power*,Early Bird,Grass,—,021,5355,30,30,30,30,30,30,180,30.00,FALSE
+Sunflora,Grass,—,Chlorophyll,Solar Power*,Early Bird,Grass,—,021,5355,75,75,55,105,85,30,425,70.83,FALSE
+Yanma,Bug,Flying,Speed Boost,Compound Eyes,Frisk,Bug,—,021,5355,65,65,45,75,45,95,390,65.00,FALSE
+Wooper,Water,Ground,Damp,Water Absorb,Unaware,Water 1,Field,021,5355,55,45,45,25,25,15,210,35.00,FALSE
+Quagsire,Water,Ground,Damp,Water Absorb,Unaware,Water 1,Field,021,5355,95,85,85,65,65,35,430,71.67,FALSE
+Espeon,Psychic,—,Synchronize,—,Magic Bounce,Field,—,036,9180,65,65,60,130,95,110,525,87.50,FALSE
+Umbreon,Dark,—,Synchronize,—,Inner Focus,Field,—,036,9180,95,65,110,60,130,65,525,87.50,FALSE
+Murkrow,Dark,Flying,Insomnia,Super Luck*,Prankster,Flying,—,021,5355,60,85,42,85,42,91,405,67.50,FALSE
+Slowking,Water,Psychic,Oblivious,Own Tempo,Regenerator,Monster,Water 1,021,5355,95,75,80,100,110,30,490,81.67,FALSE
+Misdreavus,Ghost,—,Levitate,—,—,Amorphous,—,026,6630,60,60,60,85,85,85,435,72.50,FALSE
+Unown,Psychic,—,Levitate,—,—,Undiscovered,—,041,10455,48,72,48,72,48,48,336,56.00,FALSE
+Wobbuffet,Psychic,—,Shadow Tag,—,Telepathy,Amorphous,—,021,5355,190,33,58,33,58,33,405,67.50,FALSE
+Girafarig,Normal,Psychic,Inner Focus,Early Bird,Sap Sipper,Field,—,021,5355,70,80,65,90,65,85,455,75.83,FALSE
+Pineco,Bug,—,Sturdy,—,Overcoat,Bug,—,021,5355,50,65,90,35,35,15,290,48.33,FALSE
+Forretress,Bug,Steel,Sturdy,—,Overcoat,Bug,—,021,5355,75,90,140,60,60,40,465,77.50,FALSE
+Dunsparce,Normal,—,Serene Grace,Run Away,Rattled,Field,—,021,5355,100,70,70,65,65,45,415,69.17,FALSE
+Gligar,Ground,Flying,Hyper Cutter,Sand Veil,Immunity,Bug,—,021,5355,65,75,105,35,65,85,430,71.67,FALSE
+Steelix,Steel,Ground,Rock Head,Sturdy,Sheer Force,Mineral,—,026,6630,75,85,200,55,65,30,510,85.00,FALSE
+Snubbull,Fairy,—,Intimidate,Run Away,Rattled,Field,Fairy,021,5355,60,80,50,40,40,30,300,50.00,FALSE
+Granbull,Fairy,—,Intimidate,Quick Feet*,Rattled,Field,Fairy,021,5355,90,120,75,60,60,45,450,75.00,FALSE
+Qwilfish,Water,Poison,Poison Point,Swift Swim,Intimidate,Water 2,—,021,5355,65,95,85,55,55,85,440,73.33,FALSE
+Scizor,Bug,Steel,Swarm,Technician*,Light Metal,Bug,—,026,6630,70,130,100,55,80,65,500,83.33,FALSE
+Shuckle,Bug,Rock,Sturdy,Gluttony*,Contrary,Bug,—,021,5355,20,10,230,10,230,5,505,84.17,FALSE
+Heracross,Bug,Fighting,Swarm,Guts,Moxie,Bug,—,026,6630,80,125,75,40,95,85,500,83.33,FALSE
+Sneasel,Dark,Ice,Inner Focus,Keen Eye,Pickpocket,Field,—,021,5355,55,95,55,35,75,115,430,71.67,FALSE
+Teddiursa,Normal,—,Pickup,Quick Feet*,Honey Gather,Field,—,021,5355,60,80,50,50,50,40,330,55.00,FALSE
+Ursaring,Normal,—,Guts,Quick Feet*,Unnerve,Field,—,021,5355,90,130,75,75,75,55,500,83.33,FALSE
+Slugma,Fire,—,Magma Armor,Flame Body,Weak Armor,Amorphous,—,021,5355,40,40,40,70,40,20,250,41.67,FALSE
+Magcargo,Fire,Rock,Magma Armor,Flame Body,Weak Armor,Amorphous,—,021,5355,60,50,120,90,80,30,430,71.67,FALSE
+Swinub,Ice,Ground,Oblivious,Snow Cloak*,Thick Fat,Field,—,021,5355,50,50,40,30,30,50,250,41.67,FALSE
+Piloswine,Ice,Ground,Oblivious,Snow Cloak*,Thick Fat,Field,—,021,5355,100,100,80,60,60,50,450,75.00,FALSE
+Corsola,Water,Rock,Hustle,Natural Cure,Regenerator,Water 1,Water 3,021,5355,65,55,95,65,95,35,410,68.33,FALSE
+Remoraid,Water,—,Hustle,Sniper*,Moody,Water 1,Water 2,021,5355,35,65,35,65,35,65,300,50.00,FALSE
+Octillery,Water,—,Suction Cups,Sniper*,Moody,Water 1,Water 2,021,5355,75,105,75,105,75,45,480,80.00,FALSE
+Delibird,Ice,Flying,Vital Spirit,Hustle,Insomnia,Water 1,Field,021,5355,45,55,45,65,45,75,330,55.00,FALSE
+Mantine,Water,Flying,Swift Swim,Water Absorb,Water Veil,Water 1,—,026,6630,85,40,70,80,140,70,485,80.83,FALSE
+Skarmory,Steel,Flying,Keen Eye,Sturdy,Weak Armor,Flying,—,026,6630,65,80,140,40,70,70,465,77.50,FALSE
+Houndour,Dark,Fire,Early Bird,Flash Fire,Unnerve,Field,—,021,5355,45,60,30,80,50,65,330,55.00,FALSE
+Houndoom,Dark,Fire,Early Bird,Flash Fire,Unnerve,Field,—,021,5355,75,90,50,110,80,95,500,83.33,FALSE
+Kingdra,Water,Dragon,Swift Swim,Sniper*,Damp,Water 1,Dragon,021,5355,75,95,95,95,95,85,540,90.00,FALSE
+Phanpy,Ground,—,Pickup,—,Sand Veil,Field,—,021,5355,90,60,60,40,40,40,330,55.00,FALSE
+Donphan,Ground,—,Sturdy,—,Sand Veil,Field,—,021,5355,90,120,120,60,60,50,500,83.33,FALSE
+Porygon2,Normal,—,Trace,Download*,Analytic,Mineral,—,021,5355,85,80,90,105,95,60,515,85.83,FALSE
+Stantler,Normal,—,Intimidate,Frisk*,Sap Sipper,Field,—,021,5355,73,95,62,85,65,85,465,77.50,FALSE
+Smeargle,Normal,—,Own Tempo,Technician*,Moody,Field,—,021,5355,55,20,35,20,45,75,250,41.67,FALSE
+Tyrogue,Fighting,—,Guts,Steadfast*,Vital Spirit,Undiscovered,—,026,6630,35,35,35,35,35,35,210,35.00,FALSE
+Hitmontop,Fighting,—,Intimidate,Technician*,Steadfast,Human-Like,—,026,6630,50,95,95,35,110,70,455,75.83,FALSE
+Smoochum,Ice,Psychic,Oblivious,Forewarn*,Hydration,Undiscovered,—,026,6630,45,30,15,85,65,65,305,50.83,FALSE
+Elekid,Electric,—,Static,—,Vital Spirit,Undiscovered,—,026,6630,45,63,37,65,55,95,360,60.00,FALSE
+Magby,Fire,—,Flame Body,—,Vital Spirit,Undiscovered,—,026,6630,45,75,37,70,55,83,365,60.83,FALSE
+Miltank,Normal,—,Thick Fat,Scrappy*,Sap Sipper,Field,—,021,5355,95,80,105,40,70,100,490,81.67,FALSE
+Blissey,Normal,—,Natural Cure,Serene Grace,Healer,Fairy,—,041,10455,255,10,10,75,135,55,540,90.00,FALSE
+Raikou,Electric,—,Pressure,—,Volt Absorb,Undiscovered,—,081,20655,90,85,75,115,100,115,580,96.67,FALSE
+Entei,Fire,—,Pressure,—,Flash Fire,Undiscovered,—,081,20655,115,115,85,90,75,100,580,96.67,FALSE
+Suicune,Water,—,Pressure,—,Water Absorb,Undiscovered,—,081,20655,100,75,115,90,115,85,580,96.67,FALSE
+Larvitar,Rock,Ground,Guts,—,Sand Veil,Monster,—,041,10455,50,64,50,45,50,41,300,50.00,FALSE
+Pupitar,Rock,Ground,Shed Skin,—,—,Monster,—,041,10455,70,84,70,65,70,51,410,68.33,FALSE
+Tyranitar,Rock,Dark,Sand Stream,—,Unnerve,Monster,—,041,10455,100,134,110,95,100,61,600,100.00,FALSE
+Lugia,Psychic,Flying,Pressure,—,Multiscale,Undiscovered,—,121,30855,106,90,130,90,154,110,680,113.33,FALSE
+Ho-Oh,Fire,Flying,Pressure,—,Regenerator,Undiscovered,—,121,30855,106,130,90,110,154,90,680,113.33,FALSE
+Celebi,Psychic,Grass,Natural Cure,—,—,Undiscovered,—,121,30855,100,100,100,100,100,100,600,100.00,FALSE
+Treecko,Grass,—,Overgrow,—,Unburden,Monster,Dragon,021,5355,40,45,35,65,55,70,310,51.67,FALSE
+Grovyle,Grass,—,Overgrow,—,Unburden,Monster,Dragon,021,5355,50,65,45,85,65,95,405,67.50,FALSE
+Sceptile,Grass,—,Overgrow,—,Unburden,Monster,Dragon,021,5355,70,85,65,105,85,120,530,88.33,FALSE
+Torchic,Fire,—,Blaze,—,Speed Boost,Field,—,021,5355,45,60,40,70,50,45,310,51.67,FALSE
+Combusken,Fire,Fighting,Blaze,—,Speed Boost,Field,—,021,5355,60,85,60,85,60,55,405,67.50,FALSE
+Blaziken,Fire,Fighting,Blaze,—,Speed Boost,Field,—,021,5355,80,120,70,110,70,80,530,88.33,FALSE
+Mudkip,Water,—,Torrent,—,Damp,Monster,Water 1,021,5355,50,70,50,50,50,40,310,51.67,FALSE
+Marshtomp,Water,Ground,Torrent,—,Damp,Monster,Water 1,021,5355,70,85,70,60,70,50,405,67.50,FALSE
+Swampert,Water,Ground,Torrent,—,Damp,Monster,Water 1,021,5355,100,110,90,85,90,60,535,89.17,FALSE
+Poochyena,Dark,—,Run Away,Quick Feet*,Rattled,Field,—,016,4080,35,55,35,30,30,35,220,36.67,FALSE
+Mightyena,Dark,—,Intimidate,Quick Feet*,Moxie,Field,—,016,4080,70,90,70,60,60,70,420,70.00,FALSE
+Zigzagoon,Normal,—,Pickup,Gluttony*,Quick Feet,Field,—,016,4080,38,30,41,30,41,60,240,40.00,FALSE
+Linoone,Normal,—,Pickup,Gluttony*,Quick Feet,Field,—,016,4080,78,70,61,50,61,100,420,70.00,FALSE
+Wurmple,Bug,—,Shield Dust,—,Run Away,Bug,—,016,4080,45,45,35,20,30,20,195,32.50,FALSE
+Silcoon,Bug,—,Shed Skin,—,—,Bug,—,016,4080,50,35,55,25,25,15,205,34.17,FALSE
+Beautifly,Bug,Flying,Swarm,—,Rivalry,Bug,—,016,4080,60,70,50,100,50,65,395,65.83,FALSE
+Cascoon,Bug,—,Shed Skin,—,—,Bug,—,016,4080,50,35,55,25,25,15,205,34.17,FALSE
+Dustox,Bug,Poison,Shield Dust,—,Compound Eyes,Bug,—,016,4080,60,50,70,50,90,65,385,64.17,FALSE
+Lotad,Water,Grass,Swift Swim,Rain Dish,Own Tempo,Water 1,Grass,016,4080,40,30,30,40,50,30,220,36.67,FALSE
+Lombre,Water,Grass,Swift Swim,Rain Dish,Own Tempo,Water 1,Grass,016,4080,60,50,50,60,70,50,340,56.67,FALSE
+Ludicolo,Water,Grass,Swift Swim,Rain Dish,Own Tempo,Water 1,Grass,016,4080,80,70,70,90,100,70,480,80.00,FALSE
+Seedot,Grass,—,Chlorophyll,Early Bird,Pickpocket,Field,Grass,016,4080,40,40,50,30,30,30,220,36.67,FALSE
+Nuzleaf,Grass,Dark,Chlorophyll,Early Bird,Pickpocket,Field,Grass,016,4080,70,70,40,60,40,60,340,56.67,FALSE
+Shiftry,Grass,Dark,Chlorophyll,Early Bird,Pickpocket,Field,Grass,016,4080,90,100,60,90,60,80,480,80.00,FALSE
+Taillow,Normal,Flying,Guts,—,Scrappy,Flying,—,016,4080,40,55,30,30,30,85,270,45.00,FALSE
+Swellow,Normal,Flying,Guts,—,Scrappy,Flying,—,016,4080,60,85,60,75,50,125,455,75.83,FALSE
+Wingull,Water,Flying,Keen Eye,—,Rain Dish,Water 1,Flying,021,5355,40,30,30,55,30,85,270,45.00,FALSE
+Pelipper,Water,Flying,Keen Eye,—,Rain Dish,Water 1,Flying,021,5355,60,50,100,95,70,65,440,73.33,FALSE
+Ralts,Psychic,Fairy,Synchronize,Trace,Telepathy,Amorphous,—,021,5355,28,25,25,45,35,40,198,33.00,FALSE
+Kirlia,Psychic,Fairy,Synchronize,Trace,Telepathy,Amorphous,—,021,5355,38,35,35,65,55,50,278,46.33,FALSE
+Gardevoir,Psychic,Fairy,Synchronize,Trace,Telepathy,Amorphous,—,021,5355,68,65,65,125,115,80,518,86.33,FALSE
+Surskit,Bug,Water,Swift Swim,—,Rain Dish,Water 1,Bug,016,4080,40,30,32,50,52,65,269,44.83,FALSE
+Masquerain,Bug,Flying,Intimidate,—,Unnerve,Water 1,Bug,016,4080,70,60,62,100,82,60,434,72.33,FALSE
+Shroomish,Grass,—,Effect Spore,Poison Heal*,Quick Feet,Fairy,Grass,016,4080,60,40,60,40,60,35,295,49.17,FALSE
+Breloom,Grass,Fighting,Effect Spore,Poison Heal*,Technician,Fairy,Grass,016,4080,60,130,80,60,60,70,460,76.67,FALSE
+Slakoth,Normal,—,Truant,—,—,Field,—,016,4080,60,60,60,35,35,30,280,46.67,FALSE
+Vigoroth,Normal,—,Vital Spirit,—,—,Field,—,016,4080,80,80,80,55,55,90,440,73.33,FALSE
+Slaking,Normal,—,Truant,—,—,Field,—,016,4080,150,160,100,95,65,100,670,111.67,FALSE
+Nincada,Bug,Ground,Compound Eyes,—,Run Away,Bug,—,016,4080,31,45,90,30,30,40,266,44.33,FALSE
+Ninjask,Bug,Flying,Speed Boost,—,Infiltrator,Bug,—,016,4080,61,90,45,50,50,160,456,76.00,FALSE
+Shedinja,Bug,Ghost,Wonder Guard,—,Wonder Guard,Mineral,—,016,4080,1,90,45,30,30,40,236,39.33,FALSE
+Whismur,Normal,—,Soundproof,—,Rattled,Monster,Field,021,5355,64,51,23,51,23,28,240,40.00,FALSE
+Loudred,Normal,—,Soundproof,—,Scrappy,Monster,Field,021,5355,84,71,43,71,43,48,360,60.00,FALSE
+Exploud,Normal,—,Soundproof,—,Scrappy,Monster,Field,021,5355,104,91,63,91,73,68,490,81.67,FALSE
+Makuhita,Fighting,—,Thick Fat,Guts,Sheer Force,Human-Like,—,021,5355,72,60,30,20,30,25,237,39.50,FALSE
+Hariyama,Fighting,—,Thick Fat,Guts,Sheer Force,Human-Like,—,021,5355,144,120,60,40,60,50,474,79.00,FALSE
+Azurill,Normal,Fairy,Thick Fat,Huge Power,Sap Sipper,Undiscovered,—,011,2805,50,20,40,20,40,20,190,31.67,FALSE
+Nosepass,Rock,—,Sturdy,Magnet Pull,Sand Force,Mineral,—,021,5355,30,45,135,45,90,30,375,62.50,FALSE
+Skitty,Normal,—,Cute Charm,Normalize*,Wonder Skin,Field,Fairy,016,4080,50,45,45,35,35,50,260,43.33,FALSE
+Delcatty,Normal,—,Cute Charm,Normalize*,Wonder Skin,Field,Fairy,016,4080,70,65,65,55,55,90,400,66.67,FALSE
+Sableye,Dark,Ghost,Keen Eye,Stall*,Prankster,Human-Like,—,026,6630,50,75,75,65,65,50,380,63.33,FALSE
+Mawile,Steel,Fairy,Hyper Cutter,Intimidate,Sheer Force,Field,Fairy,021,5355,50,85,85,55,55,50,380,63.33,FALSE
+Aron,Steel,Rock,Sturdy,Rock Head,Heavy Metal,Monster,—,036,9180,50,70,100,40,40,30,330,55.00,FALSE
+Lairon,Steel,Rock,Sturdy,Rock Head,Heavy Metal,Monster,—,036,9180,60,90,140,50,50,40,430,71.67,FALSE
+Aggron,Steel,Rock,Sturdy,Rock Head,Heavy Metal,Monster,—,036,9180,70,110,180,60,60,50,530,88.33,FALSE
+Meditite,Fighting,Psychic,Pure Power,—,Telepathy,Human-Like,—,021,5355,30,40,55,40,55,60,280,46.67,FALSE
+Medicham,Fighting,Psychic,Pure Power,—,Telepathy,Human-Like,—,021,5355,60,60,75,60,75,80,410,68.33,FALSE
+Electrike,Electric,—,Static,Lightning Rod,Minus,Field,—,021,5355,40,45,40,65,40,65,295,49.17,FALSE
+Manectric,Electric,—,Static,Lightning Rod,Minus,Field,—,021,5355,70,75,60,105,60,105,475,79.17,FALSE
+Plusle,Electric,—,Plus,—,Lightning Rod,Fairy,—,021,5355,60,50,40,85,75,95,405,67.50,FALSE
+Minun,Electric,—,Minus,—,Volt Absorb,Fairy,—,021,5355,60,40,50,75,85,95,405,67.50,FALSE
+Volbeat,Bug,—,Illuminate,Swarm,Prankster,Bug,Human-Like,016,4080,65,73,75,47,85,85,430,71.67,FALSE
+Illumise,Bug,—,Oblivious,Tinted Lens*,Prankster,Bug,Human-Like,016,4080,65,47,75,73,85,85,430,71.67,FALSE
+Roselia,Grass,Poison,Natural Cure,Poison Point,Leaf Guard,Fairy,Grass,021,5355,50,60,45,100,80,65,400,66.67,FALSE
+Gulpin,Poison,—,Liquid Ooze,Sticky Hold,Gluttony,Amorphous,—,021,5355,70,43,53,43,53,40,302,50.33,FALSE
+Swalot,Poison,—,Liquid Ooze,Sticky Hold,Gluttony,Amorphous,—,021,5355,100,73,83,73,83,55,467,77.83,FALSE
+Carvanha,Water,Dark,Rough Skin,—,Speed Boost,Water 2,—,021,5355,45,90,20,65,20,65,305,50.83,FALSE
+Sharpedo,Water,Dark,Rough Skin,—,Speed Boost,Water 2,—,021,5355,70,120,40,95,40,95,460,76.67,FALSE
+Wailmer,Water,—,Water Veil,Oblivious,Pressure,Field,Water 2,041,10455,130,70,35,70,35,60,400,66.67,FALSE
+Wailord,Water,—,Water Veil,Oblivious,Pressure,Field,Water 2,041,10455,170,90,45,90,45,60,500,83.33,FALSE
+Numel,Fire,Ground,Oblivious,Simple*,Own Tempo,Field,—,021,5355,60,60,40,65,45,35,305,50.83,FALSE
+Camerupt,Fire,Ground,Magma Armor,Solid Rock*,Anger Point,Field,—,021,5355,70,100,70,105,75,40,460,76.67,FALSE
+Torkoal,Fire,—,White Smoke,—,Shell Armor,Field,—,021,5355,70,85,140,85,70,20,470,78.33,FALSE
+Spoink,Psychic,—,Thick Fat,Own Tempo,Gluttony,Field,—,021,5355,60,25,35,70,80,60,330,55.00,FALSE
+Grumpig,Psychic,—,Thick Fat,Own Tempo,Gluttony,Field,—,021,5355,80,45,65,90,110,80,470,78.33,FALSE
+Spinda,Normal,—,Own Tempo,Tangled Feet*,Contrary,Field,Human-Like,021,5355,60,60,60,60,60,60,360,60.00,FALSE
+Trapinch,Ground,—,Hyper Cutter,Arena Trap,Sheer Force,Bug,—,021,5355,45,100,45,45,45,10,290,48.33,FALSE
+Vibrava,Ground,Dragon,Levitate,—,—,Bug,—,021,5355,50,70,50,50,50,70,340,56.67,FALSE
+Flygon,Ground,Dragon,Levitate,—,—,Bug,—,021,5355,80,100,80,80,80,100,520,86.67,FALSE
+Cacnea,Grass,—,Sand Veil,—,Water Absorb,Grass,Human-Like,021,5355,50,85,40,85,40,35,335,55.83,FALSE
+Cacturne,Grass,Dark,Sand Veil,—,Water Absorb,Grass,Human-Like,021,5355,70,115,60,115,60,55,475,79.17,FALSE
+Swablu,Normal,Flying,Natural Cure,—,Cloud Nine,Flying,Dragon,021,5355,45,40,60,40,75,50,310,51.67,FALSE
+Altaria,Dragon,Flying,Natural Cure,—,Cloud Nine,Flying,Dragon,021,5355,75,70,90,70,105,80,490,81.67,FALSE
+Zangoose,Normal,—,Immunity,—,Toxic Boost,Field,—,021,5355,73,115,60,60,60,90,458,76.33,FALSE
+Seviper,Poison,—,Shed Skin,—,Infiltrator,Field,Dragon,021,5355,73,100,60,100,60,65,458,76.33,FALSE
+Lunatone,Rock,Psychic,Levitate,—,—,Mineral,—,026,6630,90,55,65,95,85,70,460,76.67,FALSE
+Solrock,Rock,Psychic,Levitate,—,—,Mineral,—,026,6630,90,95,85,55,65,70,460,76.67,FALSE
+Barboach,Water,Ground,Oblivious,Anticipation*,Hydration,Water 2,—,021,5355,50,48,43,46,41,60,288,48.00,FALSE
+Whiscash,Water,Ground,Oblivious,Anticipation*,Hydration,Water 2,—,021,5355,110,78,73,76,71,60,468,78.00,FALSE
+Corphish,Water,—,Hyper Cutter,Shell Armor,Adaptability,Water 1,Water 3,021,5355,43,80,65,50,35,35,308,51.33,FALSE
+Crawdaunt,Water,Dark,Hyper Cutter,Shell Armor,Adaptability,Water 1,Water 3,021,5355,63,120,85,90,55,55,468,78.00,FALSE
+Baltoy,Ground,Psychic,Levitate,—,—,Mineral,—,021,5355,40,40,55,40,70,55,300,50.00,FALSE
+Claydol,Ground,Psychic,Levitate,—,—,Mineral,—,021,5355,60,70,105,70,120,75,500,83.33,FALSE
+Lileep,Rock,Grass,Suction Cups,—,Storm Drain,Water 3,—,031,7905,66,41,77,61,87,23,355,59.17,FALSE
+Cradily,Rock,Grass,Suction Cups,—,Storm Drain,Water 3,—,031,7905,86,81,97,81,107,43,495,82.50,FALSE
+Anorith,Rock,Bug,Battle Armor,—,Swift Swim,Water 3,—,031,7905,45,95,50,40,50,75,355,59.17,FALSE
+Armaldo,Rock,Bug,Battle Armor,—,Swift Swim,Water 3,—,031,7905,75,125,100,70,80,45,495,82.50,FALSE
+Feebas,Water,—,Swift Swim,Oblivious*,Adaptability,Water 1,Dragon,021,5355,20,15,20,10,55,80,200,33.33,FALSE
+Milotic,Water,—,Marvel Scale,Competitive*,Cute Charm,Water 1,Dragon,021,5355,95,60,79,100,125,81,540,90.00,FALSE
+Castform,Normal,—,Forecast,—,—,Fairy,Amorphous,026,6630,70,70,70,70,70,70,420,70.00,FALSE
+Kecleon,Normal,—,Color Change,—,Protean,Field,—,021,5355,60,90,70,60,120,40,440,73.33,FALSE
+Shuppet,Ghost,—,Insomnia,Frisk*,Cursed Body,Amorphous,—,026,6630,44,75,35,63,33,45,295,49.17,FALSE
+Banette,Ghost,—,Insomnia,Frisk*,Cursed Body,Amorphous,—,026,6630,64,115,65,83,63,65,455,75.83,FALSE
+Duskull,Ghost,—,Levitate,—,Frisk,Amorphous,—,026,6630,20,40,90,30,90,25,295,49.17,FALSE
+Dusclops,Ghost,—,Pressure,—,Frisk,Amorphous,—,026,6630,40,70,130,60,130,25,455,75.83,FALSE
+Tropius,Grass,Flying,Chlorophyll,Solar Power*,Harvest,Monster,Grass,026,6630,99,68,83,72,87,51,460,76.67,FALSE
+Chimecho,Psychic,—,Levitate,—,—,Amorphous,—,026,6630,75,50,80,95,90,65,455,75.83,FALSE
+Absol,Dark,—,Pressure,Super Luck*,Justified,Field,—,026,6630,65,130,60,75,60,75,465,77.50,FALSE
+Wynaut,Psychic,—,Shadow Tag,—,Telepathy,Undiscovered,—,021,5355,95,23,48,23,48,23,260,43.33,FALSE
+Snorunt,Ice,—,Inner Focus,Ice Body*,Moody,Fairy,Mineral,021,5355,50,50,50,50,50,50,300,50.00,FALSE
+Glalie,Ice,—,Inner Focus,Ice Body*,Moody,Fairy,Mineral,021,5355,80,80,80,80,80,80,480,80.00,FALSE
+Spheal,Ice,Water,Thick Fat,Ice Body*,Oblivious,Water 1,Field,021,5355,70,40,50,55,50,25,290,48.33,FALSE
+Sealeo,Ice,Water,Thick Fat,Ice Body*,Oblivious,Water 1,Field,021,5355,90,60,70,75,70,45,410,68.33,FALSE
+Walrein,Ice,Water,Thick Fat,Ice Body*,Oblivious,Water 1,Field,021,5355,110,80,90,95,90,65,530,88.33,FALSE
+Clamperl,Water,—,Shell Armor,—,Rattled,Water 1,—,021,5355,35,64,85,74,55,32,345,57.50,FALSE
+Huntail,Water,—,Swift Swim,—,Water Veil,Water 1,—,021,5355,55,104,105,94,75,52,485,80.83,FALSE
+Gorebyss,Water,—,Swift Swim,—,Hydration,Water 1,—,021,5355,55,84,105,114,75,52,485,80.83,FALSE
+Relicanth,Water,Rock,Swift Swim,Rock Head,Sturdy,Water 1,Water 2,041,10455,100,90,130,45,65,55,485,80.83,FALSE
+Luvdisc,Water,—,Swift Swim,—,Hydration,Water 2,—,021,5355,43,30,55,40,65,97,330,55.00,FALSE
+Bagon,Dragon,—,Rock Head,—,Sheer Force,Dragon,—,041,10455,45,75,60,40,30,50,300,50.00,FALSE
+Shelgon,Dragon,—,Rock Head,—,Overcoat,Dragon,—,041,10455,65,95,100,60,50,50,420,70.00,FALSE
+Salamence,Dragon,Flying,Intimidate,—,Moxie,Dragon,—,041,10455,95,135,80,110,80,100,600,100.00,FALSE
+Beldum,Steel,Psychic,Clear Body,—,Light Metal,Mineral,—,041,10455,40,55,80,35,60,30,300,50.00,FALSE
+Metang,Steel,Psychic,Clear Body,—,Light Metal,Mineral,—,041,10455,60,75,100,55,80,50,420,70.00,FALSE
+Metagross,Steel,Psychic,Clear Body,—,Light Metal,Mineral,—,041,10455,80,135,130,95,90,70,600,100.00,FALSE
+Regirock,Rock,—,Clear Body,—,Sturdy,Undiscovered,—,081,20655,80,100,200,50,100,50,580,96.67,FALSE
+Regice,Ice,—,Clear Body,—,Ice Body,Undiscovered,—,081,20655,80,50,100,100,200,50,580,96.67,FALSE
+Registeel,Steel,—,Clear Body,—,Light Metal,Undiscovered,—,081,20655,80,75,150,75,150,50,580,96.67,FALSE
+Latias,Dragon,Psychic,Levitate,—,—,Undiscovered,—,121,30855,80,80,90,110,130,110,600,100.00,FALSE
+Latios,Dragon,Psychic,Levitate,—,—,Undiscovered,—,121,30855,80,90,80,130,110,110,600,100.00,FALSE
+Kyogre,Water,—,Drizzle,—,—,Undiscovered,—,121,30855,100,100,90,150,140,90,670,111.67,FALSE
+Groudon,Ground,—,Drought,—,—,Undiscovered,—,121,30855,100,150,140,100,90,90,670,111.67,FALSE
+Rayquaza,Dragon,Flying,Air Lock,—,—,Undiscovered,—,121,30855,105,150,90,150,90,95,680,113.33,FALSE
+Jirachi,Steel,Psychic,Serene Grace,—,—,Undiscovered,—,121,30855,100,100,100,100,100,100,600,100.00,FALSE
+Deoxys,Psychic,—,Pressure,—,—,Undiscovered,—,121,30855,50,150,50,150,50,150,600,100.00,FALSE
+Turtwig,Grass,—,Overgrow,—,Shell Armor,Monster,Grass,021,5355,55,68,64,45,55,31,318,53.00,FALSE
+Grotle,Grass,—,Overgrow,—,Shell Armor,Monster,Grass,021,5355,75,89,85,55,65,36,405,67.50,FALSE
+Torterra,Grass,Ground,Overgrow,—,Shell Armor,Monster,Grass,021,5355,95,109,105,75,85,56,525,87.50,FALSE
+Chimchar,Fire,—,Blaze,—,Iron Fist,Field,Human-Like,021,5355,44,58,44,58,44,61,309,51.50,FALSE
+Monferno,Fire,Fighting,Blaze,—,Iron Fist,Field,Human-Like,021,5355,64,78,52,78,52,81,405,67.50,FALSE
+Infernape,Fire,Fighting,Blaze,—,Iron Fist,Field,Human-Like,021,5355,76,104,71,104,71,108,534,89.00,FALSE
+Piplup,Water,—,Torrent,—,Defiant,Water 1,Field,021,5355,53,51,53,61,56,40,314,52.33,FALSE
+Prinplup,Water,—,Torrent,—,Defiant,Water 1,Field,021,5355,64,66,68,81,76,50,405,67.50,FALSE
+Empoleon,Water,Steel,Torrent,—,Defiant,Water 1,Field,021,5355,84,86,88,111,101,60,530,88.33,FALSE
+Starly,Normal,Flying,Keen Eye,—,Reckless,Flying,—,016,4080,40,55,30,30,30,60,245,40.83,FALSE
+Staravia,Normal,Flying,Intimidate,—,Reckless,Flying,—,016,4080,55,75,50,40,40,80,340,56.67,FALSE
+Staraptor,Normal,Flying,Intimidate,—,Reckless,Flying,—,016,4080,85,120,70,50,60,100,485,80.83,FALSE
+Bidoof,Normal,—,Simple,Unaware,Moody,Water 1,Field,016,4080,59,45,40,35,40,31,250,41.67,FALSE
+Bibarel,Normal,Water,Simple,Unaware,Moody,Water 1,Field,016,4080,79,85,60,55,60,71,410,68.33,FALSE
+Kricketot,Bug,—,Shed Skin,—,Run Away,Bug,—,016,4080,37,25,41,25,41,25,194,32.33,FALSE
+Kricketune,Bug,—,Swarm,—,Technician,Bug,—,016,4080,77,85,51,55,51,65,384,64.00,FALSE
+Shinx,Electric,—,Rivalry,Intimidate,Guts,Field,—,021,5355,45,65,34,40,34,45,263,43.83,FALSE
+Luxio,Electric,—,Rivalry,Intimidate,Guts,Field,—,021,5355,60,85,49,60,49,60,363,60.50,FALSE
+Luxray,Electric,—,Rivalry,Intimidate,Guts,Field,—,021,5355,80,120,79,95,79,70,523,87.17,FALSE
+Budew,Grass,Poison,Natural Cure,Poison Point,Leaf Guard,Undiscovered,—,021,5355,40,30,35,50,70,55,280,46.67,FALSE
+Roserade,Grass,Poison,Natural Cure,Poison Point,Technician,Fairy,Grass,021,5355,60,70,65,125,105,90,515,85.83,FALSE
+Cranidos,Rock,—,Mold Breaker,—,Sheer Force,Monster,—,031,7905,67,125,40,30,30,58,350,58.33,FALSE
+Rampardos,Rock,—,Mold Breaker,—,Sheer Force,Monster,—,031,7905,97,165,60,65,50,58,495,82.50,FALSE
+Shieldon,Rock,Steel,Sturdy,—,Soundproof,Monster,—,031,7905,30,42,118,42,88,30,350,58.33,FALSE
+Bastiodon,Rock,Steel,Sturdy,—,Soundproof,Monster,—,031,7905,60,52,168,47,138,30,495,82.50,FALSE
+Burmy,Bug,—,Shed Skin,—,Overcoat,Bug,—,016,4080,40,29,45,29,45,36,224,37.33,FALSE
+Wormadam,Bug,Grass,Anticipation,—,Overcoat,Bug,—,016,4080,60,59,85,79,105,36,424,70.67,FALSE
+Mothim,Bug,Flying,Swarm,—,Tinted Lens,Bug,—,016,4080,70,94,50,94,50,66,424,70.67,FALSE
+Combee,Bug,Flying,Honey Gather,—,Hustle,Bug,—,016,4080,30,30,42,30,42,70,244,40.67,FALSE
+Vespiquen,Bug,Flying,Pressure,—,Unnerve,Bug,—,016,4080,70,80,102,80,102,40,474,79.00,FALSE
+Pachirisu,Electric,—,Run Away,Pickup,Volt Absorb,Field,Fairy,011,2805,60,45,70,45,90,95,405,67.50,FALSE
+Buizel,Water,—,Swift Swim,—,Water Veil,Water 1,Field,021,5355,55,65,35,60,30,85,330,55.00,FALSE
+Floatzel,Water,—,Swift Swim,—,Water Veil,Water 1,Field,021,5355,85,105,55,85,50,115,495,82.50,FALSE
+Cherubi,Grass,—,Chlorophyll,—,—,Fairy,Grass,021,5355,45,35,45,62,53,35,275,45.83,FALSE
+Cherrim,Grass,—,Flower Gift,—,—,Fairy,Grass,021,5355,70,60,70,87,78,85,450,75.00,FALSE
+Shellos,Water,—,Sticky Hold,Storm Drain,Sand Force,Water 1,Amorphous,021,5355,76,48,48,57,62,34,325,54.17,FALSE
+Gastrodon,Water,Ground,Sticky Hold,Storm Drain,Sand Force,Water 1,Amorphous,021,5355,111,83,68,92,82,39,475,79.17,FALSE
+Ambipom,Normal,—,Technician,Pickup,Skill Link,Field,—,021,5355,75,100,66,60,66,115,482,80.33,FALSE
+Drifloon,Ghost,Flying,Aftermath,Unburden,Flare Boost,Amorphous,—,031,7905,90,50,34,60,44,70,348,58.00,FALSE
+Drifblim,Ghost,Flying,Aftermath,Unburden,Flare Boost,Amorphous,—,031,7905,150,80,44,90,54,80,498,83.00,FALSE
+Buneary,Normal,—,Run Away,Klutz,Limber,Field,Human-Like,021,5355,55,66,44,44,56,85,350,58.33,FALSE
+Lopunny,Normal,—,Cute Charm,Klutz,Limber,Field,Human-Like,021,5355,65,76,84,54,96,105,480,80.00,FALSE
+Mismagius,Ghost,—,Levitate,—,—,Amorphous,—,026,6630,60,60,60,105,105,105,495,82.50,FALSE
+Honchkrow,Dark,Flying,Insomnia,Super Luck,Moxie,Flying,—,021,5355,100,125,52,105,52,71,505,84.17,FALSE
+Glameow,Normal,—,Limber,Own Tempo,Keen Eye,Field,—,021,5355,49,55,42,42,37,85,310,51.67,FALSE
+Purugly,Normal,—,Thick Fat,Own Tempo,Defiant,Field,—,021,5355,71,82,64,64,59,112,452,75.33,FALSE
+Chingling,Psychic,—,Levitate,—,—,Undiscovered,—,026,6630,45,30,50,65,50,45,285,47.50,FALSE
+Stunky,Poison,Dark,Stench,Aftermath,Keen Eye,Field,—,021,5355,63,63,47,41,41,74,329,54.83,FALSE
+Skuntank,Poison,Dark,Stench,Aftermath,Keen Eye,Field,—,021,5355,103,93,67,71,61,84,479,79.83,FALSE
+Bronzor,Steel,Psychic,Levitate,Heatproof,Heavy Metal,Mineral,—,021,5355,57,24,86,24,86,23,300,50.00,FALSE
+Bronzong,Steel,Psychic,Levitate,Heatproof,Heavy Metal,Mineral,—,021,5355,67,89,116,79,116,33,500,83.33,FALSE
+Bonsly,Rock,—,Sturdy,Rock Head,Rattled,Undiscovered,—,021,5355,50,80,95,10,45,10,290,48.33,FALSE
+Mime Jr.,Psychic,Fairy,Soundproof,Filter,Technician,Undiscovered,—,026,6630,20,25,45,70,90,60,310,51.67,FALSE
+Happiny,Normal,—,Natural Cure,Serene Grace,Friend Guard,Undiscovered,—,041,10455,100,5,5,15,65,30,220,36.67,FALSE
+Chatot,Normal,Flying,Keen Eye,Tangled Feet,Big Pecks,Flying,—,021,5355,76,65,45,92,42,91,411,68.50,FALSE
+Spiritomb,Ghost,Dark,Pressure,—,Infiltrator,Amorphous,—,031,7905,50,92,108,92,108,35,485,80.83,FALSE
+Gible,Dragon,Ground,Sand Veil,—,Rough Skin,Monster,Dragon,041,10455,58,70,45,40,45,42,300,50.00,FALSE
+Gabite,Dragon,Ground,Sand Veil,—,Rough Skin,Monster,Dragon,041,10455,68,90,65,50,55,82,410,68.33,FALSE
+Garchomp,Dragon,Ground,Sand Veil,—,Rough Skin,Monster,Dragon,041,10455,108,130,95,80,85,102,600,100.00,FALSE
+Munchlax,Normal,—,Pickup,Thick Fat,Gluttony,Undiscovered,—,041,10455,135,85,40,40,85,5,390,65.00,FALSE
+Riolu,Fighting,—,Steadfast,Inner Focus,Prankster,Undiscovered,—,026,6630,40,70,40,35,40,60,285,47.50,FALSE
+Lucario,Fighting,Steel,Steadfast,Inner Focus,Justified,Field,Human-Like,026,6630,70,110,70,115,70,90,525,87.50,FALSE
+Hippopotas,Ground,—,Sand Stream,—,Sand Force,Field,—,031,7905,68,72,78,38,42,32,330,55.00,FALSE
+Hippowdon,Ground,—,Sand Stream,—,Sand Force,Field,—,031,7905,108,112,118,68,72,47,525,87.50,FALSE
+Skorupi,Poison,Bug,Battle Armor,Sniper,Keen Eye,Bug,Water 3,021,5355,40,50,90,30,55,65,330,55.00,FALSE
+Drapion,Poison,Dark,Battle Armor,Sniper,Keen Eye,Bug,Water 3,021,5355,70,90,110,60,75,95,500,83.33,FALSE
+Croagunk,Poison,Fighting,Anticipation,Dry Skin,Poison Touch,Human-Like,—,011,2805,48,61,40,61,40,50,300,50.00,FALSE
+Toxicroak,Poison,Fighting,Anticipation,Dry Skin,Poison Touch,Human-Like,—,011,2805,83,106,65,86,65,85,490,81.67,FALSE
+Carnivine,Grass,—,Levitate,—,—,Grass,—,026,6630,74,100,72,90,72,46,454,75.67,FALSE
+Finneon,Water,—,Swift Swim,Storm Drain,Water Veil,Water 2,—,021,5355,49,49,56,49,61,66,330,55.00,FALSE
+Lumineon,Water,—,Swift Swim,Storm Drain,Water Veil,Water 2,—,021,5355,69,69,76,69,86,91,460,76.67,FALSE
+Mantyke,Water,Flying,Swift Swim,Water Absorb,Water Veil,Undiscovered,—,026,6630,45,20,50,60,120,50,345,57.50,FALSE
+Snover,Grass,Ice,Snow Warning,—,Soundproof,Monster,Grass,021,5355,60,62,50,62,60,40,334,55.67,FALSE
+Abomasnow,Grass,Ice,Snow Warning,—,Soundproof,Monster,Grass,021,5355,90,92,75,92,85,60,494,82.33,FALSE
+Weavile,Dark,Ice,Pressure,—,Pickpocket,Field,—,021,5355,70,120,65,45,85,125,510,85.00,FALSE
+Magnezone,Electric,Steel,Magnet Pull,Sturdy,Analytic,Mineral,—,021,5355,70,70,115,130,90,60,535,89.17,FALSE
+Lickilicky,Normal,—,Own Tempo,Oblivious,Cloud Nine,Monster,—,021,5355,110,85,95,80,95,50,515,85.83,FALSE
+Rhyperior,Ground,Rock,Lightning Rod,Solid Rock,Reckless,Monster,Field,021,5355,115,140,130,55,55,40,535,89.17,FALSE
+Tangrowth,Grass,—,Chlorophyll,Leaf Guard,Regenerator,Grass,—,021,5355,100,100,125,110,50,50,535,89.17,FALSE
+Electivire,Electric,—,Motor Drive,—,Vital Spirit,Human-Like,—,026,6630,75,123,67,95,85,95,540,90.00,FALSE
+Magmortar,Fire,—,Flame Body,—,Vital Spirit,Human-Like,—,026,6630,75,95,67,125,95,83,540,90.00,FALSE
+Togekiss,Fairy,Flying,Hustle,Serene Grace,Super Luck,Flying,Fairy,011,2805,85,50,95,120,115,80,545,90.83,FALSE
+Yanmega,Bug,Flying,Speed Boost,Tinted Lens,Frisk,Bug,—,021,5355,86,76,86,116,56,95,515,85.83,FALSE
+Leafeon,Grass,—,Leaf Guard,—,Chlorophyll,Field,—,036,9180,65,110,130,60,65,95,525,87.50,FALSE
+Glaceon,Ice,—,Snow Cloak,—,Ice Body,Field,—,036,9180,65,60,110,130,95,65,525,87.50,FALSE
+Gliscor,Ground,Flying,Hyper Cutter,Sand Veil,Poison Heal,Bug,—,021,5355,75,95,125,45,75,95,510,85.00,FALSE
+Mamoswine,Ice,Ground,Oblivious,Snow Cloak,Thick Fat,Field,—,021,5355,110,130,80,70,60,80,530,88.33,FALSE
+Porygon-Z,Normal,—,Adaptability,Download,Analytic,Mineral,—,021,5355,85,80,70,135,75,90,535,89.17,FALSE
+Gallade,Psychic,Fighting,Steadfast,—,Justified,Amorphous,—,021,5355,68,125,65,65,115,80,518,86.33,FALSE
+Probopass,Rock,Steel,Sturdy,Magnet Pull,Sand Force,Mineral,—,021,5355,60,55,145,75,150,40,525,87.50,FALSE
+Dusknoir,Ghost,—,Pressure,—,Frisk,Amorphous,—,026,6630,45,100,135,65,135,45,525,87.50,FALSE
+Froslass,Ice,Ghost,Snow Cloak,—,Cursed Body,Fairy,Mineral,021,5355,70,80,70,80,70,110,480,80.00,FALSE
+Rotom,Electric,Ghost,Levitate,—,—,Amorphous,—,021,5355,50,50,77,95,77,91,440,73.33,FALSE
+Uxie,Psychic,—,Levitate,—,—,Undiscovered,—,081,20655,75,75,130,75,130,95,580,96.67,FALSE
+Mesprit,Psychic,—,Levitate,—,—,Undiscovered,—,081,20655,80,105,105,105,105,80,580,96.67,FALSE
+Azelf,Psychic,—,Levitate,—,—,Undiscovered,—,081,20655,75,125,70,125,70,115,580,96.67,FALSE
+Dialga,Steel,Dragon,Pressure,—,Telepathy,Undiscovered,—,121,30855,100,120,120,150,100,90,680,113.33,FALSE
+Palkia,Water,Dragon,Pressure,—,Telepathy,Undiscovered,—,121,30855,90,120,100,150,120,100,680,113.33,FALSE
+Heatran,Fire,Steel,Flash Fire,—,Flame Body,Undiscovered,—,011,2805,91,90,106,130,106,77,600,100.00,FALSE
+Regigigas,Normal,—,Slow Start,—,—,Undiscovered,—,121,30855,110,160,110,80,110,100,670,111.67,FALSE
+Giratina,Ghost,Dragon,Pressure,—,Telepathy,Undiscovered,—,121,30855,150,100,120,100,120,90,680,113.33,FALSE
+Cresselia,Psychic,—,Levitate,—,—,Undiscovered,—,121,30855,120,70,120,75,130,85,600,100.00,FALSE
+Phione,Water,—,Hydration,—,—,Water 1,Fairy,041,10455,80,80,80,80,80,80,480,80.00,FALSE
+Manaphy,Water,—,Hydration,—,—,Water 1,Fairy,011,2805,100,100,100,100,100,100,600,100.00,FALSE
+Darkrai,Dark,—,Bad Dreams,—,—,Undiscovered,—,121,30855,70,90,90,135,90,125,600,100.00,FALSE
+Shaymin,Grass,—,Natural Cure,—,—,Undiscovered,—,121,30855,100,100,100,100,100,100,600,100.00,FALSE
+Arceus,Normal,—,Multitype,—,—,Undiscovered,—,121,30855,120,120,120,120,120,120,720,120.00,FALSE
+Victini,Psychic,Fire,Victory Star,—,—,Undiscovered,—,121,30855,100,100,100,100,100,100,600,100.00,FALSE
+Snivy,Grass,—,Overgrow,—,Contrary,Field,Grass,021,5355,45,45,55,45,55,63,308,51.33,FALSE
+Servine,Grass,—,Overgrow,—,Contrary,Field,Grass,021,5355,60,60,75,60,75,83,413,68.83,FALSE
+Serperior,Grass,—,Overgrow,—,Contrary,Field,Grass,021,5355,75,75,95,75,95,113,528,88.00,FALSE
+Tepig,Fire,—,Blaze,—,Thick Fat,Field,—,021,5355,65,63,45,45,45,45,308,51.33,FALSE
+Pignite,Fire,Fighting,Blaze,—,Thick Fat,Field,—,021,5355,90,93,55,70,55,55,418,69.67,FALSE
+Emboar,Fire,Fighting,Blaze,—,Reckless,Field,—,021,5355,110,123,65,100,65,65,528,88.00,FALSE
+Oshawott,Water,—,Torrent,—,Shell Armor,Field,—,021,5355,55,55,45,63,45,45,308,51.33,FALSE
+Dewott,Water,—,Torrent,—,Shell Armor,Field,—,021,5355,75,75,60,83,60,60,413,68.83,FALSE
+Samurott,Water,—,Torrent,—,Shell Armor,Field,—,021,5355,95,100,85,108,70,70,528,88.00,FALSE
+Patrat,Normal,—,Run Away,Keen Eye,Analytic,Field,—,016,4080,45,55,39,35,39,42,255,42.50,FALSE
+Watchog,Normal,—,Illuminate,Keen Eye,Analytic,Field,—,016,4080,60,85,69,60,69,77,420,70.00,FALSE
+Lillipup,Normal,—,Vital Spirit,Pickup,Run Away,Field,—,016,4080,45,60,45,25,45,55,275,45.83,FALSE
+Herdier,Normal,—,Intimidate,Sand Rush,Scrappy,Field,—,016,4080,65,80,65,35,65,60,370,61.67,FALSE
+Stoutland,Normal,—,Intimidate,Sand Rush,Scrappy,Field,—,016,4080,85,110,90,45,90,80,500,83.33,FALSE
+Purrloin,Dark,—,Limber,Unburden,Prankster,Field,—,021,5355,41,50,37,50,37,66,281,46.83,FALSE
+Liepard,Dark,—,Limber,Unburden,Prankster,Field,—,021,5355,64,88,50,88,50,106,446,74.33,FALSE
+Pansage,Grass,—,Gluttony,—,Overgrow,Field,—,021,5355,50,53,48,53,48,64,316,52.67,FALSE
+Simisage,Grass,—,Gluttony,—,Overgrow,Field,—,021,5355,75,98,63,98,63,101,498,83.00,FALSE
+Pansear,Fire,—,Gluttony,—,Blaze,Field,—,021,5355,50,53,48,53,48,64,316,52.67,FALSE
+Simisear,Fire,—,Gluttony,—,Blaze,Field,—,021,5355,75,98,63,98,63,101,498,83.00,FALSE
+Panpour,Water,—,Gluttony,—,Torrent,Field,—,021,5355,50,53,48,53,48,64,316,52.67,FALSE
+Simipour,Water,—,Gluttony,—,Torrent,Field,—,021,5355,75,98,63,98,63,101,498,83.00,FALSE
+Munna,Psychic,—,Forewarn,Synchronize,Telepathy,Field,—,011,2805,76,25,45,67,55,24,292,48.67,FALSE
+Musharna,Psychic,—,Forewarn,Synchronize,Telepathy,Field,—,011,2805,116,55,85,107,95,29,487,81.17,FALSE
+Pidove,Normal,Flying,Big Pecks,Super Luck,Rivalry,Flying,—,016,4080,50,55,50,36,30,43,264,44.00,FALSE
+Tranquill,Normal,Flying,Big Pecks,Super Luck,Rivalry,Flying,—,016,4080,62,77,62,50,42,65,358,59.67,FALSE
+Unfezant,Normal,Flying,Big Pecks,Super Luck,Rivalry,Flying,—,016,4080,80,115,80,65,55,93,488,81.33,FALSE
+Blitzle,Electric,—,Lightning Rod,Motor Drive,Sap Sipper,Field,—,021,5355,45,60,32,50,32,76,295,49.17,FALSE
+Zebstrika,Electric,—,Lightning Rod,Motor Drive,Sap Sipper,Field,—,021,5355,75,100,63,80,63,116,497,82.83,FALSE
+Roggenrola,Rock,—,Sturdy,—,Sand Force,Mineral,—,016,4080,55,75,85,25,25,15,280,46.67,FALSE
+Boldore,Rock,—,Sturdy,—,Sand Force,Mineral,—,016,4080,70,105,105,50,40,20,390,65.00,FALSE
+Gigalith,Rock,—,Sturdy,—,Sand Force,Mineral,—,016,4080,85,135,130,60,80,25,515,85.83,FALSE
+Woobat,Psychic,Flying,Unaware,Klutz,Simple,Field,Flying,016,4080,65,45,43,55,43,72,323,53.83,FALSE
+Swoobat,Psychic,Flying,Unaware,Klutz,Simple,Field,Flying,016,4080,67,57,55,77,55,114,425,70.83,FALSE
+Drilbur,Ground,—,Sand Rush,Sand Force,Mold Breaker,Field,—,021,5355,60,85,40,30,45,68,328,54.67,FALSE
+Excadrill,Ground,Steel,Sand Rush,Sand Force,Mold Breaker,Field,—,021,5355,110,135,60,50,65,88,508,84.67,FALSE
+Audino,Normal,—,Healer,Regenerator,Klutz,Fairy,—,021,5355,103,60,86,60,86,50,445,74.17,FALSE
+Timburr,Fighting,—,Guts,Sheer Force,Iron Fist,Human-Like,—,021,5355,75,80,55,25,35,35,305,50.83,FALSE
+Gurdurr,Fighting,—,Guts,Sheer Force,Iron Fist,Human-Like,—,021,5355,85,105,85,40,50,40,405,67.50,FALSE
+Conkeldurr,Fighting,—,Guts,Sheer Force,Iron Fist,Human-Like,—,021,5355,105,140,95,55,65,45,505,84.17,FALSE
+Tympole,Water,—,Swift Swim,Hydration,Water Absorb,Water 1,—,021,5355,50,50,40,50,40,64,294,49.00,FALSE
+Palpitoad,Water,Ground,Swift Swim,Hydration,Water Absorb,Water 1,—,021,5355,75,65,55,65,55,69,384,64.00,FALSE
+Seismitoad,Water,Ground,Swift Swim,Poison Touch,Water Absorb,Water 1,—,021,5355,105,95,75,85,75,74,509,84.83,FALSE
+Throh,Fighting,—,Guts,Inner Focus,Mold Breaker,Human-Like,—,021,5355,120,100,85,30,85,45,465,77.50,FALSE
+Sawk,Fighting,—,Sturdy,Inner Focus,Mold Breaker,Human-Like,—,021,5355,75,125,75,30,75,85,465,77.50,FALSE
+Sewaddle,Bug,Grass,Swarm,Chlorophyll,Overcoat,Bug,—,016,4080,45,53,70,40,60,42,310,51.67,FALSE
+Swadloon,Bug,Grass,Leaf Guard,Chlorophyll,Overcoat,Bug,—,016,4080,55,63,90,50,80,42,380,63.33,FALSE
+Leavanny,Bug,Grass,Swarm,Chlorophyll,Overcoat,Bug,—,016,4080,75,103,80,70,80,92,500,83.33,FALSE
+Venipede,Bug,Poison,Poison Point,Swarm,Speed Boost,Bug,—,016,4080,30,45,59,30,39,57,260,43.33,FALSE
+Whirlipede,Bug,Poison,Poison Point,Swarm,Speed Boost,Bug,—,016,4080,40,55,99,40,79,47,360,60.00,FALSE
+Scolipede,Bug,Poison,Poison Point,Swarm,Speed Boost,Bug,—,016,4080,60,100,89,55,69,112,485,80.83,FALSE
+Cottonee,Grass,Fairy,Prankster,Infiltrator,Chlorophyll,Grass,Fairy,021,5355,40,27,60,37,50,66,280,46.67,FALSE
+Whimsicott,Grass,Fairy,Prankster,Infiltrator,Chlorophyll,Grass,Fairy,021,5355,60,67,85,77,75,116,480,80.00,FALSE
+Petilil,Grass,—,Chlorophyll,Own Tempo,Leaf Guard,Grass,—,021,5355,45,35,50,70,50,30,280,46.67,FALSE
+Lilligant,Grass,—,Chlorophyll,Own Tempo,Leaf Guard,Grass,—,021,5355,70,60,75,110,75,90,480,80.00,FALSE
+Basculin,Water,—,Reckless,Adaptability,Mold Breaker,Water 2,—,041,10455,70,92,65,80,55,98,460,76.67,FALSE
+Sandile,Ground,Dark,Intimidate,Moxie,Anger Point,Field,—,021,5355,50,72,35,35,35,65,292,48.67,FALSE
+Krokorok,Ground,Dark,Intimidate,Moxie,Anger Point,Field,—,021,5355,60,82,45,45,45,74,351,58.50,FALSE
+Krookodile,Ground,Dark,Intimidate,Moxie,Anger Point,Field,—,021,5355,95,117,80,65,70,92,519,86.50,FALSE
+Darumaka,Fire,—,Hustle,—,Inner Focus,Field,—,021,5355,70,90,45,15,45,50,315,52.50,FALSE
+Darmanitan,Fire,—,Sheer Force,—,Zen Mode,Field,—,021,5355,105,140,55,30,55,95,480,80.00,FALSE
+Maractus,Grass,—,Water Absorb,Chlorophyll,Storm Drain,Grass,—,021,5355,75,86,67,106,67,60,461,76.83,FALSE
+Dwebble,Bug,Rock,Sturdy,Shell Armor,Weak Armor,Bug,Mineral,021,5355,50,65,85,35,35,55,325,54.17,FALSE
+Crustle,Bug,Rock,Sturdy,Shell Armor,Weak Armor,Bug,Mineral,021,5355,70,105,125,65,75,45,485,80.83,FALSE
+Scraggy,Dark,Fighting,Shed Skin,Moxie,Intimidate,Field,Dragon,016,4080,50,75,70,35,70,48,348,58.00,FALSE
+Scrafty,Dark,Fighting,Shed Skin,Moxie,Intimidate,Field,Dragon,016,4080,65,90,115,45,115,58,488,81.33,FALSE
+Sigilyph,Psychic,Flying,Wonder Skin,Magic Guard,Tinted Lens,Flying,—,021,5355,72,58,80,103,80,97,490,81.67,FALSE
+Yamask,Ghost,—,Mummy,—,—,Mineral,Amorphous,026,6630,38,30,85,55,65,30,303,50.50,FALSE
+Cofagrigus,Ghost,—,Mummy,—,—,Mineral,Amorphous,026,6630,58,50,145,95,105,30,483,80.50,FALSE
+Tirtouga,Water,Rock,Solid Rock,Sturdy,Swift Swim,Water 1,Water 3,031,7905,54,78,103,53,45,22,355,59.17,FALSE
+Carracosta,Water,Rock,Solid Rock,Sturdy,Swift Swim,Water 1,Water 3,031,7905,74,108,133,83,65,32,495,82.50,FALSE
+Archen,Rock,Flying,Defeatist,—,—,Flying,Water 3,031,7905,55,112,45,74,45,70,401,66.83,FALSE
+Archeops,Rock,Flying,Defeatist,—,—,Flying,Water 3,031,7905,75,140,65,112,65,110,567,94.50,FALSE
+Trubbish,Poison,—,Stench,Sticky Hold,Aftermath,Mineral,—,021,5355,50,50,62,40,62,65,329,54.83,FALSE
+Garbodor,Poison,—,Stench,Weak Armor,Aftermath,Mineral,—,021,5355,80,95,82,60,82,75,474,79.00,FALSE
+Zorua,Dark,—,Illusion,—,—,Field,—,026,6630,40,65,40,80,40,65,330,55.00,FALSE
+Zoroark,Dark,—,Illusion,—,—,Field,—,026,6630,60,105,60,120,60,105,510,85.00,FALSE
+Minccino,Normal,—,Cute Charm,Technician,Skill Link,Field,—,016,4080,55,50,40,40,40,75,300,50.00,FALSE
+Cinccino,Normal,—,Cute Charm,Technician,Skill Link,Field,—,016,4080,75,95,60,65,60,115,470,78.33,FALSE
+Gothita,Psychic,—,Frisk,Competitive*,Shadow Tag,Human-Like,—,021,5355,45,30,50,55,65,45,290,48.33,FALSE
+Gothorita,Psychic,—,Frisk,Competitive*,Shadow Tag,Human-Like,—,021,5355,60,45,70,75,85,55,390,65.00,FALSE
+Gothitelle,Psychic,—,Frisk,Competitive*,Shadow Tag,Human-Like,—,021,5355,70,55,95,95,110,65,490,81.67,FALSE
+Solosis,Psychic,—,Overcoat,Magic Guard,Regenerator,Amorphous,—,021,5355,45,30,40,105,50,20,290,48.33,FALSE
+Duosion,Psychic,—,Overcoat,Magic Guard,Regenerator,Amorphous,—,021,5355,65,40,50,125,60,30,370,61.67,FALSE
+Reuniclus,Psychic,—,Overcoat,Magic Guard,Regenerator,Amorphous,—,021,5355,110,65,75,125,85,30,490,81.67,FALSE
+Ducklett,Water,Flying,Keen Eye,Big Pecks,Hydration,Water 1,Flying,021,5355,62,44,50,44,50,55,305,50.83,FALSE
+Swanna,Water,Flying,Keen Eye,Big Pecks,Hydration,Water 1,Flying,021,5355,75,87,63,87,63,98,473,78.83,FALSE
+Vanillite,Ice,—,Ice Body,—,Weak Armor,Mineral,—,021,5355,36,50,50,65,60,44,305,50.83,FALSE
+Vanillish,Ice,—,Ice Body,—,Weak Armor,Mineral,—,021,5355,51,65,65,80,75,59,395,65.83,FALSE
+Vanilluxe,Ice,—,Ice Body,—,Weak Armor,Mineral,—,021,5355,71,95,85,110,95,79,535,89.17,FALSE
+Deerling,Normal,Grass,Chlorophyll,Sap Sipper,Serene Grace,Field,—,021,5355,60,60,50,40,50,75,335,55.83,FALSE
+Sawsbuck,Normal,Grass,Chlorophyll,Sap Sipper,Serene Grace,Field,—,021,5355,80,100,70,60,70,95,475,79.17,FALSE
+Emolga,Electric,Flying,Static,—,Motor Drive,Field,—,021,5355,55,75,60,75,60,103,428,71.33,FALSE
+Karrablast,Bug,—,Swarm,Shed Skin,No Guard,Bug,—,016,4080,50,75,45,40,45,60,315,52.50,FALSE
+Escavalier,Bug,Steel,Swarm,Shell Armor,Overcoat,Bug,—,016,4080,70,135,105,60,105,20,495,82.50,FALSE
+Foongus,Grass,Poison,Effect Spore,—,Regenerator,Grass,—,021,5355,69,55,45,55,55,15,294,49.00,FALSE
+Amoonguss,Grass,Poison,Effect Spore,—,Regenerator,Grass,—,021,5355,114,85,70,85,80,30,464,77.33,FALSE
+Frillish,Water,Ghost,Water Absorb,Cursed Body,Damp,Amorphous,—,021,5355,55,40,50,65,85,40,335,55.83,FALSE
+Jellicent,Water,Ghost,Water Absorb,Cursed Body,Damp,Amorphous,—,021,5355,100,60,70,85,105,60,480,80.00,FALSE
+Alomomola,Water,—,Healer,Hydration,Regenerator,Water 1,Water 2,041,10455,165,75,80,40,45,65,470,78.33,FALSE
+Joltik,Bug,Electric,Compound Eyes,Unnerve,Swarm,Bug,—,021,5355,50,47,50,57,50,65,319,53.17,FALSE
+Galvantula,Bug,Electric,Compound Eyes,Unnerve,Swarm,Bug,—,021,5355,70,77,60,97,60,108,472,78.67,FALSE
+Ferroseed,Grass,Steel,Iron Barbs,—,—,Grass,Mineral,021,5355,44,50,91,24,86,10,305,50.83,FALSE
+Ferrothorn,Grass,Steel,Iron Barbs,—,Anticipation,Grass,Mineral,021,5355,74,94,131,54,116,20,489,81.50,FALSE
+Klink,Steel,—,Plus,Minus,Clear Body,Mineral,—,021,5355,40,55,70,45,60,30,300,50.00,FALSE
+Klang,Steel,—,Plus,Minus,Clear Body,Mineral,—,021,5355,60,80,95,70,85,50,440,73.33,FALSE
+Klinklang,Steel,—,Plus,Minus,Clear Body,Mineral,—,021,5355,60,100,115,70,85,90,520,86.67,FALSE
+Tynamo,Electric,—,Levitate,—,—,Amorphous,—,021,5355,35,55,40,45,40,60,275,45.83,FALSE
+Eelektrik,Electric,—,Levitate,—,—,Amorphous,—,021,5355,65,85,70,75,70,40,405,67.50,FALSE
+Eelektross,Electric,—,Levitate,—,—,Amorphous,—,021,5355,85,115,80,105,80,50,515,85.83,FALSE
+Elgyem,Psychic,—,Telepathy,Synchronize,Analytic,Human-Like,—,021,5355,55,55,55,85,55,30,335,55.83,FALSE
+Beheeyem,Psychic,—,Telepathy,Synchronize,Analytic,Human-Like,—,021,5355,75,75,75,125,95,40,485,80.83,FALSE
+Litwick,Ghost,Fire,Flash Fire,Flame Body,Infiltrator,Amorphous,—,021,5355,50,30,55,65,55,20,275,45.83,FALSE
+Lampent,Ghost,Fire,Flash Fire,Flame Body,Infiltrator,Amorphous,—,021,5355,60,40,60,95,60,55,370,61.67,FALSE
+Chandelure,Ghost,Fire,Flash Fire,Flame Body,Infiltrator,Amorphous,—,021,5355,60,55,90,145,90,80,520,86.67,FALSE
+Axew,Dragon,—,Rivalry,Mold Breaker,Unnerve,Monster,Dragon,041,10455,46,87,60,30,40,57,320,53.33,FALSE
+Fraxure,Dragon,—,Rivalry,Mold Breaker,Unnerve,Monster,Dragon,041,10455,66,117,70,40,50,67,410,68.33,FALSE
+Haxorus,Dragon,—,Rivalry,Mold Breaker,Unnerve,Monster,Dragon,041,10455,76,147,90,60,70,97,540,90.00,FALSE
+Cubchoo,Ice,—,Snow Cloak,—,Rattled,Field,—,021,5355,55,70,40,60,40,40,305,50.83,FALSE
+Beartic,Ice,—,Snow Cloak,—,Swift Swim,Field,—,021,5355,95,130,80,70,80,50,505,84.17,FALSE
+Cryogonal,Ice,—,Levitate,—,—,Mineral,—,026,6630,80,50,50,95,135,105,515,85.83,FALSE
+Shelmet,Bug,—,Hydration,Shell Armor,Overcoat,Bug,—,016,4080,50,40,85,40,65,25,305,50.83,FALSE
+Accelgor,Bug,—,Hydration,Sticky Hold,Unburden,Bug,—,016,4080,80,70,40,100,60,145,495,82.50,FALSE
+Stunfisk,Ground,Electric,Static,Limber,Sand Veil,Water 1,Amorphous,021,5355,109,66,84,81,99,32,471,78.50,FALSE
+Mienfoo,Fighting,—,Inner Focus,Regenerator,Reckless,Field,Human-Like,026,6630,45,85,50,55,50,65,350,58.33,FALSE
+Mienshao,Fighting,—,Inner Focus,Regenerator,Reckless,Field,Human-Like,026,6630,65,125,60,95,60,105,510,85.00,FALSE
+Druddigon,Dragon,—,Rough Skin,Sheer Force,Mold Breaker,Dragon,Monster,031,7905,77,120,90,60,90,48,485,80.83,FALSE
+Golett,Ground,Ghost,Iron Fist,Klutz,No Guard,Mineral,—,026,6630,59,74,50,35,50,35,303,50.50,FALSE
+Golurk,Ground,Ghost,Iron Fist,Klutz,No Guard,Mineral,—,026,6630,89,124,80,55,80,55,483,80.50,FALSE
+Pawniard,Dark,Steel,Defiant,Inner Focus,Pressure,Human-Like,—,021,5355,45,85,70,40,40,60,340,56.67,FALSE
+Bisharp,Dark,Steel,Defiant,Inner Focus,Pressure,Human-Like,—,021,5355,65,125,100,60,70,70,490,81.67,FALSE
+Bouffalant,Normal,—,Reckless,Sap Sipper,Soundproof,Field,—,021,5355,95,110,95,40,95,55,490,81.67,FALSE
+Rufflet,Normal,Flying,Keen Eye,Sheer Force,Hustle,Flying,—,021,5355,70,83,50,37,50,60,350,58.33,FALSE
+Braviary,Normal,Flying,Keen Eye,Sheer Force,Defiant,Flying,—,021,5355,100,123,75,57,75,80,510,85.00,FALSE
+Vullaby,Dark,Flying,Big Pecks,Overcoat,Weak Armor,Flying,—,021,5355,70,55,75,45,65,60,370,61.67,FALSE
+Mandibuzz,Dark,Flying,Big Pecks,Overcoat,Weak Armor,Flying,—,021,5355,110,65,105,55,95,80,510,85.00,FALSE
+Heatmor,Fire,—,Gluttony,Flash Fire,White Smoke,Field,—,021,5355,85,97,66,105,66,65,484,80.67,FALSE
+Durant,Bug,Steel,Swarm,Hustle,Truant,Bug,—,021,5355,58,109,112,48,48,109,484,80.67,FALSE
+Deino,Dark,Dragon,Hustle,—,—,Dragon,—,041,10455,52,65,50,45,50,38,300,50.00,FALSE
+Zweilous,Dark,Dragon,Hustle,—,—,Dragon,—,041,10455,72,85,70,65,70,58,420,70.00,FALSE
+Hydreigon,Dark,Dragon,Levitate,—,—,Dragon,—,041,10455,92,105,90,125,90,98,600,100.00,FALSE
+Larvesta,Bug,Fire,Flame Body,—,Swarm,Bug,—,041,10455,55,85,55,50,55,60,360,60.00,FALSE
+Volcarona,Bug,Fire,Flame Body,—,Swarm,Bug,—,041,10455,85,60,65,135,105,100,550,91.67,FALSE
+Cobalion,Steel,Fighting,Justified,—,—,Undiscovered,—,081,20655,91,90,129,90,72,108,580,96.67,FALSE
+Terrakion,Rock,Fighting,Justified,—,—,Undiscovered,—,081,20655,91,129,90,72,90,108,580,96.67,FALSE
+Virizion,Grass,Fighting,Justified,—,—,Undiscovered,—,081,20655,91,90,72,90,129,108,580,96.67,FALSE
+Tornadus,Flying,—,Prankster,—,Defiant,Undiscovered,—,121,30855,79,115,70,125,80,111,580,96.67,FALSE
+Thundurus,Electric,Flying,Prankster,—,Defiant,Undiscovered,—,121,30855,79,115,70,125,80,111,580,96.67,FALSE
+Reshiram,Dragon,Fire,Turboblaze,—,—,Undiscovered,—,121,30855,100,120,100,150,120,90,680,113.33,FALSE
+Zekrom,Dragon,Electric,Teravolt,—,—,Undiscovered,—,121,30855,100,150,120,120,100,90,680,113.33,FALSE
+Landorus,Ground,Flying,Sand Force,—,Sheer Force,Undiscovered,—,121,30855,89,125,90,115,80,101,600,100.00,FALSE
+Kyurem,Dragon,Ice,Pressure,—,—,Undiscovered,—,121,30855,125,130,90,130,90,95,660,110.00,FALSE
+Keldeo,Water,Fighting,Justified,—,—,Undiscovered,—,081,20655,91,72,90,129,90,108,580,96.67,FALSE
+Meloetta,Normal,Psychic,Serene Grace,—,—,Undiscovered,—,021,5355,100,77,77,128,128,90,600,100.00,FALSE
+Genesect,Bug,Steel,Download,—,—,Undiscovered,—,121,30855,71,120,95,120,95,99,600,100.00,FALSE
+Chespin,Grass,—,Overgrow,—,Bulletproof,Field,—,021,5355,56,61,65,48,45,38,313,52.17,FALSE
+Quilladin,Grass,—,Overgrow,—,Bulletproof,Field,—,021,5355,61,78,95,56,58,57,405,67.50,FALSE
+Chesnaught,Grass,Fighting,Overgrow,—,Bulletproof,Field,—,021,5355,88,107,122,74,75,64,530,88.33,FALSE
+Fennekin,Fire,—,Blaze,—,Magician,Field,—,021,5355,40,45,40,62,60,60,307,51.17,FALSE
+Braixen,Fire,—,Blaze,—,Magician,Field,—,021,5355,59,59,58,90,70,73,409,68.17,FALSE
+Delphox,Fire,Psychic,Blaze,—,Magician,Field,—,021,5355,75,69,72,114,100,104,534,89.00,FALSE
+Froakie,Water,—,Torrent,—,Protean,Water 1,—,021,5355,41,56,40,62,44,71,314,52.33,FALSE
+Frogadier,Water,—,Torrent,—,Protean,Water 1,—,021,5355,54,63,52,83,56,97,405,67.50,FALSE
+Greninja,Water,Dark,Torrent,—,Protean,Water 1,—,021,5355,72,95,67,103,71,122,530,88.33,FALSE
+Greninja: Ash,Water,Dark,Battle Bond,—,—,—,—,—,—,72,145,67,153,71,132,640,106.67,TRUE
+Bunnelby,Normal,—,Pickup,Cheek Pouch,Huge Power,Field,—,015,3840,38,36,38,32,36,57,237,39.50,FALSE
+Diggersby,Normal,Ground,Pickup,Cheek Pouch,Huge Power,Field,—,015,3840,85,56,77,50,77,78,423,70.50,FALSE
+Fletchling,Normal,Flying,Big Pecks,—,Gale Wings,Flying,—,015,3840,45,50,43,40,38,62,278,46.33,FALSE
+Fletchinder,Fire,Flying,Flame Body,—,Gale Wings,Flying,—,015,3840,62,73,55,56,52,84,382,63.67,FALSE
+Talonflame,Fire,Flying,Flame Body,—,Gale Wings,Flying,—,015,3840,78,81,71,74,69,126,499,83.17,FALSE
+Scatterbug,Bug,—,Shield Dust,Compound Eyes,Friend Guard,Bug,—,015,3840,38,35,40,27,25,35,200,33.33,FALSE
+Spewpa,Bug,—,Shed Skin,—,Friend Guard,Bug,—,015,3840,45,22,60,27,30,29,213,35.50,FALSE
+Vivillon,Bug,Flying,Shield Dust,Compound Eyes,Friend Guard,Bug,—,015,3840,80,52,50,90,50,89,411,68.50,FALSE
+Litleo,Fire,Normal,Rivalry,Unnerve,Moxie,Field,—,020,5120,62,50,58,73,54,72,369,61.50,FALSE
+Pyroar,Fire,Normal,Rivalry,Unnerve,Moxie,Field,—,020,5120,86,68,72,109,66,106,507,84.50,FALSE
+Flabébé,Fairy,—,Flower Veil,—,Symbiosis,Fairy,—,020,5120,44,38,39,61,79,42,303,50.50,FALSE
+Floette,Fairy,—,Flower Veil,—,Symbiosis,Fairy,—,020,5120,54,45,47,75,98,52,371,61.83,FALSE
+Florges,Fairy,—,Flower Veil,—,Symbiosis,Fairy,—,020,5120,78,65,68,112,154,75,552,92.00,FALSE
+Skiddo,Grass,—,Sap Sipper,—,Grass Pelt,Field,—,020,5120,66,65,48,62,57,52,350,58.33,FALSE
+Gogoat,Grass,—,Sap Sipper,—,Grass Pelt,Field,—,020,5120,123,100,62,97,81,68,531,88.50,FALSE
+Pancham,Fighting,—,Iron Fist,Mold Breaker,Scrappy,Field,Human-Like,025,6400,67,82,62,46,48,43,348,58.00,FALSE
+Pangoro,Fighting,Dark,Iron Fist,Mold Breaker,Scrappy,Field,Human-Like,025,6400,95,124,78,69,71,58,495,82.50,FALSE
+Furfrou,Normal,—,Fur Coat,—,—,Field,—,020,5120,75,80,60,65,90,102,472,78.67,FALSE
+Espurr,Psychic,—,Keen Eye,Infiltrator,Own Tempo,Field,—,020,5120,62,48,54,63,60,68,355,59.17,FALSE
+Meowstic,Psychic,—,Keen Eye,Infiltrator,Prankster,Field,—,020,5120,74,48,76,83,81,104,466,77.67,FALSE
+Honedge,Steel,Ghost,No Guard,—,—,Mineral,—,020,5120,45,80,100,35,37,28,325,54.17,FALSE
+Doublade,Steel,Ghost,No Guard,—,—,Mineral,—,020,5120,59,110,150,45,49,35,448,74.67,FALSE
+Aegislash,Steel,Ghost,Stance Change,—,—,Mineral,—,020,5120,60,150,50,150,50,60,520,86.67,FALSE
+Spritzee,Fairy,—,Healer,—,Aroma Veil,Fairy,—,020,5120,78,52,60,63,65,23,341,56.83,FALSE
+Aromatisse,Fairy,—,Healer,—,Aroma Veil,Fairy,—,020,5120,101,72,72,99,89,29,462,77.00,FALSE
+Swirlix,Fairy,—,Sweet Veil,—,Unburden,Fairy,—,020,5120,62,48,66,59,57,49,341,56.83,FALSE
+Slurpuff,Fairy,—,Sweet Veil,—,Unburden,Fairy,—,020,5120,82,80,86,85,75,72,480,80.00,FALSE
+Inkay,Dark,Psychic,Contrary,Suction Cups,Infiltrator,Water 1,Water 2,020,5120,53,54,53,37,46,45,288,48.00,FALSE
+Malamar,Dark,Psychic,Contrary,Suction Cups,Infiltrator,Water 1,Water 2,020,5120,86,92,88,68,75,73,482,80.33,FALSE
+Binacle,Rock,Water,Tough Claws,Sniper,Pickpocket,Water 3,—,020,5120,42,52,67,39,56,50,306,51.00,FALSE
+Barbaracle,Rock,Water,Tough Claws,Sniper,Pickpocket,Water 3,—,020,5120,72,105,115,54,86,68,500,83.33,FALSE
+Skrelp,Poison,Water,Poison Point,Poison Touch,Adaptability,Water 1,Dragon,020,5120,50,60,60,60,60,30,320,53.33,FALSE
+Dragalge,Poison,Dragon,Poison Point,Poison Touch,Adaptability,Water 1,Dragon,020,5120,65,75,90,97,123,44,494,82.33,FALSE
+Clauncher,Water,—,Mega Launcher,—,—,Water 1,Water 3,015,3840,50,53,62,58,63,44,330,55.00,FALSE
+Clawitzer,Water,—,Mega Launcher,—,—,Water 1,Water 3,015,3840,71,73,88,120,89,59,500,83.33,FALSE
+Helioptile,Electric,Normal,Dry Skin,Sand Veil,Solar Power,Monster,Dragon,020,5120,44,38,33,61,43,70,289,48.17,FALSE
+Heliolisk,Electric,Normal,Dry Skin,Sand Veil,Solar Power,Monster,Dragon,020,5120,62,55,52,109,94,109,481,80.17,FALSE
+Tyrunt,Rock,Dragon,Strong Jaw,—,Sturdy,Monster,Dragon,030,7680,58,89,77,45,45,48,362,60.33,FALSE
+Tyrantrum,Rock,Dragon,Strong Jaw,—,Rock Head,Monster,Dragon,030,7680,82,121,119,69,59,71,521,86.83,FALSE
+Amaura,Rock,Ice,Refrigerate,—,Snow Warning,Monster,—,030,7680,77,59,50,67,63,46,362,60.33,FALSE
+Aurorus,Rock,Ice,Refrigerate,—,Snow Warning,Monster,—,030,7680,123,77,72,99,92,58,521,86.83,FALSE
+Sylveon,Fairy,—,Cute Charm,—,Pixilate,Field,—,036,9180,95,65,65,110,130,60,525,87.50,FALSE
+Hawlucha,Fighting,Flying,Limber,Unburden,Mold Breaker,Human-Like,—,020,5120,78,92,75,74,63,118,500,83.33,FALSE
+Dedenne,Electric,Fairy,Cheek Pouch,Pickup,Plus,Field,Fairy,020,5120,67,58,57,81,67,101,431,71.83,FALSE
+Carbink,Rock,Fairy,Clear Body,—,Sturdy,Fairy,Mineral,025,6400,50,50,150,50,150,50,500,83.33,FALSE
+Goomy,Dragon,—,Sap Sipper,Hydration,Gooey,Dragon,—,040,10240,45,50,35,55,75,40,300,50.00,FALSE
+Sliggoo,Dragon,—,Sap Sipper,Hydration,Gooey,Dragon,—,040,10240,68,75,53,83,113,60,452,75.33,FALSE
+Goodra,Dragon,—,Sap Sipper,Hydration,Gooey,Dragon,—,040,10240,90,100,70,110,150,80,600,100.00,FALSE
+Klefki,Steel,Fairy,Prankster,—,Magician,Mineral,—,020,5120,57,80,91,80,87,75,470,78.33,FALSE
+Phantump,Ghost,Grass,Natural Cure,Frisk,Harvest,Grass,Amorphous,020,5120,43,70,48,50,60,38,309,51.50,FALSE
+Trevenant,Ghost,Grass,Natural Cure,Frisk,Harvest,Grass,Amorphous,020,5120,85,110,76,65,82,56,474,79.00,FALSE
+Pumpkaboo,Ghost,Grass,Pickup,Frisk,Insomnia,Amorphous,—,021,5355,49,66,70,44,55,51,335,55.83,FALSE
+Gourgeist,Ghost,Grass,Pickup,Frisk,Insomnia,Amorphous,—,021,5355,65,90,122,58,75,84,494,82.33,FALSE
+Bergmite,Ice,—,Own Tempo,Ice Body,Sturdy,Monster,—,020,5120,55,69,85,32,35,28,304,50.67,FALSE
+Avalugg,Ice,—,Own Tempo,Ice Body,Sturdy,Monster,—,020,5120,95,117,184,44,46,28,514,85.67,FALSE
+Noibat,Flying,Dragon,Frisk,Infiltrator,Telepathy,Flying,—,021,5355,40,30,35,45,40,55,245,40.83,FALSE
+Noivern,Flying,Dragon,Frisk,Infiltrator,Telepathy,Flying,—,021,5355,85,70,80,97,80,123,535,89.17,FALSE
+Xerneas,Fairy,—,Fairy Aura,—,—,Undiscovered,—,000,0,126,131,95,131,98,99,680,113.33,FALSE
+Yveltal,Dark,Flying,Dark Aura,—,—,Undiscovered,—,000,0,126,131,95,131,98,99,680,113.33,FALSE
+Zygarde (Complete),Dragon,Ground,Aura Break,—,Power Construct,Undiscovered,—,000,0,216,100,121,91,95,85,708,118.00,FALSE
+Zygarde (50%),Dragon,Ground,Aura Break,—,Power Construct,Undiscovered,—,000,0,108,100,121,81,95,95,600,100.00,TRUE
+Zygarde (10%),Dragon,Ground,Aura Break,—,Power Construct,Undiscovered,—,000,0,54,100,71,61,85,115,486,81.00,TRUE
+Diancie,Rock,Fairy,Clear Body,—,—,Undiscovered,—,000,0,50,100,150,100,150,50,600,100.00,FALSE
+Hoopa,Psychic,Ghost,Magician,—,—,Undiscovered,—,000,0,80,110,60,150,130,70,600,100.00,FALSE
+Volcanion,Fire,Water,Water Absorb,—,—,Undiscovered,—,000,0,80,110,120,130,90,70,600,100.00,FALSE
+Rowlet,Grass,Flying,Overgrow,Long Reach,—,Flying,—,,3840,68,55,55,50,50,42,320,53.33,FALSE
+Dartrix,Grass,Flying,Overgrow,Long Reach,—,Flying,—,,3840,78,75,75,70,70,52,420,70.00,FALSE
+Decidueye,Grass,Ghost,Overgrow,Long Reach,—,Flying,—,,3840,78,107,75,100,100,70,530,88.33,FALSE
+Litten,Fire,—,Blaze,Intimidate,—,Field,—,,3840,45,65,40,60,40,70,320,53.33,FALSE
+Torracat,Fire,—,Blaze,Intimidate,—,Field,—,,3840,65,85,50,80,50,90,420,70.00,FALSE
+Incineroar,Fire,Dark,Blaze,Intimidate,—,Field,—,,3840,95,115,90,80,90,60,530,88.33,FALSE
+Popplio,Water,—,Torrent,Liquid Voice,—,Water 1,Field,,3840,50,54,54,66,56,40,320,53.33,FALSE
+Brionne,Water,—,Torrent,Liquid Voice,—,Water 1,Field,,3840,60,69,69,91,81,50,420,70.00,FALSE
+Primarina,Water,Fairy,Torrent,Liquid Voice,—,Water 1,Field,,3840,80,74,74,126,116,60,530,88.33,FALSE
+Pikipek,Normal,Flying,Keen Eye,Skill Link,Pickup,Flying,—,,3840,35,75,30,30,30,65,265,44.17,FALSE
+Trumbeak,Normal,Flying,Keen Eye,Skill Link,Pickup,Flying,—,,3840,55,85,50,40,50,75,355,59.17,FALSE
+Toucannon,Normal,Flying,Keen Eye,Skill Link,Pickup,Flying,—,,3840,80,120,75,75,75,60,485,80.83,FALSE
+Yungoos,Normal,—,Stakeout,Strong Jaw,Adaptability,Field,,,3840,48,70,30,30,30,45,253,42.17,FALSE
+Gumshoos,Normal,—,Stakeout,Strong Jaw,Adaptability,Field,,,3840,88,110,60,55,60,45,418,69.67,FALSE
+Grubbin,Bug,—,Swarm,—,—,Bug,—,,3840,47,62,45,55,45,46,300,50.00,FALSE
+Charjabug,Bug,Electric,Battery,—,—,Bug,—,,3840,57,82,95,55,75,36,400,66.67,FALSE
+Vikavolt,Bug,Electric,Levitate,—,—,Bug,—,,3840,77,70,90,145,75,43,500,83.33,FALSE
+Crabrawler,Fighting,—,Hyper Cutter,Iron Fist,Anger Point,Water 3,—,,5120,47,82,57,42,47,63,338,56.33,FALSE
+Crabominable,Fighting,Ice,Hyper Cutter,Iron Fist,Anger Point,Water 4,—,,5120,97,132,77,62,67,43,478,79.67,FALSE
+Oricorio (Baile),Fire,Flying,Dancer,—,—,Flying,—,,5120,75,70,70,98,70,93,476,79.33,FALSE
+Oricorio (Pom-Pom),Electric,Flying,Dancer,—,—,Flying,—,,5120,75,70,70,98,70,93,476,79.33,TRUE
+Oricorio (P'au),Psychic,Flying,Dancer,—,—,Flying,—,,5120,75,70,70,98,70,93,476,79.33,TRUE
+Oricorio (Sensu),Ghost,Flying,Dancer,—,—,Flying,—,,5120,75,70,70,98,70,93,476,79.33,TRUE
+Cutiefly,Bug,Fairy,Honey Gather,Shield Dust,Sweet Veil,Bug,Fairy,,5120,40,45,40,55,40,84,304,50.67,FALSE
+Ribombee,Bug,Fairy,Honey Gather,Shield Dust,Sweet Veil,Bug,Fairy,,5120,60,55,60,95,70,124,464,77.33,FALSE
+Rockruff,Rock,—,Keen Eye,Vital Spirit,Steadfast,Field,—,,3840,45,65,40,30,40,60,280,46.67,FALSE
+Lycanroc: Midday,Rock,—,Keen Eye,Sand Rush,Steadfast,Field,—,,3840,75,115,65,55,65,112,487,81.17,FALSE
+Lycanroc: Midnight,Rock,—,Keen Eye,Vital Spirit,No Guard,Field,—,,3840,85,115,75,55,75,82,487,81.17,TRUE
+Wishiwashi: Solo,Water,—,Schooling,—,—,Water 2,—,,3840,45,20,20,25,25,40,175,29.17,FALSE
+Wishiwashi: Schooling,Water,—,Schooling,—,—,Water 2,—,,3840,45,140,130,140,135,30,620,103.33,TRUE
+Mareanie,Poison,Water,Merciless,Limber,Regenerator,Water 1,—,,5120,50,53,62,43,52,45,305,50.83,FALSE
+Toxapex,Poison,Water,Merciless,Limber,Regenerator,Water 2,—,,5120,50,63,152,53,142,35,495,82.50,FALSE
+Mudbray,Ground,—,Own Tempo,Stamina,Inner Focus,Field,—,,5120,70,100,70,45,55,45,385,64.17,FALSE
+Mudsdale,Ground,—,Own Tempo,Stamina,Inner Focus,Field,—,,5120,100,125,100,55,85,35,500,83.33,FALSE
+Dewpider,Water,Bug,Water Bubble,—,Water Absorb,Water 1,Bug,,3840,38,40,52,40,72,27,269,44.83,FALSE
+Araquanid,Water,Bug,Water Bubble,—,Water Absorb,Water 2,Bug,,3840,68,70,92,50,132,42,454,75.67,FALSE
+Fomantis,Grass,—,Leaf Guard,—,Contrary,Grass,—,,5120,40,55,35,50,35,35,250,41.67,FALSE
+Lurantis,Grass,—,Leaf Guard,—,Contrary,Grass,—,,5120,70,105,90,80,90,45,480,80.00,FALSE
+Morelull,Grass,Fairy,Illuminate,Effect Spore,Rain Dish,Grass,—,,5120,40,35,55,65,75,15,285,47.50,FALSE
+Shiinotic,Grass,Fairy,Illuminate,Effect Spore,Rain Dish,Grass,—,,5120,60,45,80,90,100,30,405,67.50,FALSE
+Salandit,Poison,Fire,Corrosion,—,Oblivious,Monster,Dragon,,5120,48,44,40,71,40,77,320,53.33,FALSE
+Salazzle,Poison,Fire,Corrosion,—,Oblivious,Monster,Dragon,,5120,68,64,60,11,60,117,380,63.33,FALSE
+Stufful,Normal,Fighting,Fluffy,Klutz,Cute Charm,Field,—,,3840,70,75,50,45,50,50,340,56.67,FALSE
+Bewear,Normal,Fighting,Fluffy,Klutz,Cute Charm,Field,—,,3840,120,125,80,55,60,60,500,83.33,FALSE
+Bounsweet,Grass,—,Leaf Guard,Oblivious,Sweet Veil,Grass,—,,,42,30,38,30,38,32,210,35.00,FALSE
+Steenee,Grass,—,Leaf Guard,Oblivious,Sweet Veil,Grass,—,,,52,40,48,40,48,62,290,48.33,FALSE
+Tsareena,Grass,—,Leaf Guard,Oblivious,Sweet Veil,Grass,—,,,72,120,98,50,98,72,510,85.00,FALSE
+Comfey,Fairy,,Flower Veil,Hidden Ability,Natural Cure,Grass,,,5120,51,52,90,82,110,100,485,80.83,FALSE
+Oranguru,Normal,Psychic,Inner Focus,Telepathy,Symbiosis,Field,,,5120,90,60,80,90,110,60,490,81.67,FALSE
+Passimian,Fighting,—,Receiver,—,Defiant,Field,,,5120,100,120,90,40,60,80,490,81.67,FALSE
+Wimpod,Bug,Water,Wimp Out,—,—,Bug,Water 3,,5120,25,35,40,20,30,80,230,38.33,FALSE
+Golisopod,Bug,Water,Emergency Exit,—,—,Bug,Water 3,,5120,75,125,140,60,90,40,530,88.33,FALSE
+Sandygast,Ghost,Ground,Water Compaction,—,Sand Veil,Amorphous,—,,3840,55,55,80,70,45,15,320,53.33,FALSE
+Palossand,Ghost,Ground,Water Compaction,—,Sand Veil,Amorphous,—,,3840,85,75,110,100,75,35,480,80.00,FALSE
+Pyukumuku,Water,—,Innards Out,—,Unaware,Water 1,—,,3840,55,60,130,30,130,5,410,68.33,FALSE
+Type: Null,Normal,—,Battle Armor,—,—,—,—,,30720,95,95,95,95,95,59,534,89.00,FALSE
+Silvally,Normal,—,RKS System,—,—,—,—,,30720,95,95,95,95,95,95,570,95.00,FALSE
+Minior,Rock,Flying,Shields Down,—,—,Mineral,—,,6400,60,60,100,60,100,60,440,73.33,FALSE
+Minior: Blue Core,Rock,Flying,Shields Down,—,—,Mineral,—,,6400,60,100,60,100,60,120,500,83.33,TRUE
+Minior: Green Core,Rock,Flying,Shields Down,—,—,Mineral,—,,6400,60,100,60,100,60,120,500,83.33,TRUE
+Minior: Indigo Core,Rock,Flying,Shields Down,—,—,Mineral,—,,6400,60,100,60,100,60,120,500,83.33,TRUE
+Minior: Orange Core,Rock,Flying,Shields Down,—,—,Mineral,—,,6400,60,100,60,100,60,120,500,83.33,TRUE
+Minior: Red Core,Rock,Flying,Shields Down,—,—,Mineral,—,,6400,60,100,60,100,60,120,500,83.33,TRUE
+Minior: Violet Core,Rock,Flying,Shields Down,—,—,Mineral,—,,6400,60,100,60,100,60,120,500,83.33,TRUE
+Minior: Yellow Core,Rock,Flying,Shields Down,—,—,Mineral,—,,6400,60,100,60,100,60,120,500,83.33,TRUE
+Komala,Normal,—,Comatose,—,—,Field,—,,5120,65,115,65,75,95,65,480,80.00,FALSE
+Turtonator,Fire,Dragon,Shell Armor,—,—,Monster,Dragon,,5120,60,78,135,91,85,36,485,80.83,FALSE
+Togedemaru,Electric,Steel,Iron Barbs,Lightning Rod,Sturdy,Field,Fairy,,2560,65,98,63,40,73,96,435,72.50,FALSE
+Mimikyu,Ghost,Fairy,Disguise,—,—,Amorphous,—,,5120,55,90,80,50,105,96,476,79.33,FALSE
+Bruxish,Water,Psychic,Dazzling,Strong Jaw,Wonder Skin,Water 2,—,,3840,68,105,70,70,70,92,475,79.17,FALSE
+Drampa,Normal,Dragon,Berserk,Sap Sipper,Cloud Nine,Monster,Dragon,,5120,78,60,85,135,91,36,485,80.83,FALSE
+Dhelmise,Ghost,Grass,Steelworker,—,—,Mineral,—,,6400,70,131,100,86,90,40,517,86.17,FALSE
+Jangmo-o,Dragon,—,Bulletproof,Soundproof,Overcoat,Dragon,—,,10240,45,55,65,45,45,45,300,50.00,FALSE
+Hakamo-o,Dragon,Fighting,Bulletproof,Soundproof,Overcoat,Dragon,—,,10240,55,75,90,65,70,65,420,70.00,FALSE
+Kommo-o,Dragon,Fighting,Bulletproof,Soundproof,Overcoat,Dragon,—,,10240,75,110,125,100,105,85,600,100.00,FALSE
+Tapu Koko,Electric,Fairy,Electric Surge,Telepathy,—,—,—,,3840,70,115,85,95,75,130,570,95.00,FALSE
+Tapu Lele,Psychic,Fairy,Psychic Surge,Telepathy,—,—,—,,3840,70,85,75,130,115,95,570,95.00,FALSE
+Tapu Bulu,Grass,Fairy,Grassy Surge,Telepathy,—,—,—,,3840,70,130,115,85,95,75,570,95.00,FALSE
+Tapu Fini,Water,Fairy,Misty Surge,Telepathy,—,—,—,,3840,70,75,115,95,130,85,570,95.00,FALSE
+Cosmog,Psychic,—,Unaware,—,—,—,—,,30720,43,29,31,29,31,37,200,33.33,FALSE
+Cosmoem,Psychic,—,Sturdy,—,—,—,—,,30720,43,29,131,29,131,37,400,66.67,FALSE
+Solgaleo,Psychic,Steel,Full Metal Body,—,—,—,—,,30720,137,137,107,113,89,97,680,113.33,FALSE
+Lunala,Psychic,Ghost,Shadow Shield,—,—,—,—,,30720,137,113,89,137,107,97,680,113.33,FALSE
+Nihilego,Rock,Poison,Beast Boost,—,—,—,—,,30720,109,53,47,127,131,103,570,95.00,FALSE
+Buzzwole,Bug,Fighting,Beast Boost,—,—,—,—,,30720,107,139,139,53,53,79,570,95.00,FALSE
+Pheromosa,Bug,Fighting,Beast Boost,—,—,—,—,,30720,71,137,37,137,37,151,570,95.00,FALSE
+Xurkitree,Electric,—,Beast Boost,—,—,—,—,,30720,83,89,71,173,71,83,570,95.00,FALSE
+Celesteela,Steel,Flying,Beast Boost,—,—,—,—,,30720,97,101,103,107,101,61,570,95.00,FALSE
+Kartana,Grass,Steel,Beast Boost,—,—,—,—,,30720,59,181,131,59,31,109,570,95.00,FALSE
+Guzzlord,Dark,Dragon,Beast Boost,—,—,—,—,,30720,223,101,53,97,53,43,570,95.00,FALSE
+Necrozma,Psychic,—,Beast Boost,—,—,—,—,,30720,97,107,101,127,89,79,600,100.00,FALSE
+Magearna,Steel,Fairy,Soul Heart,—,—,Undiscovered,—,000,0,80,95,115,130,115,65,600,100.00,FALSE
