@@ -4,22 +4,55 @@ var pokemon_path = "res://pkmdb/"
 var data_translate = load("res://Pokemon_Database.gd").new()
 var pk6 = load("res://pk6.gd").new()
 var pk7 = load("res://pk7.gd").new()
+<<<<<<< Updated upstream
 var info
 var moves = []
+=======
+var walking_pokemon = load("res://WalkingPokemon.tscn")
+var info = {}
+var moves = {}
+>>>>>>> Stashed changes
 var flavor_text
 func _ready():
-	var user_pokemon = list_files_in_directory(pokemon_path) #lists all of the pk files in pkmdb folder
+	var dir = Directory.new()
+	var path : String = OS.get_executable_path().get_base_dir()+"/pkmdb"
+	$"Loading Screen".switch("reading")
+	var user_pokemon
+	if path == "C:/Program Files (x86)/Steam/steamapps/common/Godot Engine/pkmdb":
+		user_pokemon = list_files_in_directory(pokemon_path) #lists all of the pk files in pkmdb folder
+	else:
+		user_pokemon = list_files_in_directory(path)
 	var existing_pokemon = bank.load() #loads the bank file of existing pokemon info
+<<<<<<< Updated upstream
 	if user_pokemon.size() > existing_pokemon.data.size():
 		get_info(user_pokemon,existing_pokemon)
+=======
+	var without_null = []
+	if existing_pokemon != []:
+		for x in existing_pokemon.data:
+			if x == null:
+				continue
+			elif x != null:
+				without_null.push_back(x)
+		if user_pokemon.size() > without_null.size():
+			get_info(user_pokemon,existing_pokemon)
+		else:
+			$TabContainer.loadPokemon(existing_pokemon)
+			$Pokemon.set_data(without_null)
+>>>>>>> Stashed changes
 	else:
-		$TabContainer.addPokemon(existing_pokemon.data)
+		get_info(user_pokemon,existing_pokemon)
 
 
 func get_info(user_pokemon, existing_pokemon):
 	var id = 1 #this is for giving the pokemon unqie keys
 	var pokemon = []
 	$"Loading Screen/ProgressBar".max_value = user_pokemon.size()
+<<<<<<< Updated upstream
+=======
+	if existing_pokemon != [] and not existing_pokemon.data.empty():
+		pokemon = existing_pokemon.data
+>>>>>>> Stashed changes
 	while user_pokemon.size() > 0:
 		var array #tempory array for personal data about the pokemon
 		var file = user_pokemon.front()
@@ -30,9 +63,19 @@ func get_info(user_pokemon, existing_pokemon):
 			"pk7":
 				array = pk7.readpk(file)
 		#asks PokeAPI for infomation about the pokemons species and moves
+<<<<<<< Updated upstream
 		if array[3] in existing_pokemon:
 			continue
+=======
+		var current
+		if existing_pokemon != [] and not existing_pokemon.data.empty() and pokemon.has(existing_pokemon.data[id]):
+				print(array)
+				id += 1
+				continue
+				
+>>>>>>> Stashed changes
 		else:
+			$"Loading Screen".switch("api")
 			var url = "https://pokeapi.co/api/v2/"
 			$PokemonRequest.request(url+"pokemon/"+str(int(array[0])))
 			yield($PokemonRequest, "request_completed")
@@ -45,6 +88,7 @@ func get_info(user_pokemon, existing_pokemon):
 					yield($MoveRequest, "request_completed")
 					array.remove(4)
 				else:
+<<<<<<< Updated upstream
 					moves.push_back(["-","-","-",0,0,0])
 					array.remove(4)
 			array.push_back(moves)
@@ -52,10 +96,41 @@ func get_info(user_pokemon, existing_pokemon):
 			moves = []
 			info = []
 			flavor_text = []
+=======
+					array[x] = {}
+					array[x]["name"] = "-"
+					array[x]["typing"] = "-"
+					array[x]["form"] = "-"
+					array[x]["pp"] = 0
+					array[x]["power"] = 0
+					array[x]["accuracy"] = 0
+				moves.clear()
+			if existing_pokemon != [] and existing_pokemon.data.has(array):
+				id += 1
+				moves.clear()
+				info.clear()
+				flavor_text = ""
+				continue
+			elif pokemon.has(null):
+				var pos = pokemon.find(null,0)
+				pokemon.remove(pos)
+				pokemon.insert(pos,array)
+			else:
+				pokemon.push_back(array)
+				var walk = walking_pokemon.instance()
+				$"Loading Screen".add_child(walk)
+				walk.start(array)
+			print(array)
+			moves.clear()
+			info.clear()
+			flavor_text = ""
+>>>>>>> Stashed changes
 			$"Loading Screen/ProgressBar".value += 1
 			id += 1
 		#
+	$"Loading Screen".switch("layout")
 	$TabContainer.addPokemon(pokemon)
+	
 func list_files_in_directory(path): #lists all the pk files in the pkmdb folder
 	var files = []
 	var dir = Directory.new()
@@ -127,4 +202,10 @@ func _process(delta):
 	elif Input.is_action_just_pressed("reset"):
 		bank.reset()
 		get_tree().quit()
+<<<<<<< Updated upstream
 
+=======
+	elif Input.is_action_just_pressed("right_click") and $Panel.visible != true:
+		$PopupMenu.popup()
+		$PopupMenu.set_global_position(get_viewport().get_mouse_position())
+>>>>>>> Stashed changes

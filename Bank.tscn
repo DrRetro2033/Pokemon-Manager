@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://pkm.gd" type="Script" id=1]
@@ -5,9 +6,20 @@
 [ext_resource path="res://pokemon-gen7x/regular/abomasnow.png" type="Texture" id=3]
 [ext_resource path="res://Move.gd" type="Script" id=4]
 [ext_resource path="res://Essentiarum Regular.ttf" type="DynamicFontData" id=5]
+=======
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://pkm.gd" type="Script" id=1]
+[ext_resource path="res://Panel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://RightClickMenu.gd" type="Script" id=3]
+[ext_resource path="res://RenamePanel.gd" type="Script" id=4]
+[ext_resource path="res://Search.tscn" type="PackedScene" id=5]
+>>>>>>> Stashed changes
 [ext_resource path="res://bank_manager.gd" type="Script" id=6]
 [ext_resource path="res://Bank_Layout.gd" type="Script" id=7]
-[ext_resource path="res://Box.tscn" type="PackedScene" id=8]
+[ext_resource path="res://pokemon-gen7x/regular/abomasnow-mega.png" type="Texture" id=8]
+[ext_resource path="res://Waiting.tres" type="Animation" id=9]
+[ext_resource path="res://icon.png" type="Texture" id=10]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Panel
@@ -196,7 +208,8 @@ var text = {
 }
 
 func _ready():
-	pass # Replace with function body.
+	visible = true
+	OS.window_resizable = false
 
 func switch(x):
 	$Label.text = text[x]
@@ -204,10 +217,167 @@ func switch(x):
 
 "
 
+[sub_resource type="GDScript" id=9]
+script/source = "extends Sprite
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$\"AnimationPlayer\".play(\"Waiting\")
+	var sprites = list_files_in_directory(\"res://pokemon-gen7x/regular/\")
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var rand = rng.randi_range(0,sprites.size())
+	print(rand)
+	var path = sprites[rand]
+	if path.ends_with(\".import\"):
+		path.erase(path.length()-7,7)
+	print(path)
+	set_texture(load(\"res://pokemon-gen7x/regular/\"+path))
+
+
+func list_files_in_directory(path): 
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
+
+	while true:
+		var file = dir.get_next()
+		if file == \"\":
+			break
+		elif not file.begins_with(\".\"):
+			files.append(file)
+	dir.list_dir_end()
+	return files
+"
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("..:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 512, 256 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:flip_h")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="GDScript" id=8]
+script/source = "extends Node
+signal done_searching(data)
+var pokemon
+
+func _ready():
+	pass # Replace with function body.
+
+
+func set_data(data):
+	pokemon = data.duplicate()
+	print(pokemon)
+
+
+func _on_Search_search(search_criteria):
+	var array = []
+	if search_criteria[\"nickname\"] != \"\":
+		for x in pokemon:
+			var pokemon_name = x.nickname
+			if pokemon_name.findn(search_criteria[\"nickname\"]) >= 0:
+				array.push_back(x)
+	else:
+		array = pokemon
+	if search_criteria[\"type1\"] != 0:
+		var temp_array = array.duplicate()
+		for x in array:
+			var type1 = x.type1
+			if type1 != search_criteria[\"type1\"]:
+				var pos = temp_array.find(x)
+				print(pos)
+				temp_array.remove(pos)
+		array = temp_array.duplicate()
+	if search_criteria[\"type2\"] != 0:
+		var temp_array = array.duplicate()
+		for x in array:
+			var type2 = x.type2
+			if type2 != search_criteria[\"type2\"]:
+				var pos = temp_array.find(x)
+				print(pos)
+				temp_array.remove(pos)
+		array = temp_array.duplicate()
+	if search_criteria[\"gender\"] != 1:
+		var temp_array = array.duplicate()
+		for x in array:
+			var gender = x.gender
+			if gender != search_criteria[\"gender\"]:
+				var pos = temp_array.find(x)
+				print(pos)
+				temp_array.remove(pos)
+		array = temp_array.duplicate()
+	print(array)
+	$\"../Search\".showResults(array)
+	
+"
+
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
@@ -230,6 +400,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+<<<<<<< Updated upstream
 [node name="Box1" parent="TabContainer" instance=ExtResource( 8 )]
 margin_left = 4.0
 margin_top = 32.0
@@ -859,6 +1030,8 @@ custom_fonts/normal_font = SubResource( 8 )
 meta_underlined = false
 text = "This is for the pokedex's entry"
 
+=======
+>>>>>>> Stashed changes
 [node name="PokemonRequest" type="HTTPRequest" parent="."]
 
 [node name="MoveRequest" type="HTTPRequest" parent="."]
@@ -869,8 +1042,11 @@ script = ExtResource( 6 )
 [node name="Loading Screen" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = SubResource( 7 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -883,6 +1059,9 @@ margin_top = -7.0
 margin_right = -191.0
 margin_bottom = 7.0
 step = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="Loading Screen"]
 anchor_left = 0.5
@@ -896,10 +1075,104 @@ margin_bottom = -54.0
 text = "Please Wait..."
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="Loading Screen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Loading Screen/Control"]
+position = Vector2( 512, 256 )
+texture = ExtResource( 8 )
+script = SubResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Loading Screen/Control/Sprite"]
+anims/RESET = SubResource( 10 )
+anims/Waiting = ExtResource( 9 )
+
+[node name="Folder2" type="Sprite" parent="Loading Screen/Control"]
+position = Vector2( 704, 392 )
+z_index = 1
+texture = ExtResource( 10 )
+
+[node name="Folder" type="Sprite" parent="Loading Screen/Control"]
+position = Vector2( 320, 392 )
+z_index = 1
+texture = ExtResource( 10 )
 
 [node name="SpeciesRequest" type="HTTPRequest" parent="."]
 
+<<<<<<< Updated upstream
 [connection signal="pressed" from="Panel/Back" to="Panel" method="_on_Back_pressed"]
+=======
+[node name="PopupMenu" type="PopupMenu" parent="."]
+margin_right = 88.0
+margin_bottom = 128.0
+items = [ "Box", null, 0, false, true, -1, 0, null, "", true, "New Box", null, 0, false, false, 0, 0, null, "", false, "Rename Box", null, 0, false, false, 1, 0, null, "", false, "Pokemon", null, 0, false, true, -1, 0, null, "", true, "Search for Pokemon", null, 0, false, false, 2, 0, null, "", false ]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rename" type="PopupDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -256.0
+margin_top = -140.0
+margin_right = 256.0
+margin_bottom = 140.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Rename"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -256.0
+margin_top = -52.0
+margin_right = 256.0
+margin_bottom = -38.0
+text = "Enter in new name"
+align = 1
+valign = 1
+
+[node name="Name" type="LineEdit" parent="Rename"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -192.0
+margin_top = -12.0
+margin_right = 192.0
+margin_bottom = 12.0
+align = 1
+placeholder_text = "Box"
+
+[node name="Pokemon" type="Node" parent="." groups=["Database"]]
+script = SubResource( 8 )
+
+[node name="Search" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="Panel" parent="." groups=["Info Panel"] instance=ExtResource( 2 )]
+visible = false
+
+>>>>>>> Stashed changes
 [connection signal="request_completed" from="PokemonRequest" to="." method="_on_PokemonRequest_request_completed"]
 [connection signal="request_completed" from="MoveRequest" to="." method="_on_MoveRequest_request_completed"]
 [connection signal="request_completed" from="SpeciesRequest" to="." method="_on_SpeciesRequest_request_completed"]
+[connection signal="id_pressed" from="PopupMenu" to="PopupMenu" method="_on_PopupMenu_id_pressed"]
+[connection signal="new_box" from="PopupMenu" to="TabContainer" method="_on_PopupMenu_new_box"]
+[connection signal="newName" from="Rename" to="TabContainer" method="_on_Rename_newName"]
+[connection signal="text_entered" from="Rename/Name" to="Rename" method="_on_Name_text_entered"]
+[connection signal="search" from="Search" to="Pokemon" method="_on_Search_search"]

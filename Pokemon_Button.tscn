@@ -11,10 +11,13 @@ onready var sprite = $VBoxContainer/TextureRect
 onready var hold_timer = $Timer
 const button = preload(\"res://drag.tscn\")
 var pokemon
+var can_drag = true
 func _ready():
 	pass
 
 func pokeButton(var info):
+	label = $VBoxContainer/Label
+	sprite = $VBoxContainer/TextureRect
 	if info != null:
 		pokemon = info
 		disabled = false
@@ -32,8 +35,8 @@ func pokeButton(var info):
 
 
 func _on_Button_pressed():
-	var bank = get_parent()
-	bank.buttonPressed(pokemon)
+	for panel in get_tree().get_nodes_in_group(\"Info Panel\"):
+		panel.open(pokemon)
 	hold_timer.stop()
 
 
@@ -42,7 +45,7 @@ func _on_Button_button_down():
 	get_drag_data(Vector2(0.0,0.0))
 
 func get_drag_data(position):
-	if not disabled:
+	if not disabled and can_drag:
 		var data = {}
 		data[\"origin\"] = self
 		data[\"pokemon\"] = pokemon

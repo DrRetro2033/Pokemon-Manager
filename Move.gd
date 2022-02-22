@@ -36,10 +36,13 @@ func damage_form(var form,var node):
 	match form:
 		damage_class.PHYSICAL:
 			node.color = Color("#9f0000")
-			node.get_child(0).text = "physical"
+			var texture = load("res://Physical.tga")
+			node.get_child(0).set_texture(texture)
 		damage_class.SPECIAL:
 			node.color = Color("#18203a")
-			node.get_child(0).text = "special"
+			var texture = load("res://Special.tga")
+			node.get_child(0).set_texture(texture)
 		damage_class.STATUS:
 			node.color = Color("#525252")
-			node.get_child(0).text = "status"
+			var texture = load("res://Status.tga")
+			node.get_child(0).set_texture(texture)

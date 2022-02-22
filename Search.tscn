@@ -1,0 +1,127 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Search.gd" type="Script" id=1]
+
+[node name="Search" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -500.0
+margin_top = -288.0
+margin_right = 500.0
+margin_bottom = 288.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Nickname" type="LineEdit" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 740.0
+margin_top = 32.0
+margin_right = -28.0
+margin_bottom = -520.0
+placeholder_text = "Nickname"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+anchor_left = 0.023625
+anchor_top = 0.0466667
+anchor_right = 0.718625
+anchor_bottom = 0.900833
+margin_left = -11.625
+margin_top = -10.88
+margin_right = -11.625
+margin_bottom = -10.88
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+margin_right = 695.0
+margin_bottom = 492.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Back" type="Button" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 520.0
+margin_right = -816.0
+margin_bottom = -12.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Type 1" type="OptionButton" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 740.0
+margin_top = 68.0
+margin_right = -152.0
+margin_bottom = -488.0
+text = "All"
+items = [ "All", null, false, 0, null, "Normal", null, false, 1, null, "Fire", null, false, 2, null, "Water", null, false, 3, null, "Grass", null, false, 4, null, "Electric", null, false, 5, null, "Ice", null, false, 6, null, "Fighting", null, false, 7, null, "Poison", null, false, 8, null, "Ground", null, false, 9, null, "Flying", null, false, 10, null, "Psychic", null, false, 11, null, "Bug", null, false, 12, null, "Rock", null, false, 13, null, "Ghost", null, false, 14, null, "Dark", null, false, 15, null, "Dragon", null, false, 16, null, "Steel", null, false, 17, null, "Fairy", null, false, 18, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Type 2" type="OptionButton" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 864.0
+margin_top = 68.0
+margin_right = -28.0
+margin_bottom = -488.0
+text = "All"
+items = [ "All", null, false, 0, null, "Normal", null, false, 1, null, "Fire", null, false, 2, null, "Water", null, false, 3, null, "Grass", null, false, 4, null, "Electric", null, false, 5, null, "Ice", null, false, 6, null, "Fighting", null, false, 7, null, "Poison", null, false, 8, null, "Ground", null, false, 9, null, "Flying", null, false, 10, null, "Psychic", null, false, 11, null, "Bug", null, false, 12, null, "Rock", null, false, 13, null, "Ghost", null, false, 14, null, "Dark", null, false, 15, null, "Dragon", null, false, 16, null, "Steel", null, false, 17, null, "Fairy", null, false, 18, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gender" type="OptionButton" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 740.0
+margin_top = 100.0
+margin_right = -28.0
+margin_bottom = -456.0
+text = "All"
+items = [ "All", null, false, 1, null, "Male", null, false, 0, null, "Female", null, false, 2, null, "N/A", null, false, 4, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Search" type="Button" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 740.0
+margin_top = 520.0
+margin_right = -28.0
+margin_bottom = -12.0
+text = "Search!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="text_entered" from="Panel/Nickname" to="." method="_on_LineEdit_text_entered"]
+[connection signal="pressed" from="Panel/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="Panel/Search" to="." method="_on_Search_pressed"]

@@ -25,6 +25,10 @@ config/description="View, Organize, and Manage your Pokemon"
 run/main_scene="res://Bank.tscn"
 config/icon="res://Poké_Ball_icon.svg.png"
 
+[autoload]
+
+BinaryTranslator="*res://BinaryTranslator.gd"
+
 [importer_defaults]
 
 csv_translation={

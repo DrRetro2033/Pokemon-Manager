@@ -26,9 +26,6 @@ func setSlots(poke):
 			break
 	return pokemon
 
-func buttonPressed(pokemon):
-	panel.open(pokemon)
-
 func save(bank):
 	for slot in get_children():
 		bank.data.push_back(slot.pokemon) 
