@@ -27,9 +27,10 @@ func _ready():
 				without_null.push_back(x)
 		if user_pokemon.size() > without_null.size():
 			get_info(user_pokemon,existing_pokemon)
+			$Pokemon.set_data(without_null)
 		else:
 			$TabContainer.loadPokemon(existing_pokemon)
-#			$Pokemon.set_data(without_null)
+			$Pokemon.set_data(without_null)
 	else:
 		get_info(user_pokemon,existing_pokemon)
 
@@ -38,7 +39,7 @@ func get_info(user_pokemon, existing_pokemon):
 	var id = 1 #this is for giving the pokemon unqie keys
 	var pokemon = []
 	$"Loading Screen/ProgressBar".max_value = user_pokemon.size()
-	if existing_pokemon != [] and not existing_pokemon.data.empty():
+	if existing_pokemon != null and not existing_pokemon.data.empty():
 		pokemon = existing_pokemon.data
 	while user_pokemon.size() > 0:
 		var array #tempory array for personal data about the pokemon
@@ -51,26 +52,32 @@ func get_info(user_pokemon, existing_pokemon):
 				array = pk7.readpk(file)
 		#asks PokeAPI for infomation about the pokemons species and moves
 		var current
-		if existing_pokemon != [] and not existing_pokemon.data.empty() and pokemon.has(existing_pokemon.data[id]):
+		if existing_pokemon != null and not existing_pokemon.data.empty() and pokemon.has(existing_pokemon.data[id]):
 				print(array)
 				id += 1
 				continue
-				
 		else:
 			$"Loading Screen".switch("api")
 			var url = "https://pokeapi.co/api/v2/"
-			$PokemonRequest.request(url+"pokemon/"+str(int(array[0])))
+			$PokemonRequest.request(url+"pokemon/"+str(int(array["species"])))
 			yield($PokemonRequest, "request_completed")
-			$SpeciesRequest.request(url+"pokemon-species/"+str(int(array[0])))
+			array["type1"] = info["type1"]
+			array["type2"] = info["type2"]
+			$SpeciesRequest.request(url+"pokemon-species/"+str(int(array["species"])))
 			yield($SpeciesRequest, "request_completed")
-			array[0] = id
+			array["text"] = flavor_text
 			var move_names = ["move1","move2","move3","move4"]
 			for x in move_names:
-				while array.size() >= 5:
-					if array[4] > 0:
-						$MoveRequest.request(url+"move/"+str(int(array[4])))
+					if array[x] > 0:
+						$MoveRequest.request(url+"move/"+str(int(array[x])))
 						yield($MoveRequest, "request_completed")
-						array.remove(4)
+						array[x] = {}
+						array[x]["name"] = moves["name"]
+						array[x]["typing"] = moves["typing"]
+						array[x]["form"] = moves["form"]
+						array[x]["pp"] = moves["pp"]
+						array[x]["power"] = moves["power"]
+						array[x]["accuracy"] = 0
 					else:
 						array[x] = {}
 						array[x]["name"] = "-"
@@ -80,7 +87,8 @@ func get_info(user_pokemon, existing_pokemon):
 						array[x]["power"] = 0
 						array[x]["accuracy"] = 0
 					moves.clear()
-			if existing_pokemon != [] and existing_pokemon.data.has(array):
+			array["species"] = info["species"]
+			if existing_pokemon != null and existing_pokemon.data.has(array):
 				id += 1
 				moves.clear()
 				info.clear()
@@ -88,6 +96,9 @@ func get_info(user_pokemon, existing_pokemon):
 				continue
 			elif pokemon.has(null):
 				var pos = pokemon.find(null,0)
+				moves.clear()
+				info.clear()
+				flavor_text = ""
 				pokemon.remove(pos)
 				pokemon.insert(pos,array)
 			else:
@@ -136,15 +147,17 @@ func _on_PokemonRequest_request_completed(result,response_code,headers,body):
 		type2 = data_translate.typing(type2)
 	else:
 		type2 = data_translate.types.NULL
-	info = [species,type1,type2]
+	info = {"species" : species, "type1" : type1, "type2" : type2}
 	$PokemonRequest.cancel_request() #stops the request 
 
 func _on_MoveRequest_request_completed(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8())
 	var data = json.result
-	var corrected_typing = data_translate.typing(str(data.type.name))
-	var corrected_form = data_translate.damageClass(str(data.damage_class.name))
-	moves.push_back([data.name,corrected_typing,corrected_form,data.pp,data.power,data.accuracy])
+	moves["typing"] = data_translate.typing(str(data.type.name))
+	moves["form"] = data_translate.damageClass(str(data.damage_class.name))
+	moves["name"] = data.name
+	moves["pp"] = data.pp
+	moves["power"] = data.power
 	$MoveRequest.cancel_request()
 
 
@@ -162,7 +175,7 @@ func _on_SpeciesRequest_request_completed(result, response_code, headers, body):
 					fix_text = fix_text + letter
 				else:
 					fix_text = fix_text + " "
-			flavor_text = [str(fix_text)]
+			flavor_text = str(fix_text)
 			break
 		else:
 			continue
