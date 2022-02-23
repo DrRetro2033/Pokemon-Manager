@@ -4,14 +4,9 @@ var pokemon_path = "res://pkmdb/"
 var data_translate = load("res://Pokemon_Database.gd").new()
 var pk6 = load("res://pk6.gd").new()
 var pk7 = load("res://pk7.gd").new()
-<<<<<<< Updated upstream
-var info
-var moves = []
-=======
 var walking_pokemon = load("res://WalkingPokemon.tscn")
 var info = {}
 var moves = {}
->>>>>>> Stashed changes
 var flavor_text
 func _ready():
 	var dir = Directory.new()
@@ -23,12 +18,8 @@ func _ready():
 	else:
 		user_pokemon = list_files_in_directory(path)
 	var existing_pokemon = bank.load() #loads the bank file of existing pokemon info
-<<<<<<< Updated upstream
-	if user_pokemon.size() > existing_pokemon.data.size():
-		get_info(user_pokemon,existing_pokemon)
-=======
 	var without_null = []
-	if existing_pokemon != []:
+	if existing_pokemon.data != []:
 		for x in existing_pokemon.data:
 			if x == null:
 				continue
@@ -38,8 +29,7 @@ func _ready():
 			get_info(user_pokemon,existing_pokemon)
 		else:
 			$TabContainer.loadPokemon(existing_pokemon)
-			$Pokemon.set_data(without_null)
->>>>>>> Stashed changes
+#			$Pokemon.set_data(without_null)
 	else:
 		get_info(user_pokemon,existing_pokemon)
 
@@ -48,11 +38,8 @@ func get_info(user_pokemon, existing_pokemon):
 	var id = 1 #this is for giving the pokemon unqie keys
 	var pokemon = []
 	$"Loading Screen/ProgressBar".max_value = user_pokemon.size()
-<<<<<<< Updated upstream
-=======
 	if existing_pokemon != [] and not existing_pokemon.data.empty():
 		pokemon = existing_pokemon.data
->>>>>>> Stashed changes
 	while user_pokemon.size() > 0:
 		var array #tempory array for personal data about the pokemon
 		var file = user_pokemon.front()
@@ -63,17 +50,12 @@ func get_info(user_pokemon, existing_pokemon):
 			"pk7":
 				array = pk7.readpk(file)
 		#asks PokeAPI for infomation about the pokemons species and moves
-<<<<<<< Updated upstream
-		if array[3] in existing_pokemon:
-			continue
-=======
 		var current
 		if existing_pokemon != [] and not existing_pokemon.data.empty() and pokemon.has(existing_pokemon.data[id]):
 				print(array)
 				id += 1
 				continue
 				
->>>>>>> Stashed changes
 		else:
 			$"Loading Screen".switch("api")
 			var url = "https://pokeapi.co/api/v2/"
@@ -82,29 +64,22 @@ func get_info(user_pokemon, existing_pokemon):
 			$SpeciesRequest.request(url+"pokemon-species/"+str(int(array[0])))
 			yield($SpeciesRequest, "request_completed")
 			array[0] = id
-			while array.size() >= 5:
-				if array[4] > 0:
-					$MoveRequest.request(url+"move/"+str(int(array[4])))
-					yield($MoveRequest, "request_completed")
-					array.remove(4)
-				else:
-<<<<<<< Updated upstream
-					moves.push_back(["-","-","-",0,0,0])
-					array.remove(4)
-			array.push_back(moves)
-			pokemon.push_back([info,array,flavor_text])
-			moves = []
-			info = []
-			flavor_text = []
-=======
-					array[x] = {}
-					array[x]["name"] = "-"
-					array[x]["typing"] = "-"
-					array[x]["form"] = "-"
-					array[x]["pp"] = 0
-					array[x]["power"] = 0
-					array[x]["accuracy"] = 0
-				moves.clear()
+			var move_names = ["move1","move2","move3","move4"]
+			for x in move_names:
+				while array.size() >= 5:
+					if array[4] > 0:
+						$MoveRequest.request(url+"move/"+str(int(array[4])))
+						yield($MoveRequest, "request_completed")
+						array.remove(4)
+					else:
+						array[x] = {}
+						array[x]["name"] = "-"
+						array[x]["typing"] = "-"
+						array[x]["form"] = "-"
+						array[x]["pp"] = 0
+						array[x]["power"] = 0
+						array[x]["accuracy"] = 0
+					moves.clear()
 			if existing_pokemon != [] and existing_pokemon.data.has(array):
 				id += 1
 				moves.clear()
@@ -124,7 +99,6 @@ func get_info(user_pokemon, existing_pokemon):
 			moves.clear()
 			info.clear()
 			flavor_text = ""
->>>>>>> Stashed changes
 			$"Loading Screen/ProgressBar".value += 1
 			id += 1
 		#
@@ -202,10 +176,6 @@ func _process(delta):
 	elif Input.is_action_just_pressed("reset"):
 		bank.reset()
 		get_tree().quit()
-<<<<<<< Updated upstream
-
-=======
 	elif Input.is_action_just_pressed("right_click") and $Panel.visible != true:
 		$PopupMenu.popup()
 		$PopupMenu.set_global_position(get_viewport().get_mouse_position())
->>>>>>> Stashed changes

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Move.gd" type="Script" id=1]
 [ext_resource path="res://pokemon-gen7x/regular/abomasnow.png" type="Texture" id=2]
@@ -6,13 +6,7 @@
 [ext_resource path="res://Essentiarum Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Path.gd" type="Script" id=5]
 [ext_resource path="res://V_Chart.gd" type="Script" id=6]
-[ext_resource path="res://Special.tga" type="Texture" id=7]
-[ext_resource path="res://Heart.png" type="Texture" id=8]
-[ext_resource path="res://Shield.png" type="Texture" id=9]
-[ext_resource path="res://Run.png" type="Texture" id=10]
-[ext_resource path="res://Sp_Shield.png" type="Texture" id=11]
-[ext_resource path="res://Sp_Sword.png" type="Texture" id=12]
-[ext_resource path="res://Sword.png" type="Texture" id=13]
+[ext_resource path="res://Special.png" type="Texture" id=7]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Panel
@@ -485,8 +479,8 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="GridContainer/Move1/Row2/Form"]
-margin_right = 57.0
-margin_bottom = 27.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 7 )
 expand = true
 stretch_mode = 6
@@ -586,8 +580,8 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="GridContainer/Move2/Row2/Form"]
-margin_right = 57.0
-margin_bottom = 27.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 7 )
 expand = true
 stretch_mode = 6
@@ -687,8 +681,8 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="GridContainer/Move3/Row2/Form"]
-margin_right = 57.0
-margin_bottom = 27.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 7 )
 expand = true
 stretch_mode = 6
@@ -789,8 +783,8 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="GridContainer/Move4/Row2/Form"]
-margin_right = 57.0
-margin_bottom = 27.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 7 )
 expand = true
 stretch_mode = 6
@@ -811,13 +805,13 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="."]
-anchor_left = 0.551
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 0.551
+anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -564.224
+margin_left = -512.0
 margin_top = -300.0
-margin_right = 459.776
+margin_right = 512.0
 margin_bottom = 300.0
 mouse_filter = 2
 __meta__ = {
@@ -970,102 +964,6 @@ margin_bottom = 45.8182
 text = "SPD"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HP" type="TextureRect" parent="Control"]
-anchor_left = 0.551
-anchor_top = 0.5
-anchor_right = 0.551
-anchor_bottom = 0.5
-margin_left = -20.224
-margin_top = -164.0
-margin_right = 19.776
-margin_bottom = -124.0
-texture = ExtResource( 8 )
-expand = true
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Attack" type="TextureRect" parent="Control"]
-anchor_left = 0.551
-anchor_top = 0.5
-anchor_right = 0.551
-anchor_bottom = 0.5
-margin_left = 104.776
-margin_top = -116.0
-margin_right = 163.776
-margin_bottom = -56.0
-texture = ExtResource( 13 )
-expand = true
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Def" type="TextureRect" parent="Control"]
-anchor_left = 0.551
-anchor_top = 0.5
-anchor_right = 0.551
-anchor_bottom = 0.5
-margin_left = 107.776
-margin_top = 60.0
-margin_right = 161.776
-margin_bottom = 116.0
-texture = ExtResource( 9 )
-expand = true
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Speed" type="TextureRect" parent="Control"]
-anchor_left = 0.551
-anchor_top = 0.5
-anchor_right = 0.551
-anchor_bottom = 0.5
-margin_left = -28.224
-margin_top = 124.0
-margin_right = 27.776
-margin_bottom = 184.0
-texture = ExtResource( 10 )
-expand = true
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SpDef" type="TextureRect" parent="Control"]
-anchor_left = 0.551
-anchor_top = 0.5
-anchor_right = 0.551
-anchor_bottom = 0.5
-margin_left = -160.224
-margin_top = 60.0
-margin_right = -106.224
-margin_bottom = 116.0
-texture = ExtResource( 11 )
-expand = true
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Attack2" type="TextureRect" parent="Control"]
-anchor_left = 0.551
-anchor_top = 0.5
-anchor_right = 0.551
-anchor_bottom = 0.5
-margin_left = -160.224
-margin_top = -112.0
-margin_right = -101.224
-margin_bottom = -52.0
-texture = ExtResource( 12 )
-expand = true
-stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }

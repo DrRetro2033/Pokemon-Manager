@@ -23,8 +23,8 @@ func pokeButton(var info):
 		disabled = false
 		label.visible = true
 		sprite.visible = true
-		label.text = info[1][1]
-		var path_name = info[0][0]
+		label.text = info[\"nickname\"]
+		var path_name = info[\"species\"]
 		var temp_path = path+path_name.to_lower()+\".png\"
 		sprite.set_texture(load(temp_path))
 	else:

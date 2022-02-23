@@ -69,10 +69,4 @@ func addPokemon(pokemon):
 		current_pos = x.setSlots(current_pos)
 		yield(get_tree().create_timer(0.1),"timeout")
 	$"../Loading Screen".visible = false
-<<<<<<< Updated upstream
-
-func dragSwitch(pos):
-	set_current_tab(get_tab_idx_at_point(pos))
-=======
 	OS.window_resizable = true
->>>>>>> Stashed changes
