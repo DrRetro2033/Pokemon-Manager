@@ -33,4 +33,8 @@ Features:
  - In progress/Planned:
    - Stats chart with ivs, evs, and base stats.
    - pk8, pk5, pk4, pk3, pk2, pk1 files will be supported soon.
+   - Transfer Pokémon to someone else online.
+   - Switch from requiring internet, to having PokeAPI's database integrated with Pokémon Manager.
+   - Compatibility with alternate forms
+   - Show trainer info
  
