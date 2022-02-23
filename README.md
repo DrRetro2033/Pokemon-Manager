@@ -25,8 +25,12 @@ Features:
 - 
  - Displays Pokémon's PokéDex entry.
  - Shows known moves with pp, power, type, and form.
- - Stats chart with ivs, evs, and base stats.
+ - Stats chart with base stats.
  - Drag and drop Pokémon into a blank space or switch positions with another Pokémon.
  - Search for specific Pokémon by nickname, typing, and gender.
- - Rename, and add boxes to your liking (Empty boxes are not stored to save on space)
+ - Rename, and add boxes to your liking (Empty boxes are not stored).
+
+ - In progress/Planned:
+   - Stats chart with ivs, evs, and base stats.
+   - pk8, pk5, pk4, pk3, pk2, pk1 files will be supported soon.
  
