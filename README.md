@@ -8,14 +8,13 @@ Pokémon Manager is made in the Godot engine and was made to replace the PK Data
 
 IMPORTANT:
 -
-Pokémon Manager is not a save editor. Also, due to my lack of experience of doing projects like Pokémon Manager, I will make a lot of mistakes in terms of optimization and organization. Please feel free to make constructive feedback and help me understand my mistakes.
-
+Pokémon Manager is not a save editor. Also, due to my lack of experience of doing projects like Pokémon Manager, I will make a lot of mistakes in terms of optimization and organization. Please feel free to make constructive feedback and help me understand my mistakes.  
 Setup:
 -
 
 - Pre-requisites:
   - Have downloaded the latest version of PkHEX, opened a save file, and dumped Pokémon into the database.
-  - Pokémon Manager uses PokéAPI to make the code cleaner and save space, but since it's on the internet, you require wifi or ethernet when adding new Pokémon.
+  - Pokémon Manager uses PokéAPI to make the code cleaner and save space, but since it's on the internet, you require wifi or ethernet when adding new Pokémon.features 
 - Installing:
   - Download the latest version of Pokémon Manager.
   - Extract the zip file into the same folder as PkHEX.
@@ -24,7 +23,7 @@ Setup:
 Features:
 - 
  - Displays Pokémon's PokéDex entry.
- - Shows known moves with pp, power, type, and class.
+ - Shows known moves with pp, power, type, and damage class.
  - Stats chart with base stats and ivs.
  - Drag and drop Pokémon into a blank space or switch positions with another Pokémon.
  - Search for specific Pokémon by nickname, typing, and gender.
@@ -39,3 +38,4 @@ Features:
    - Show trainer info
    - Display Pokémon's level
    - Switch PokéDex entries when viewing Pokémon 
+ 
