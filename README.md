@@ -8,7 +8,8 @@ Pokémon Manager is made in the Godot engine and was made to replace the PK Data
 
 IMPORTANT:
 -
-Pokémon Manager is not a save editor. Also, due to my lack of experience of doing projects like Pokémon Manager, I will make a lot of mistakes in terms of optimization and organization. Please feel free to make constructive feedback and help me understand my mistakes.  
+Pokémon Manager is not a save editor. Also, due to my lack of experience of doing projects like Pokémon Manager, I will make a lot of mistakes in terms of optimization and organization. Please feel free to make constructive feedback and help me understand my mistakes. 
+ 
 Setup:
 -
 
