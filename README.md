@@ -42,3 +42,7 @@ Features:
    - Be able to make a personalized profile.
    - More organization tools and add the ability to make multiple parties.
    - Switch icons between 3d models, home icons, and sprites.
+
+ - Credits:
+Copyright (c) © 2013–2021 Paul Hallett and PokéAPI contributors (https://github.com/PokeAPI/pokeapi#contributing). Pokémon and Pokémon character names are trademarks of Nintendo.
+All rights reserved.
