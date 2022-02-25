@@ -35,8 +35,10 @@ Features:
    - pk8, pk5, pk4, pk3, pk2, pk1 files will be supported soon.
    - Transfer Pokémon with someone else online.
    - Switch from requiring internet, to having PokeAPI's database integrated with Pokémon Manager.
-   - Compatibility with alternate forms
-   - Show trainer info
-   - Display Pokémon's level
-   - Switch PokéDex entries when viewing Pokémon 
+   - Compatibility with alternate forms.
+   - Show trainer info for each Pokémon.
+   - Display Pokémon's level and have it effect the stats chart.
+   - Switch PokéDex entries when viewing Pokémon.
+   - Be able to make a personalized profile.
+   - More organization tools and add the ability to make multiple parties.
  
