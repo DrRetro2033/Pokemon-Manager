@@ -42,4 +42,3 @@ Features:
    - Be able to make a personalized profile.
    - More organization tools and add the ability to make multiple parties.
    - Switch icons between 3d models, home icons, and sprites.
-   - Store younger versions of Pokémon together with the latest versions, and have a separate menu.
