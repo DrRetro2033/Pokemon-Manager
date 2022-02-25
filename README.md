@@ -15,7 +15,7 @@ Setup:
 
 - Pre-requisites:
   - Have downloaded the latest version of PkHEX, opened a save file, and dumped Pokémon into the database.
-  - Pokémon Manager uses PokéAPI to make the code cleaner and save space, but since it's on the internet, you require wifi or ethernet when adding new Pokémon.features 
+  - Pokémon Manager uses PokéAPI to make the code cleaner and save space, but since it's on the internet, you require wifi or ethernet when adding new Pokémon.
 - Installing:
   - Download the latest version of Pokémon Manager.
   - Extract the zip file into the same folder as PkHEX.
