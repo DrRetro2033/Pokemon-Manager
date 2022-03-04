@@ -2,3 +2,5 @@ pokemon-gen7x/
 pkmdb/
 save/
 .import/
+*.png
+*.import

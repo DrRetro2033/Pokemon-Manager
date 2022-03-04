@@ -16,6 +16,7 @@ func save():
 		elif last != null:
 			break
 	$"../TabContainer".save(bank)
+	$"../Trainer".save(bank)
 	var path : String = OS.get_executable_path().get_base_dir()+"/save"
 	print(path)
 	var save_file_path : String

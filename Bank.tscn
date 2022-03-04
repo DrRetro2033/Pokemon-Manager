@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://pkm.gd" type="Script" id=1]
 [ext_resource path="res://Panel.tscn" type="PackedScene" id=2]
@@ -7,10 +7,13 @@
 [ext_resource path="res://Search.tscn" type="PackedScene" id=5]
 [ext_resource path="res://bank_manager.gd" type="Script" id=6]
 [ext_resource path="res://Bank_Layout.gd" type="Script" id=7]
-[ext_resource path="res://pokemon-gen7x/regular/abomasnow-mega.png" type="Texture" id=8]
+[ext_resource path="res://abomasnow-mega.png" type="Texture" id=8]
 [ext_resource path="res://Waiting.tres" type="Animation" id=9]
 [ext_resource path="res://icon.png" type="Texture" id=10]
 [ext_resource path="res://Pokemon.gd" type="Script" id=11]
+[ext_resource path="res://ProfileMaker.gd" type="Script" id=12]
+[ext_resource path="res://Trainer.gd" type="Script" id=13]
+[ext_resource path="res://ProfileView.gd" type="Script" id=15]
 
 [sub_resource type="GDScript" id=7]
 script/source = "extends Panel
@@ -44,7 +47,7 @@ script/source = "extends Sprite
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$\"AnimationPlayer\".play(\"Waiting\")
-	var sprites = list_files_in_directory(\"res://pokemon-gen7x/regular/\")
+	var sprites = list_files_in_directory(\"res://sprites/pokemon/icons/\")
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var rand = rng.randi_range(0,sprites.size())
@@ -141,24 +144,75 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TabContainer" type="TabContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
-margin_top = 8.0
+margin_top = 16.0
 margin_right = -8.0
 margin_bottom = -8.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/side_margin = 40
 tab_align = 0
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="ProfilePic" type="Button" parent="."]
+margin_left = 8.0
+margin_top = 3.0
+margin_right = 43.0
+margin_bottom = 38.0
+script = ExtResource( 15 )
+
+[node name="Pic" type="TextureRect" parent="ProfilePic"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -17.5
+margin_top = -17.5
+margin_right = 17.5
+margin_bottom = 17.5
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="PopupPanel" type="PopupPanel" parent="ProfilePic"]
+anchor_left = 0.229
+anchor_right = 0.229
+margin_left = -8.015
+margin_top = 35.0
+margin_right = 127.985
+margin_bottom = 213.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ProfilePic/PopupPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="TextureRect" type="TextureRect" parent="ProfilePic/PopupPanel/VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="ProfilePic/PopupPanel/VBoxContainer"]
+margin_top = 128.0
+margin_right = 128.0
+margin_bottom = 170.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "Name"
+align = 1
+valign = 1
 
 [node name="PokemonRequest" type="HTTPRequest" parent="."]
 
@@ -210,9 +264,10 @@ __meta__ = {
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 4096.0
-margin_bottom = 2400.0
+margin_right = 1024.0
+margin_bottom = 600.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -226,13 +281,17 @@ anims/RESET = SubResource( 10 )
 anims/Waiting = ExtResource( 9 )
 
 [node name="Folder2" type="Sprite" parent="Loading Screen/Control"]
+light_mask = 2
 position = Vector2( 704, 392 )
 z_index = 1
+z_as_relative = false
 texture = ExtResource( 10 )
 
 [node name="Folder" type="Sprite" parent="Loading Screen/Control"]
+light_mask = 2
 position = Vector2( 320, 392 )
 z_index = 1
+z_as_relative = false
 texture = ExtResource( 10 )
 
 [node name="SpeciesRequest" type="HTTPRequest" parent="."]
@@ -294,6 +353,113 @@ visible = false
 [node name="Panel" parent="." groups=["Info Panel"] instance=ExtResource( 2 )]
 visible = false
 
+[node name="ProfileMaker" type="WindowDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -312.0
+margin_top = -178.0
+margin_right = 312.0
+margin_bottom = 224.0
+popup_exclusive = true
+window_title = "Setup"
+script = ExtResource( 12 )
+
+[node name="Welcome" type="Label" parent="ProfileMaker"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -240.0
+margin_top = -172.0
+margin_right = 240.0
+margin_bottom = -126.0
+text = "Welcome to Pokemon Manager!"
+align = 1
+valign = 1
+
+[node name="Button" type="Button" parent="ProfileMaker"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -41.0
+margin_top = 165.0
+margin_right = 39.0
+margin_bottom = 185.0
+text = "Ok"
+
+[node name="Name" type="LineEdit" parent="ProfileMaker"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = 84.0
+margin_right = 128.0
+margin_bottom = 108.0
+align = 1
+placeholder_text = "Name"
+
+[node name="ProfilePic" type="Button" parent="ProfileMaker"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -80.0
+margin_top = -108.0
+margin_right = 80.0
+margin_bottom = 52.0
+
+[node name="Pic" type="TextureRect" parent="ProfileMaker/ProfilePic"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -72.0
+margin_top = -72.0
+margin_right = 72.0
+margin_bottom = 72.0
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="Warning" type="Label" parent="ProfileMaker"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -96.0
+margin_top = 119.0
+margin_right = 94.0
+margin_bottom = 133.0
+custom_colors/font_color = Color( 1, 0.247059, 0.247059, 1 )
+text = "Please enter a name."
+align = 1
+valign = 1
+
+[node name="FileDialog" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -364.0
+margin_top = -260.0
+margin_right = 364.0
+margin_bottom = 260.0
+window_title = "Open a File"
+mode = 0
+access = 2
+filters = PoolStringArray( "*.png ; PNG Images" )
+current_dir = "/Users/Colly/OneDrive/Documents/GitHub/Pokemon-Manager"
+current_path = "/Users/Colly/OneDrive/Documents/GitHub/Pokemon-Manager/"
+
+[node name="Trainer" type="Node" parent="."]
+script = ExtResource( 13 )
+
+[connection signal="pressed" from="ProfilePic" to="ProfilePic" method="_on_ProfilePic_pressed"]
 [connection signal="request_completed" from="PokemonRequest" to="." method="_on_PokemonRequest_request_completed"]
 [connection signal="request_completed" from="MoveRequest" to="." method="_on_MoveRequest_request_completed"]
 [connection signal="request_completed" from="SpeciesRequest" to="." method="_on_SpeciesRequest_request_completed"]
@@ -302,3 +468,6 @@ visible = false
 [connection signal="newName" from="Rename" to="TabContainer" method="_on_Rename_newName"]
 [connection signal="text_entered" from="Rename/Name" to="Rename" method="_on_Name_text_entered"]
 [connection signal="search" from="Search" to="Pokemon" method="_on_Search_search"]
+[connection signal="pressed" from="ProfileMaker/Button" to="ProfileMaker" method="_on_Button_pressed"]
+[connection signal="pressed" from="ProfileMaker/ProfilePic" to="ProfileMaker" method="_on_ProfilePic_pressed"]
+[connection signal="file_selected" from="FileDialog" to="ProfileMaker" method="_on_FileDialog_file_selected"]

@@ -24,10 +24,17 @@ config/name="Pokemon Manager"
 config/description="View, Organize, and Manage your Pokemon"
 run/main_scene="res://Bank.tscn"
 config/icon="res://Poké_Ball_icon.svg.png"
+config/custom_image=""
+config/stretch/mode="viewport"
 
 [autoload]
 
 BinaryTranslator="*res://BinaryTranslator.gd"
+Pokemon="*res://Pokemon.gd"
+
+[display]
+
+window/stretch/aspect="expand"
 
 [importer_defaults]
 

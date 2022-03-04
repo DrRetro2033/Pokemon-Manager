@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Move.gd" type="Script" id=1]
-[ext_resource path="res://pokemon-gen7x/regular/abomasnow.png" type="Texture" id=2]
+[ext_resource path="res://abomasnow.png" type="Texture" id=2]
 [ext_resource path="res://Futura Condensed Extra Bold.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://Essentiarum Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Path.gd" type="Script" id=5]
@@ -11,7 +11,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Panel
 
-const path = \"res://pokemon-gen7x/regular/\"
+const path = \"res://sprites/pokemon/official-artwork/\"
 onready var sprite = $TextureRect
 onready var type1_color = $Type1
 onready var type2_color = $Type2
@@ -126,17 +126,17 @@ func open(info):
 		type1_color.visible = true
 		type2_color.visible = true
 	poke_name.text = info[\"nickname\"]
-	var species_name = info[\"species\"]
+	var species_name = info[\"species-name\"]
 	species_name[0] = species_name.left(1).to_upper()
 	species.text = species_name
 	match info[\"gender\"]:
 		0:
 			gender.text = \"male\"
 			gender_color.color = Color(\"#12a7da\")
-		2:
+		1:
 			gender.text = \"female\"
 			gender_color.color = Color(\"#fc92ff\")
-		4:
+		2:
 			gender.text = \"n/a\"
 			gender_color.color = Color(\"#424242\")
 	var moves = 4
@@ -159,8 +159,8 @@ func open(info):
 		child.move(move[\"name\"],move[\"typing\"],move[\"form\"],move[\"pp\"],move[\"power\"])
 		moves -= 1
 	text.text = info[\"text\"]
-	var path_name = info[\"species\"]
-	var temp_path = path+path_name.to_lower()+\".png\"
+	var path_name = str(info[\"species\"])
+	var temp_path = path+path_name+\".png\"
 	sprite.set_texture(load(temp_path))
 	$\"Control/V Chart\".EvSet(info)
 	print(info)
@@ -221,9 +221,6 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_left = 1.0
@@ -825,72 +822,72 @@ color = Color( 0.258824, 0.258824, 0.258824, 1 )
 polygon = PoolVector2Array( 0, -64, 56, -32, 56, 32, 0, 64, -56, 32, -56, -32 )
 script = ExtResource( 6 )
 
-[node name="BaseStats" type="Node2D" parent="Control/V Chart"]
+[node name="Stats" type="Node2D" parent="Control/V Chart"]
 
-[node name="HP" type="Path2D" parent="Control/V Chart/BaseStats"]
+[node name="HP" type="Path2D" parent="Control/V Chart/Stats"]
 curve = SubResource( 15 )
 script = ExtResource( 5 )
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Control/V Chart/BaseStats/HP"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Control/V Chart/Stats/HP"]
 rotation = 1.5708
 rotate = false
 loop = false
 
-[node name="Attack" type="Path2D" parent="Control/V Chart/BaseStats"]
+[node name="Attack" type="Path2D" parent="Control/V Chart/Stats"]
 scale = Vector2( 1, -1 )
 curve = SubResource( 10 )
 script = ExtResource( 5 )
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Control/V Chart/BaseStats/Attack"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Control/V Chart/Stats/Attack"]
 rotation = 0.519146
 rotate = false
 loop = false
 
-[node name="Defense" type="Path2D" parent="Control/V Chart/BaseStats"]
+[node name="Defense" type="Path2D" parent="Control/V Chart/Stats"]
 scale = Vector2( 1, -1 )
 curve = SubResource( 11 )
 script = ExtResource( 5 )
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Control/V Chart/BaseStats/Defense"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Control/V Chart/Stats/Defense"]
 rotation = -0.519146
 rotate = false
 loop = false
 
-[node name="Speed" type="Path2D" parent="Control/V Chart/BaseStats"]
+[node name="Speed" type="Path2D" parent="Control/V Chart/Stats"]
 curve = SubResource( 12 )
 script = ExtResource( 5 )
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Control/V Chart/BaseStats/Speed"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Control/V Chart/Stats/Speed"]
 rotation = 1.5708
 rotate = false
 loop = false
 
-[node name="Sp Def" type="Path2D" parent="Control/V Chart/BaseStats"]
+[node name="Sp Def" type="Path2D" parent="Control/V Chart/Stats"]
 scale = Vector2( 1, -1 )
 curve = SubResource( 13 )
 script = ExtResource( 5 )
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Control/V Chart/BaseStats/Sp Def"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Control/V Chart/Stats/Sp Def"]
 rotation = -2.62245
 rotate = false
 loop = false
 
-[node name="Sp Atk" type="Path2D" parent="Control/V Chart/BaseStats"]
+[node name="Sp Atk" type="Path2D" parent="Control/V Chart/Stats"]
 scale = Vector2( 1, -1 )
 curve = SubResource( 14 )
 script = ExtResource( 5 )
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Control/V Chart/BaseStats/Sp Atk"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Control/V Chart/Stats/Sp Atk"]
 rotation = 2.62245
 rotate = false
 loop = false
 
-[node name="EV Vis" type="Polygon2D" parent="Control/V Chart/BaseStats"]
-color = Color( 0.968627, 1, 0, 0.419608 )
+[node name="Base Vis" type="Polygon2D" parent="Control/V Chart/Stats"]
+color = Color( 0.968627, 1, 0, 0.317647 )
 polygon = PoolVector2Array( 0, -64, 56, -32, 56, 32, 0, 64, -56, 32, -56, -32 )
 uv = PoolVector2Array( 0, 0 )
 
-[node name="HP" type="Label" parent="Control/V Chart/BaseStats/EV Vis"]
+[node name="HP" type="Label" parent="Control/V Chart/Stats/Base Vis"]
 visible = false
 margin_left = -24.0
 margin_top = -80.0
@@ -903,7 +900,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP2" type="Label" parent="Control/V Chart/BaseStats/EV Vis"]
+[node name="HP2" type="Label" parent="Control/V Chart/Stats/Base Vis"]
 visible = false
 margin_left = 50.0
 margin_top = -47.7273
@@ -916,7 +913,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP3" type="Label" parent="Control/V Chart/BaseStats/EV Vis"]
+[node name="HP3" type="Label" parent="Control/V Chart/Stats/Base Vis"]
 visible = false
 margin_left = 50.0
 margin_top = 31.8182
@@ -929,7 +926,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP4" type="Label" parent="Control/V Chart/BaseStats/EV Vis"]
+[node name="HP4" type="Label" parent="Control/V Chart/Stats/Base Vis"]
 visible = false
 margin_left = -23.8636
 margin_top = 69.8864
@@ -942,7 +939,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP5" type="Label" parent="Control/V Chart/BaseStats/EV Vis"]
+[node name="HP5" type="Label" parent="Control/V Chart/Stats/Base Vis"]
 visible = false
 margin_left = -100.0
 margin_top = -47.7273
@@ -955,7 +952,174 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP6" type="Label" parent="Control/V Chart/BaseStats/EV Vis"]
+[node name="HP6" type="Label" parent="Control/V Chart/Stats/Base Vis"]
+visible = false
+margin_left = -104.545
+margin_top = 31.8182
+margin_right = -49.5455
+margin_bottom = 45.8182
+text = "SPD"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IVs Vis" type="Polygon2D" parent="Control/V Chart/Stats"]
+color = Color( 0, 0.717647, 1, 0.317647 )
+polygon = PoolVector2Array( 0, -64, 56, -32, 56, 32, 0, 64, -56, 32, -56, -32 )
+uv = PoolVector2Array( 0, 0 )
+
+[node name="HP" type="Label" parent="Control/V Chart/Stats/IVs Vis"]
+visible = false
+margin_left = -24.0
+margin_top = -80.0
+margin_right = 24.0
+margin_bottom = -66.0
+text = "HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP2" type="Label" parent="Control/V Chart/Stats/IVs Vis"]
+visible = false
+margin_left = 50.0
+margin_top = -47.7273
+margin_right = 98.0
+margin_bottom = -33.7273
+text = "ATK"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP3" type="Label" parent="Control/V Chart/Stats/IVs Vis"]
+visible = false
+margin_left = 50.0
+margin_top = 31.8182
+margin_right = 98.0
+margin_bottom = 45.8182
+text = "DEF"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP4" type="Label" parent="Control/V Chart/Stats/IVs Vis"]
+visible = false
+margin_left = -23.8636
+margin_top = 69.8864
+margin_right = 24.1364
+margin_bottom = 83.8864
+text = "SPD"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP5" type="Label" parent="Control/V Chart/Stats/IVs Vis"]
+visible = false
+margin_left = -100.0
+margin_top = -47.7273
+margin_right = -52.0
+margin_bottom = -33.7273
+text = "SPA"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP6" type="Label" parent="Control/V Chart/Stats/IVs Vis"]
+visible = false
+margin_left = -104.545
+margin_top = 31.8182
+margin_right = -49.5455
+margin_bottom = 45.8182
+text = "SPD"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EVs Vis" type="Polygon2D" parent="Control/V Chart/Stats"]
+visible = false
+color = Color( 1, 0, 0, 0.317647 )
+polygon = PoolVector2Array( 0, -64, 56, -32, 56, 32, 0, 64, -56, 32, -56, -32 )
+uv = PoolVector2Array( 0, 0 )
+
+[node name="HP" type="Label" parent="Control/V Chart/Stats/EVs Vis"]
+visible = false
+margin_left = -24.0
+margin_top = -80.0
+margin_right = 24.0
+margin_bottom = -66.0
+text = "HP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP2" type="Label" parent="Control/V Chart/Stats/EVs Vis"]
+visible = false
+margin_left = 50.0
+margin_top = -47.7273
+margin_right = 98.0
+margin_bottom = -33.7273
+text = "ATK"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP3" type="Label" parent="Control/V Chart/Stats/EVs Vis"]
+visible = false
+margin_left = 50.0
+margin_top = 31.8182
+margin_right = 98.0
+margin_bottom = 45.8182
+text = "DEF"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP4" type="Label" parent="Control/V Chart/Stats/EVs Vis"]
+visible = false
+margin_left = -23.8636
+margin_top = 69.8864
+margin_right = 24.1364
+margin_bottom = 83.8864
+text = "SPD"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP5" type="Label" parent="Control/V Chart/Stats/EVs Vis"]
+visible = false
+margin_left = -100.0
+margin_top = -47.7273
+margin_right = -52.0
+margin_bottom = -33.7273
+text = "SPA"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP6" type="Label" parent="Control/V Chart/Stats/EVs Vis"]
 visible = false
 margin_left = -104.545
 margin_top = 31.8182

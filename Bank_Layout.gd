@@ -70,3 +70,4 @@ func addPokemon(pokemon):
 		yield(get_tree().create_timer(0.1),"timeout")
 	$"../Loading Screen".visible = false
 	OS.window_resizable = true
+

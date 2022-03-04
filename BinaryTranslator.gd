@@ -19,4 +19,8 @@ func bin_to_int(binary):
 		if byte == 1:
 			number += pow(2,binary.length() - 1)
 		binary.erase(0,1)
-	return number
+	return int(number)
+
+func bitshiftR(binary,shift):
+	binary.erase(binary.length() - shift, shift)
+	return binary

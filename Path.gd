@@ -13,6 +13,6 @@ func _ready():
 
 func setStats(stat):
 	print(stat)
-	var dis = float(float(stat)/float(255))
+	var dis = float(float(stat)/float(670))
 	print(dis)
 	get_child(0).set_unit_offset(1 * dis)

@@ -16,7 +16,7 @@ func _on_LineEdit_text_entered(new_text):
 	search_criteria["type2"] = $"Panel/Type 2".get_selected_id()
 	search_criteria["gender"] = $Panel/Gender.get_selected_id()
 	print("Search")
-	emit_signal("search",search_criteria)
+	Pokemon.search(search_criteria)
 
 func showResults(database):
 	for x in database:
@@ -46,4 +46,4 @@ func _on_Search_pressed():
 	search_criteria["type2"] = $"Panel/Type 2".get_selected_id()
 	search_criteria["gender"] = $Panel/Gender.get_selected_id()
 	print("Search")
-	emit_signal("search",search_criteria)
+	Pokemon.search(search_criteria)

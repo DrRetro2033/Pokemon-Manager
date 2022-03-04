@@ -1,13 +1,16 @@
 extends Node
 onready var bank = $"Bank Manager"
-var pokemon_path = "res://pkmdb/"
+const url = "https://pokeapi.co/api/v2/"
+const pokemon_path = "res://pkmdb/"
 var data_translate = load("res://Pokemon_Database.gd").new()
 var pk6 = load("res://pk6.gd").new()
 var pk7 = load("res://pk7.gd").new()
 var walking_pokemon = load("res://WalkingPokemon.tscn")
-var info = {}
-var moves = {}
-var flavor_text
+var info : Dictionary
+var moves : Dictionary
+var flavor_text : String
+var form : int
+var pokemon_url : String
 func _ready():
 	var dir = Directory.new()
 	var path : String = OS.get_executable_path().get_base_dir()+"/pkmdb"
@@ -18,6 +21,13 @@ func _ready():
 	else:
 		user_pokemon = list_files_in_directory(path)
 	var existing_pokemon = bank.load() #loads the bank file of existing pokemon info
+	if existing_pokemon.first_time_setup: #checks to see if this the first time the user is using pokemon manager 
+		$ProfileMaker.popup()
+	else: #if this is not the first time, get all of the users info
+		$Trainer.trainer_name = existing_pokemon.trainer_name
+		$Trainer.trainer_picture = existing_pokemon.trainer_picture
+		$ProfilePic/Pic.texture = existing_pokemon.trainer_picture
+	#this chunk of code jod is to get all of the pokemon that already exists in the bank and remove null/empty slots
 	var without_null = []
 	if existing_pokemon.data != []:
 		for x in existing_pokemon.data:
@@ -25,7 +35,8 @@ func _ready():
 				continue
 			elif x != null:
 				without_null.push_back(x)
-		if user_pokemon.size() > without_null.size():
+	# 
+		if user_pokemon.size() > without_null.size(): #if the user_pokemon is bigger than without_null then that means that there is new pokemon in the pkmdb folder
 			get_info(user_pokemon,existing_pokemon)
 			$Pokemon.set_data(without_null)
 		else:
@@ -45,27 +56,23 @@ func get_info(user_pokemon, existing_pokemon):
 		var array #tempory array for personal data about the pokemon
 		var file = user_pokemon.front()
 		user_pokemon.remove(0)
-		match file.get_extension(): #switches the correct pk script
+		match file.get_extension(): #switches the correct pk script to read the pk file
 			"pk6":
 				array = pk6.readpk(file)
 			"pk7":
 				array = pk7.readpk(file)
 		#asks PokeAPI for infomation about the pokemons species and moves
-		var current
 		if existing_pokemon != null and not existing_pokemon.data.empty() and pokemon.has(existing_pokemon.data[id]):
 				print(array)
 				id += 1
 				continue
 		else:
-			$"Loading Screen".switch("api")
-			var url = "https://pokeapi.co/api/v2/"
-			$PokemonRequest.request(url+"pokemon/"+str(int(array["species"])))
-			yield($PokemonRequest, "request_completed")
-			array["type1"] = info["type1"]
-			array["type2"] = info["type2"]
+			$"Loading Screen".switch("api") #changes loading screen text
+			form = array["form"] #tells the species request which form the pokemon is
 			$SpeciesRequest.request(url+"pokemon-species/"+str(int(array["species"])))
 			yield($SpeciesRequest, "request_completed")
-			array["text"] = flavor_text
+			$PokemonRequest.request(pokemon_url)
+			yield($PokemonRequest, "request_completed")
 			var move_names = ["move1","move2","move3","move4"]
 			for x in move_names:
 					if array[x] > 0:
@@ -78,7 +85,7 @@ func get_info(user_pokemon, existing_pokemon):
 						array[x]["pp"] = moves["pp"]
 						array[x]["power"] = moves["power"]
 						array[x]["accuracy"] = 0
-					else:
+					else: #if there is no move, then set all move info to default
 						array[x] = {}
 						array[x]["name"] = "-"
 						array[x]["typing"] = "-"
@@ -86,19 +93,27 @@ func get_info(user_pokemon, existing_pokemon):
 						array[x]["pp"] = 0
 						array[x]["power"] = 0
 						array[x]["accuracy"] = 0
-					moves.clear()
 			array["species"] = info["species"]
+			array["sprite"] = info["sprite"]
+			array["species-name"] = info["species-name"]
+			array["type1"] = info["type1"]
+			array["type2"] = info["type2"]
+			array["hp"] = info["hp"]
+			array["atk"] = info["atk"]
+			array["def"] = info["def"]
+			array["spa"] = info["spa"]
+			array["spd"] = info["spd"]
+			array["spe"] = info["spe"]
+			array["text"] = flavor_text
 			if existing_pokemon != null and existing_pokemon.data.has(array):
 				id += 1
 				moves.clear()
 				info.clear()
 				flavor_text = ""
+				pokemon_url = ""
 				continue
 			elif pokemon.has(null):
 				var pos = pokemon.find(null,0)
-				moves.clear()
-				info.clear()
-				flavor_text = ""
 				pokemon.remove(pos)
 				pokemon.insert(pos,array)
 			else:
@@ -110,11 +125,13 @@ func get_info(user_pokemon, existing_pokemon):
 			moves.clear()
 			info.clear()
 			flavor_text = ""
+			pokemon_url = ""
 			$"Loading Screen/ProgressBar".value += 1
 			id += 1
 		#
 	$"Loading Screen".switch("layout")
 	$TabContainer.addPokemon(pokemon)
+
 	
 func list_files_in_directory(path): #lists all the pk files in the pkmdb folder
 	var files = []
@@ -135,6 +152,12 @@ func _on_PokemonRequest_request_completed(result,response_code,headers,body):
 	var json = JSON.parse(body.get_string_from_utf8())
 	var data = json.result
 	var species = data.name
+	var hp = data.stats[0]
+	var atk = data.stats[1]
+	var def = data.stats[2]
+	var spa = data.stats[3]
+	var spd = data.stats[4]
+	var spe = data.stats[5]
 	var type1 = data.types[0]
 	var type2
 	type1 = type1.type
@@ -147,7 +170,21 @@ func _on_PokemonRequest_request_completed(result,response_code,headers,body):
 		type2 = data_translate.typing(type2)
 	else:
 		type2 = data_translate.types.NULL
-	info = {"species" : species, "type1" : type1, "type2" : type2}
+	var sprite = data["sprites"]["versions"]["generation-viii"]["icons"]["front_default"]
+	sprite = sprite.get_file()
+	info = {
+		"species" : data.id,
+		"species-name" : species, 
+		"type1" : type1, 
+		"type2" : type2, 
+		"hp" : hp.base_stat,
+		"atk" : atk.base_stat,
+		"def" : def.base_stat,
+		"spa" : spa.base_stat,
+		"spd" : spd.base_stat,
+		"spe" : spe.base_stat,
+		"sprite" : sprite
+	}
 	$PokemonRequest.cancel_request() #stops the request 
 
 func _on_MoveRequest_request_completed(result, response_code, headers, body):
@@ -180,7 +217,9 @@ func _on_SpeciesRequest_request_completed(result, response_code, headers, body):
 		else:
 			continue
 	print(flavor_text)
-	yield($PokemonRequest, "request_completed")
+	var temp_varties = data.varieties[form]
+	pokemon_url = temp_varties.pokemon.url
+	$SpeciesRequest.cancel_request()
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):

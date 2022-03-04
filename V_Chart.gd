@@ -13,27 +13,35 @@ onready var ev = $EV
 func _ready():
 	pass # Replace with function body.
 
-
+#89691
 func EvSet(info):
-	$BaseStats/HP.setStats(info["hp"])
-	$BaseStats/Attack.setStats(info["atk"])
-	$BaseStats/Defense.setStats(info["def"])
-	$BaseStats/Speed.setStats(info["spe"])
-	$"BaseStats/Sp Def".setStats(info["spd"])
-	$"BaseStats/Sp Atk".setStats(info["spa"])
-	
+	$Stats/HP.setStats(calculateStats(info["hp"],0,0))
+	$Stats/Attack.setStats(calculateStats(info["atk"],0,0))
+	$Stats/Defense.setStats(calculateStats(info["def"],0,0))
+	$Stats/Speed.setStats(calculateStats(info["spe"],0,0))
+	$"Stats/Sp Def".setStats(calculateStats(info["spd"],0,0))
+	$"Stats/Sp Atk".setStats(calculateStats(info["spa"],0,0))
+	var array = setChart()
+	$"Stats/Base Vis".set_polygon(array)
+	$Stats/HP.setStats(calculateStats(info["hp"],info["iv_hp"] * 2,0))
+	$Stats/Attack.setStats(calculateStats(info["atk"], info["iv_atk"] * 2, 0))
+	$Stats/Defense.setStats(calculateStats(info["def"], info["iv_def"] * 2, 0))
+	$Stats/Speed.setStats(calculateStats(info["spe"], info["iv_spe"] * 2, 0))
+	$"Stats/Sp Def".setStats(calculateStats(info["spd"], info["iv_spd"] * 2, 0))
+	$"Stats/Sp Atk".setStats(calculateStats(info["spa"], info["iv_spa"] * 2, 0))
+	array = setChart()
+	$"Stats/IVs Vis".set_polygon(array)
+func calculateStats(base,iv,ev):
+	var answer = (((2 * base + iv + (ev/4))*100)/100)+5
+	return answer
+
+func setChart():
 	var array = PoolVector2Array([
-		$BaseStats/HP.get_child(0).position,
-		$BaseStats/Defense.get_child(0).position,
-		$BaseStats/Attack.get_child(0).position,
-		$BaseStats/Speed.get_child(0).position,
-		$"BaseStats/Sp Atk".get_child(0).position,
-		$"BaseStats/Sp Def".get_child(0).position
+		$Stats/HP.get_child(0).position,
+		$Stats/Defense.get_child(0).position,
+		$Stats/Attack.get_child(0).position,
+		$Stats/Speed.get_child(0).position,
+		$"Stats/Sp Atk".get_child(0).position,
+		$"Stats/Sp Def".get_child(0).position
 	])
-	
-	$"BaseStats/EV Vis".set_polygon(array)
-	
-	
-	
-	
-	
+	return array
