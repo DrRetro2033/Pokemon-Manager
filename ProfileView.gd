@@ -12,7 +12,4 @@ func _ready():
 #	pass
 
 
-func _on_ProfilePic_pressed():
-	$PopupPanel/VBoxContainer/TextureRect.texture = trainer.trainer_picture
-	$PopupPanel/VBoxContainer/Label.text = trainer.trainer_name
-	$PopupPanel.popup()
+

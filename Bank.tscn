@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://pkm.gd" type="Script" id=1]
 [ext_resource path="res://Panel.tscn" type="PackedScene" id=2]
@@ -10,10 +10,9 @@
 [ext_resource path="res://abomasnow-mega.png" type="Texture" id=8]
 [ext_resource path="res://Waiting.tres" type="Animation" id=9]
 [ext_resource path="res://icon.png" type="Texture" id=10]
-[ext_resource path="res://Pokemon.gd" type="Script" id=11]
+[ext_resource path="res://ProfileInfo.gd" type="Script" id=11]
 [ext_resource path="res://ProfileMaker.gd" type="Script" id=12]
-[ext_resource path="res://Trainer.gd" type="Script" id=13]
-[ext_resource path="res://ProfileView.gd" type="Script" id=15]
+[ext_resource path="res://PartyCreator.tscn" type="PackedScene" id=13]
 
 [sub_resource type="GDScript" id=7]
 script/source = "extends Panel
@@ -158,12 +157,46 @@ custom_constants/side_margin = 40
 tab_align = 0
 script = ExtResource( 7 )
 
+[node name="PopupPanel" type="PopupPanel" parent="."]
+margin_left = 8.0
+margin_top = 38.0
+margin_right = 144.0
+margin_bottom = 216.0
+script = ExtResource( 11 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="TextureRect" type="TextureRect" parent="PopupPanel/VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="PopupPanel/VBoxContainer"]
+margin_top = 128.0
+margin_right = 128.0
+margin_bottom = 170.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "Name"
+align = 1
+valign = 1
+
 [node name="ProfilePic" type="Button" parent="."]
 margin_left = 8.0
 margin_top = 3.0
 margin_right = 43.0
 margin_bottom = 38.0
-script = ExtResource( 15 )
 
 [node name="Pic" type="TextureRect" parent="ProfilePic"]
 anchor_left = 0.5
@@ -178,42 +211,6 @@ texture = ExtResource( 10 )
 expand = true
 stretch_mode = 5
 
-[node name="PopupPanel" type="PopupPanel" parent="ProfilePic"]
-anchor_left = 0.229
-anchor_right = 0.229
-margin_left = -8.015
-margin_top = 35.0
-margin_right = 127.985
-margin_bottom = 213.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ProfilePic/PopupPanel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
-
-[node name="TextureRect" type="TextureRect" parent="ProfilePic/PopupPanel/VBoxContainer"]
-margin_right = 128.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 3.0
-texture = ExtResource( 10 )
-expand = true
-stretch_mode = 6
-
-[node name="Label" type="Label" parent="ProfilePic/PopupPanel/VBoxContainer"]
-margin_top = 128.0
-margin_right = 128.0
-margin_bottom = 170.0
-size_flags_horizontal = 3
-size_flags_vertical = 7
-text = "Name"
-align = 1
-valign = 1
-
 [node name="PokemonRequest" type="HTTPRequest" parent="."]
 
 [node name="MoveRequest" type="HTTPRequest" parent="."]
@@ -222,6 +219,7 @@ valign = 1
 script = ExtResource( 6 )
 
 [node name="Loading Screen" type="Panel" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -264,8 +262,8 @@ __meta__ = {
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 6144.0
+margin_bottom = 3600.0
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -301,9 +299,6 @@ margin_right = 88.0
 margin_bottom = 128.0
 items = [ "Box", null, 0, false, true, -1, 0, null, "", true, "New Box", null, 0, false, false, 0, 0, null, "", false, "Rename Box", null, 0, false, false, 1, 0, null, "", false, "Pokemon", null, 0, false, true, -1, 0, null, "", true, "Search for Pokemon", null, 0, false, false, 2, 0, null, "", false ]
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Rename" type="PopupDialog" parent="."]
 anchor_left = 0.5
@@ -343,9 +338,6 @@ margin_right = 192.0
 margin_bottom = 12.0
 align = 1
 placeholder_text = "Box"
-
-[node name="Pokemon" type="Node" parent="." groups=["Database"]]
-script = ExtResource( 11 )
 
 [node name="Search" parent="." instance=ExtResource( 5 )]
 visible = false
@@ -456,10 +448,10 @@ filters = PoolStringArray( "*.png ; PNG Images" )
 current_dir = "/Users/Colly/OneDrive/Documents/GitHub/Pokemon-Manager"
 current_path = "/Users/Colly/OneDrive/Documents/GitHub/Pokemon-Manager/"
 
-[node name="Trainer" type="Node" parent="."]
-script = ExtResource( 13 )
+[node name="PartyCreator" parent="." instance=ExtResource( 13 )]
+visible = false
 
-[connection signal="pressed" from="ProfilePic" to="ProfilePic" method="_on_ProfilePic_pressed"]
+[connection signal="pressed" from="ProfilePic" to="PopupPanel" method="_on_ProfilePic_pressed"]
 [connection signal="request_completed" from="PokemonRequest" to="." method="_on_PokemonRequest_request_completed"]
 [connection signal="request_completed" from="MoveRequest" to="." method="_on_MoveRequest_request_completed"]
 [connection signal="request_completed" from="SpeciesRequest" to="." method="_on_SpeciesRequest_request_completed"]
@@ -467,7 +459,6 @@ script = ExtResource( 13 )
 [connection signal="new_box" from="PopupMenu" to="TabContainer" method="_on_PopupMenu_new_box"]
 [connection signal="newName" from="Rename" to="TabContainer" method="_on_Rename_newName"]
 [connection signal="text_entered" from="Rename/Name" to="Rename" method="_on_Name_text_entered"]
-[connection signal="search" from="Search" to="Pokemon" method="_on_Search_search"]
 [connection signal="pressed" from="ProfileMaker/Button" to="ProfileMaker" method="_on_Button_pressed"]
 [connection signal="pressed" from="ProfileMaker/ProfilePic" to="ProfileMaker" method="_on_ProfilePic_pressed"]
 [connection signal="file_selected" from="FileDialog" to="ProfileMaker" method="_on_FileDialog_file_selected"]

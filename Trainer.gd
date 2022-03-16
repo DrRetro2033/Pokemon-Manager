@@ -1,7 +1,7 @@
 extends Node
 var trainer_name
 var trainer_picture
-
+var first_time_setup
 func _ready():
 	pass
 

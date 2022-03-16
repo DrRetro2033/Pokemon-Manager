@@ -20,11 +20,13 @@ func loadPokemon(bank):
 		yield(get_tree().create_timer(1),"timeout")
 		overflow -= 1
 	print(boxes)
-	var current_pos = bank.data
+	var current_pos = bank.order
 	for x in get_children():
 		current_pos = x.setSlots(current_pos)
 		yield(get_tree().create_timer(0.1),"timeout")
 	$"../Loading Screen".visible = false
+	if Trainer.first_time_setup:
+		$"../ProfileMaker".popup()
 	OS.window_resizable = true
 
 func _process(delta):
@@ -70,4 +72,6 @@ func addPokemon(pokemon):
 		yield(get_tree().create_timer(0.1),"timeout")
 	$"../Loading Screen".visible = false
 	OS.window_resizable = true
+	if Trainer.first_time_setup:
+		$"../ProfileMaker".popup()
 

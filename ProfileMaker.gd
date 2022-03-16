@@ -12,8 +12,8 @@ func _on_Button_pressed():
 	if $Name.text == "":
 		$Warning.visible = true
 	else:
-		$"../Trainer".trainer_name = $Name.text
-		$"../Trainer".trainer_picture = pic
+		Trainer.trainer_name = $Name.text
+		Trainer.trainer_picture = pic
 		$"../ProfilePic/Pic".texture = pic
 		visible = false
 

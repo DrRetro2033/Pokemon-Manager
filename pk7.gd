@@ -3,6 +3,7 @@ var folder = "res://pkmdb/"
 func readpk(var path):
 	print(path)
 	var info = {}
+	info["id"] = path
 	var file = File.new()
 	var temp_path
 	if OS.get_executable_path().get_base_dir() != "C:/Program Files (x86)/Steam/steamapps/common/Godot Engine":
@@ -16,6 +17,7 @@ func readpk(var path):
 	info["move2"] = read_16(file,0x5C)
 	info["move3"] = read_16(file,0x5E)
 	info["move4"] = read_16(file,0x60)
+	info["exp"] = read_32(file,0x10)
 	var bin = BinaryTranslator.int_to_bin(read_32(file,0x74))
 	var IVs = ["iv_hp","iv_atk","iv_def","iv_spe","iv_spa","iv_spd"]
 	for iv in IVs:

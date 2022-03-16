@@ -21,3 +21,5 @@ func _on_PopupMenu_id_pressed(id):
 			$"../Rename".popup()
 		2:
 			$"../Search".visible = true
+		3:
+			$"../PartyCreator".showPartyMaker()

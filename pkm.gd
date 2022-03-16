@@ -10,8 +10,10 @@ var info : Dictionary
 var moves : Dictionary
 var flavor_text : String
 var form : int
+var growth : String
 var pokemon_url : String
 func _ready():
+	print(BinaryTranslator.bin_to_int(BinaryTranslator.int_to_bin(2254250705)))
 	var dir = Directory.new()
 	var path : String = OS.get_executable_path().get_base_dir()+"/pkmdb"
 	$"Loading Screen".switch("reading")
@@ -22,14 +24,15 @@ func _ready():
 		user_pokemon = list_files_in_directory(path)
 	var existing_pokemon = bank.load() #loads the bank file of existing pokemon info
 	if existing_pokemon.first_time_setup: #checks to see if this the first time the user is using pokemon manager 
-		$ProfileMaker.popup()
-	else: #if this is not the first time, get all of the users info
-		$Trainer.trainer_name = existing_pokemon.trainer_name
-		$Trainer.trainer_picture = existing_pokemon.trainer_picture
+		Trainer.first_time_setup = true
+	else:
+		Trainer.trainer_name = existing_pokemon.trainer_name
+		Trainer.trainer_picture = existing_pokemon.trainer_picture
+		Trainer.first_time_setup = false
 		$ProfilePic/Pic.texture = existing_pokemon.trainer_picture
 	#this chunk of code jod is to get all of the pokemon that already exists in the bank and remove null/empty slots
 	var without_null = []
-	if existing_pokemon.data != []:
+	if existing_pokemon.data != {}:
 		for x in existing_pokemon.data:
 			if x == null:
 				continue
@@ -38,17 +41,17 @@ func _ready():
 	# 
 		if user_pokemon.size() > without_null.size(): #if the user_pokemon is bigger than without_null then that means that there is new pokemon in the pkmdb folder
 			get_info(user_pokemon,existing_pokemon)
-			$Pokemon.set_data(without_null)
 		else:
+			Pokemon.set_data(existing_pokemon.data)
 			$TabContainer.loadPokemon(existing_pokemon)
-			$Pokemon.set_data(without_null)
 	else:
 		get_info(user_pokemon,existing_pokemon)
 
 
 func get_info(user_pokemon, existing_pokemon):
-	var id = 1 #this is for giving the pokemon unqie keys
-	var pokemon = []
+	var id = 0 #this is for giving the pokemon unqie keys
+	var pokemon = {}
+	var order = []
 	$"Loading Screen/ProgressBar".max_value = user_pokemon.size()
 	if existing_pokemon != null and not existing_pokemon.data.empty():
 		pokemon = existing_pokemon.data
@@ -62,7 +65,7 @@ func get_info(user_pokemon, existing_pokemon):
 			"pk7":
 				array = pk7.readpk(file)
 		#asks PokeAPI for infomation about the pokemons species and moves
-		if existing_pokemon != null and not existing_pokemon.data.empty() and pokemon.has(existing_pokemon.data[id]):
+		if existing_pokemon != null and not existing_pokemon.data.empty() and pokemon.has(existing_pokemon.data.has(array["id"])):
 				print(array)
 				id += 1
 				continue
@@ -93,6 +96,7 @@ func get_info(user_pokemon, existing_pokemon):
 						array[x]["pp"] = 0
 						array[x]["power"] = 0
 						array[x]["accuracy"] = 0
+			array["level"] = Pokemon.level(array["exp"],growth)
 			array["species"] = info["species"]
 			array["sprite"] = info["sprite"]
 			array["species-name"] = info["species-name"]
@@ -105,19 +109,18 @@ func get_info(user_pokemon, existing_pokemon):
 			array["spd"] = info["spd"]
 			array["spe"] = info["spe"]
 			array["text"] = flavor_text
-			if existing_pokemon != null and existing_pokemon.data.has(array):
+			if existing_pokemon != null and existing_pokemon.data.has(array["id"]):
 				id += 1
 				moves.clear()
 				info.clear()
 				flavor_text = ""
 				pokemon_url = ""
+				growth = ""
 				continue
-			elif pokemon.has(null):
-				var pos = pokemon.find(null,0)
-				pokemon.remove(pos)
-				pokemon.insert(pos,array)
 			else:
-				pokemon.push_back(array)
+				pokemon[array["id"]] = {}
+				pokemon[array["id"]] = array
+				order.push_back(array["id"])
 				var walk = walking_pokemon.instance()
 				$"Loading Screen".add_child(walk)
 				walk.start(array)
@@ -126,11 +129,13 @@ func get_info(user_pokemon, existing_pokemon):
 			info.clear()
 			flavor_text = ""
 			pokemon_url = ""
+			growth = ""
 			$"Loading Screen/ProgressBar".value += 1
 			id += 1
 		#
+	Pokemon.set_data(pokemon)
 	$"Loading Screen".switch("layout")
-	$TabContainer.addPokemon(pokemon)
+	$TabContainer.addPokemon(order)
 
 	
 func list_files_in_directory(path): #lists all the pk files in the pkmdb folder
@@ -183,7 +188,7 @@ func _on_PokemonRequest_request_completed(result,response_code,headers,body):
 		"spa" : spa.base_stat,
 		"spd" : spd.base_stat,
 		"spe" : spe.base_stat,
-		"sprite" : sprite
+		"sprite" : sprite,
 	}
 	$PokemonRequest.cancel_request() #stops the request 
 
@@ -219,6 +224,8 @@ func _on_SpeciesRequest_request_completed(result, response_code, headers, body):
 	print(flavor_text)
 	var temp_varties = data.varieties[form]
 	pokemon_url = temp_varties.pokemon.url
+	growth = data.growth_rate.name
+	print(growth)
 	$SpeciesRequest.cancel_request()
 
 func _process(delta):
@@ -231,3 +238,4 @@ func _process(delta):
 	elif Input.is_action_just_pressed("right_click") and $Panel.visible != true:
 		$PopupMenu.popup()
 		$PopupMenu.set_global_position(get_viewport().get_mouse_position())
+

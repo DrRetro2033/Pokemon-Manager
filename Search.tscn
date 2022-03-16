@@ -6,9 +6,6 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="."]
 anchor_left = 0.5
@@ -121,6 +118,20 @@ text = "Search!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="NoResults" type="Label" parent="Panel"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 256.0
+margin_top = 36.0
+margin_right = -544.0
+margin_bottom = -526.0
+text = "Oops... You have no Pokémon that matches search criteria!
+"
+align = 1
+valign = 1
+autowrap = true
 
 [connection signal="text_entered" from="Panel/Nickname" to="." method="_on_LineEdit_text_entered"]
 [connection signal="pressed" from="Panel/Back" to="." method="_on_Back_pressed"]

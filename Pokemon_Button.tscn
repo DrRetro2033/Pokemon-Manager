@@ -10,7 +10,7 @@ onready var label = $VBoxContainer/Label
 onready var sprite = $VBoxContainer/TextureRect
 onready var hold_timer = $Timer
 const button = preload(\"res://drag.tscn\")
-var pokemon
+var id
 var can_drag = true
 func _ready():
 	pass
@@ -19,16 +19,17 @@ func pokeButton(var info):
 	label = $VBoxContainer/Label
 	sprite = $VBoxContainer/TextureRect
 	if info != null:
-		pokemon = info
+		id = info
+		var pokemon = Pokemon.pokemon[info]
 		disabled = false
 		label.visible = true
 		sprite.visible = true
-		label.text = info[\"nickname\"]
-		var path_name = str(info[\"sprite\"])
+		label.text = pokemon[\"nickname\"]
+		var path_name = str(pokemon[\"sprite\"])
 		var temp_path = path+path_name
 		sprite.set_texture(load(temp_path))
 	else:
-		pokemon = null
+		id = null
 		disabled = true
 		label.visible = false
 		sprite.visible = false
@@ -36,7 +37,7 @@ func pokeButton(var info):
 
 func _on_Button_pressed():
 	for panel in get_tree().get_nodes_in_group(\"Info Panel\"):
-		panel.open(pokemon)
+		panel.open(id)
 	hold_timer.stop()
 
 
@@ -48,7 +49,7 @@ func get_drag_data(position):
 	if not disabled and can_drag:
 		var data = {}
 		data[\"origin\"] = self
-		data[\"pokemon\"] = pokemon
+		data[\"pokemon\"] = id
 		var drag_button = TextureRect.new()
 		drag_button.texture = get_child(0).get_child(0).texture
 		drag_button.rect_size = Vector2(100,100)
@@ -62,7 +63,7 @@ func can_drop_data(position, data):
 	return true
 
 func drop_data(position, data):
-	data[\"origin\"].pokeButton(pokemon)
+	data[\"origin\"].pokeButton(id)
 	pokeButton(data[\"pokemon\"])
 
 "
@@ -80,9 +81,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
 visible = false

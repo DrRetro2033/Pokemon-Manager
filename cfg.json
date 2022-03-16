@@ -1,0 +1,115 @@
+{
+  "Startup": {
+    "Version": "22.1.1.0",
+    "ForceHaXOnLaunch": false,
+    "TryDetectRecentSave": true,
+    "AutoLoadSaveOnStartup": 1,
+    "ShowChangelogOnUpdate": true,
+    "PluginLoadMethod": 1,
+    "RecentlyLoaded": [
+      "F:\\3ds\\Checkpoint\\saves\\0x0175E Pokémon Moon\\20040719-054712\\main",
+      "",
+      "E:\\3ds\\Checkpoint\\saves\\0x0175E Pokémon Moon\\20040719-054712\\main"
+    ],
+    "Language": "en",
+    "DefaultSaveVersion": 48
+  },
+  "Backup": {
+    "BAKEnabled": true,
+    "BAKPrompt": true,
+    "OtherBackupPaths": [],
+    "OtherSaveFileExtensions": []
+  },
+  "Legality": {
+    "CheckWordFilter": true,
+    "AllowGen1Tradeback": true,
+    "NicknamedTrade": -1,
+    "NicknamedMysteryGift": 0,
+    "RNGFrameNotFound": 0,
+    "Gen7TransferStarPID": 0,
+    "Gen8MemoryMissingHT": 0,
+    "Gen8TransferTrackerNotPresent": 0,
+    "NicknamedAnotherSpecies": 0,
+    "ZeroHeightWeight": 0
+  },
+  "Import": {
+    "ApplyNature": true,
+    "ApplyMarkings": true
+  },
+  "SlotWrite": {
+    "SetUpdateDex": true,
+    "SetUpdatePKM": true,
+    "ModifyUnset": true
+  },
+  "Privacy": {
+    "HideSAVDetails": false,
+    "HideSecretDetails": false
+  },
+  "Display": {
+    "Unicode": true,
+    "IgnoreLegalPopup": false,
+    "FlagIllegal": true
+  },
+  "Sprite": {
+    "ShinySprites": true,
+    "ShowEggSpriteAsHeldItem": true,
+    "ShowEncounterBall": true,
+    "ShowEncounterColor": 2,
+    "ShowEncounterColorPKM": 0,
+    "ShowEncounterOpacityBackground": 63,
+    "ShowEncounterOpacityStripe": 95,
+    "ShowExperiencePercent": false,
+    "ShowEncounterThicknessStripe": 4
+  },
+  "Sounds": {
+    "PlaySoundSAVLoad": true,
+    "PlaySoundLegalityCheck": true
+  },
+  "Hover": {
+    "HoverSlotShowText": true,
+    "HoverSlotPlayCry": true,
+    "HoverSlotGlowEdges": true
+  },
+  "Draw": {
+    "GlowInitial": "White",
+    "GlowFinal": "LightSkyBlue",
+    "InvalidSelection": "DarkSalmon",
+    "MarkDefault": "Black",
+    "MarkBlue": "DeepSkyBlue",
+    "MarkPink": "255, 117, 179",
+    "Male": "Blue",
+    "Female": "Red",
+    "ShinyUnicode": "☆",
+    "ShinyDefault": "*",
+    "BackLegal": "200, 255, 200",
+    "TextColor": "WindowText",
+    "BackColor": "Window",
+    "BackHighlighted": "Highlight",
+    "TextHighlighted": "HighlightText"
+  },
+  "Advanced": {
+    "AllowIncompatibleConversion": false,
+    "PathBlockKeyListSWSH": "SCBlocks.txt",
+    "HideEventTypeBelow": 0,
+    "HideEvent8Contains": ""
+  },
+  "EntityEditor": {
+    "HiddenPowerOnChangeMaxPower": true
+  },
+  "EntityDb": {
+    "SearchBackups": true,
+    "SearchExtraSaves": true,
+    "SearchExtraSavesDeep": true,
+    "InitialSortMode": 0,
+    "FilterUnavailableSpecies": true
+  },
+  "EncounterDb": {
+    "ReturnNoneIfEmptySearch": true,
+    "FilterUnavailableSpecies": true,
+    "UseTabsAsCriteria": true,
+    "UseTabsAsCriteriaAnySpecies": true
+  },
+  "MysteryDb": {
+    "FilterUnavailableSpecies": true
+  }
+}

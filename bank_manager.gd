@@ -9,14 +9,15 @@ func save():
 	var bank := bank_loaded.new()
 	for node in get_tree().get_nodes_in_group("Bank"):
 		node.save(bank)
-	for item in bank.data:
-		var last = bank.data.back()
+	for item in bank.order:
+		var last = bank.order.back()
 		if last == null:
-			bank.data.remove(bank.data.size() - 1)
+			bank.order.remove(bank.order.size() - 1)
 		elif last != null:
 			break
 	$"../TabContainer".save(bank)
-	$"../Trainer".save(bank)
+	bank.data = Pokemon.pokemon
+	Trainer.save(bank)
 	var path : String = OS.get_executable_path().get_base_dir()+"/save"
 	print(path)
 	var save_file_path : String
@@ -64,7 +65,8 @@ func load():
 
 func reset():
 	var bank := bank_loaded.new()
-	bank.data = []
+	bank.data = {}
+	bank.order = []
 	bank.box_names = []
 	var directory : Directory = Directory.new()
 	if not directory.dir_exists(BANK_FOLDER):

@@ -31,6 +31,7 @@ config/stretch/mode="viewport"
 
 BinaryTranslator="*res://BinaryTranslator.gd"
 Pokemon="*res://Pokemon.gd"
+Trainer="*res://Trainer.gd"
 
 [display]
 

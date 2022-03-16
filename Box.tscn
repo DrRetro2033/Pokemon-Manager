@@ -28,7 +28,7 @@ func setSlots(poke):
 
 func save(bank):
 	for slot in get_children():
-		bank.data.push_back(slot.pokemon) 
+		bank.order.push_back(slot.id) 
 "
 
 [node name="Box1" type="GridContainer" groups=["Bank"]]
