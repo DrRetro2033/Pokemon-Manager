@@ -1,6 +1,6 @@
 # Pokémon Manager
 View, organize, and manage your Pokémon.
-
+(Pokemon_Manager.png)
 
 What is Pokémon Manager?
 -
