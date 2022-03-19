@@ -30,19 +30,21 @@ Features:
  - Search for specific Pokémon by nickname, typing, and gender.
  - Rename, and add boxes to your liking (Empty boxes are not stored).
  - By my understanding of the Godot Engine, you could theoretically keep Pokémon Manager, [PKHeX](https://github.com/kwsch/PKHeX), and your pokémon on a usb stick and plug it into a brand new computer and it should work. Although [PKHeX](https://github.com/kwsch/PKHeX) will not work unless you install .NET Core onto the computer
- 
- - In progress/Planned:
+ - Level of Pokémon is displayed next to the gender of the pokemon.
+ - Ability to make multiple parties.
+ - Compatibility with alternate forms (Currently, there are no PokéDex entries for alternate Pokémon in PokéAPI so alternate forms will show the first form's entry nad not the correct form's entry. This will be fixed in a future update)
+ - Make a personalized profile.
+
+In progress/Planned:
+-
    - Stats chart with ivs, evs, and base stats.
-   - pk8, pk5, pk4, pk3, pk2, pk1 files will be supported soon.
+   - pk8, pk4, pk3, pk2, pk1 files will be supported soon.
    - Transfer Pokémon with someone else online.
    - Switch from requiring internet to having PokeAPI's database integrated with Pokémon Manager.
-   - Compatibility with alternate forms.
    - Show trainer info (meaning the trainer's name and details) for each Pokémon and search by trainers.
-   - Display Pokémon's level and have it effect the stats chart.
    - Switch PokéDex entries when viewing Pokémon.
-   - Be able to make a personalized profile.
-   - More organization tools and add the ability to make multiple parties.
    - Switch icons between 3d models, home icons, and sprites.
+   - More organization tools.
 
 Credits:
 -
