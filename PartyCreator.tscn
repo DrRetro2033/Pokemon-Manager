@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://PartyCreator.gd" type="Script" id=1]
-[ext_resource path="res://Pokemon_Button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Party.tscn" type="PackedScene" id=2]
 
 [node name="PartyCreator" type="Control"]
 anchor_right = 1.0
@@ -57,66 +57,19 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Party1" type="GridContainer" parent="Panel/Parties"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-columns = 2
+[node name="Party 1" parent="Panel/Parties" instance=ExtResource( 2 )]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Parties/Party1"]
-margin_right = 136.0
-margin_bottom = 396.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Member1" parent="Panel/Parties/Party1/VBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 136.0
-margin_bottom = 129.0
-
-[node name="Member3" parent="Panel/Parties/Party1/VBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 133.0
-margin_right = 136.0
-margin_bottom = 262.0
-
-[node name="Member5" parent="Panel/Parties/Party1/VBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 266.0
-margin_right = 136.0
-margin_bottom = 396.0
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/Parties/Party1"]
-margin_left = 140.0
-margin_right = 276.0
-margin_bottom = 396.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Member2" parent="Panel/Parties/Party1/VBoxContainer2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 136.0
-margin_bottom = 129.0
-
-[node name="Member4" parent="Panel/Parties/Party1/VBoxContainer2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 133.0
-margin_right = 136.0
-margin_bottom = 262.0
-
-[node name="Member6" parent="Panel/Parties/Party1/VBoxContainer2" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 266.0
-margin_right = 136.0
-margin_bottom = 396.0
+[node name="AddParty" type="Button" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 252.0
+margin_top = 208.0
+margin_right = 280.0
+margin_bottom = 228.0
+text = "+"
 
 [connection signal="pressed" from="Panel/Back" to="." method="_on_Back_pressed"]
+[connection signal="tab_changed" from="Panel/Parties" to="." method="_on_Parties_tab_changed"]
+[connection signal="pressed" from="Panel/AddParty" to="." method="_on_AddParty_pressed"]

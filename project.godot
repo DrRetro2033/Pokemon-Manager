@@ -13,17 +13,24 @@ _global_script_classes=[ {
 "class": "Bank",
 "language": "GDScript",
 "path": "res://data/bank.gd"
+}, {
+"base": "Node",
+"class": "PKM_FILE",
+"language": "GDScript",
+"path": "res://PKM_Reader.gd"
 } ]
 _global_script_class_icons={
-"Bank": ""
+"Bank": "",
+"PKM_FILE": ""
 }
 
 [application]
 
-config/name="Pokemon Manager"
+config/name="Pokémon Manager"
 config/description="View, Organize, and Manage your Pokemon"
 run/main_scene="res://Bank.tscn"
 config/icon="res://Poké_Ball_icon.svg.png"
+config/windows_native_icon="res://Poké_Ball_icon.svg.ico"
 config/custom_image=""
 config/stretch/mode="viewport"
 

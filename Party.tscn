@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Member_Button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Party.gd" type="Script" id=2]
+
+[node name="Party 1" type="GridContainer" groups=["Parties"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+columns = 2
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 506.0
+margin_bottom = 564.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Member1" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 506.0
+margin_bottom = 185.0
+
+[node name="Member3" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 189.0
+margin_right = 506.0
+margin_bottom = 374.0
+
+[node name="Member5" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 378.0
+margin_right = 506.0
+margin_bottom = 564.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+margin_left = 510.0
+margin_right = 1016.0
+margin_bottom = 564.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Member2" parent="VBoxContainer2" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 506.0
+margin_bottom = 185.0
+
+[node name="Member4" parent="VBoxContainer2" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 189.0
+margin_right = 506.0
+margin_bottom = 374.0
+
+[node name="Member6" parent="VBoxContainer2" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 378.0
+margin_right = 506.0
+margin_bottom = 564.0
+
+[connection signal="dragged_and_dropped" from="VBoxContainer/Member1" to="." method="_on_Member1_dragged_and_dropped"]
+[connection signal="dragged_and_dropped" from="VBoxContainer/Member3" to="." method="_on_Member3_dragged_and_dropped"]
+[connection signal="dragged_and_dropped" from="VBoxContainer/Member5" to="." method="_on_Member5_dragged_and_dropped"]
+[connection signal="dragged_and_dropped" from="VBoxContainer2/Member2" to="." method="_on_Member2_dragged_and_dropped"]
+[connection signal="dragged_and_dropped" from="VBoxContainer2/Member4" to="." method="_on_Member4_dragged_and_dropped"]
+[connection signal="dragged_and_dropped" from="VBoxContainer2/Member6" to="." method="_on_Member6_dragged_and_dropped"]

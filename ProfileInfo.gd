@@ -19,3 +19,7 @@ func _on_ProfilePic_pressed():
 	$VBoxContainer/TextureRect.texture = Trainer.trainer_picture
 	$VBoxContainer/Label.text = Trainer.trainer_name
 	popup()
+
+
+func _on_Main_Menu_pressed():
+	visible = false

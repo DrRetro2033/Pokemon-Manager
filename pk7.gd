@@ -1,3 +1,5 @@
+extends PKM_FILE
+
 var folder = "res://pkmdb/"
 
 func readpk(var path):
@@ -42,18 +44,3 @@ func readpk(var path):
 	info["form"] = BinaryTranslator.bin_to_int(form_gender.right(form_gender.length() - 2))
 	file.close()
 	return info
-
-func read_8(file,pos):
-	file.seek(pos)
-	var value = file.get_8()
-	return value
-
-func read_16(file,pos):
-	file.seek(pos)
-	var value = file.get_16()
-	return value
-
-func read_32(file,pos):
-	file.seek(pos)
-	var value = file.get_32()
-	return value

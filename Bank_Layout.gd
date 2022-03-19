@@ -8,7 +8,7 @@ func loadPokemon(bank):
 	var overflow = int(bank.data.size() / max_per_page)
 	var array = bank.box_names
 	print(overflow)
-	while overflow >= 0:
+	while overflow >= 0: #if there are more pokemon that can't all fit into one box it creates new ones
 		var new_box = box.instance()
 		if bank.box_names.size() - 1 >= overflow:
 			new_box.name = array.front()
@@ -58,7 +58,7 @@ func _on_Rename_newName(new_name):
 func addPokemon(pokemon):
 	var overflow = int(pokemon.size() / max_per_page)
 	print(overflow)
-	while overflow >= 0:
+	while overflow >= 0: 
 		var new_box = box.instance()
 		new_box.name = "Box%s" % str(get_child_count() + 1)
 		boxes.push_back(new_box.name)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://pkm.gd" type="Script" id=1]
 [ext_resource path="res://Panel.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://ProfileInfo.gd" type="Script" id=11]
 [ext_resource path="res://ProfileMaker.gd" type="Script" id=12]
 [ext_resource path="res://PartyCreator.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Menu.tscn" type="PackedScene" id=14]
 
 [sub_resource type="GDScript" id=7]
 script/source = "extends Panel
@@ -174,7 +175,7 @@ margin_bottom = -4.0
 
 [node name="TextureRect" type="TextureRect" parent="PopupPanel/VBoxContainer"]
 margin_right = 128.0
-margin_bottom = 124.0
+margin_bottom = 106.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
@@ -183,14 +184,20 @@ expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="PopupPanel/VBoxContainer"]
-margin_top = 128.0
+margin_top = 110.0
 margin_right = 128.0
-margin_bottom = 170.0
+margin_bottom = 146.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 text = "Name"
 align = 1
 valign = 1
+
+[node name="Main Menu" type="Button" parent="PopupPanel/VBoxContainer"]
+margin_top = 150.0
+margin_right = 128.0
+margin_bottom = 170.0
+text = "Main Menu"
 
 [node name="ProfilePic" type="Button" parent="."]
 margin_left = 8.0
@@ -262,8 +269,8 @@ __meta__ = {
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 6144.0
-margin_bottom = 3600.0
+margin_right = 10240.0
+margin_bottom = 6000.0
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -297,7 +304,7 @@ texture = ExtResource( 10 )
 [node name="PopupMenu" type="PopupMenu" parent="."]
 margin_right = 88.0
 margin_bottom = 128.0
-items = [ "Box", null, 0, false, true, -1, 0, null, "", true, "New Box", null, 0, false, false, 0, 0, null, "", false, "Rename Box", null, 0, false, false, 1, 0, null, "", false, "Pokemon", null, 0, false, true, -1, 0, null, "", true, "Search for Pokemon", null, 0, false, false, 2, 0, null, "", false ]
+items = [ "Box", null, 0, false, true, -1, 0, null, "", true, "New Box", null, 0, false, false, 0, 0, null, "", false, "Rename Box", null, 0, false, false, 1, 0, null, "", false, "Pokemon", null, 0, false, true, -1, 0, null, "", true, "Search for Pokemon", null, 0, false, false, 2, 0, null, "", false, "Manage Parties", null, 0, false, false, 3, 0, null, "", false ]
 script = ExtResource( 3 )
 
 [node name="Rename" type="PopupDialog" parent="."]
@@ -340,9 +347,6 @@ align = 1
 placeholder_text = "Box"
 
 [node name="Search" parent="." instance=ExtResource( 5 )]
-visible = false
-
-[node name="Panel" parent="." groups=["Info Panel"] instance=ExtResource( 2 )]
 visible = false
 
 [node name="ProfileMaker" type="WindowDialog" parent="."]
@@ -451,6 +455,14 @@ current_path = "/Users/Colly/OneDrive/Documents/GitHub/Pokemon-Manager/"
 [node name="PartyCreator" parent="." instance=ExtResource( 13 )]
 visible = false
 
+[node name="Panel" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="Menu" parent="." instance=ExtResource( 14 )]
+visible = false
+
+[connection signal="pressed" from="PopupPanel/VBoxContainer/Main Menu" to="PopupPanel" method="_on_Main_Menu_pressed"]
+[connection signal="pressed" from="PopupPanel/VBoxContainer/Main Menu" to="Menu" method="_on_Main_Menu_pressed"]
 [connection signal="pressed" from="ProfilePic" to="PopupPanel" method="_on_ProfilePic_pressed"]
 [connection signal="request_completed" from="PokemonRequest" to="." method="_on_PokemonRequest_request_completed"]
 [connection signal="request_completed" from="MoveRequest" to="." method="_on_MoveRequest_request_completed"]

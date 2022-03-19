@@ -9,6 +9,9 @@ func save():
 	var bank := bank_loaded.new()
 	for node in get_tree().get_nodes_in_group("Bank"):
 		node.save(bank)
+	for node in get_tree().get_nodes_in_group("Parties"):
+		node.save(bank)
+	$"../PartyCreator".save(bank)
 	for item in bank.order:
 		var last = bank.order.back()
 		if last == null:
@@ -68,6 +71,8 @@ func reset():
 	bank.data = {}
 	bank.order = []
 	bank.box_names = []
+	bank.parties_order = []
+	bank.parties = {}
 	var directory : Directory = Directory.new()
 	if not directory.dir_exists(BANK_FOLDER):
 		directory.make_dir_recursive(BANK_FOLDER)

@@ -3,6 +3,7 @@ onready var bank = $"Bank Manager"
 const url = "https://pokeapi.co/api/v2/"
 const pokemon_path = "res://pkmdb/"
 var data_translate = load("res://Pokemon_Database.gd").new()
+var pk5 = load("res://pk5.gd").new()
 var pk6 = load("res://pk6.gd").new()
 var pk7 = load("res://pk7.gd").new()
 var walking_pokemon = load("res://WalkingPokemon.tscn")
@@ -44,6 +45,7 @@ func _ready():
 		else:
 			Pokemon.set_data(existing_pokemon.data)
 			$TabContainer.loadPokemon(existing_pokemon)
+			$PartyCreator.loadParties(existing_pokemon)
 	else:
 		get_info(user_pokemon,existing_pokemon)
 
@@ -55,17 +57,20 @@ func get_info(user_pokemon, existing_pokemon):
 	$"Loading Screen/ProgressBar".max_value = user_pokemon.size()
 	if existing_pokemon != null and not existing_pokemon.data.empty():
 		pokemon = existing_pokemon.data
+		order = existing_pokemon.order
 	while user_pokemon.size() > 0:
 		var array #tempory array for personal data about the pokemon
 		var file = user_pokemon.front()
 		user_pokemon.remove(0)
 		match file.get_extension(): #switches the correct pk script to read the pk file
+			"pk5":
+				array = pk5.readpk(file)
 			"pk6":
 				array = pk6.readpk(file)
 			"pk7":
 				array = pk7.readpk(file)
 		#asks PokeAPI for infomation about the pokemons species and moves
-		if existing_pokemon != null and not existing_pokemon.data.empty() and pokemon.has(existing_pokemon.data.has(array["id"])):
+		if existing_pokemon != null and not existing_pokemon.data.empty() and pokemon.has(array["id"]):
 				print(array)
 				id += 1
 				continue
@@ -100,6 +105,8 @@ func get_info(user_pokemon, existing_pokemon):
 			array["species"] = info["species"]
 			array["sprite"] = info["sprite"]
 			array["species-name"] = info["species-name"]
+			if array["nickname"] == "":
+				array["nickname"] = info["species-name"].capitalize()
 			array["type1"] = info["type1"]
 			array["type2"] = info["type2"]
 			array["hp"] = info["hp"]
@@ -210,18 +217,12 @@ func _on_SpeciesRequest_request_completed(result, response_code, headers, body):
 	for x in text:
 		var characters = "abcdefghijklmnopqrstuvwxyz.,'`é?!1234567890-’"
 		if x.language.name == "en":
-			flavor_text = str(x.flavor_text)
-			var fix_text = ""
-			for letter in flavor_text:
-				if characters.findn(letter) != -1:
-					fix_text = fix_text + letter
-				else:
-					fix_text = fix_text + " "
-			flavor_text = str(fix_text)
+			flavor_text = x.flavor_text
+			flavor_text = removeEscapechars(flavor_text)
+			print(flavor_text)
 			break
 		else:
 			continue
-	print(flavor_text)
 	var temp_varties = data.varieties[form]
 	pokemon_url = temp_varties.pokemon.url
 	growth = data.growth_rate.name
@@ -239,3 +240,15 @@ func _process(delta):
 		$PopupMenu.popup()
 		$PopupMenu.set_global_position(get_viewport().get_mouse_position())
 
+func removeEscapechars(text):
+	var ascii_text = Array(flavor_text.to_utf8())
+	while ascii_text.has(12):
+		var pos = ascii_text.find(12)
+		ascii_text.remove(pos)
+		ascii_text.insert(pos,32)
+	while ascii_text.has(10):
+		var pos = ascii_text.find(10)
+		ascii_text.remove(pos)
+		ascii_text.insert(pos,32)
+	text = PoolByteArray(ascii_text).get_string_from_utf8()
+	return text

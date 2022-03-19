@@ -39,9 +39,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 5
 script = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Button" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0

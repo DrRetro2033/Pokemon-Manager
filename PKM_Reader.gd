@@ -1,22 +1,19 @@
 extends Node
 
-func readpk5(var path):
-	var array = path.split(" - ",false)
-	var species = array[0]
-	var nickname = array[1]
-	print(nickname)
-	print(species)
+class_name PKM_FILE
 
-func readpk6(var path):
-	var array = path.split(" - ",false)
-	var species = array[0]
-	var nickname = array[1]
-	print(nickname)
-	print(species)
+func read_8(file,pos):
+	file.seek(pos)
+	var value = file.get_8()
+	return value
 
-func readpk7(var path):
-	var array = path.split(" - ",false)
-	var species = array[0]
-	var nickname = array[1]
-	print(nickname)
-	print(species)
+func read_16(file,pos):
+	file.seek(pos)
+	var value = file.get_16()
+	return value
+
+func read_32(file,pos):
+	file.seek(pos)
+	var value = file.get_32()
+	return value
+

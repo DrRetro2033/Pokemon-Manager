@@ -218,7 +218,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -56, 32 )
 }
 
-[node name="Panel" type="Panel"]
+[node name="Panel" type="Panel" groups=["Info Panel"]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
