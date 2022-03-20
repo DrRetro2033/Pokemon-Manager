@@ -29,6 +29,12 @@ func setSlots(poke):
 func save(bank):
 	for slot in get_children():
 		bank.order.push_back(slot.id) 
+
+func list_pokemon():
+	var pokemon = []
+	for slot in get_children():
+		pokemon.push_back(slot.id)
+	return pokemon
 "
 
 [node name="Box1" type="GridContainer" groups=["Bank"]]
@@ -37,117 +43,187 @@ anchor_bottom = 1.0
 margin_top = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 5
+columns = 6
 script = SubResource( 2 )
 
 [node name="Button" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 201.0
-margin_bottom = 189.0
+margin_right = 167.0
+margin_bottom = 141.0
 
 [node name="Button2" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 205.0
-margin_right = 406.0
-margin_bottom = 189.0
+margin_left = 171.0
+margin_right = 338.0
+margin_bottom = 141.0
 
 [node name="Button3" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 410.0
-margin_right = 611.0
-margin_bottom = 189.0
+margin_left = 342.0
+margin_right = 509.0
+margin_bottom = 141.0
 
 [node name="Button4" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 615.0
-margin_right = 816.0
-margin_bottom = 189.0
+margin_left = 513.0
+margin_right = 680.0
+margin_bottom = 141.0
 
 [node name="Button5" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 820.0
-margin_right = 1021.0
-margin_bottom = 189.0
+margin_left = 684.0
+margin_right = 851.0
+margin_bottom = 141.0
 
 [node name="Button6" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 193.0
-margin_right = 201.0
-margin_bottom = 382.0
+margin_left = 855.0
+margin_right = 1022.0
+margin_bottom = 141.0
 
 [node name="Button7" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 205.0
-margin_top = 193.0
-margin_right = 406.0
-margin_bottom = 382.0
+margin_top = 145.0
+margin_right = 167.0
+margin_bottom = 286.0
 
 [node name="Button8" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 410.0
-margin_top = 193.0
-margin_right = 611.0
-margin_bottom = 382.0
+margin_left = 171.0
+margin_top = 145.0
+margin_right = 338.0
+margin_bottom = 286.0
 
 [node name="Button9" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 615.0
-margin_top = 193.0
-margin_right = 816.0
-margin_bottom = 382.0
+margin_left = 342.0
+margin_top = 145.0
+margin_right = 509.0
+margin_bottom = 286.0
 
 [node name="Button10" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 820.0
-margin_top = 193.0
-margin_right = 1021.0
-margin_bottom = 382.0
+margin_left = 513.0
+margin_top = 145.0
+margin_right = 680.0
+margin_bottom = 286.0
 
 [node name="Button11" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 386.0
-margin_right = 201.0
-margin_bottom = 575.0
+margin_left = 684.0
+margin_top = 145.0
+margin_right = 851.0
+margin_bottom = 286.0
 
 [node name="Button12" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 205.0
-margin_top = 386.0
-margin_right = 406.0
-margin_bottom = 575.0
+margin_left = 855.0
+margin_top = 145.0
+margin_right = 1022.0
+margin_bottom = 286.0
 
 [node name="Button13" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 410.0
-margin_top = 386.0
-margin_right = 611.0
-margin_bottom = 575.0
+margin_top = 290.0
+margin_right = 167.0
+margin_bottom = 431.0
 
 [node name="Button14" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 615.0
-margin_top = 386.0
-margin_right = 816.0
-margin_bottom = 575.0
+margin_left = 171.0
+margin_top = 290.0
+margin_right = 338.0
+margin_bottom = 431.0
 
 [node name="Button15" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 820.0
-margin_top = 386.0
-margin_right = 1021.0
-margin_bottom = 575.0
+margin_left = 342.0
+margin_top = 290.0
+margin_right = 509.0
+margin_bottom = 431.0
+
+[node name="Button16" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 513.0
+margin_top = 290.0
+margin_right = 680.0
+margin_bottom = 431.0
+
+[node name="Button17" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 684.0
+margin_top = 290.0
+margin_right = 851.0
+margin_bottom = 431.0
+
+[node name="Button18" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 855.0
+margin_top = 290.0
+margin_right = 1022.0
+margin_bottom = 431.0
+
+[node name="Button19" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 435.0
+margin_right = 167.0
+margin_bottom = 576.0
+
+[node name="Button20" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 171.0
+margin_top = 435.0
+margin_right = 338.0
+margin_bottom = 576.0
+
+[node name="Button21" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 342.0
+margin_top = 435.0
+margin_right = 509.0
+margin_bottom = 576.0
+
+[node name="Button22" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 513.0
+margin_top = 435.0
+margin_right = 680.0
+margin_bottom = 576.0
+
+[node name="Button23" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 684.0
+margin_top = 435.0
+margin_right = 851.0
+margin_bottom = 576.0
+
+[node name="Button24" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 855.0
+margin_top = 435.0
+margin_right = 1022.0
+margin_bottom = 576.0

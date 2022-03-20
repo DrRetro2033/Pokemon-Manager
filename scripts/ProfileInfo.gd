@@ -23,3 +23,8 @@ func _on_ProfilePic_pressed():
 
 func _on_Main_Menu_pressed():
 	visible = false
+
+
+func _on_Showdown_pressed():
+	OS.shell_open("https://play.pokemonshowdown.com/")
+	visible = false

@@ -2,7 +2,7 @@ extends PopupMenu
 
 
 signal new_box
-
+signal export_box
 
 func _ready():
 	pass # Replace with function body.
@@ -23,3 +23,5 @@ func _on_PopupMenu_id_pressed(id):
 			$"../Search".visible = true
 		3:
 			$"../PartyCreator".showPartyMaker()
+		4:
+			emit_signal("export_box")

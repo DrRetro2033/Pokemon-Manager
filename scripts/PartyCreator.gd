@@ -63,3 +63,15 @@ func loadParties(bank):
 		parties.add_child(new_party)
 		new_party.set_pokemon_in_party(bank.parties[party_name])
 		newMember(bank.parties[party_name])
+
+
+func _on_Export_pressed():
+	var party = parties.get_tab_control(parties.current_tab).get_pokemon_in_party()
+	var party_to_showdown = ""
+	for member in party:
+		if member == null:
+			continue
+		else:
+			party_to_showdown += PokemonShowdown.export_to_showdown(Pokemon.pokemon[member])
+	OS.clipboard = party_to_showdown
+	$"../Copied".popup()

@@ -2,7 +2,7 @@ extends TabContainer
 
 onready var box = load("res://Box.tscn")
 var page = 0
-var max_per_page = 15
+var max_per_page = 24
 var boxes = []
 func loadPokemon(bank):
 	var overflow = int(bank.data.size() / max_per_page)
@@ -75,3 +75,14 @@ func addPokemon(pokemon):
 	if Trainer.first_time_setup:
 		$"../ProfileMaker".popup()
 
+func _on_PopupMenu_export_box():
+	var box = get_tab_control(current_tab)
+	var export_box = box.list_pokemon()
+	var box_to_showdown = ""
+	for id in export_box:
+		if id == null:
+			continue
+		else:
+			box_to_showdown += PokemonShowdown.export_to_showdown(Pokemon.pokemon[id])
+	OS.clipboard = box_to_showdown
+	$"../Copied".popup()
