@@ -14,8 +14,8 @@ var form : int
 var growth : String
 var pokemon_url : String
 func _ready():
-	print(BinaryTranslator.bin_to_int(BinaryTranslator.int_to_bin(2254250705)))
-	var dir = Directory.new()
+	print(BinaryTranslator.bin_to_int(BinaryTranslator.int_to_bin(2254250705))) #this is for testing the binary translator by having it convert this number to binary and back
+	var dir = Directory.new() #instances a new directory object
 	var path : String = OS.get_executable_path().get_base_dir()+"/pkmdb"
 	$"Loading Screen".switch("reading")
 	var user_pokemon
