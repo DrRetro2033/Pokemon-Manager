@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Member_Button.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Party.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Party.gd" type="Script" id=2]
 
 [node name="Party 1" type="GridContainer" groups=["Parties"]]
 anchor_right = 1.0

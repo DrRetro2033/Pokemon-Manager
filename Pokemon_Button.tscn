@@ -9,7 +9,6 @@ const path = \"res://sprites/pokemon/icons/\"
 onready var label = $VBoxContainer/Label
 onready var sprite = $VBoxContainer/TextureRect
 onready var hold_timer = $Timer
-const button = preload(\"res://drag.tscn\")
 var id
 var can_drag = true
 func _ready():

@@ -2,10 +2,10 @@ extends Node
 onready var bank = $"Bank Manager"
 const url = "https://pokeapi.co/api/v2/"
 const pokemon_path = "res://pkmdb/"
-var data_translate = load("res://Pokemon_Database.gd").new()
-var pk5 = load("res://pk5.gd").new()
-var pk6 = load("res://pk6.gd").new()
-var pk7 = load("res://pk7.gd").new()
+var data_translate = load("res://scripts/Pokemon_Database.gd").new()
+var pk5 = load("res://scripts/pk5.gd").new()
+var pk6 = load("res://scripts/pk6.gd").new()
+var pk7 = load("res://scripts/pk7.gd").new()
 var walking_pokemon = load("res://WalkingPokemon.tscn")
 var info : Dictionary
 var moves : Dictionary

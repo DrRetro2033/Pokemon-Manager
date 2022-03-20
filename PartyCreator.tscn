@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://PartyCreator.gd" type="Script" id=1]
+[ext_resource path="res://scripts/PartyCreator.gd" type="Script" id=1]
 [ext_resource path="res://Party.tscn" type="PackedScene" id=2]
 
 [node name="PartyCreator" type="Control"]

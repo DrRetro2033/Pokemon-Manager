@@ -1,17 +1,17 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://pkm.gd" type="Script" id=1]
+[ext_resource path="res://scripts/pkm.gd" type="Script" id=1]
 [ext_resource path="res://Panel.tscn" type="PackedScene" id=2]
-[ext_resource path="res://RightClickMenu.gd" type="Script" id=3]
-[ext_resource path="res://RenamePanel.gd" type="Script" id=4]
+[ext_resource path="res://scripts/RightClickMenu.gd" type="Script" id=3]
+[ext_resource path="res://scripts/RenamePanel.gd" type="Script" id=4]
 [ext_resource path="res://Search.tscn" type="PackedScene" id=5]
-[ext_resource path="res://bank_manager.gd" type="Script" id=6]
-[ext_resource path="res://Bank_Layout.gd" type="Script" id=7]
+[ext_resource path="res://scripts/bank_manager.gd" type="Script" id=6]
+[ext_resource path="res://scripts/Bank_Layout.gd" type="Script" id=7]
 [ext_resource path="res://abomasnow-mega.png" type="Texture" id=8]
 [ext_resource path="res://Waiting.tres" type="Animation" id=9]
 [ext_resource path="res://icon.png" type="Texture" id=10]
-[ext_resource path="res://ProfileInfo.gd" type="Script" id=11]
-[ext_resource path="res://ProfileMaker.gd" type="Script" id=12]
+[ext_resource path="res://scripts/ProfileInfo.gd" type="Script" id=11]
+[ext_resource path="res://scripts/ProfileMaker.gd" type="Script" id=12]
 [ext_resource path="res://PartyCreator.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Menu.tscn" type="PackedScene" id=14]
 
@@ -269,8 +269,8 @@ __meta__ = {
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 10240.0
-margin_bottom = 6000.0
+margin_right = 12288.0
+margin_bottom = 7200.0
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false

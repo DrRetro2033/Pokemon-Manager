@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "PKM_FILE",
 "language": "GDScript",
-"path": "res://PKM_Reader.gd"
+"path": "res://scripts/PKM_Reader.gd"
 } ]
 _global_script_class_icons={
 "Bank": "",
@@ -36,9 +36,9 @@ config/stretch/mode="viewport"
 
 [autoload]
 
-BinaryTranslator="*res://BinaryTranslator.gd"
-Pokemon="*res://Pokemon.gd"
-Trainer="*res://Trainer.gd"
+BinaryTranslator="*res://scripts/BinaryTranslator.gd"
+Pokemon="*res://scripts/Pokemon.gd"
+Trainer="*res://scripts/Trainer.gd"
 
 [display]
 

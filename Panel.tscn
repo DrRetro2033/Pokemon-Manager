@@ -1,11 +1,11 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://Move.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Move.gd" type="Script" id=1]
 [ext_resource path="res://abomasnow.png" type="Texture" id=2]
 [ext_resource path="res://Futura Condensed Extra Bold.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://Essentiarum Regular.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Path.gd" type="Script" id=5]
-[ext_resource path="res://V_Chart.gd" type="Script" id=6]
+[ext_resource path="res://scripts/Path.gd" type="Script" id=5]
+[ext_resource path="res://scripts/V_Chart.gd" type="Script" id=6]
 [ext_resource path="res://Special.png" type="Texture" id=7]
 
 [sub_resource type="GDScript" id=1]
