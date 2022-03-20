@@ -6,12 +6,12 @@ var data_translate = load("res://scripts/Pokemon_Database.gd").new()
 var pk5 = load("res://scripts/pk5.gd").new()
 var pk6 = load("res://scripts/pk6.gd").new()
 var pk7 = load("res://scripts/pk7.gd").new()
-var walking_pokemon = load("res://WalkingPokemon.tscn")
-var info : Dictionary
-var moves : Dictionary
-var flavor_text : String
-var form : int
-var growth : String
+var walking_pokemon = load("res://WalkingPokemon.tscn") #this is the scene that contains the animations and sprite of the pokemon walking into the bank
+var info : Dictionary #basic info for the pokemon
+var moves : Dictionary #hold all known moves a pokemon has
+var flavor_text : String #the first pokedex entry that a pokemon has
+var form : int #what alt form the pokemon is
+var growth : String #the speed at which pokemon level up at (needed for converting exp to levels)
 var pokemon_url : String
 func _ready():
 	print(BinaryTranslator.bin_to_int(BinaryTranslator.int_to_bin(2254250705))) #this is for testing the binary translator by having it convert this number to binary and back
@@ -31,7 +31,7 @@ func _ready():
 		Trainer.trainer_picture = existing_pokemon.trainer_picture
 		Trainer.first_time_setup = false
 		$ProfilePic/Pic.texture = existing_pokemon.trainer_picture
-	#this chunk of code jod is to get all of the pokemon that already exists in the bank and remove null/empty slots
+	#this chunk of code job is to get all of the pokemon that already exists in the bank and remove null/empty slots
 	var without_null = []
 	if existing_pokemon.data != {}:
 		for x in existing_pokemon.data:
@@ -101,7 +101,7 @@ func get_info(user_pokemon, existing_pokemon):
 						array[x]["pp"] = 0
 						array[x]["power"] = 0
 						array[x]["accuracy"] = 0
-			array["level"] = Pokemon.level(array["exp"],growth)
+			array["level"] = Pokemon.level(array["exp"],growth) #converts the pokemon total exp and converts it the pokemon's level
 			array["species"] = info["species"]
 			array["sprite"] = info["sprite"]
 			array["species-name"] = info["species-name"]
