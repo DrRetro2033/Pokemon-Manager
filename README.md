@@ -32,7 +32,7 @@ Features:
  - By my understanding of the Godot Engine, you could theoretically keep Pokémon Manager, [PKHeX](https://github.com/kwsch/PKHeX), and your pokémon on a usb stick and plug it into a brand new computer and it should work. Although [PKHeX](https://github.com/kwsch/PKHeX) will not work unless you install .NET Core onto the computer
  - Level of Pokémon is displayed next to the gender of the pokemon.
  - Ability to make multiple parties.
- - Compatibility with alternate forms (Currently, there are no PokéDex entries for alternate Pokémon in PokéAPI so alternate forms will show the first form's entry nad not the correct form's entry. This will be fixed in a future update)
+ - Compatibility with alternate forms (Currently, there are no PokéDex entries for alternate Pokémon in PokéAPI so alternate forms will show the first form's entry and not the correct form's entry. This will be fixed in a future update)
  - Make a personalized profile.
 
 In progress/Planned:
