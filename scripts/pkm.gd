@@ -104,7 +104,7 @@ func get_info(user_pokemon, existing_pokemon):
 			array["species"] = info["species"]
 			array["sprite"] = info["sprite"] 
 			array["species-name"] = info["species-name"]
-			if array["nickname"] == "":
+			if array["nickname"] == "": #if the nickname is blank then that means that the pokemon's name is just it's species name
 				array["nickname"] = info["species-name"].capitalize()
 			array["type1"] = info["type1"]
 			array["type2"] = info["type2"]
@@ -115,7 +115,8 @@ func get_info(user_pokemon, existing_pokemon):
 			array["spd"] = info["spd"]
 			array["spe"] = info["spe"]
 			array["text"] = flavor_text
-			if existing_pokemon != null and existing_pokemon.data.has(array["id"]):
+			#this should be removed in the future
+			if existing_pokemon != null and existing_pokemon.data.has(array["id"]): 
 				id += 1
 				moves.clear()
 				info.clear()
@@ -124,12 +125,15 @@ func get_info(user_pokemon, existing_pokemon):
 				growth = ""
 				continue
 			else:
+			#
 				pokemon[array["id"]] = {}
 				pokemon[array["id"]] = array
 				order.push_back(array["id"])
+				#this part creates and starts the walking pokemon
 				var walk = walking_pokemon.instance()
 				$"Loading Screen".add_child(walk)
 				walk.start(array)
+				#
 			print(array)
 			moves.clear()
 			info.clear()
@@ -139,7 +143,7 @@ func get_info(user_pokemon, existing_pokemon):
 			$"Loading Screen/ProgressBar".value += 1
 			id += 1
 		#
-	Pokemon.set_data(pokemon)
+	Pokemon.set_data(pokemon) #makes a copy of the temporary dictionary and gives it to the object Pokemon for public access
 	$"Loading Screen".switch("layout")
 	$TabContainer.addPokemon(order)
 
@@ -214,7 +218,7 @@ func _on_SpeciesRequest_request_completed(result, response_code, headers, body):
 	var data = json.result
 	var text = data.flavor_text_entries
 	for x in text:
-		var characters = "abcdefghijklmnopqrstuvwxyz.,'`é?!1234567890-’"
+		var characters = "abcdefghijklmnopqrstuvwxyz.,'`é?!1234567890-’" #will be removed
 		if x.language.name == "en":
 			flavor_text = x.flavor_text
 			flavor_text = removeEscapechars(flavor_text)
@@ -239,7 +243,7 @@ func _process(delta):
 		$PopupMenu.popup()
 		$PopupMenu.set_global_position(get_viewport().get_mouse_position())
 
-func removeEscapechars(text):
+func removeEscapechars(text): #removes all escape charaters that messes up the pokedex entries
 	var ascii_text = Array(flavor_text.to_utf8())
 	while ascii_text.has(12):
 		var pos = ascii_text.find(12)
