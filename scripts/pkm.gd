@@ -31,7 +31,7 @@ func _ready():
 		Trainer.trainer_picture = existing_pokemon.trainer_picture
 		Trainer.first_time_setup = false
 		$ProfilePic/Pic.texture = existing_pokemon.trainer_picture
-	#this chunk of code job is to get all of the pokemon that already exists in the bank and remove null/empty slots
+	#this chunk of code's job is to get all of the pokemon that already exists in the bank and remove null/empty slots
 	var without_null = []
 	if existing_pokemon.data != {}:
 		for x in existing_pokemon.data:
@@ -61,27 +61,26 @@ func get_info(user_pokemon, existing_pokemon):
 	while user_pokemon.size() > 0:
 		var array #tempory array for personal data about the pokemon
 		var file = user_pokemon.front()
-		user_pokemon.remove(0)
-		match file.get_extension(): #switches the correct pk script to read the pk file
+		user_pokemon.remove(0) #removes the pokemon so that godot does not read it again and get stuck in a loop
+		match file.get_extension(): #switches to the correct pk script to read the pk file
 			"pk5":
 				array = pk5.readpk(file)
 			"pk6":
 				array = pk6.readpk(file)
 			"pk7":
 				array = pk7.readpk(file)
-		#asks PokeAPI for infomation about the pokemons species and moves
-		if existing_pokemon != null and not existing_pokemon.data.empty() and pokemon.has(array["id"]):
+		if existing_pokemon != null and not existing_pokemon.data.empty() and pokemon.has(array["id"]): #if the pokemon is already in the database, skip it
 				print(array)
 				id += 1
 				continue
-		else:
+		else: #asks PokeAPI for infomation about the pokemons species and known moves
 			$"Loading Screen".switch("api") #changes loading screen text
 			form = array["form"] #tells the species request which form the pokemon is
 			$SpeciesRequest.request(url+"pokemon-species/"+str(int(array["species"])))
 			yield($SpeciesRequest, "request_completed")
 			$PokemonRequest.request(pokemon_url)
 			yield($PokemonRequest, "request_completed")
-			var move_names = ["move1","move2","move3","move4"]
+			var move_names = ["move1","move2","move3","move4"] 
 			for x in move_names:
 					if array[x] > 0:
 						$MoveRequest.request(url+"move/"+str(int(array[x])))
@@ -103,7 +102,7 @@ func get_info(user_pokemon, existing_pokemon):
 						array[x]["accuracy"] = 0
 			array["level"] = Pokemon.level(array["exp"],growth) #converts the pokemon total exp and converts it the pokemon's level
 			array["species"] = info["species"]
-			array["sprite"] = info["sprite"]
+			array["sprite"] = info["sprite"] 
 			array["species-name"] = info["species-name"]
 			if array["nickname"] == "":
 				array["nickname"] = info["species-name"].capitalize()
