@@ -4,7 +4,7 @@ View, organize, and manage your Pokémon.
 
 What is Pokémon Manager?
 -
-As the 3ds and Wii U's e-shop draws to a close, all online only services will be lost to time. One of the most consering is Pokémon Bank, as soon your pokémon from the 3DS games, and consequently DS games, and GBA games will be trapped on your console. Thankfully, the 3ds homebrewing and the Pokémon community has already made software to transfer help transfer Pokémon to the switch. The most important software for this process is [PKHeX](https://github.com/kwsch/PKHeX), as it allows users to copy pokémon from one save file to another. [PKHeX](https://github.com/kwsch/PKHeX) is an amazing piece of software, but in my option, the only problem I have with it is the pk database. The pk database is only designed to store copies of Pokémon, but I feel that it could be expanded to be a easier way to store pokémon on your computer. So I created Pokémon Manager with the main goal of being an alternative to Pokémon Bank and Pokémon Home. Pokémon Manager will start out as a Windows exclusive program; but I am planning, after I get the foundation built, to make a linux version too. As I do not have a Mac machine lying around my house, I am not planning to make a Mac version, but because Pokémon Manager is made on the godot engine and open-source, someone could compile it to Mac and test it.
+Pokémon Manager is alternative to Pokémon Bank and Pokémon Home for computers.
 
 IMPORTANT:
 -
@@ -34,6 +34,7 @@ Features:
  - Ability to make multiple parties.
  - Compatibility with alternate forms (Currently, there are no PokéDex entries for alternate Pokémon in PokéAPI so alternate forms will show the first form's entry and not the correct form's entry. This will be fixed in a future update)
  - Make a personalized profile.
+ - Copy parties and boxes to your clipboard and paste them into Pokémon Showdown.
 
 In progress/Planned:
 -
