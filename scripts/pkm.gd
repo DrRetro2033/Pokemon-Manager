@@ -19,7 +19,7 @@ func _ready():
 	var path : String = OS.get_executable_path().get_base_dir()+"/pkmdb"
 	$"Loading Screen".switch("reading")
 	var user_pokemon
-	if path == "C:/Program Files (x86)/Steam/steamapps/common/Godot Engine/pkmdb":
+	if path == "C:/Program Files (x86)/Steam/steamapps/common/Godot Engine/pkmdb": #this is only for testing purposes as I keep the pkmdb folder in this directory
 		user_pokemon = list_files_in_directory(pokemon_path) #lists all of the pk files in pkmdb folder
 	else:
 		user_pokemon = list_files_in_directory(path)
@@ -54,8 +54,8 @@ func get_info(user_pokemon, existing_pokemon):
 	var id = 0 #this is for giving the pokemon unqie keys
 	var pokemon = {}
 	var order = []
-	$"Loading Screen/ProgressBar".max_value = user_pokemon.size()
-	if existing_pokemon != null and not existing_pokemon.data.empty():
+	$"Loading Screen/ProgressBar".max_value = user_pokemon.size() #sets the progress bar's max value to the amount of pokemon the user has
+	if existing_pokemon != null and not existing_pokemon.data.empty(): #checks to see if there is any existing pokemon in the bank file and if there is then add them to the database
 		pokemon = existing_pokemon.data
 		order = existing_pokemon.order
 	while user_pokemon.size() > 0:
