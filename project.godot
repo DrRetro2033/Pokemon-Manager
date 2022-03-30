@@ -39,7 +39,8 @@ config/stretch/mode="viewport"
 BinaryTranslator="*res://scripts/BinaryTranslator.gd"
 Pokemon="*res://scripts/Pokemon.gd"
 Trainer="*res://scripts/Trainer.gd"
-PokemonShowdown="*res://pokemon_showdown.gd"
+PokemonShowdown="*res://scripts/pokemon_showdown.gd"
+PM="*res://scripts/PM.gd"
 
 [display]
 

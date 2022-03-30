@@ -1,5 +1,6 @@
 extends Polygon2D
-
+const default_scale = Vector2(1.8,1.8)
+const default_size = Vector2(202,230)
 enum stats {
 	HP,
 	ATK,
@@ -13,7 +14,6 @@ onready var ev = $EV
 func _ready():
 	pass # Replace with function body.
 
-#89691
 func EvSet(info):
 	$Stats/HP.setStats(calculateStats(info["hp"],0,0))
 	$Stats/Attack.setStats(calculateStats(info["atk"],0,0))

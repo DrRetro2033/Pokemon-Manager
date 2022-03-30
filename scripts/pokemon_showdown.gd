@@ -8,9 +8,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	yield(get_tree().create_timer(0.01),"timeout")
-	var test = Pokemon.pokemon["003 - Daisy - B82ABBBB6F73.pk6"]
-	print(export_to_showdown(test))
+	pass
 
 
 

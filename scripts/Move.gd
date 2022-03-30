@@ -1,11 +1,17 @@
 extends VBoxContainer
-
+const default_scale = 27
+const default_size = 22
 enum damage_class {
 	NULL,
 	PHYSICAL,
 	SPECIAL,
 	STATUS
 }
+
+func _process(delta):
+	var font = $Row2/Type/Label.get_font("font","Label")
+	font.size = default_size + int($Row2/Type.rect_size.y - default_scale)
+	$Row2/Type/Label.add_font_override("font",font)
 
 func move(move,type,form,pp,power):
 	print(type)
@@ -32,17 +38,18 @@ func move(move,type,form,pp,power):
 	$Row1/PP.text = str(pp)
 
 func damage_form(var form,var node):
-	var new_form
+	var new_form = node.get_stylebox("panel").duplicate()
 	match form:
 		damage_class.PHYSICAL:
-			node.color = Color("#9f0000")
+			new_form.set_bg_color(Color("#9f0000"))
 			var texture = load("res://Physical.svg")
 			node.get_child(0).set_texture(texture)
 		damage_class.SPECIAL:
-			node.color = Color("#18203a")
+			new_form.set_bg_color(Color("#18203a"))
 			var texture = load("res://Special.svg")
 			node.get_child(0).set_texture(texture)
 		damage_class.STATUS:
-			node.color = Color("#525252")
+			new_form.set_bg_color(Color("#525252"))
 			var texture = load("res://Status.svg")
 			node.get_child(0).set_texture(texture)
+	node.add_stylebox_override("panel",new_form)

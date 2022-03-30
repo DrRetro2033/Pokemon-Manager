@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scripts/pkm.gd" type="Script" id=1]
 [ext_resource path="res://Panel.tscn" type="PackedScene" id=2]
@@ -14,6 +14,10 @@
 [ext_resource path="res://scripts/ProfileMaker.gd" type="Script" id=12]
 [ext_resource path="res://PartyCreator.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Menu.tscn" type="PackedScene" id=14]
+[ext_resource path="res://fonts/OpenSans-VariableFont_wdth,wght.ttf" type="DynamicFontData" id=15]
+
+[sub_resource type="DynamicFont" id=11]
+font_data = ExtResource( 15 )
 
 [sub_resource type="GDScript" id=7]
 script/source = "extends Panel
@@ -155,11 +159,11 @@ margin_bottom = -8.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/side_margin = 40
+custom_fonts/font = SubResource( 11 )
 tab_align = 0
 script = ExtResource( 7 )
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
-visible = true
 margin_left = 8.0
 margin_top = 38.0
 margin_right = 144.0
@@ -276,8 +280,8 @@ __meta__ = {
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 16384.0
-margin_bottom = 9600.0
+margin_right = 31744.0
+margin_bottom = 18600.0
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
