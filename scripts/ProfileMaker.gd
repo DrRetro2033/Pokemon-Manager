@@ -11,6 +11,7 @@ func _on_Button_pressed():
 		Trainer.trainer_name = $Name.text
 		Trainer.trainer_picture = pic
 		$"../ProfilePic/Pic".texture = pic
+		Trainer.first_time_setup = false
 		visible = false
 
 func _on_ProfilePic_pressed():

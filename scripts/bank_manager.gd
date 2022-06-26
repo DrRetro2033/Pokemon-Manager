@@ -54,14 +54,14 @@ func load():
 		var file : File = File.new()
 		if not file.file_exists(save_file_path):
 			print("Bank file does not exist")
-			var bank = []
+			var bank = bank_loaded.new()
 			return bank
 	else:
 		save_file_path = path.plus_file(SAVE_NAME_TEMPLATE)
 		var file : File = File.new()
 		if not file.file_exists(save_file_path):
 			print("Bank file does not exist")
-			var bank = []
+			var bank = bank_loaded.new()
 			return bank
 	var bank : Resource = load(save_file_path)
 	return bank

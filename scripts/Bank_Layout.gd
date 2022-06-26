@@ -30,7 +30,7 @@ func loadPokemon(bank):
 	OS.window_resizable = true
 
 func _process(delta):
-	if $"../Rename".visible != true or $"../Search".visible != true:
+	if !Trainer.first_time_setup:
 		if Input.is_action_just_pressed("ui_left") and current_tab != 0:
 			current_tab -= 1
 		elif Input.is_action_just_pressed("ui_right") and current_tab != get_child_count() - 1:

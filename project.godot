@@ -28,7 +28,7 @@ _global_script_class_icons={
 
 config/name="Pokémon Manager"
 config/description="View, Organize, and Manage your Pokemon"
-run/main_scene="res://Bank.tscn"
+run/main_scene="res://scenes/Bank.tscn"
 config/icon="res://Poké_Ball_icon.svg.png"
 config/windows_native_icon="res://Poké_Ball_icon.svg.ico"
 config/custom_image=""
@@ -100,7 +100,3 @@ translations=PoolStringArray(  )
 [physics]
 
 common/enable_pause_aware_picking=true
-
-[rendering]
-
-environment/default_environment="res://default_env.tres"

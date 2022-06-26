@@ -1,23 +1,23 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://scripts/pkm.gd" type="Script" id=1]
+[ext_resource path="res://Menu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Panel.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scripts/RightClickMenu.gd" type="Script" id=3]
-[ext_resource path="res://scripts/RenamePanel.gd" type="Script" id=4]
-[ext_resource path="res://Search.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scripts/bank_manager.gd" type="Script" id=6]
-[ext_resource path="res://scripts/Bank_Layout.gd" type="Script" id=7]
-[ext_resource path="res://abomasnow-mega.png" type="Texture" id=8]
-[ext_resource path="res://Waiting.tres" type="Animation" id=9]
-[ext_resource path="res://icon.png" type="Texture" id=10]
-[ext_resource path="res://scripts/ProfileInfo.gd" type="Script" id=11]
-[ext_resource path="res://scripts/ProfileMaker.gd" type="Script" id=12]
-[ext_resource path="res://PartyCreator.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Menu.tscn" type="PackedScene" id=14]
-[ext_resource path="res://fonts/OpenSans-VariableFont_wdth,wght.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://PartyCreator.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Search.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/pkm.gd" type="Script" id=5]
+[ext_resource path="res://Waiting.tres" type="Animation" id=6]
+[ext_resource path="res://fonts/OpenSans-VariableFont_wdth,wght.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://icon.png" type="Texture" id=8]
+[ext_resource path="res://abomasnow-mega.png" type="Texture" id=9]
+[ext_resource path="res://scripts/RightClickMenu.gd" type="Script" id=10]
+[ext_resource path="res://scripts/RenamePanel.gd" type="Script" id=11]
+[ext_resource path="res://scripts/Bank_Layout.gd" type="Script" id=12]
+[ext_resource path="res://scripts/ProfileInfo.gd" type="Script" id=13]
+[ext_resource path="res://scripts/ProfileMaker.gd" type="Script" id=14]
+[ext_resource path="res://scripts/bank_manager.gd" type="Script" id=15]
 
 [sub_resource type="DynamicFont" id=11]
-font_data = ExtResource( 15 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="GDScript" id=7]
 script/source = "extends Panel
@@ -147,7 +147,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 1 )
+script = ExtResource( 5 )
 
 [node name="TabContainer" type="TabContainer" parent="."]
 anchor_right = 1.0
@@ -161,14 +161,14 @@ size_flags_vertical = 3
 custom_constants/side_margin = 40
 custom_fonts/font = SubResource( 11 )
 tab_align = 0
-script = ExtResource( 7 )
+script = ExtResource( 12 )
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
 margin_left = 8.0
 margin_top = 38.0
 margin_right = 144.0
 margin_bottom = 216.0
-script = ExtResource( 11 )
+script = ExtResource( 13 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel"]
 anchor_right = 1.0
@@ -184,7 +184,7 @@ margin_bottom = 88.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
-texture = ExtResource( 10 )
+texture = ExtResource( 8 )
 expand = true
 stretch_mode = 6
 
@@ -225,7 +225,7 @@ margin_left = -17.5
 margin_top = -17.5
 margin_right = 17.5
 margin_bottom = 17.5
-texture = ExtResource( 10 )
+texture = ExtResource( 8 )
 expand = true
 stretch_mode = 5
 
@@ -234,7 +234,7 @@ stretch_mode = 5
 [node name="MoveRequest" type="HTTPRequest" parent="."]
 
 [node name="Bank Manager" type="Node" parent="."]
-script = ExtResource( 6 )
+script = ExtResource( 15 )
 
 [node name="Loading Screen" type="Panel" parent="."]
 visible = false
@@ -280,8 +280,8 @@ __meta__ = {
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 31744.0
-margin_bottom = 18600.0
+margin_right = 35840.0
+margin_bottom = 21000.0
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -289,26 +289,26 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="Loading Screen/Control"]
 position = Vector2( 512, 256 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 script = SubResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Loading Screen/Control/Sprite"]
 anims/RESET = SubResource( 10 )
-anims/Waiting = ExtResource( 9 )
+anims/Waiting = ExtResource( 6 )
 
 [node name="Folder2" type="Sprite" parent="Loading Screen/Control"]
 light_mask = 2
 position = Vector2( 704, 392 )
 z_index = 1
 z_as_relative = false
-texture = ExtResource( 10 )
+texture = ExtResource( 8 )
 
 [node name="Folder" type="Sprite" parent="Loading Screen/Control"]
 light_mask = 2
 position = Vector2( 320, 392 )
 z_index = 1
 z_as_relative = false
-texture = ExtResource( 10 )
+texture = ExtResource( 8 )
 
 [node name="SpeciesRequest" type="HTTPRequest" parent="."]
 
@@ -316,7 +316,7 @@ texture = ExtResource( 10 )
 margin_right = 88.0
 margin_bottom = 128.0
 items = [ "Box", null, 0, false, true, -1, 0, null, "", true, "Add a new box", null, 0, false, false, 0, 0, null, "", false, "Rename box", null, 0, false, false, 1, 0, null, "", false, "Copy box to clipboard", null, 0, false, false, 4, 0, null, "", false, "Pokemon", null, 0, false, true, -1, 0, null, "", true, "Search for Pokemon", null, 0, false, false, 2, 0, null, "", false, "Manage parties", null, 0, false, false, 3, 0, null, "", false ]
-script = ExtResource( 3 )
+script = ExtResource( 10 )
 
 [node name="Rename" type="PopupDialog" parent="."]
 anchor_left = 0.5
@@ -327,7 +327,7 @@ margin_left = -256.0
 margin_top = -140.0
 margin_right = 256.0
 margin_bottom = 140.0
-script = ExtResource( 4 )
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -357,7 +357,7 @@ margin_bottom = 12.0
 align = 1
 placeholder_text = "Box"
 
-[node name="Search" parent="." instance=ExtResource( 5 )]
+[node name="Search" parent="." instance=ExtResource( 4 )]
 visible = false
 
 [node name="ProfileMaker" type="WindowDialog" parent="."]
@@ -371,7 +371,7 @@ margin_right = 312.0
 margin_bottom = 224.0
 popup_exclusive = true
 window_title = "Setup"
-script = ExtResource( 12 )
+script = ExtResource( 14 )
 
 [node name="Welcome" type="Label" parent="ProfileMaker"]
 anchor_left = 0.5
@@ -428,7 +428,7 @@ margin_left = -72.0
 margin_top = -72.0
 margin_right = 72.0
 margin_bottom = 72.0
-texture = ExtResource( 10 )
+texture = ExtResource( 8 )
 expand = true
 stretch_mode = 5
 
@@ -463,13 +463,13 @@ filters = PoolStringArray( "*.png ; PNG Images" )
 current_dir = "/Users/Colly/OneDrive/Documents/GitHub/Pokemon-Manager"
 current_path = "/Users/Colly/OneDrive/Documents/GitHub/Pokemon-Manager/"
 
-[node name="PartyCreator" parent="." instance=ExtResource( 13 )]
+[node name="PartyCreator" parent="." instance=ExtResource( 3 )]
 visible = false
 
 [node name="Panel" parent="." instance=ExtResource( 2 )]
 visible = false
 
-[node name="Menu" parent="." instance=ExtResource( 14 )]
+[node name="Menu" parent="." instance=ExtResource( 1 )]
 visible = false
 
 [node name="Copied" type="AcceptDialog" parent="."]

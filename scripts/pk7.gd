@@ -26,6 +26,12 @@ func readpk(var path):
 		info[iv] = BinaryTranslator.bin_to_int(bin.right(bin.length() - 5))
 		bin = BinaryTranslator.bitshiftR(bin, 5)
 	bin = BinaryTranslator.bitshiftR(bin, 1)
+	info["ev_hp"] = read_8(file,0x1E)
+	info["ev_atk"] = read_8(file,0x1F)
+	info["ev_def"] = read_8(file,0x20)
+	info["ev_spe"] = read_8(file,0x21)
+	info["ev_spa"] = read_8(file,0x22)
+	info["ev_spd"] = read_8(file,0x23)
 	print(bin)
 	var nickname = ""
 	if int(bin) == 1:

@@ -608,12 +608,12 @@ rotation = 2.62245
 rotate = false
 loop = false
 
-[node name="Base Vis" type="Polygon2D" parent="Viewport/V Chart/Stats"]
-color = Color( 0.968627, 1, 0, 0.317647 )
+[node name="EVs Vis" type="Polygon2D" parent="Viewport/V Chart/Stats"]
+color = Color( 0, 0.529412, 1, 1 )
 polygon = PoolVector2Array( 0, -64, 56, -32, 56, 32, 0, 64, -56, 32, -56, -32 )
 uv = PoolVector2Array( 0, 0 )
 
-[node name="HP" type="Label" parent="Viewport/V Chart/Stats/Base Vis"]
+[node name="HP" type="Label" parent="Viewport/V Chart/Stats/EVs Vis"]
 visible = false
 margin_left = -24.0
 margin_top = -80.0
@@ -626,7 +626,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP2" type="Label" parent="Viewport/V Chart/Stats/Base Vis"]
+[node name="HP2" type="Label" parent="Viewport/V Chart/Stats/EVs Vis"]
 visible = false
 margin_left = 50.0
 margin_top = -47.7273
@@ -639,7 +639,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP3" type="Label" parent="Viewport/V Chart/Stats/Base Vis"]
+[node name="HP3" type="Label" parent="Viewport/V Chart/Stats/EVs Vis"]
 visible = false
 margin_left = 50.0
 margin_top = 31.8182
@@ -652,7 +652,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP4" type="Label" parent="Viewport/V Chart/Stats/Base Vis"]
+[node name="HP4" type="Label" parent="Viewport/V Chart/Stats/EVs Vis"]
 visible = false
 margin_left = -23.8636
 margin_top = 69.8864
@@ -665,7 +665,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP5" type="Label" parent="Viewport/V Chart/Stats/Base Vis"]
+[node name="HP5" type="Label" parent="Viewport/V Chart/Stats/EVs Vis"]
 visible = false
 margin_left = -100.0
 margin_top = -47.7273
@@ -678,7 +678,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP6" type="Label" parent="Viewport/V Chart/Stats/Base Vis"]
+[node name="HP6" type="Label" parent="Viewport/V Chart/Stats/EVs Vis"]
 visible = false
 margin_left = -104.545
 margin_top = 31.8182
@@ -692,7 +692,7 @@ __meta__ = {
 }
 
 [node name="IVs Vis" type="Polygon2D" parent="Viewport/V Chart/Stats"]
-color = Color( 0, 0.717647, 1, 0.317647 )
+color = Color( 0, 0.764706, 1, 1 )
 polygon = PoolVector2Array( 0, -64, 56, -32, 56, 32, 0, 64, -56, 32, -56, -32 )
 uv = PoolVector2Array( 0, 0 )
 
@@ -774,13 +774,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EVs Vis" type="Polygon2D" parent="Viewport/V Chart/Stats"]
-visible = false
-color = Color( 1, 0, 0, 0.0745098 )
+[node name="Base Vis" type="Polygon2D" parent="Viewport/V Chart/Stats"]
+color = Color( 0, 1, 0.368627, 1 )
 polygon = PoolVector2Array( 0, -64, 56, -32, 56, 32, 0, 64, -56, 32, -56, -32 )
 uv = PoolVector2Array( 0, 0 )
 
-[node name="HP" type="Label" parent="Viewport/V Chart/Stats/EVs Vis"]
+[node name="HP" type="Label" parent="Viewport/V Chart/Stats/Base Vis"]
 visible = false
 margin_left = -24.0
 margin_top = -80.0
@@ -793,7 +792,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP2" type="Label" parent="Viewport/V Chart/Stats/EVs Vis"]
+[node name="HP2" type="Label" parent="Viewport/V Chart/Stats/Base Vis"]
 visible = false
 margin_left = 50.0
 margin_top = -47.7273
@@ -806,7 +805,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP3" type="Label" parent="Viewport/V Chart/Stats/EVs Vis"]
+[node name="HP3" type="Label" parent="Viewport/V Chart/Stats/Base Vis"]
 visible = false
 margin_left = 50.0
 margin_top = 31.8182
@@ -819,7 +818,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP4" type="Label" parent="Viewport/V Chart/Stats/EVs Vis"]
+[node name="HP4" type="Label" parent="Viewport/V Chart/Stats/Base Vis"]
 visible = false
 margin_left = -23.8636
 margin_top = 69.8864
@@ -832,7 +831,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP5" type="Label" parent="Viewport/V Chart/Stats/EVs Vis"]
+[node name="HP5" type="Label" parent="Viewport/V Chart/Stats/Base Vis"]
 visible = false
 margin_left = -100.0
 margin_top = -47.7273
@@ -845,7 +844,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HP6" type="Label" parent="Viewport/V Chart/Stats/EVs Vis"]
+[node name="HP6" type="Label" parent="Viewport/V Chart/Stats/Base Vis"]
 visible = false
 margin_left = -104.545
 margin_top = 31.8182
