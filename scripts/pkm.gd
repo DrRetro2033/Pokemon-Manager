@@ -30,6 +30,7 @@ func _ready():
 		Trainer.trainer_picture = existing_pokemon.trainer_picture
 		Trainer.first_time_setup = false
 		$ProfilePic/Pic.texture = existing_pokemon.trainer_picture
+		Trainer.trainers = existing_pokemon.trainers
 	#this chunk of code's job is to get all of the pokemon that already exists in the bank and remove null/empty slots
 	var without_null = []
 	if existing_pokemon.data != {}:
@@ -101,6 +102,7 @@ func get_info(user_pokemon, existing_pokemon):
 						array[x]["form"] = "-"
 						array[x]["pp"] = 0
 						array[x]["power"] = 0
+						array[x]["text"] = ""
 						array[x]["accuracy"] = 0
 			array["species"] = info["species"]
 			array["sprite"] = info["sprite"] 

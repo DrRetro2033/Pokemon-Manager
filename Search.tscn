@@ -104,6 +104,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Trainer" type="OptionButton" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 740.0
+margin_top = 132.0
+margin_right = -28.0
+margin_bottom = -424.0
+text = "All Trainers"
+items = [ "All Trainers", null, false, -1, null ]
+selected = 0
+
 [node name="Search" type="Button" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -130,6 +141,7 @@ align = 1
 valign = 1
 autowrap = true
 
+[connection signal="visibility_changed" from="." to="." method="_on_Search_visibility_changed"]
 [connection signal="text_entered" from="Panel/Nickname" to="." method="_on_LineEdit_text_entered"]
 [connection signal="pressed" from="Panel/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="Panel/Search" to="." method="_on_Search_pressed"]

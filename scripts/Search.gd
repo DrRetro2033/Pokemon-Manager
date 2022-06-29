@@ -37,6 +37,7 @@ func _on_Button_pressed():
 	visible = true
 
 
+
 func _on_Back_pressed():
 	visible = false
 
@@ -50,6 +51,18 @@ func _on_Search_pressed():
 	search_criteria["type1"] = $"Panel/Type 1".get_selected_id()
 	search_criteria["type2"] = $"Panel/Type 2".get_selected_id()
 	search_criteria["gender"] = $Panel/Gender.get_selected_id()
+	search_criteria["ot"] = $Panel/Trainer.get_item_metadata($Panel/Trainer.get_selected_id())
 	print("Search")
 	var results = Pokemon.search(search_criteria)
 	showResults(results)
+
+
+func _on_Search_visibility_changed():
+	var pos = 1
+	$Panel/Trainer.clear()
+	$Panel/Trainer.add_item("All Trainers",0)
+	$Panel/Trainer.set_item_metadata(0,null)
+	for trainer in Trainer.trainers:
+		$Panel/Trainer.add_item(trainer["nickname"],pos)
+		$Panel/Trainer.set_item_metadata(pos,trainer)
+		pos += 1

@@ -198,6 +198,7 @@ func open(info):
 		\"\\n\\tSpD: \"+str(pokemon[\"ev_spd\"])+
 		\"\\n\\tSpA: \"+str(pokemon[\"ev_spa\"])
 		)
+	$\"OT Info\".text = \"Met \"+pokemon[\"ot\"][\"nickname\"]+\" at level \"+str(pokemon[\"met_level\"])+\" in \"+Pokemon.gameVersion(pokemon[\"ot\"][\"game\"])+\".\"
 	print(pokemon)
 
 func _process(delta):
@@ -633,8 +634,8 @@ button_mask = 2
 anchor_left = 0.046875
 anchor_top = 0.28
 anchor_right = 0.351563
-anchor_bottom = 0.833333
-rect_min_size = Vector2( 312, 324 )
+anchor_bottom = 0.553333
+rect_min_size = Vector2( 312, 162 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
@@ -968,6 +969,16 @@ align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
+}
+
+[node name="OT Info" type="Label" parent="."]
+anchor_left = 0.046875
+anchor_top = 0.553333
+anchor_right = 0.300781
+anchor_bottom = 0.576667
+text = "Caught by in"
+__meta__ = {
+"_edit_use_anchors_": true
 }
 
 [node name="Control" type="TextureRect" parent="."]

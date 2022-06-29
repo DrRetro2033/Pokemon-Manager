@@ -607,6 +607,73 @@ const rates = {
 		68116
 	]
 }
+enum {
+	# Pokémon Sapphire (GBA)
+	S = 1,
+
+	# Pokémon Ruby (GBA)
+	R = 2,
+
+	# Pokémon Emerald (GBA)
+	E = 3,
+
+	# Pokémon FireRed (GBA)
+	FR = 4,
+
+	# Pokémon LeafGreen (GBA)
+	LG = 5,
+
+	# Pokémon Diamond (NDS)
+	D = 10,
+	
+	# Pokémon Pearl (NDS)
+	P = 11,
+
+	# Pokémon Platinum (NDS)
+	Pt = 12,
+
+	# Pokémon HeartGold (NDS)
+	HG = 7,
+
+	# Pokémon SoulSilver (NDS)
+	SS = 8,
+
+	# Pokémon White (NDS)
+	W = 20,
+
+	# Pokémon Black (NDS)
+	B = 21,
+
+	# Pokémon White 2 (NDS)
+	W2 = 22,
+
+	# Pokémon Black 2 (NDS)
+	B2 = 23,
+
+	# Pokémon X (3DS)
+	X = 24,
+
+	# Pokémon Y (3DS)
+	Y = 25,
+	
+	# Pokémon Alpha Sapphire (3DS)
+	AS = 26,
+	
+	# Pokémon Omega Ruby (3DS)
+	OR = 27,
+  
+	# Pokémon Sun (3DS)
+	Sn = 30,
+
+	# Pokémon Moon (3DS)
+	Mn = 31,
+
+	# Pokémon Ultra Sun (3DS)
+	US = 32,
+
+	# Pokémon Ultra Moon (3DS)
+	UM = 33,
+}
 var pokemon = {}
 func set_data(data):
 	pokemon = data.duplicate()
@@ -638,6 +705,14 @@ func search(search):
 		for x in ids:
 			if pokemon[x]["gender"] != search["gender"]:
 				print("Erased "+x+" because of "+str(pokemon[x]["gender"]))
+				results.erase(x)
+	print(search["ot"])
+	print(search["ot"] != null)
+	if search["ot"] != null:
+		var ids = results.duplicate()
+		for x in ids:
+			if pokemon[x]["ot"].values() != search["ot"].values():
+				print("Erased "+x+" because of "+str(pokemon[x]["ot"]))
 				results.erase(x)
 	print(results)
 	return results
@@ -700,3 +775,52 @@ func EggGroups(var egg_groups):
 	for group in egg_groups:
 		array.append(group.name)
 	return array
+
+func gameVersion(id):
+	var version = ""
+	match id:
+		S:
+			version = "Pokémon Sapphire (GBA)"
+		R:
+			version = "Pokémon Ruby (GBA)"
+		E:
+			version = "Pokémon Emerald (GBA)"
+		FR:
+			version = "Pokémon FireRed (GBA)"
+		LG:
+			version = "Pokémon LeafGreen (GBA)"
+		D:
+			version = "Pokémon Diamond (NDS)"
+		P:
+			version = "Pokémon Pearl (NDS)"
+		Pt:
+			version = "Pokémon Platinum (NDS)"
+		HG:
+			version = "Pokémon HeartGold (NDS)"
+		SS:
+			version = "Pokémon SoulSilver (NDS)"
+		W:
+			version = "Pokémon White (NDS)"
+		B:
+			version = "Pokémon Black (NDS)"
+		W2:
+			version = "Pokémon White 2 (NDS)"
+		B2:
+			version = "Pokémon Black 2 (NDS)"
+		X:
+			version = "Pokémon X (3DS)"
+		Y:
+			version = "Pokémon Y (3DS)"
+		AS:
+			version = "Pokémon Alpha Sapphire (3DS)"
+		OR:
+			version = "Pokémon Omega Ruby (3DS)"
+		Sn:
+			version = "Pokémon Sun (3DS)"
+		Mn:
+			version = "Pokémon Moon (3DS)"
+		US:
+			version = "Pokémon Ultra Sun (3DS)"
+		UM:
+			version = "Pokémon Ultra Moon (3DS)"
+	return version

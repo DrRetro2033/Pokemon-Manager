@@ -456,8 +456,8 @@ __meta__ = {
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 5120.0
-margin_bottom = 3000.0
+margin_right = 9216.0
+margin_bottom = 5400.0
 
 [node name="Sprite" type="Sprite" parent="Loading Screen/Control"]
 position = Vector2( 512, 256 )

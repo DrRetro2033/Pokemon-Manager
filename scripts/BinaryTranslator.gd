@@ -24,3 +24,6 @@ func bin_to_int(binary):
 func bitshiftR(binary,shift):
 	binary.erase(binary.length() - shift, shift)
 	return binary
+
+func bitshiftL(binary,shift):
+	binary.erase()

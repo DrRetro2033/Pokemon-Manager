@@ -43,6 +43,21 @@ func readpk(var path):
 			nickname = nickname+file.get_line()
 			print(nickname)
 	info["nickname"] = nickname
+	nickname = ""
+	file.seek(0x68)
+	while true:
+		if file.get_8() == 0:
+			break
+		file.seek(file.get_position() - 1)
+		nickname = nickname+file.get_line()
+		print(nickname)
+	info["ot"] = {}
+	info["ot"]["nickname"] = nickname
+	info["ot"]["game"] = read_8(file,0x5F)
+	info["ot"]["id"] = read_16(file,0x0C)
+	bin = BinaryTranslator.int_to_bin(read_8(file,0x84))
+	info["met_level"] = BinaryTranslator.bin_to_int(bin.right(bin.length() - 7))
+	Trainer.addTrainer(info["ot"])
 	var form_gender = BinaryTranslator.int_to_bin(read_8(file, 0x40))
 	form_gender = BinaryTranslator.bitshiftR(form_gender,1)
 	info["gender"] = BinaryTranslator.bin_to_int(form_gender.right(form_gender.length() - 2))

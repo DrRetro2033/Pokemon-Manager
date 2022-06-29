@@ -37,10 +37,9 @@ func _on_Move4_pressed():
 "
 
 [node name="Popup" type="PopupPanel"]
-visible = true
 margin_right = 65.0
 margin_bottom = 32.0
-size_flags_vertical = 3
+size_flags_vertical = 15
 script = SubResource( 2 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
