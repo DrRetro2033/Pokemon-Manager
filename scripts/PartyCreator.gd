@@ -22,7 +22,19 @@ func clearPokemon():
 
 func _on_AddParty_pressed():
 	var new_party = party.instance()
-	new_party.name = "Party "+str(parties.get_child_count()+1)
+	var copy_num = 0
+	while(true):
+		var exists = false
+		new_party.name = "Party "+str(parties.get_child_count()+1+copy_num)
+		print(new_party.name)
+		for existing_party in parties.get_children():
+			if new_party.name == existing_party.name:
+				exists = true
+		copy_num += 1
+		if exists:
+			copy_num += 1
+			continue
+		break
 	parties.add_child(new_party)
 	parties.current_tab = parties.get_tab_count()-1
 
@@ -75,3 +87,14 @@ func _on_Export_pressed():
 			party_to_showdown += PokemonShowdown.export_to_showdown(Pokemon.pokemon[member])
 	OS.clipboard = party_to_showdown
 	$"../Copied".popup()
+
+
+func _on_RemoveParty_pressed():
+	if $Panel/Parties.get_child_count() != 1:
+		var party = $Panel/Parties.get_tab_control($Panel/Parties.current_tab)
+		if $Panel/Parties.current_tab != 0:
+			$Panel/Parties.current_tab = $Panel/Parties.current_tab - 1
+		else:
+			$Panel/Parties.current_tab = $Panel/Parties.current_tab + 1
+		$Panel/Parties.remove_child(party)
+		party.queue_free()

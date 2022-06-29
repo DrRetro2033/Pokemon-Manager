@@ -11,7 +11,6 @@ var info : Dictionary #basic info for the pokemon
 var moves : Dictionary #hold all known moves a pokemon has
 var flavor_text : String #the first pokedex entry that a pokemon has
 var form : int #what alt form the pokemon is
-var growth : String #the speed at which pokemon level up at (needed for converting exp to levels)
 var pokemon_url : String
 func _ready():
 	print(BinaryTranslator.bin_to_int(BinaryTranslator.int_to_bin(2254250705))) #this is for testing the binary translator by having it convert this number to binary and back
@@ -78,6 +77,8 @@ func get_info(user_pokemon, existing_pokemon):
 			form = array["form"] #tells the species request which form the pokemon is
 			$SpeciesRequest.request(url+"pokemon-species/"+str(int(array["species"])))
 			yield($SpeciesRequest, "request_completed")
+			array["level"] = Pokemon.level(array["exp"],info["growth"]) #converts the pokemon total exp and converts it the pokemon's level
+			array["egg_groups"] = info["egg_groups"]
 			$PokemonRequest.request(pokemon_url)
 			yield($PokemonRequest, "request_completed")
 			var move_names = ["move1","move2","move3","move4"] 
@@ -91,6 +92,7 @@ func get_info(user_pokemon, existing_pokemon):
 						array[x]["form"] = moves["form"]
 						array[x]["pp"] = moves["pp"]
 						array[x]["power"] = moves["power"]
+						array[x]["text"] = moves["text"]
 						array[x]["accuracy"] = 0
 					else: #if there is no move, then set all move info to default
 						array[x] = {}
@@ -100,7 +102,6 @@ func get_info(user_pokemon, existing_pokemon):
 						array[x]["pp"] = 0
 						array[x]["power"] = 0
 						array[x]["accuracy"] = 0
-			array["level"] = Pokemon.level(array["exp"],growth) #converts the pokemon total exp and converts it the pokemon's level
 			array["species"] = info["species"]
 			array["sprite"] = info["sprite"] 
 			array["species-name"] = info["species-name"]
@@ -122,7 +123,6 @@ func get_info(user_pokemon, existing_pokemon):
 				info.clear()
 				flavor_text = ""
 				pokemon_url = ""
-				growth = ""
 				continue
 			else:
 			#
@@ -131,7 +131,7 @@ func get_info(user_pokemon, existing_pokemon):
 				order.push_back(array["id"])
 				#this part creates and starts the walking pokemon
 				var walk = walking_pokemon.instance()
-				$"Loading Screen".add_child(walk)
+				$"Loading Screen/WalkingPokemon".add_child(walk)
 				walk.start(array)
 				#
 			print(array)
@@ -139,7 +139,6 @@ func get_info(user_pokemon, existing_pokemon):
 			info.clear()
 			flavor_text = ""
 			pokemon_url = ""
-			growth = ""
 			$"Loading Screen/ProgressBar".value += 1
 			id += 1
 		#
@@ -210,6 +209,13 @@ func _on_MoveRequest_request_completed(result, response_code, headers, body):
 	moves["name"] = data.name
 	moves["pp"] = data.pp
 	moves["power"] = data.power
+	var pos = 0
+	var flavor_text_entries = data.flavor_text_entries
+	while pos <= flavor_text_entries.size()-1:
+		if flavor_text_entries[pos]["language"]["name"] == "en":
+			moves["text"] = flavor_text_entries[pos].flavor_text
+			break
+		pos += 1
 	$MoveRequest.cancel_request()
 
 
@@ -228,8 +234,9 @@ func _on_SpeciesRequest_request_completed(result, response_code, headers, body):
 			continue
 	var temp_varties = data.varieties[form]
 	pokemon_url = temp_varties.pokemon.url
-	growth = data.growth_rate.name
-	print(growth)
+	info["growth"] = data.growth_rate.name
+	info["egg_groups"] = Pokemon.EggGroups(data.egg_groups)
+	print(info["growth"])
 	$SpeciesRequest.cancel_request()
 
 func _process(delta):

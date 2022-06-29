@@ -23,11 +23,8 @@ func loadPokemon(bank):
 	var current_pos = bank.order
 	for x in get_children():
 		current_pos = x.setSlots(current_pos)
-		yield(get_tree().create_timer(0.1),"timeout")
-	$"../Loading Screen".visible = false
-	if Trainer.first_time_setup:
-		$"../ProfileMaker".popup()
-	OS.window_resizable = true
+		yield(get_tree().create_timer(0.01),"timeout")
+	$"../Loading Screen".finised()
 
 func _process(delta):
 	if !Trainer.first_time_setup:
@@ -70,10 +67,7 @@ func addPokemon(pokemon):
 	for x in get_children():
 		current_pos = x.setSlots(current_pos)
 		yield(get_tree().create_timer(0.1),"timeout")
-	$"../Loading Screen".visible = false
-	OS.window_resizable = true
-	if Trainer.first_time_setup:
-		$"../ProfileMaker".popup()
+	$"../Loading Screen".finised()
 
 func _on_PopupMenu_export_box():
 	var box = get_tab_control(current_tab)

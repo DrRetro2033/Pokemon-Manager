@@ -694,3 +694,9 @@ func level(var Exp, var rate):
 				else:
 					continue
 	return level
+
+func EggGroups(var egg_groups):
+	var array = []
+	for group in egg_groups:
+		array.append(group.name)
+	return array

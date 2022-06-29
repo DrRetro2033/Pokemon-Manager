@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Menu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Panel.tscn" type="PackedScene" id=2]
@@ -15,6 +15,9 @@
 [ext_resource path="res://scripts/ProfileInfo.gd" type="Script" id=13]
 [ext_resource path="res://scripts/ProfileMaker.gd" type="Script" id=14]
 [ext_resource path="res://scripts/bank_manager.gd" type="Script" id=15]
+[ext_resource path="res://box.png" type="Texture" id=16]
+[ext_resource path="res://Folder_Icon.png" type="Texture" id=17]
+[ext_resource path="res://box_top.png" type="Texture" id=18]
 
 [sub_resource type="DynamicFont" id=11]
 font_data = ExtResource( 7 )
@@ -36,7 +39,16 @@ func _ready():
 func switch(x):
 	$Label.text = text[x]
 
-
+func finised():
+	$Control/AnimationPlayer.play(\"Finished\")
+	yield($Control/AnimationPlayer,\"animation_finished\")
+	$WalkingPokemon.visible = false
+	$Control/AnimationPlayer.play(\"FinishedClose\")
+	yield($Control/AnimationPlayer,\"animation_finished\")
+	visible = false
+	if Trainer.first_time_setup:
+		$\"../ProfileMaker\".popup()
+	OS.window_resizable = true
 "
 
 [sub_resource type="GDScript" id=9]
@@ -142,6 +154,173 @@ tracks/4/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="Animation" id=12]
+resource_name = "Finished"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Folder2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 704, 392 ), Vector2( 320, 392 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Folder2:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -90.0, -90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Folder:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Folder:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Folder2/Top:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "FinishedClose"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Folder2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 320, 392 ), Vector2( 512, 392 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Folder2:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -90.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Folder:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Folder:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Folder2/Top:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Folder2/Top:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Folder2/Top:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.7, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1000 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Folder2/Top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1160 ) ]
+}
+
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -237,9 +416,9 @@ stretch_mode = 5
 script = ExtResource( 15 )
 
 [node name="Loading Screen" type="Panel" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_default_cursor_shape = 4
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = SubResource( 7 )
@@ -257,9 +436,6 @@ margin_top = -7.0
 margin_right = -191.0
 margin_bottom = 7.0
 step = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="Loading Screen"]
 anchor_left = 0.5
@@ -280,12 +456,8 @@ __meta__ = {
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 35840.0
-margin_bottom = 21000.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
+margin_right = 5120.0
+margin_bottom = 3000.0
 
 [node name="Sprite" type="Sprite" parent="Loading Screen/Control"]
 position = Vector2( 512, 256 )
@@ -299,16 +471,41 @@ anims/Waiting = ExtResource( 6 )
 [node name="Folder2" type="Sprite" parent="Loading Screen/Control"]
 light_mask = 2
 position = Vector2( 704, 392 )
+rotation = -1.5708
+scale = Vector2( 0.05, 0.05 )
 z_index = 1
 z_as_relative = false
-texture = ExtResource( 8 )
+texture = ExtResource( 16 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Loading Screen/Control/Folder2"]
+position = Vector2( 8706.09, -13898.4 )
+rotation = 1.5708
+scale = Vector2( 19.8649, 22.6087 )
+color = Color( 0.145098, 0.145098, 0.164706, 1 )
+polygon = PoolVector2Array( 752, 332, 1344, 332, 1344, 424, 752, 424 )
+
+[node name="Top" type="Sprite" parent="Loading Screen/Control/Folder2"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -1160 )
+texture = ExtResource( 18 )
 
 [node name="Folder" type="Sprite" parent="Loading Screen/Control"]
 light_mask = 2
 position = Vector2( 320, 392 )
+scale = Vector2( 0.09, 0.09 )
 z_index = 1
 z_as_relative = false
-texture = ExtResource( 8 )
+texture = ExtResource( 17 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Loading Screen/Control"]
+anims/Finished = SubResource( 12 )
+anims/FinishedClose = SubResource( 13 )
+anims/RESET = SubResource( 14 )
+
+[node name="WalkingPokemon" type="Control" parent="Loading Screen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="SpeciesRequest" type="HTTPRequest" parent="."]
 

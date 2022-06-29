@@ -1,11 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://abomasnow-mega.png" type="Texture" id=1]
 [ext_resource path="res://Walking.tres" type="Animation" id=2]
 [ext_resource path="res://Flying.tres" type="Animation" id=3]
 [ext_resource path="res://Water.png" type="Texture" id=4]
 [ext_resource path="res://WaterDrop.png" type="Texture" id=5]
-[ext_resource path="res://fire.png" type="Texture" id=6]
+[ext_resource path="res://fire1.png" type="Texture" id=6]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Node2D
@@ -25,9 +25,11 @@ func start(var info):
 	var temp_path = path+path_name
 	print(temp_path)
 	$PokemonWalking.set_texture(load(temp_path))
-	if info[\"type1\"] == 10:
+	if info[\"egg_groups\"].has(\"flying\"):
 		$AnimationPlayer.play(\"Flying\")
-	elif info[\"type1\"] == 3:
+	elif info[\"type1\"] == 14:
+		$AnimationPlayer.play(\"Haunting\")
+	elif info[\"egg_groups\"].has(\"water1\") or info[\"egg_groups\"].has(\"water2\") or info[\"egg_groups\"].has(\"water3\"):
 		$AnimationPlayer.play(\"Swimming\")
 	else:
 		$AnimationPlayer.play(\"Walking\")
@@ -36,9 +38,8 @@ func start(var info):
 "
 
 [sub_resource type="Animation" id=6]
-resource_name = "HauntingStart"
+resource_name = "Haunting"
 length = 8.0
-step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("PokemonWalking:position")
 tracks/0/interp = 1
@@ -46,10 +47,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.7, 0.9, 1.2, 1.55 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.3, 0.7, 0.9, 1.2, 1.55, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 320, 392 ), Vector2( 320, 392 ), Vector2( 342, 345 ), Vector2( 360, 333 ), Vector2( 397, 356 ), Vector2( 433, 391 ) ]
+"values": [ Vector2( 320, 392 ), Vector2( 320, 392 ), Vector2( 342, 345 ), Vector2( 360, 333 ), Vector2( 397, 356 ), Vector2( 433, 391 ), Vector2( 704, 391 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("PokemonWalking:rotation_degrees")
@@ -58,7 +59,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.7, 0.9, 1.2, 1.55, 8 ),
+"times": PoolRealArray( 0, 0.3, 0.7, 0.9, 1.2, 1.55, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
@@ -76,7 +77,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("PokemonWalking:modulate")
+tracks/3/path = NodePath("PokemonWalking:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -86,6 +87,30 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.490196 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("PokemonWalking/Fire:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("PokemonWalking/Fire:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -215,6 +240,15 @@ tracks/7/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( -1, 1 ), Vector2( 1, 1 ) ]
 }
 
+[sub_resource type="Curve" id=7]
+min_value = -5.0
+max_value = 2.0
+_data = [ Vector2( 0, 0 ), 0.0, 2.0, 0, 1, Vector2( 1, 2 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.134948, 0.83045, 1 )
+colors = PoolColorArray( 0.0509804, 0.0509804, 0.0509804, 0, 1, 1, 1, 0.509804, 1, 1, 1, 0.509804, 1, 1, 1, 0 )
+
 [sub_resource type="Curve" id=4]
 min_value = -360.0
 max_value = 360.0
@@ -224,23 +258,17 @@ _data = [ Vector2( 0, 167.727 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0
 offsets = PoolRealArray( 0, 0.712418, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 6 )
-region = Rect2( 30, 60, 100, 130 )
-filter_clip = true
-
 [node name="Node2D" type="Node2D"]
 script = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Flying = ExtResource( 3 )
-anims/HauntingStart = SubResource( 6 )
+anims/Haunting = SubResource( 6 )
 anims/RESET = SubResource( 1 )
 anims/Swimming = SubResource( 3 )
 anims/Walking = ExtResource( 2 )
 
 [node name="Water" type="Node2D" parent="."]
-visible = false
 position = Vector2( 599.099, 416 )
 scale = Vector2( 0.7, 0.7 )
 
@@ -259,11 +287,28 @@ region_enabled = true
 region_rect = Rect2( 70, 162, 64, 36 )
 
 [node name="PokemonWalking" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.490196 )
 position = Vector2( 320, 392 )
 z_as_relative = false
 texture = ExtResource( 1 )
 flip_h = true
+
+[node name="Fire" type="CPUParticles2D" parent="PokemonWalking"]
+visible = false
+position = Vector2( -0.400146, 14.4624 )
+emitting = false
+amount = 4
+lifetime = 5.0
+speed_scale = 0.5
+texture = ExtResource( 6 )
+direction = Vector2( 1, 1 )
+spread = 180.0
+gravity = Vector2( 5, 5 )
+initial_velocity = 1.0
+orbit_velocity_curve = SubResource( 7 )
+radial_accel = 30.0
+damping = 10.0
+scale_amount = 0.1
+color_ramp = SubResource( 8 )
 
 [node name="Droplets" type="CPUParticles2D" parent="."]
 position = Vector2( 641.489, 404.906 )
@@ -281,7 +326,3 @@ angle_random = 0.4
 angle_curve = SubResource( 4 )
 scale_amount = 0.05
 color_ramp = SubResource( 5 )
-
-[node name="Fire" type="CPUParticles2D" parent="."]
-local_coords = false
-texture = SubResource( 8 )

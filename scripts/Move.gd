@@ -7,16 +7,17 @@ enum damage_class {
 	SPECIAL,
 	STATUS
 }
-
+var flavor_text = ""
 func _process(delta):
 	var font = $Row2/Type/Label.get_font("font","Label")
 	font.size = default_size + int($Row2/Type.rect_size.y - default_scale)
 	$Row2/Type/Label.add_font_override("font",font)
 
-func move(move,type,form,pp,power):
+func move(move,type,form,pp,power,text):
 	print(type)
 	get_parent().get_parent().types(type,$Row2/Type)
 	damage_form(form,$Row2/Form)
+	flavor_text = text
 	if not move == "-":
 		$Label.visible = true
 		$Row1.visible = true
@@ -53,3 +54,7 @@ func damage_form(var form,var node):
 			var texture = load("res://Status.svg")
 			node.get_child(0).set_texture(texture)
 	node.add_stylebox_override("panel",new_form)
+
+
+func _on_Area2D_contextMenu(context):
+	context.info(flavor_text)

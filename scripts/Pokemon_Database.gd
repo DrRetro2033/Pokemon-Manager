@@ -4,24 +4,24 @@ var database = {}
 var path = "res://Pokemon_Database.prn"
 enum types {
 	NULL,
-	NORMAL,
-	FIRE,
-	WATER,
-	GRASS,
-	ELECTRIC,
-	ICE,
-	FIGHTING,
-	POISON,
-	GROUND,
-	FLYING,
-	PSYCHIC,
-	BUG,
-	ROCK,
-	GHOST,
-	DARK,
-	DRAGON,
-	STEEL,
-	FAIRY
+	NORMAL, #1
+	FIRE, #2
+	WATER, #3
+	GRASS, #4
+	ELECTRIC, #5
+	ICE, #6
+	FIGHTING, #7
+	POISON, #8
+	GROUND, #9
+	FLYING, #10
+	PSYCHIC, #11
+	BUG, #12
+	ROCK, #13
+	GHOST, #14
+	DARK, #15
+	DRAGON, #16
+	STEEL, #17
+	FAIRY #18
 }
 
 enum damage_class {

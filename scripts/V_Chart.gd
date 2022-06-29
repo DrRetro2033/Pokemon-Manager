@@ -31,12 +31,12 @@ func EvSet(info):
 	$"Stats/Sp Atk".setStats(calculateStats(info["spa"], info["iv_spa"] * 2, 0))
 	array = setChart()
 	$"Stats/IVs Vis".set_polygon(array)
-	$Stats/HP.setStats(calculateStats(info["hp"],info["iv_hp"] * 2,info["ev_hp"]))
-	$Stats/Attack.setStats(calculateStats(info["atk"], info["iv_atk"] * 2,info["ev_atk"]))
-	$Stats/Defense.setStats(calculateStats(info["def"], info["iv_def"] * 2,info["ev_def"]))
-	$Stats/Speed.setStats(calculateStats(info["spe"], info["iv_spe"] * 2,info["iv_spe"]))
-	$"Stats/Sp Def".setStats(calculateStats(info["spd"], info["iv_spd"] * 2,info["iv_spd"]))
-	$"Stats/Sp Atk".setStats(calculateStats(info["spa"], info["iv_spa"] * 2,info["iv_spa"]))
+	$Stats/HP.setStats(calculateStats(info["hp"],info["iv_hp"] * 2,info["ev_hp"]*2))
+	$Stats/Attack.setStats(calculateStats(info["atk"], info["iv_atk"] * 2,info["ev_atk"]*2))
+	$Stats/Defense.setStats(calculateStats(info["def"], info["iv_def"] * 2,info["ev_def"]*2))
+	$Stats/Speed.setStats(calculateStats(info["spe"], info["iv_spe"] * 2,info["ev_spe"]*2))
+	$"Stats/Sp Def".setStats(calculateStats(info["spd"], info["iv_spd"] * 2,info["ev_spd"]*2))
+	$"Stats/Sp Atk".setStats(calculateStats(info["spa"], info["iv_spa"] * 2,info["ev_spa"]*2))
 	array = setChart()
 	$"Stats/EVs Vis".set_polygon(array)
 func calculateStats(base,iv,ev):
@@ -53,3 +53,4 @@ func setChart():
 		$"Stats/Sp Def".get_child(0).position
 	])
 	return array
+
