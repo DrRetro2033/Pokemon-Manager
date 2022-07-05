@@ -13,9 +13,9 @@ func _process(delta):
 	font.size = default_size + int($Row2/Type.rect_size.y - default_scale)
 	$Row2/Type/Label.add_font_override("font",font)
 
-func move(move,type,form,pp,power,text):
+func move(parent,move,type,form,pp,power,text):
 	print(type)
-	get_parent().get_parent().types(type,$Row2/Type)
+	parent.types(type,$Row2/Type)
 	damage_form(form,$Row2/Form)
 	flavor_text = text
 	if not move == "-":

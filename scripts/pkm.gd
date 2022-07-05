@@ -53,11 +53,10 @@ func _ready():
 func get_info(user_pokemon, existing_pokemon):
 	var id = 0 #this is for giving the pokemon unqie keys
 	var pokemon = {}
-	var order = []
+	var new_pokemon = []
 	$"Loading Screen/ProgressBar".max_value = user_pokemon.size() #sets the progress bar's max value to the amount of pokemon the user has
 	if existing_pokemon != null and not existing_pokemon.data.empty(): #checks to see if there is any existing pokemon in the bank file and if there is then add them to the database
 		pokemon = existing_pokemon.data
-		order = existing_pokemon.order
 	while user_pokemon.size() > 0:
 		var array #tempory array for personal data about the pokemon
 		var file = user_pokemon.front()
@@ -70,7 +69,6 @@ func get_info(user_pokemon, existing_pokemon):
 			"pk7":
 				array = pk7.readpk(file)
 		if existing_pokemon != null and not existing_pokemon.data.empty() and pokemon.has(array["id"]): #if the pokemon is already in the database, skip it
-				print(array)
 				id += 1
 				continue
 		else: #asks PokeAPI for infomation about the pokemons species and known moves
@@ -130,13 +128,13 @@ func get_info(user_pokemon, existing_pokemon):
 			#
 				pokemon[array["id"]] = {}
 				pokemon[array["id"]] = array
-				order.push_back(array["id"])
+				new_pokemon.push_back(array["id"])
 				#this part creates and starts the walking pokemon
 				var walk = walking_pokemon.instance()
 				$"Loading Screen/WalkingPokemon".add_child(walk)
 				walk.start(array)
 				#
-			print(array)
+#			print(array)
 			moves.clear()
 			info.clear()
 			flavor_text = ""
@@ -146,7 +144,7 @@ func get_info(user_pokemon, existing_pokemon):
 		#
 	Pokemon.set_data(pokemon) #makes a copy of the temporary dictionary and gives it to the object Pokemon for public access
 	$"Loading Screen".switch("layout")
-	$TabContainer.addPokemon(order)
+	$TabContainer.addPokemon(new_pokemon,existing_pokemon)
 
 	
 func list_files_in_directory(path): #lists all the pk files in the pkmdb folder
@@ -154,7 +152,6 @@ func list_files_in_directory(path): #lists all the pk files in the pkmdb folder
 	var dir = Directory.new()
 	dir.open(path)
 	dir.list_dir_begin()
-
 	while true:
 		var file = dir.get_next()
 		if file == "":
@@ -238,7 +235,7 @@ func _on_SpeciesRequest_request_completed(result, response_code, headers, body):
 	pokemon_url = temp_varties.pokemon.url
 	info["growth"] = data.growth_rate.name
 	info["egg_groups"] = Pokemon.EggGroups(data.egg_groups)
-	print(info["growth"])
+#	print(info["growth"])
 	$SpeciesRequest.cancel_request()
 
 func _process(delta):

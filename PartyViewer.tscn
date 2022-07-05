@@ -1,0 +1,4586 @@
+[gd_scene load_steps=36 format=2]
+
+[ext_resource path="res://PanelTheme.tres" type="Theme" id=1]
+[ext_resource path="res://fonts/Essentiarum Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://abomasnow.png" type="Texture" id=3]
+[ext_resource path="res://Special.png" type="Texture" id=4]
+[ext_resource path="res://scripts/Move.gd" type="Script" id=5]
+
+[sub_resource type="GDScript" id=54]
+script/source = "extends Panel
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+const path = \"res://sprites/pokemon/official-artwork/\"
+onready var member1 = $Members/Member1
+onready var member2 = $Members/Member2
+onready var member3 = $Members/Member3
+onready var member4 = $Members/Member4
+onready var member5 = $Members/Member5
+onready var member6 = $Members/Member6
+enum types {
+	NULL,
+	NORMAL,
+	FIRE,
+	WATER,
+	GRASS,
+	ELECTRIC,
+	ICE,
+	FIGHTING,
+	POISON,
+	GROUND,
+	FLYING,
+	PSYCHIC,
+	BUG,
+	ROCK,
+	GHOST,
+	DARK,
+	DRAGON,
+	STEEL,
+	FAIRY
+}
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+func types(var type, var node):
+	var style = node.get_stylebox(\"panel\").duplicate()
+	match type: #sets the text and color for the type2
+		types.NULL:
+			node.get_child(0).text = \"n/a\"
+			style.set_bg_color(Color8(66,66,66,255))
+		types.NORMAL:
+			node.get_child(0).text = \"c\"
+			style.set_bg_color(Color(\"#c3c2a4\"))
+		types.FIRE:
+			node.get_child(0).text = \"r\"
+			style.set_bg_color(Color(\"#df2c04\"))
+		types.WATER:
+			node.get_child(0).text = \"w\"
+			style.set_bg_color(Color(\"#3578f4\"))
+		types.GRASS:
+			node.get_child(0).text = \"g\"
+			style.set_bg_color(Color(\"#57a031\"))
+		types.ELECTRIC:
+			node.get_child(0).text = \"l\"
+			style.set_bg_color(Color(\"#f8c81d\"))
+		types.ICE:
+			node.get_child(0).text = \"i\"
+			style.set_bg_color(Color(\"#81e0e5\"))
+		types.FIGHTING:
+			node.get_child(0).text = \"f\"
+			style.set_bg_color(Color(\"#6d2818\"))
+		types.POISON:
+			node.get_child(0).text = \"o\"
+			style.set_bg_color(Color(\"#9345b3\"))
+		types.GROUND:
+			node.get_child(0).text = \"a\"
+			style.set_bg_color(Color(\"#d1b85e\"))
+		types.FLYING:
+			node.get_child(0).text = \"v\"
+			style.set_bg_color(Color(\"#84afff\"))
+		types.PSYCHIC:
+			node.get_child(0).text = \"p\"
+			style.set_bg_color(Color(\"#ff398b\"))
+		types.BUG:
+			node.get_child(0).text = \"b\"
+			style.set_bg_color(Color(\"#bdc45b\"))
+		types.ROCK:
+			node.get_child(0).text = \"k\"
+			style.set_bg_color(Color(\"#b29e59\"))
+		types.GHOST:
+			node.get_child(0).text = \"h\"
+			style.set_bg_color(Color(\"#5d66a6\"))
+		types.DARK:
+			node.get_child(0).text = \"d\"
+			style.set_bg_color(Color(\"#442d04\"))
+		types.DRAGON:
+			node.get_child(0).text = \"n\"
+			style.set_bg_color(Color(\"#8c79dc\"))
+		types.STEEL:
+			node.get_child(0).text = \"m\"
+			style.set_bg_color(Color(\"#b7b7ce\"))
+		types.FAIRY:
+			node.get_child(0).text = \"y\"
+			style.set_bg_color(Color(\"#f0aee1\"))
+	node.add_stylebox_override(\"panel\",style)
+
+func setMember(spot,member):
+	var path_name = str(member[\"species\"])
+	var temp_path = path+path_name+\".png\"
+	spot.get_node(\"TextureRect\").set_texture(load(temp_path))
+	types(member[\"type1\"],spot.get_node(\"Type1\"))
+	types(member[\"type1\"],spot.get_node(\"OnlyOneType\"))
+	spot.get_node(\"OnlyOneType\").get_node(\"Label\").text = spot.get_node(\"Type1\").get_node(\"Label\").text
+	types(member[\"type2\"],spot.get_node(\"Type2\"))
+	if spot.get_node(\"Type2\").get_node(\"Label\").text == \"n/a\":
+		spot.get_node(\"OnlyOneType\").visible = true
+		spot.get_node(\"Type1\").visible = false
+		spot.get_node(\"Type2\").visible = false
+	else:
+		spot.get_node(\"OnlyOneType\").visible = false
+		spot.get_node(\"Type1\").visible = true
+		spot.get_node(\"Type2\").visible = true
+	var moves = 4
+	while moves > 0:
+		var move
+		var child
+		match moves:
+			1:
+				move = member[\"move1\"]
+				child = spot.get_node(\"GridContainer/Move1\")
+			2:
+				move = member[\"move2\"]
+				child = spot.get_node(\"GridContainer/Move2\")
+			3:
+				move = member[\"move3\"]
+				child = spot.get_node(\"GridContainer/Move3\")
+			4:
+				move = member[\"move4\"]
+				child = spot.get_node(\"GridContainer/Move4\")
+		child.move(self,move[\"name\"],move[\"typing\"],move[\"form\"],move[\"pp\"],move[\"power\"],move[\"text\"])
+		child.get_node(\"Row1/PP\").visible = false
+		moves -= 1
+
+func showParty(party):
+	var member = Pokemon.pokemon[party[0]]
+	for child in $Members.get_children():
+		child.visible = false
+	var member_pos = 0
+	while member_pos < party.size():
+		if party[member_pos] == null:
+			continue
+		member = Pokemon.pokemon[party[member_pos]]
+		match member_pos:
+			0:
+				setMember(member1,member)
+				member1.visible = true
+			1:
+				setMember(member2,member)
+				member2.visible = true
+			2:
+				setMember(member3,member)
+				member3.visible = true
+			3:
+				setMember(member4,member)
+				member4.visible = true
+			4:
+				setMember(member5,member)
+				member5.visible = true
+			5:
+				setMember(member6,member)
+				member6.visible = true
+		member_pos += 1
+	visible = true
+
+
+func _on_Back_pressed():
+	visible = false
+"
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.764706, 0.760784, 0.643137, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="DynamicFont" id=2]
+size = 26
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.87451, 0.172549, 0.0156863, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.207843, 0.470588, 0.956863, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.341176, 0.627451, 0.192157, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.972549, 0.784314, 0.113725, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.505882, 0.878431, 0.898039, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.427451, 0.156863, 0.0941176, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.576471, 0.270588, 0.701961, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.819608, 0.721569, 0.368627, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.517647, 0.686275, 1, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 1, 0.223529, 0.545098, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.741176, 0.768627, 0.356863, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.698039, 0.619608, 0.34902, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.364706, 0.4, 0.65098, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0.266667, 0.176471, 0.0156863, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 0.54902, 0.47451, 0.862745, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.717647, 0.717647, 0.807843, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.941176, 0.682353, 0.882353, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=49]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0, 0.623529, 1, 1 )
+border_blend = true
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+corner_detail = 16
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=50]
+bg_color = Color( 0, 0.996078, 1, 0 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0.556863, 1, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=57]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=51]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=52]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="DynamicFont" id=20]
+size = 26
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=48]
+size = 22
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=53]
+bg_color = Color( 0, 1, 0.156863, 0.196078 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=55]
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=56]
+bg_color = Color( 0.258824, 0.258824, 0.258824, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Party" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 54 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="CurrentType" type="Label" parent="."]
+anchor_left = 0.0625
+anchor_top = 0.443333
+anchor_right = 0.290039
+anchor_bottom = 0.466667
+text = "Select typing of opponent:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Rows" type="GridContainer" parent="."]
+anchor_left = 0.0625
+anchor_top = 0.49
+anchor_right = 0.291016
+anchor_bottom = 0.856667
+margin_top = 3.05176e-05
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Normal" type="PanelContainer" parent="Rows"]
+margin_right = 75.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Normal"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "c"
+align = 1
+valign = 1
+
+[node name="Fire" type="PanelContainer" parent="Rows"]
+margin_left = 79.0
+margin_right = 154.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Fire"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "r"
+align = 1
+valign = 1
+
+[node name="Water" type="PanelContainer" parent="Rows"]
+margin_left = 158.0
+margin_right = 233.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Water"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "w"
+align = 1
+valign = 1
+
+[node name="Grass" type="PanelContainer" parent="Rows"]
+margin_top = 37.0
+margin_right = 75.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 5 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Grass"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "g"
+align = 1
+valign = 1
+
+[node name="Electric" type="PanelContainer" parent="Rows"]
+margin_left = 79.0
+margin_top = 37.0
+margin_right = 154.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 6 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Electric"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "l"
+align = 1
+valign = 1
+
+[node name="Ice" type="PanelContainer" parent="Rows"]
+margin_left = 158.0
+margin_top = 37.0
+margin_right = 233.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 7 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Ice"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "i"
+align = 1
+valign = 1
+
+[node name="Fighting" type="PanelContainer" parent="Rows"]
+margin_top = 74.0
+margin_right = 75.0
+margin_bottom = 107.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 8 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Fighting"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "f"
+align = 1
+valign = 1
+
+[node name="Poison" type="PanelContainer" parent="Rows"]
+margin_left = 79.0
+margin_top = 74.0
+margin_right = 154.0
+margin_bottom = 107.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 9 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Poison"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "o"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="Ground" type="PanelContainer" parent="Rows"]
+margin_left = 158.0
+margin_top = 74.0
+margin_right = 233.0
+margin_bottom = 107.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 10 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Ground"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "a"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="Flying" type="PanelContainer" parent="Rows"]
+margin_top = 111.0
+margin_right = 75.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 11 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Flying"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "v"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="Psychic" type="PanelContainer" parent="Rows"]
+margin_left = 79.0
+margin_top = 111.0
+margin_right = 154.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 12 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Psychic"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "p"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="Bug" type="PanelContainer" parent="Rows"]
+margin_left = 158.0
+margin_top = 111.0
+margin_right = 233.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 13 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Bug"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "b"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="Rock" type="PanelContainer" parent="Rows"]
+margin_top = 148.0
+margin_right = 75.0
+margin_bottom = 181.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 14 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Rock"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "k"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="Ghost" type="PanelContainer" parent="Rows"]
+margin_left = 79.0
+margin_top = 148.0
+margin_right = 154.0
+margin_bottom = 181.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 15 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Ghost"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "h
+"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="Dark" type="PanelContainer" parent="Rows"]
+margin_left = 158.0
+margin_top = 148.0
+margin_right = 233.0
+margin_bottom = 181.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 16 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Dark"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "d
+"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="Dragon" type="PanelContainer" parent="Rows"]
+margin_top = 185.0
+margin_right = 75.0
+margin_bottom = 218.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 17 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Dragon"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "n
+"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="Steel" type="PanelContainer" parent="Rows"]
+margin_left = 79.0
+margin_top = 185.0
+margin_right = 154.0
+margin_bottom = 218.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 18 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Steel"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "m"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="Fairy" type="PanelContainer" parent="Rows"]
+margin_left = 158.0
+margin_top = 185.0
+margin_right = 233.0
+margin_bottom = 218.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 19 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Rows/Fairy"]
+margin_right = 75.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "y"
+align = 1
+valign = 1
+max_lines_visible = 1
+
+[node name="Buttons" type="GridContainer" parent="."]
+anchor_left = 0.0625
+anchor_top = 0.49
+anchor_right = 0.291016
+anchor_bottom = 0.856667
+margin_top = 3.05176e-05
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Normal" type="ToolButton" parent="Buttons"]
+margin_right = 75.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 51 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Fire" type="ToolButton" parent="Buttons"]
+margin_left = 79.0
+margin_right = 154.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Water" type="ToolButton" parent="Buttons"]
+margin_left = 158.0
+margin_right = 233.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Grass" type="ToolButton" parent="Buttons"]
+margin_top = 37.0
+margin_right = 75.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Electric" type="ToolButton" parent="Buttons"]
+margin_left = 79.0
+margin_top = 37.0
+margin_right = 154.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Ice" type="ToolButton" parent="Buttons"]
+margin_left = 158.0
+margin_top = 37.0
+margin_right = 233.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Fighting" type="ToolButton" parent="Buttons"]
+margin_top = 74.0
+margin_right = 75.0
+margin_bottom = 107.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Poison" type="ToolButton" parent="Buttons"]
+margin_left = 79.0
+margin_top = 74.0
+margin_right = 154.0
+margin_bottom = 107.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Ground" type="ToolButton" parent="Buttons"]
+margin_left = 158.0
+margin_top = 74.0
+margin_right = 233.0
+margin_bottom = 107.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Flying" type="ToolButton" parent="Buttons"]
+margin_top = 111.0
+margin_right = 75.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Psychic" type="ToolButton" parent="Buttons"]
+margin_left = 79.0
+margin_top = 111.0
+margin_right = 154.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Bug" type="ToolButton" parent="Buttons"]
+margin_left = 158.0
+margin_top = 111.0
+margin_right = 233.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Rock" type="ToolButton" parent="Buttons"]
+margin_top = 148.0
+margin_right = 75.0
+margin_bottom = 181.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Ghost" type="ToolButton" parent="Buttons"]
+margin_left = 79.0
+margin_top = 148.0
+margin_right = 154.0
+margin_bottom = 181.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Dark" type="ToolButton" parent="Buttons"]
+margin_left = 158.0
+margin_top = 148.0
+margin_right = 233.0
+margin_bottom = 181.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Dragon" type="ToolButton" parent="Buttons"]
+margin_top = 185.0
+margin_right = 75.0
+margin_bottom = 218.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Steel" type="ToolButton" parent="Buttons"]
+margin_left = 79.0
+margin_top = 185.0
+margin_right = 154.0
+margin_bottom = 218.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Fairy" type="ToolButton" parent="Buttons"]
+margin_left = 158.0
+margin_top = 185.0
+margin_right = 233.0
+margin_bottom = 218.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 49 )
+custom_styles/pressed = SubResource( 50 )
+custom_styles/focus = SubResource( 57 )
+custom_styles/normal = SubResource( 52 )
+toggle_mode = true
+flat = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Members" type="GridContainer" parent="."]
+anchor_left = 0.34375
+anchor_top = 0.0266667
+anchor_right = 0.96875
+anchor_bottom = 0.96
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Member1" type="Control" parent="Members"]
+margin_right = 206.0
+margin_bottom = 275.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member1"]
+anchor_right = 1.0
+anchor_bottom = 0.426415
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Type1" type="PanelContainer" parent="Members/Member1"]
+anchor_top = 0.426901
+anchor_right = 0.496094
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member1/Type1"]
+margin_right = 102.195
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="Type2" type="PanelContainer" parent="Members/Member1"]
+anchor_left = 0.503906
+anchor_top = 0.426901
+anchor_right = 1.0
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member1/Type2"]
+margin_right = 102.195
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="OnlyOneType" type="PanelContainer" parent="Members/Member1"]
+anchor_top = 0.426901
+anchor_right = 1.0
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member1/OnlyOneType"]
+margin_right = 206.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="GridContainer" type="GridContainer" parent="Members/Member1"]
+anchor_top = 0.546667
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 0
+custom_constants/vseparation = 12
+columns = 2
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Move1" type="VBoxContainer" parent="Members/Member1/GridContainer"]
+margin_right = 101.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member1/GridContainer/Move1"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member1/GridContainer/Move1"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member1/GridContainer/Move1/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member1/GridContainer/Move1/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member1/GridContainer/Move1"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member1/GridContainer/Move1/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member1/GridContainer/Move1/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member1/GridContainer/Move1/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member1/GridContainer/Move1/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move2" type="VBoxContainer" parent="Members/Member1/GridContainer"]
+margin_left = 105.0
+margin_right = 206.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member1/GridContainer/Move2"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member1/GridContainer/Move2"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member1/GridContainer/Move2/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member1/GridContainer/Move2/Row1"]
+visible = false
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member1/GridContainer/Move2"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member1/GridContainer/Move2/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member1/GridContainer/Move2/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member1/GridContainer/Move2/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member1/GridContainer/Move2/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move3" type="VBoxContainer" parent="Members/Member1/GridContainer"]
+margin_top = 68.0
+margin_right = 101.0
+margin_bottom = 124.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member1/GridContainer/Move3"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member1/GridContainer/Move3"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member1/GridContainer/Move3/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member1/GridContainer/Move3/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member1/GridContainer/Move3"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member1/GridContainer/Move3/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member1/GridContainer/Move3/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member1/GridContainer/Move3/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member1/GridContainer/Move3/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move4" type="VBoxContainer" parent="Members/Member1/GridContainer"]
+margin_left = 105.0
+margin_top = 68.0
+margin_right = 206.0
+margin_bottom = 124.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member1/GridContainer/Move4"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member1/GridContainer/Move4"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member1/GridContainer/Move4/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member1/GridContainer/Move4/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member1/GridContainer/Move4"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member1/GridContainer/Move4/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member1/GridContainer/Move4/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member1/GridContainer/Move4/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member1/GridContainer/Move4/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Member2" type="Control" parent="Members"]
+margin_left = 216.0
+margin_right = 422.0
+margin_bottom = 275.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member2"]
+anchor_right = 1.0
+anchor_bottom = 0.426667
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Type1" type="PanelContainer" parent="Members/Member2"]
+anchor_top = 0.426901
+anchor_right = 0.496094
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member2/Type1"]
+margin_right = 102.195
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="Type2" type="PanelContainer" parent="Members/Member2"]
+anchor_left = 0.503906
+anchor_top = 0.426901
+anchor_right = 1.0
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member2/Type2"]
+margin_right = 102.195
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="OnlyOneType" type="PanelContainer" parent="Members/Member2"]
+anchor_top = 0.426901
+anchor_right = 1.0
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member2/OnlyOneType"]
+margin_right = 206.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="GridContainer" type="GridContainer" parent="Members/Member2"]
+anchor_top = 0.546667
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 0
+custom_constants/vseparation = 12
+columns = 2
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Move1" type="VBoxContainer" parent="Members/Member2/GridContainer"]
+margin_right = 101.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member2/GridContainer/Move1"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member2/GridContainer/Move1"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member2/GridContainer/Move1/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member2/GridContainer/Move1/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member2/GridContainer/Move1"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member2/GridContainer/Move1/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member2/GridContainer/Move1/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member2/GridContainer/Move1/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member2/GridContainer/Move1/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move2" type="VBoxContainer" parent="Members/Member2/GridContainer"]
+margin_left = 105.0
+margin_right = 206.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member2/GridContainer/Move2"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member2/GridContainer/Move2"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member2/GridContainer/Move2/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member2/GridContainer/Move2/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member2/GridContainer/Move2"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member2/GridContainer/Move2/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member2/GridContainer/Move2/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member2/GridContainer/Move2/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member2/GridContainer/Move2/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move3" type="VBoxContainer" parent="Members/Member2/GridContainer"]
+margin_top = 68.0
+margin_right = 101.0
+margin_bottom = 124.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member2/GridContainer/Move3"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member2/GridContainer/Move3"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member2/GridContainer/Move3/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member2/GridContainer/Move3/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member2/GridContainer/Move3"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member2/GridContainer/Move3/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member2/GridContainer/Move3/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member2/GridContainer/Move3/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member2/GridContainer/Move3/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move4" type="VBoxContainer" parent="Members/Member2/GridContainer"]
+margin_left = 105.0
+margin_top = 68.0
+margin_right = 206.0
+margin_bottom = 124.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member2/GridContainer/Move4"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member2/GridContainer/Move4"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member2/GridContainer/Move4/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member2/GridContainer/Move4/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member2/GridContainer/Move4"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member2/GridContainer/Move4/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member2/GridContainer/Move4/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member2/GridContainer/Move4/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member2/GridContainer/Move4/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Member3" type="Control" parent="Members"]
+margin_left = 432.0
+margin_right = 638.0
+margin_bottom = 275.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member3"]
+anchor_right = 1.0
+anchor_bottom = 0.426667
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Type1" type="PanelContainer" parent="Members/Member3"]
+anchor_top = 0.426901
+anchor_right = 0.496094
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member3/Type1"]
+margin_right = 102.195
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="Type2" type="PanelContainer" parent="Members/Member3"]
+anchor_left = 0.503906
+anchor_top = 0.426901
+anchor_right = 1.0
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member3/Type2"]
+margin_right = 102.195
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="OnlyOneType" type="PanelContainer" parent="Members/Member3"]
+anchor_top = 0.426901
+anchor_right = 1.0
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member3/OnlyOneType"]
+margin_right = 206.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="GridContainer" type="GridContainer" parent="Members/Member3"]
+anchor_top = 0.546667
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 0
+custom_constants/vseparation = 12
+columns = 2
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Move1" type="VBoxContainer" parent="Members/Member3/GridContainer"]
+margin_right = 101.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member3/GridContainer/Move1"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member3/GridContainer/Move1"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member3/GridContainer/Move1/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member3/GridContainer/Move1/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member3/GridContainer/Move1"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member3/GridContainer/Move1/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member3/GridContainer/Move1/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member3/GridContainer/Move1/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member3/GridContainer/Move1/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move2" type="VBoxContainer" parent="Members/Member3/GridContainer"]
+margin_left = 105.0
+margin_right = 206.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member3/GridContainer/Move2"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member3/GridContainer/Move2"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member3/GridContainer/Move2/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member3/GridContainer/Move2/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member3/GridContainer/Move2"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member3/GridContainer/Move2/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member3/GridContainer/Move2/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member3/GridContainer/Move2/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member3/GridContainer/Move2/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move3" type="VBoxContainer" parent="Members/Member3/GridContainer"]
+margin_top = 68.0
+margin_right = 101.0
+margin_bottom = 124.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member3/GridContainer/Move3"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member3/GridContainer/Move3"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member3/GridContainer/Move3/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member3/GridContainer/Move3/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member3/GridContainer/Move3"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member3/GridContainer/Move3/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member3/GridContainer/Move3/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member3/GridContainer/Move3/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member3/GridContainer/Move3/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move4" type="VBoxContainer" parent="Members/Member3/GridContainer"]
+margin_left = 105.0
+margin_top = 68.0
+margin_right = 206.0
+margin_bottom = 124.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member3/GridContainer/Move4"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member3/GridContainer/Move4"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member3/GridContainer/Move4/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member3/GridContainer/Move4/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member3/GridContainer/Move4"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member3/GridContainer/Move4/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member3/GridContainer/Move4/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member3/GridContainer/Move4/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member3/GridContainer/Move4/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Member4" type="Control" parent="Members"]
+margin_top = 285.0
+margin_right = 206.0
+margin_bottom = 560.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member4"]
+anchor_right = 1.0
+anchor_bottom = 0.426667
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Type1" type="PanelContainer" parent="Members/Member4"]
+anchor_top = 0.426901
+anchor_right = 0.496094
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member4/Type1"]
+margin_right = 102.195
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="Type2" type="PanelContainer" parent="Members/Member4"]
+anchor_left = 0.503906
+anchor_top = 0.426901
+anchor_right = 1.0
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member4/Type2"]
+margin_right = 102.195
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="OnlyOneType" type="PanelContainer" parent="Members/Member4"]
+anchor_top = 0.426901
+anchor_right = 1.0
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member4/OnlyOneType"]
+margin_right = 206.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="GridContainer" type="GridContainer" parent="Members/Member4"]
+anchor_top = 0.546667
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 0
+custom_constants/vseparation = 12
+columns = 2
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Move1" type="VBoxContainer" parent="Members/Member4/GridContainer"]
+margin_right = 101.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member4/GridContainer/Move1"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member4/GridContainer/Move1"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member4/GridContainer/Move1/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member4/GridContainer/Move1/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member4/GridContainer/Move1"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member4/GridContainer/Move1/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member4/GridContainer/Move1/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member4/GridContainer/Move1/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member4/GridContainer/Move1/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move2" type="VBoxContainer" parent="Members/Member4/GridContainer"]
+margin_left = 105.0
+margin_right = 206.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member4/GridContainer/Move2"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member4/GridContainer/Move2"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member4/GridContainer/Move2/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member4/GridContainer/Move2/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member4/GridContainer/Move2"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member4/GridContainer/Move2/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member4/GridContainer/Move2/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member4/GridContainer/Move2/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member4/GridContainer/Move2/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move3" type="VBoxContainer" parent="Members/Member4/GridContainer"]
+margin_top = 68.0
+margin_right = 101.0
+margin_bottom = 124.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member4/GridContainer/Move3"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member4/GridContainer/Move3"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member4/GridContainer/Move3/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member4/GridContainer/Move3/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member4/GridContainer/Move3"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member4/GridContainer/Move3/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member4/GridContainer/Move3/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member4/GridContainer/Move3/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member4/GridContainer/Move3/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move4" type="VBoxContainer" parent="Members/Member4/GridContainer"]
+margin_left = 105.0
+margin_top = 68.0
+margin_right = 206.0
+margin_bottom = 124.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member4/GridContainer/Move4"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member4/GridContainer/Move4"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member4/GridContainer/Move4/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member4/GridContainer/Move4/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member4/GridContainer/Move4"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member4/GridContainer/Move4/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member4/GridContainer/Move4/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member4/GridContainer/Move4/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member4/GridContainer/Move4/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Member5" type="Control" parent="Members"]
+margin_left = 216.0
+margin_top = 285.0
+margin_right = 422.0
+margin_bottom = 560.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member5"]
+anchor_right = 1.0
+anchor_bottom = 0.426667
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Type1" type="PanelContainer" parent="Members/Member5"]
+anchor_top = 0.426901
+anchor_right = 0.496094
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member5/Type1"]
+margin_right = 102.195
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="Type2" type="PanelContainer" parent="Members/Member5"]
+anchor_left = 0.503906
+anchor_top = 0.426901
+anchor_right = 1.0
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member5/Type2"]
+margin_right = 102.195
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="OnlyOneType" type="PanelContainer" parent="Members/Member5"]
+anchor_top = 0.426901
+anchor_right = 1.0
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member5/OnlyOneType"]
+margin_right = 206.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="GridContainer" type="GridContainer" parent="Members/Member5"]
+anchor_top = 0.546667
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 0
+custom_constants/vseparation = 12
+columns = 2
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Move1" type="VBoxContainer" parent="Members/Member5/GridContainer"]
+margin_right = 101.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member5/GridContainer/Move1"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member5/GridContainer/Move1"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member5/GridContainer/Move1/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member5/GridContainer/Move1/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member5/GridContainer/Move1"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member5/GridContainer/Move1/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member5/GridContainer/Move1/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member5/GridContainer/Move1/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member5/GridContainer/Move1/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move2" type="VBoxContainer" parent="Members/Member5/GridContainer"]
+margin_left = 105.0
+margin_right = 206.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member5/GridContainer/Move2"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member5/GridContainer/Move2"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member5/GridContainer/Move2/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member5/GridContainer/Move2/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member5/GridContainer/Move2"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member5/GridContainer/Move2/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member5/GridContainer/Move2/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member5/GridContainer/Move2/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member5/GridContainer/Move2/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move3" type="VBoxContainer" parent="Members/Member5/GridContainer"]
+margin_top = 68.0
+margin_right = 101.0
+margin_bottom = 124.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member5/GridContainer/Move3"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member5/GridContainer/Move3"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member5/GridContainer/Move3/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member5/GridContainer/Move3/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member5/GridContainer/Move3"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member5/GridContainer/Move3/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member5/GridContainer/Move3/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member5/GridContainer/Move3/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member5/GridContainer/Move3/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move4" type="VBoxContainer" parent="Members/Member5/GridContainer"]
+margin_left = 105.0
+margin_top = 68.0
+margin_right = 206.0
+margin_bottom = 124.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member5/GridContainer/Move4"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member5/GridContainer/Move4"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member5/GridContainer/Move4/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member5/GridContainer/Move4/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member5/GridContainer/Move4"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member5/GridContainer/Move4/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member5/GridContainer/Move4/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member5/GridContainer/Move4/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member5/GridContainer/Move4/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Member6" type="Control" parent="Members"]
+margin_left = 432.0
+margin_top = 285.0
+margin_right = 638.0
+margin_bottom = 560.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member6"]
+anchor_right = 1.0
+anchor_bottom = 0.426667
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Type1" type="PanelContainer" parent="Members/Member6"]
+anchor_top = 0.426901
+anchor_right = 0.496094
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member6/Type1"]
+margin_right = 102.195
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="Type2" type="PanelContainer" parent="Members/Member6"]
+anchor_left = 0.503906
+anchor_top = 0.426901
+anchor_right = 1.0
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member6/Type2"]
+margin_right = 102.195
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="OnlyOneType" type="PanelContainer" parent="Members/Member6"]
+anchor_top = 0.426901
+anchor_right = 1.0
+anchor_bottom = 0.505848
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member6/OnlyOneType"]
+margin_right = 206.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 20 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="GridContainer" type="GridContainer" parent="Members/Member6"]
+anchor_top = 0.546667
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 0
+custom_constants/vseparation = 12
+columns = 2
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Move1" type="VBoxContainer" parent="Members/Member6/GridContainer"]
+margin_right = 101.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member6/GridContainer/Move1"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member6/GridContainer/Move1"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member6/GridContainer/Move1/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member6/GridContainer/Move1/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member6/GridContainer/Move1"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member6/GridContainer/Move1/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member6/GridContainer/Move1/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member6/GridContainer/Move1/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member6/GridContainer/Move1/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move2" type="VBoxContainer" parent="Members/Member6/GridContainer"]
+margin_left = 105.0
+margin_right = 206.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member6/GridContainer/Move2"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member6/GridContainer/Move2"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member6/GridContainer/Move2/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member6/GridContainer/Move2/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member6/GridContainer/Move2"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member6/GridContainer/Move2/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member6/GridContainer/Move2/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member6/GridContainer/Move2/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member6/GridContainer/Move2/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move3" type="VBoxContainer" parent="Members/Member6/GridContainer"]
+margin_top = 68.0
+margin_right = 101.0
+margin_bottom = 124.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member6/GridContainer/Move3"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member6/GridContainer/Move3"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member6/GridContainer/Move3/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member6/GridContainer/Move3/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member6/GridContainer/Move3"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member6/GridContainer/Move3/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member6/GridContainer/Move3/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member6/GridContainer/Move3/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member6/GridContainer/Move3/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move4" type="VBoxContainer" parent="Members/Member6/GridContainer"]
+margin_left = 105.0
+margin_top = 68.0
+margin_right = 206.0
+margin_bottom = 124.0
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Members/Member6/GridContainer/Move4"]
+margin_right = 101.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="Members/Member6/GridContainer/Move4"]
+visible = false
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Members/Member6/GridContainer/Move4/Row1"]
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Members/Member6/GridContainer/Move4/Row1"]
+margin_left = 43.0
+margin_right = 70.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="Members/Member6/GridContainer/Move4"]
+margin_top = 29.0
+margin_right = 101.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Members/Member6/GridContainer/Move4/Row2"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Members/Member6/GridContainer/Move4/Row2/Type"]
+margin_right = 48.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Members/Member6/GridContainer/Move4/Row2"]
+margin_left = 52.0
+margin_right = 101.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Members/Member6/GridContainer/Move4/Row2/Form"]
+margin_right = 49.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Aid" type="GridContainer" parent="."]
+visible = false
+anchor_left = 0.34375
+anchor_top = 0.0533333
+anchor_right = 0.96875
+anchor_bottom = 0.955
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Member1" type="VBoxContainer" parent="Aid"]
+margin_right = 206.0
+margin_bottom = 265.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Member" type="Panel" parent="Aid/Member1"]
+margin_right = 206.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Moves" type="GridContainer" parent="Aid/Member1"]
+margin_top = 145.0
+margin_right = 206.0
+margin_bottom = 265.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.85
+columns = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move1" type="Panel" parent="Aid/Member1/Moves"]
+margin_right = 101.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move2" type="Panel" parent="Aid/Member1/Moves"]
+margin_left = 105.0
+margin_right = 206.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move3" type="Panel" parent="Aid/Member1/Moves"]
+margin_top = 62.0
+margin_right = 101.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move4" type="Panel" parent="Aid/Member1/Moves"]
+margin_left = 105.0
+margin_top = 62.0
+margin_right = 206.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Member2" type="VBoxContainer" parent="Aid"]
+margin_left = 216.0
+margin_right = 422.0
+margin_bottom = 265.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Member" type="Panel" parent="Aid/Member2"]
+margin_right = 206.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Moves" type="GridContainer" parent="Aid/Member2"]
+margin_top = 145.0
+margin_right = 206.0
+margin_bottom = 265.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.85
+columns = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move1" type="Panel" parent="Aid/Member2/Moves"]
+margin_right = 101.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move2" type="Panel" parent="Aid/Member2/Moves"]
+margin_left = 105.0
+margin_right = 206.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move3" type="Panel" parent="Aid/Member2/Moves"]
+margin_top = 62.0
+margin_right = 101.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move4" type="Panel" parent="Aid/Member2/Moves"]
+margin_left = 105.0
+margin_top = 62.0
+margin_right = 206.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Member3" type="VBoxContainer" parent="Aid"]
+margin_left = 432.0
+margin_right = 638.0
+margin_bottom = 265.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Member" type="Panel" parent="Aid/Member3"]
+margin_right = 206.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Moves" type="GridContainer" parent="Aid/Member3"]
+margin_top = 145.0
+margin_right = 206.0
+margin_bottom = 265.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.85
+columns = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move1" type="Panel" parent="Aid/Member3/Moves"]
+margin_right = 101.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move2" type="Panel" parent="Aid/Member3/Moves"]
+margin_left = 105.0
+margin_right = 206.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move3" type="Panel" parent="Aid/Member3/Moves"]
+margin_top = 62.0
+margin_right = 101.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move4" type="Panel" parent="Aid/Member3/Moves"]
+margin_left = 105.0
+margin_top = 62.0
+margin_right = 206.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Member4" type="VBoxContainer" parent="Aid"]
+margin_top = 275.0
+margin_right = 206.0
+margin_bottom = 540.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Member" type="Panel" parent="Aid/Member4"]
+margin_right = 206.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Moves" type="GridContainer" parent="Aid/Member4"]
+margin_top = 145.0
+margin_right = 206.0
+margin_bottom = 265.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.85
+columns = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move1" type="Panel" parent="Aid/Member4/Moves"]
+margin_right = 101.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move2" type="Panel" parent="Aid/Member4/Moves"]
+margin_left = 105.0
+margin_right = 206.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move3" type="Panel" parent="Aid/Member4/Moves"]
+margin_top = 62.0
+margin_right = 101.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move4" type="Panel" parent="Aid/Member4/Moves"]
+margin_left = 105.0
+margin_top = 62.0
+margin_right = 206.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Member5" type="VBoxContainer" parent="Aid"]
+margin_left = 216.0
+margin_top = 275.0
+margin_right = 422.0
+margin_bottom = 540.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Member" type="Panel" parent="Aid/Member5"]
+margin_right = 206.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Moves" type="GridContainer" parent="Aid/Member5"]
+margin_top = 145.0
+margin_right = 206.0
+margin_bottom = 265.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.85
+columns = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move1" type="Panel" parent="Aid/Member5/Moves"]
+margin_right = 101.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move2" type="Panel" parent="Aid/Member5/Moves"]
+margin_left = 105.0
+margin_right = 206.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move3" type="Panel" parent="Aid/Member5/Moves"]
+margin_top = 62.0
+margin_right = 101.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move4" type="Panel" parent="Aid/Member5/Moves"]
+margin_left = 105.0
+margin_top = 62.0
+margin_right = 206.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Member6" type="VBoxContainer" parent="Aid"]
+margin_left = 432.0
+margin_top = 275.0
+margin_right = 638.0
+margin_bottom = 540.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Member" type="Panel" parent="Aid/Member6"]
+margin_right = 206.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Moves" type="GridContainer" parent="Aid/Member6"]
+margin_top = 145.0
+margin_right = 206.0
+margin_bottom = 265.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.85
+columns = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move1" type="Panel" parent="Aid/Member6/Moves"]
+margin_right = 101.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move2" type="Panel" parent="Aid/Member6/Moves"]
+margin_left = 105.0
+margin_right = 206.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move3" type="Panel" parent="Aid/Member6/Moves"]
+margin_top = 62.0
+margin_right = 101.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Move4" type="Panel" parent="Aid/Member6/Moves"]
+margin_left = 105.0
+margin_top = 62.0
+margin_right = 206.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Back" type="Button" parent="."]
+anchor_left = 0.0117188
+anchor_top = 0.916667
+anchor_right = 0.105469
+anchor_bottom = 0.983334
+custom_styles/hover = SubResource( 55 )
+custom_styles/normal = SubResource( 56 )
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]

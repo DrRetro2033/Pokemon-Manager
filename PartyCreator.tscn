@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/PartyCreator.gd" type="Script" id=1]
 [ext_resource path="res://Party.tscn" type="PackedScene" id=2]
+[ext_resource path="res://PartyViewer.tscn" type="PackedScene" id=3]
 
 [node name="PartyCreator" type="Control"]
 anchor_right = 1.0
@@ -92,8 +93,24 @@ margin_right = 332.0
 margin_bottom = 228.0
 text = "Copy to Clipboard"
 
+[node name="View" type="Button" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 200.0
+margin_top = 232.0
+margin_right = 332.0
+margin_bottom = 252.0
+disabled = true
+text = "View"
+
+[node name="PartyViewer" parent="." instance=ExtResource( 3 )]
+visible = false
+
 [connection signal="pressed" from="Panel/Back" to="." method="_on_Back_pressed"]
 [connection signal="tab_changed" from="Panel/Parties" to="." method="_on_Parties_tab_changed"]
 [connection signal="pressed" from="Panel/AddParty" to="." method="_on_AddParty_pressed"]
 [connection signal="pressed" from="Panel/RemoveParty" to="." method="_on_RemoveParty_pressed"]
 [connection signal="pressed" from="Panel/Export" to="." method="_on_Export_pressed"]
+[connection signal="pressed" from="Panel/View" to="." method="_on_View_pressed"]

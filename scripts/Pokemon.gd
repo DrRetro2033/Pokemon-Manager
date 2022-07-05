@@ -824,3 +824,21 @@ func gameVersion(id):
 		UM:
 			version = "Pokémon Ultra Moon (3DS)"
 	return version
+
+func getLocation(location_id,game):
+	var file = File.new()
+	match game:
+		20,21,22,23:
+			file.open("res://locations/gen5/location_0000_en.txt",File.READ)
+		24,25,26,27:
+			file.open("res://locations/gen6/location_0000_en.txt",File.READ)
+		30,31,32,33:
+			file.open("res://locations/gen7/location_0000_en.txt",File.READ)
+	var pos = location_id
+	while pos >= 1:
+		file.get_line()
+		pos -= 1
+	var location = file.get_line()
+	print(location)
+	file.close()
+	return location

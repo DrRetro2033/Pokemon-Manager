@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Move.tscn" type="PackedScene" id=1]
 [ext_resource path="res://abomasnow.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://fonts/FemaleAndMaleSymbols-BLql.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://Context.tscn" type="PackedScene" id=8]
 [ext_resource path="res://PanelTheme.tres" type="Theme" id=9]
+[ext_resource path="res://Types.tscn" type="PackedScene" id=10]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Panel
@@ -123,8 +124,8 @@ func types(var type, var node):
 	node.add_stylebox_override(\"panel\",style)
 
 
-func open(info):
-	var pokemon = Pokemon.pokemon[info]
+func open(id):
+	var pokemon = Pokemon.pokemon[id]
 	visible = true
 	types(pokemon[\"type1\"],type1_color)
 	types(pokemon[\"type1\"],one_type_color)
@@ -138,6 +139,7 @@ func open(info):
 		one_type_color.visible = false
 		type1_color.visible = true
 		type2_color.visible = true
+	$TypeChart.setChart(pokemon[\"type1\"],pokemon[\"type2\"])
 	poke_name.text = pokemon[\"nickname\"]
 	var species_name = pokemon[\"species-name\"]
 	species_name[0] = species_name.left(1).to_upper()
@@ -151,7 +153,7 @@ func open(info):
 			gender.text = \"f\"
 			gender_styles.set_bg_color(Color(\"#fc92ff\"))
 		2:
-			gender.text = \"N/A\"
+			gender.text = \"h\"
 			gender_styles.set_bg_color(Color(\"#424242\"))
 	gender_color.add_stylebox_override(\"panel\",gender_styles)
 	var moves = 4
@@ -171,7 +173,7 @@ func open(info):
 			4:
 				move = pokemon[\"move4\"]
 				child = get_node(\"GridContainer/Move4\")
-		child.move(move[\"name\"],move[\"typing\"],move[\"form\"],move[\"pp\"],move[\"power\"],move[\"text\"])
+		child.move(self,move[\"name\"],move[\"typing\"],move[\"form\"],move[\"pp\"],move[\"power\"],move[\"text\"])
 		moves -= 1
 	text.text = pokemon[\"text\"]
 	lv.text = \"Lv. \"+str(pokemon[\"level\"])
@@ -198,7 +200,15 @@ func open(info):
 		\"\\n\\tSpD: \"+str(pokemon[\"ev_spd\"])+
 		\"\\n\\tSpA: \"+str(pokemon[\"ev_spa\"])
 		)
-	$\"OT Info\".text = \"Met \"+pokemon[\"ot\"][\"nickname\"]+\" at level \"+str(pokemon[\"met_level\"])+\" in \"+Pokemon.gameVersion(pokemon[\"ot\"][\"game\"])+\".\"
+	var location = Pokemon.getLocation(pokemon[\"met_location\"],pokemon[\"ot\"][\"game\"])
+	if location.findn(\"route\") != -1:
+		location = \" on \"+location
+	else:
+		location = \" in \"+location
+	$\"OT Info\".text = (pokemon[\"nickname\"]+
+	\" met \"+pokemon[\"ot\"][\"nickname\"]+
+	\" at level \"+str(pokemon[\"met_level\"])+
+	location+\".\")
 	print(pokemon)
 
 func _process(delta):
@@ -220,7 +230,7 @@ func _process(delta):
 	$RichTextLabel.add_font_override(\"normal_font\",text_font)
 "
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=53]
 size = 26
 font_data = ExtResource( 4 )
 
@@ -249,35 +259,35 @@ font_data = ExtResource( 3 )
 size = 30
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=54]
 font_data = ExtResource( 3 )
 
-[sub_resource type="Curve2D" id=15]
+[sub_resource type="Curve2D" id=55]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -64 )
 }
 
-[sub_resource type="Curve2D" id=10]
+[sub_resource type="Curve2D" id=56]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 56, 32 )
 }
 
-[sub_resource type="Curve2D" id=11]
+[sub_resource type="Curve2D" id=57]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 56, -32 )
 }
 
-[sub_resource type="Curve2D" id=12]
+[sub_resource type="Curve2D" id=58]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64 )
 }
 
-[sub_resource type="Curve2D" id=13]
+[sub_resource type="Curve2D" id=59]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -56, -32 )
 }
 
-[sub_resource type="Curve2D" id=14]
+[sub_resource type="Curve2D" id=60]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -56, 32 )
 }
@@ -379,6 +389,10 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
+[node name="TypeChart" parent="." instance=ExtResource( 10 )]
+margin_right = -884.0
+margin_bottom = -312.0
+
 [node name="Popup" parent="." instance=ExtResource( 8 )]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -398,8 +412,7 @@ margin_bottom = -3.05176e-05
 rect_min_size = Vector2( 0, 20 )
 theme = ExtResource( 9 )
 __meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": true
+"_edit_group_": true
 }
 
 [node name="Label" type="Label" parent="Type1"]
@@ -407,7 +420,7 @@ margin_right = 108.0
 margin_bottom = 27.9996
 size_flags_horizontal = 3
 size_flags_vertical = 7
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 53 )
 text = "g"
 align = 1
 valign = 2
@@ -421,8 +434,7 @@ margin_bottom = -3.05176e-05
 rect_min_size = Vector2( 0, 20 )
 theme = ExtResource( 9 )
 __meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": true
+"_edit_group_": true
 }
 
 [node name="Label" type="Label" parent="Type2"]
@@ -430,7 +442,7 @@ margin_right = 108.0
 margin_bottom = 27.9996
 size_flags_horizontal = 3
 size_flags_vertical = 7
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 53 )
 text = "g"
 align = 1
 valign = 2
@@ -444,8 +456,7 @@ margin_bottom = -3.05176e-05
 rect_min_size = Vector2( 0, 20 )
 theme = ExtResource( 9 )
 __meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": true
+"_edit_group_": true
 }
 
 [node name="Label" type="Label" parent="OnlyOneType"]
@@ -453,10 +464,23 @@ margin_right = 224.0
 margin_bottom = 27.9996
 size_flags_horizontal = 3
 size_flags_vertical = 7
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 53 )
 text = "g"
 align = 1
 valign = 2
+
+[node name="TypeButton" type="ToolButton" parent="."]
+anchor_left = 0.765625
+anchor_top = 0.486667
+anchor_right = 0.984375
+anchor_bottom = 0.533333
+margin_bottom = -3.05176e-05
+mouse_default_cursor_shape = 16
+action_mode = 0
+button_mask = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Gender" type="PanelContainer" parent="."]
 anchor_left = 0.765625
@@ -465,8 +489,7 @@ anchor_right = 0.871094
 anchor_bottom = 0.473333
 theme = ExtResource( 9 )
 __meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": true
+"_edit_group_": true
 }
 
 [node name="Label" type="Label" parent="Gender"]
@@ -545,8 +568,7 @@ anchor_bottom = 0.853333
 custom_constants/vseparation = 12
 columns = 2
 __meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": true
+"_edit_group_": true
 }
 
 [node name="Move1" parent="GridContainer" instance=ExtResource( 1 )]
@@ -586,8 +608,7 @@ mouse_default_cursor_shape = 16
 custom_constants/vseparation = 12
 columns = 2
 __meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": true
+"_edit_group_": true
 }
 
 [node name="Move1" type="ToolButton" parent="GridContainer2"]
@@ -639,7 +660,7 @@ rect_min_size = Vector2( 312, 162 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
-custom_fonts/normal_font = SubResource( 8 )
+custom_fonts/normal_font = SubResource( 54 )
 meta_underlined = false
 text = "This is for the pokedex's entry"
 __meta__ = {
@@ -665,7 +686,7 @@ script = ExtResource( 6 )
 [node name="Stats" type="Node2D" parent="Viewport/V Chart"]
 
 [node name="HP" type="Path2D" parent="Viewport/V Chart/Stats"]
-curve = SubResource( 15 )
+curve = SubResource( 55 )
 script = ExtResource( 5 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Viewport/V Chart/Stats/HP"]
@@ -675,7 +696,7 @@ loop = false
 
 [node name="Attack" type="Path2D" parent="Viewport/V Chart/Stats"]
 scale = Vector2( 1, -1 )
-curve = SubResource( 10 )
+curve = SubResource( 56 )
 script = ExtResource( 5 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Viewport/V Chart/Stats/Attack"]
@@ -685,7 +706,7 @@ loop = false
 
 [node name="Defense" type="Path2D" parent="Viewport/V Chart/Stats"]
 scale = Vector2( 1, -1 )
-curve = SubResource( 11 )
+curve = SubResource( 57 )
 script = ExtResource( 5 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Viewport/V Chart/Stats/Defense"]
@@ -694,7 +715,7 @@ rotate = false
 loop = false
 
 [node name="Speed" type="Path2D" parent="Viewport/V Chart/Stats"]
-curve = SubResource( 12 )
+curve = SubResource( 58 )
 script = ExtResource( 5 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Viewport/V Chart/Stats/Speed"]
@@ -704,7 +725,7 @@ loop = false
 
 [node name="Sp Def" type="Path2D" parent="Viewport/V Chart/Stats"]
 scale = Vector2( 1, -1 )
-curve = SubResource( 13 )
+curve = SubResource( 59 )
 script = ExtResource( 5 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Viewport/V Chart/Stats/Sp Def"]
@@ -714,7 +735,7 @@ loop = false
 
 [node name="Sp Atk" type="Path2D" parent="Viewport/V Chart/Stats"]
 scale = Vector2( 1, -1 )
-curve = SubResource( 14 )
+curve = SubResource( 60 )
 script = ExtResource( 5 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Viewport/V Chart/Stats/Sp Atk"]
@@ -974,9 +995,10 @@ __meta__ = {
 [node name="OT Info" type="Label" parent="."]
 anchor_left = 0.046875
 anchor_top = 0.553333
-anchor_right = 0.300781
+anchor_right = 0.3125
 anchor_bottom = 0.576667
 text = "Caught by in"
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -1356,6 +1378,7 @@ EVs:
 	Spd: 1
 	SpA: 1"
 
+[connection signal="pressed" from="TypeButton" to="TypeChart" method="_on_TypeButton_pressed"]
 [connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="GridContainer2/Move1" to="Popup" method="_on_Move1_pressed"]
 [connection signal="pressed" from="GridContainer2/Move2" to="Popup" method="_on_Move2_pressed"]

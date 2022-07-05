@@ -7,17 +7,9 @@ var file_exists : bool = false
 
 func save():
 	var bank := bank_loaded.new()
-	for node in get_tree().get_nodes_in_group("Bank"):
-		node.save(bank)
 	for node in get_tree().get_nodes_in_group("Parties"):
 		node.save(bank)
 	$"../PartyCreator".save(bank)
-	for item in bank.order:
-		var last = bank.order.back()
-		if last == null:
-			bank.order.remove(bank.order.size() - 1)
-		elif last != null:
-			break
 	$"../TabContainer".save(bank)
 	bank.data = Pokemon.pokemon
 	Trainer.save(bank)
@@ -28,7 +20,6 @@ func save():
 		var directory : Directory = Directory.new()
 		if not directory.dir_exists(BANK_FOLDER):
 			directory.make_dir_recursive(BANK_FOLDER)
-		
 		var save_path = BANK_FOLDER.plus_file(SAVE_NAME_TEMPLATE)
 		var error : int = ResourceSaver.save(save_path,bank)
 		if error != OK:
@@ -69,8 +60,7 @@ func load():
 func reset():
 	var bank := bank_loaded.new()
 	bank.data = {}
-	bank.order = []
-	bank.box_names = []
+	bank.boxes = {}
 	bank.parties_order = []
 	bank.parties = {}
 	var directory : Directory = Directory.new()

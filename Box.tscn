@@ -20,17 +20,34 @@ func setSlots(poke):
 		if not pokemon.empty() and pokemon.front() != null:
 			slot.pokeButton(pokemon.front())
 			pokemon.remove(0)
-			print(\"full\")
+#			print(\"full\")
 		elif not pokemon.empty() and pokemon.front() == null:
 			slot.pokeButton(null)
 			pokemon.remove(0)
 		else:
 			break
 	return pokemon
-
-func save(bank):
+func setEmpty(id):
 	for slot in get_children():
-		bank.order.push_back(slot.id) 
+		if slot.id == null:
+			slot.pokeButton(id)
+			break
+	
+
+func isEmpty():
+	var empty = true
+	for slot in get_children():
+		if slot.id != null:
+			empty = false
+	return empty
+
+func isFull():
+	var full = true
+	for slot in get_children():
+		if slot.id == null:
+			full = false
+	return full
+
 
 func list_pokemon():
 	var pokemon = []

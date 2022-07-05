@@ -3,9 +3,11 @@ extends PopupMenu
 
 signal new_box
 signal export_box
+signal remove_box
+onready var tabs = $"../TabContainer"
 
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,3 +27,15 @@ func _on_PopupMenu_id_pressed(id):
 			$"../PartyCreator".showPartyMaker()
 		4:
 			emit_signal("export_box")
+		5:
+			var tab = tabs.get_tab_control(tabs.current_tab)
+			if tab.isEmpty():
+				tabs.remove_child(tab)
+				tab.queue_free()
+
+func _on_PopupMenu_about_to_show():
+	var tab = tabs.get_tab_control(tabs.current_tab)
+	if tab.isEmpty():
+		set_item_disabled(2,false)
+	else:
+		set_item_disabled(2,true)

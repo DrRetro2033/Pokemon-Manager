@@ -54,6 +54,10 @@ func _on_Parties_tab_changed(tab):
 
 func newMember(party_array):
 	var pokemon = Pokemon.pokemon.keys()
+	if party_array.size() > 0:
+		$Panel/View.disabled = false
+	else:
+		$Panel/View.disabled = true
 	for member in party_array:
 		pokemon.erase(member)
 	clearPokemon()
@@ -98,3 +102,9 @@ func _on_RemoveParty_pressed():
 			$Panel/Parties.current_tab = $Panel/Parties.current_tab + 1
 		$Panel/Parties.remove_child(party)
 		party.queue_free()
+
+
+func _on_View_pressed():
+	var party = parties.get_tab_control(parties.current_tab)
+	var party_array = party.get_pokemon_in_party()
+	$PartyViewer.showParty(party_array)

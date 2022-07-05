@@ -107,10 +107,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false, true ]
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -269,6 +269,7 @@ anims/Swimming = SubResource( 3 )
 anims/Walking = ExtResource( 2 )
 
 [node name="Water" type="Node2D" parent="."]
+visible = false
 position = Vector2( 599.099, 416 )
 scale = Vector2( 0.7, 0.7 )
 
@@ -295,7 +296,6 @@ flip_h = true
 [node name="Fire" type="CPUParticles2D" parent="PokemonWalking"]
 visible = false
 position = Vector2( -0.400146, 14.4624 )
-emitting = false
 amount = 4
 lifetime = 5.0
 speed_scale = 0.5

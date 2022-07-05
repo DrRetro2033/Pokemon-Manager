@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends PopupPanel
@@ -36,6 +36,8 @@ func _on_Move4_pressed():
 	popup()
 "
 
+[sub_resource type="RichTextEffect" id=3]
+
 [node name="Popup" type="PopupPanel"]
 margin_right = 65.0
 margin_bottom = 32.0
@@ -52,3 +54,4 @@ margin_bottom = -4.0
 size_flags_vertical = 3
 fit_content_height = true
 scroll_active = false
+custom_effects = [ SubResource( 3 ) ]
