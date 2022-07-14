@@ -41,6 +41,7 @@ Pokemon="*res://scripts/Pokemon.gd"
 Trainer="*res://scripts/Trainer.gd"
 PokemonShowdown="*res://scripts/pokemon_showdown.gd"
 PM="*res://scripts/PM.gd"
+Trading="*res://scripts/Trading.gd"
 
 [display]
 

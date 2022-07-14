@@ -32,6 +32,8 @@ func _on_PopupMenu_id_pressed(id):
 			if tab.isEmpty():
 				tabs.remove_child(tab)
 				tab.queue_free()
+		6:
+			$"../Trade".visible = true
 
 func _on_PopupMenu_about_to_show():
 	var tab = tabs.get_tab_control(tabs.current_tab)

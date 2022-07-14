@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://PanelTheme.tres" type="Theme" id=1]
 [ext_resource path="res://fonts/Essentiarum Regular.ttf" type="DynamicFontData" id=2]
@@ -20,6 +20,9 @@ onready var member3 = $Members/Member3
 onready var member4 = $Members/Member4
 onready var member5 = $Members/Member5
 onready var member6 = $Members/Member6
+var data_translate = load(\"res://scripts/Pokemon_Database.gd\").new()
+var current_party = []
+var selected_types = [null,null]
 enum types {
 	NULL,
 	NORMAL,
@@ -145,12 +148,14 @@ func setMember(spot,member):
 		moves -= 1
 
 func showParty(party):
+	current_party = party
 	var member = Pokemon.pokemon[party[0]]
 	for child in $Members.get_children():
 		child.visible = false
 	var member_pos = 0
 	while member_pos < party.size():
 		if party[member_pos] == null:
+			member_pos += 1
 			continue
 		member = Pokemon.pokemon[party[member_pos]]
 		match member_pos:
@@ -173,11 +178,217 @@ func showParty(party):
 				setMember(member6,member)
 				member6.visible = true
 		member_pos += 1
+	OS.min_window_size = Vector2(1536,900)
+	OS.window_size = Vector2(1536,900)
 	visible = true
 
 
 func _on_Back_pressed():
+	OS.min_window_size = Vector2(1024,600)
+	OS.window_size = Vector2(1024,600)
 	visible = false
+
+func MoveAids(type1,type2,node,member):
+	for child in node.get_node(\"Moves\").get_children():
+		child.visible = false
+	var move_names = [\"move1\",\"move2\",\"move3\",\"move4\"]
+	for move in move_names:
+		var type_adv = 1
+		var style = $Aid/Member1/Member.get_stylebox(\"panel\").duplicate()
+		var type = \"\"
+		match member[move][\"typing\"]:
+			types.NULL:
+				continue
+			types.NORMAL:
+				type = \"normal\"
+			types.FIRE:
+				type = \"fire\"
+			types.WATER:
+				type = \"water\"
+			types.GRASS:
+				type = \"grass\"
+			types.ELECTRIC:
+				type = \"electric\"
+			types.ICE:
+				type = \"ice\"
+			types.FIGHTING:
+				type = \"fighting\"
+			types.POISON:
+				type = \"poison\"
+			types.GROUND:
+				type = \"ground\"
+			types.FLYING:
+				type = \"flying\"
+			types.PSYCHIC:
+				type = \"psychic\"
+			types.BUG:
+				type = \"bug\"
+			types.ROCK:
+				type = \"rock\"
+			types.GHOST:
+				type = \"ghost\"
+			types.DARK:
+				type = \"dark\"
+			types.DRAGON:
+				type = \"dragon\"
+			types.STEEL:
+				type = \"steel\"
+			types.FAIRY:
+				type = \"fairy\"
+		if type1 != null and Pokemon.types_def[data_translate.typing(type1)].has(type):
+			type_adv *= Pokemon.types_def[data_translate.typing(type1)][type]
+		if type2 != null and Pokemon.types_def[data_translate.typing(type2)].has(type):
+			type_adv *= Pokemon.types_def[data_translate.typing(type2)][type]
+		if type_adv == 1:
+			style.set_bg_color(Color8(0,0,0,0))
+		elif type_adv == 0:
+			style.set_bg_color(Color8(32,0,255,50))
+		elif type_adv > 1:
+			style.set_bg_color(Color8(0,255,40,50))
+		elif type_adv < 1:
+			style.set_bg_color(Color8(255,0,0,50))
+		print(\"Moves/\"+(move.capitalize().replace(\" \",\"\")))
+		node.get_node(\"Moves/\"+(move.capitalize().replace(\" \",\"\"))).add_stylebox_override(\"panel\",style)
+		node.get_node(\"Moves/\"+(move.capitalize().replace(\" \",\"\"))).visible = true
+
+func Aids():
+	print(selected_types)
+	if selected_types.empty():
+		pass
+	$Aid/Member1/Member.visible = false
+	$Aid/Member2/Member.visible = false
+	$Aid/Member3/Member.visible = false
+	$Aid/Member4/Member.visible = false
+	$Aid/Member5/Member.visible = false
+	$Aid/Member6/Member.visible = false
+	var member = Pokemon.pokemon[current_party[0]]
+	var member_pos = 0
+	while member_pos < current_party.size():
+		var style = $Aid/Member1/Member.get_stylebox(\"panel\").duplicate()
+		var type_adv = 1
+		if current_party[member_pos] == null:
+			member_pos += 1
+			continue
+		member = Pokemon.pokemon[current_party[member_pos]]
+		if selected_types[0] != null:
+			if Pokemon.types_def[member[\"type1\"]].has(selected_types[0]):
+				type_adv *= Pokemon.types_def[member[\"type1\"]][selected_types[0]]
+			if member[\"type2\"] != 0 and Pokemon.types_def[member[\"type2\"]].has(selected_types[0]):
+				type_adv *= Pokemon.types_def[member[\"type2\"]][selected_types[0]]
+		if selected_types[1] != null:
+			if Pokemon.types_def[member[\"type1\"]].has(selected_types[1]):
+				type_adv *= Pokemon.types_def[member[\"type1\"]][selected_types[1]]
+			if member[\"type2\"] != 0 and Pokemon.types_def[member[\"type2\"]].has(selected_types[1]):
+				type_adv *= Pokemon.types_def[member[\"type2\"]][selected_types[1]]
+		print(type_adv)
+		if type_adv == 1.0:
+			style.set_bg_color(Color8(0,0,0,0))
+		elif type_adv == 0:
+			style.set_bg_color(Color8(32,0,255,50))
+		elif type_adv > 1.0:
+			style.set_bg_color(Color8(255,0,0,50))
+		elif type_adv < 1.0:
+			style.set_bg_color(Color8(0,255,40,50))
+		match member_pos:
+			0:
+				$Aid/Member1/Member.visible = true
+				$Aid/Member1/Member.add_stylebox_override(\"panel\",style)
+				MoveAids(selected_types[0],selected_types[1],$Aid/Member1,member)
+			1:
+				$Aid/Member2/Member.visible = true
+				$Aid/Member2/Member.add_stylebox_override(\"panel\",style)
+				MoveAids(selected_types[0],selected_types[1],$Aid/Member2,member)
+			2:
+				$Aid/Member3/Member.visible = true
+				$Aid/Member3/Member.add_stylebox_override(\"panel\",style)
+				MoveAids(selected_types[0],selected_types[1],$Aid/Member3,member)
+			3:
+				$Aid/Member4/Member.visible = true
+				$Aid/Member4/Member.add_stylebox_override(\"panel\",style)
+				MoveAids(selected_types[0],selected_types[1],$Aid/Member4,member)
+			4:
+				$Aid/Member5/Member.visible = true
+				$Aid/Member5/Member.add_stylebox_override(\"panel\",style)
+				MoveAids(selected_types[0],selected_types[1],$Aid/Member5,member)
+			5:
+				$Aid/Member6/Member.visible = true
+				$Aid/Member6/Member.add_stylebox_override(\"panel\",style)
+				MoveAids(selected_types[0],selected_types[1],$Aid/Member6,member)
+		member_pos += 1
+	if selected_types[0] != null and selected_types[1] != null:
+		for button in $Buttons.get_children():
+			if selected_types.has(button.name.to_lower()):
+				continue
+			else:
+				button.disabled = true
+	else:
+		for button in $Buttons.get_children():
+			button.disabled = false
+
+func toggled(pressed,type):
+	if pressed == true:
+		if selected_types[0] == null:
+			selected_types[0] = type
+		elif selected_types[1] == null:
+			selected_types[1] = type
+	else:
+		if selected_types.has(type):
+			selected_types[selected_types.find(type)] = null
+	Aids()
+
+func _on_Normal_toggled(button_pressed):
+	toggled(button_pressed,\"normal\")
+
+func _on_Fire_toggled(button_pressed):
+	toggled(button_pressed,\"fire\")
+
+func _on_Water_toggled(button_pressed):
+	toggled(button_pressed,\"water\")
+
+func _on_Grass_toggled(button_pressed):
+	toggled(button_pressed,\"grass\")
+
+func _on_Electric_toggled(button_pressed):
+	toggled(button_pressed,\"electric\")
+
+func _on_Ice_toggled(button_pressed):
+	toggled(button_pressed,\"ice\")
+
+func _on_Fighting_toggled(button_pressed):
+	toggled(button_pressed,\"fighting\")
+
+func _on_Poison_toggled(button_pressed):
+	toggled(button_pressed,\"poison\")
+
+func _on_Ground_toggled(button_pressed):
+	toggled(button_pressed,\"ground\")
+
+func _on_Flying_toggled(button_pressed):
+	toggled(button_pressed,\"flying\")
+
+func _on_Psychic_toggled(button_pressed):
+	toggled(button_pressed,\"psychic\")
+
+func _on_Bug_toggled(button_pressed):
+	toggled(button_pressed,\"bug\")
+
+func _on_Rock_toggled(button_pressed):
+	toggled(button_pressed,\"rock\")
+
+func _on_Ghost_toggled(button_pressed):
+	toggled(button_pressed,\"ghost\")
+
+func _on_Dark_toggled(button_pressed):
+	toggled(button_pressed,\"dark\")
+
+func _on_Dragon_toggled(button_pressed):
+	toggled(button_pressed,\"dragon\")
+
+func _on_Steel_toggled(button_pressed):
+	toggled(button_pressed,\"steel\")
+
+func _on_Fairy_toggled(button_pressed):
+	toggled(button_pressed,\"fairy\")
 "
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -340,6 +551,13 @@ corner_radius_bottom_left = 128
 [sub_resource type="StyleBoxFlat" id=57]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
+[sub_resource type="StyleBoxFlat" id=59]
+bg_color = Color( 0.760784, 0.760784, 0.760784, 0.392157 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
 [sub_resource type="StyleBoxFlat" id=51]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
@@ -355,11 +573,14 @@ size = 22
 font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxFlat" id=53]
-bg_color = Color( 0, 1, 0.156863, 0.196078 )
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
+bg_color = Color( 0, 0, 0, 0 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
 corner_radius_bottom_left = 16
+
+[sub_resource type="Theme" id=58]
+Panel/styles/panel = SubResource( 53 )
 
 [sub_resource type="StyleBoxFlat" id=55]
 corner_radius_top_left = 8
@@ -884,6 +1105,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 51 )
 toggle_mode = true
 flat = false
@@ -902,6 +1124,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -920,6 +1143,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -938,6 +1162,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -957,6 +1182,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -976,6 +1202,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -994,6 +1221,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -1013,6 +1241,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -1032,6 +1261,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -1050,6 +1280,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -1069,6 +1300,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -1088,6 +1320,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -1106,6 +1339,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -1125,6 +1359,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -1144,6 +1379,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -1162,6 +1398,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -1181,6 +1418,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -1200,6 +1438,7 @@ theme = ExtResource( 1 )
 custom_styles/hover = SubResource( 49 )
 custom_styles/pressed = SubResource( 50 )
 custom_styles/focus = SubResource( 57 )
+custom_styles/disabled = SubResource( 59 )
 custom_styles/normal = SubResource( 52 )
 toggle_mode = true
 flat = false
@@ -4120,38 +4359,38 @@ __meta__ = {
 }
 
 [node name="Aid" type="GridContainer" parent="."]
-visible = false
 anchor_left = 0.34375
-anchor_top = 0.0533333
+anchor_top = 0.0266667
 anchor_right = 0.96875
-anchor_bottom = 0.955
+anchor_bottom = 0.963333
 custom_constants/vseparation = 10
 custom_constants/hseparation = 10
 columns = 3
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": true
 }
 
 [node name="Member1" type="VBoxContainer" parent="Aid"]
 margin_right = 206.0
-margin_bottom = 265.0
+margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Member" type="Panel" parent="Aid/Member1"]
 margin_right = 206.0
-margin_bottom = 141.0
+margin_bottom = 146.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 53 )
+theme = SubResource( 58 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Moves" type="GridContainer" parent="Aid/Member1"]
-margin_top = 145.0
+margin_top = 150.0
 margin_right = 206.0
-margin_bottom = 265.0
+margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.85
@@ -4162,7 +4401,7 @@ __meta__ = {
 
 [node name="Move1" type="Panel" parent="Aid/Member1/Moves"]
 margin_right = 101.0
-margin_bottom = 58.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4173,7 +4412,7 @@ __meta__ = {
 [node name="Move2" type="Panel" parent="Aid/Member1/Moves"]
 margin_left = 105.0
 margin_right = 206.0
-margin_bottom = 58.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4182,9 +4421,9 @@ __meta__ = {
 }
 
 [node name="Move3" type="Panel" parent="Aid/Member1/Moves"]
-margin_top = 62.0
+margin_top = 64.0
 margin_right = 101.0
-margin_bottom = 120.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4194,9 +4433,9 @@ __meta__ = {
 
 [node name="Move4" type="Panel" parent="Aid/Member1/Moves"]
 margin_left = 105.0
-margin_top = 62.0
+margin_top = 64.0
 margin_right = 206.0
-margin_bottom = 120.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4207,24 +4446,24 @@ __meta__ = {
 [node name="Member2" type="VBoxContainer" parent="Aid"]
 margin_left = 216.0
 margin_right = 422.0
-margin_bottom = 265.0
+margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Member" type="Panel" parent="Aid/Member2"]
 margin_right = 206.0
-margin_bottom = 141.0
+margin_bottom = 146.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 53 )
+theme = SubResource( 58 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Moves" type="GridContainer" parent="Aid/Member2"]
-margin_top = 145.0
+margin_top = 150.0
 margin_right = 206.0
-margin_bottom = 265.0
+margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.85
@@ -4235,7 +4474,7 @@ __meta__ = {
 
 [node name="Move1" type="Panel" parent="Aid/Member2/Moves"]
 margin_right = 101.0
-margin_bottom = 58.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4246,7 +4485,7 @@ __meta__ = {
 [node name="Move2" type="Panel" parent="Aid/Member2/Moves"]
 margin_left = 105.0
 margin_right = 206.0
-margin_bottom = 58.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4255,9 +4494,9 @@ __meta__ = {
 }
 
 [node name="Move3" type="Panel" parent="Aid/Member2/Moves"]
-margin_top = 62.0
+margin_top = 64.0
 margin_right = 101.0
-margin_bottom = 120.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4267,9 +4506,9 @@ __meta__ = {
 
 [node name="Move4" type="Panel" parent="Aid/Member2/Moves"]
 margin_left = 105.0
-margin_top = 62.0
+margin_top = 64.0
 margin_right = 206.0
-margin_bottom = 120.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4280,24 +4519,24 @@ __meta__ = {
 [node name="Member3" type="VBoxContainer" parent="Aid"]
 margin_left = 432.0
 margin_right = 638.0
-margin_bottom = 265.0
+margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Member" type="Panel" parent="Aid/Member3"]
 margin_right = 206.0
-margin_bottom = 141.0
+margin_bottom = 146.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 53 )
+theme = SubResource( 58 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Moves" type="GridContainer" parent="Aid/Member3"]
-margin_top = 145.0
+margin_top = 150.0
 margin_right = 206.0
-margin_bottom = 265.0
+margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.85
@@ -4308,7 +4547,7 @@ __meta__ = {
 
 [node name="Move1" type="Panel" parent="Aid/Member3/Moves"]
 margin_right = 101.0
-margin_bottom = 58.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4319,7 +4558,7 @@ __meta__ = {
 [node name="Move2" type="Panel" parent="Aid/Member3/Moves"]
 margin_left = 105.0
 margin_right = 206.0
-margin_bottom = 58.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4328,9 +4567,9 @@ __meta__ = {
 }
 
 [node name="Move3" type="Panel" parent="Aid/Member3/Moves"]
-margin_top = 62.0
+margin_top = 64.0
 margin_right = 101.0
-margin_bottom = 120.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4340,9 +4579,9 @@ __meta__ = {
 
 [node name="Move4" type="Panel" parent="Aid/Member3/Moves"]
 margin_left = 105.0
-margin_top = 62.0
+margin_top = 64.0
 margin_right = 206.0
-margin_bottom = 120.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4351,26 +4590,26 @@ __meta__ = {
 }
 
 [node name="Member4" type="VBoxContainer" parent="Aid"]
-margin_top = 275.0
+margin_top = 285.0
 margin_right = 206.0
-margin_bottom = 540.0
+margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Member" type="Panel" parent="Aid/Member4"]
 margin_right = 206.0
-margin_bottom = 141.0
+margin_bottom = 146.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 53 )
+theme = SubResource( 58 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Moves" type="GridContainer" parent="Aid/Member4"]
-margin_top = 145.0
+margin_top = 150.0
 margin_right = 206.0
-margin_bottom = 265.0
+margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.85
@@ -4381,7 +4620,7 @@ __meta__ = {
 
 [node name="Move1" type="Panel" parent="Aid/Member4/Moves"]
 margin_right = 101.0
-margin_bottom = 58.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4392,7 +4631,7 @@ __meta__ = {
 [node name="Move2" type="Panel" parent="Aid/Member4/Moves"]
 margin_left = 105.0
 margin_right = 206.0
-margin_bottom = 58.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4401,9 +4640,9 @@ __meta__ = {
 }
 
 [node name="Move3" type="Panel" parent="Aid/Member4/Moves"]
-margin_top = 62.0
+margin_top = 64.0
 margin_right = 101.0
-margin_bottom = 120.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4413,9 +4652,9 @@ __meta__ = {
 
 [node name="Move4" type="Panel" parent="Aid/Member4/Moves"]
 margin_left = 105.0
-margin_top = 62.0
+margin_top = 64.0
 margin_right = 206.0
-margin_bottom = 120.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4425,26 +4664,26 @@ __meta__ = {
 
 [node name="Member5" type="VBoxContainer" parent="Aid"]
 margin_left = 216.0
-margin_top = 275.0
+margin_top = 285.0
 margin_right = 422.0
-margin_bottom = 540.0
+margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Member" type="Panel" parent="Aid/Member5"]
 margin_right = 206.0
-margin_bottom = 141.0
+margin_bottom = 146.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 53 )
+theme = SubResource( 58 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Moves" type="GridContainer" parent="Aid/Member5"]
-margin_top = 145.0
+margin_top = 150.0
 margin_right = 206.0
-margin_bottom = 265.0
+margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.85
@@ -4455,7 +4694,7 @@ __meta__ = {
 
 [node name="Move1" type="Panel" parent="Aid/Member5/Moves"]
 margin_right = 101.0
-margin_bottom = 58.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4466,7 +4705,7 @@ __meta__ = {
 [node name="Move2" type="Panel" parent="Aid/Member5/Moves"]
 margin_left = 105.0
 margin_right = 206.0
-margin_bottom = 58.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4475,9 +4714,9 @@ __meta__ = {
 }
 
 [node name="Move3" type="Panel" parent="Aid/Member5/Moves"]
-margin_top = 62.0
+margin_top = 64.0
 margin_right = 101.0
-margin_bottom = 120.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4487,9 +4726,9 @@ __meta__ = {
 
 [node name="Move4" type="Panel" parent="Aid/Member5/Moves"]
 margin_left = 105.0
-margin_top = 62.0
+margin_top = 64.0
 margin_right = 206.0
-margin_bottom = 120.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4499,26 +4738,26 @@ __meta__ = {
 
 [node name="Member6" type="VBoxContainer" parent="Aid"]
 margin_left = 432.0
-margin_top = 275.0
+margin_top = 285.0
 margin_right = 638.0
-margin_bottom = 540.0
+margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Member" type="Panel" parent="Aid/Member6"]
 margin_right = 206.0
-margin_bottom = 141.0
+margin_bottom = 146.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 53 )
+theme = SubResource( 58 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Moves" type="GridContainer" parent="Aid/Member6"]
-margin_top = 145.0
+margin_top = 150.0
 margin_right = 206.0
-margin_bottom = 265.0
+margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.85
@@ -4529,7 +4768,7 @@ __meta__ = {
 
 [node name="Move1" type="Panel" parent="Aid/Member6/Moves"]
 margin_right = 101.0
-margin_bottom = 58.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4540,7 +4779,7 @@ __meta__ = {
 [node name="Move2" type="Panel" parent="Aid/Member6/Moves"]
 margin_left = 105.0
 margin_right = 206.0
-margin_bottom = 58.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4549,9 +4788,9 @@ __meta__ = {
 }
 
 [node name="Move3" type="Panel" parent="Aid/Member6/Moves"]
-margin_top = 62.0
+margin_top = 64.0
 margin_right = 101.0
-margin_bottom = 120.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4561,9 +4800,9 @@ __meta__ = {
 
 [node name="Move4" type="Panel" parent="Aid/Member6/Moves"]
 margin_left = 105.0
-margin_top = 62.0
+margin_top = 64.0
 margin_right = 206.0
-margin_bottom = 120.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4583,4 +4822,22 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[connection signal="toggled" from="Buttons/Normal" to="." method="_on_Normal_toggled"]
+[connection signal="toggled" from="Buttons/Fire" to="." method="_on_Fire_toggled"]
+[connection signal="toggled" from="Buttons/Water" to="." method="_on_Water_toggled"]
+[connection signal="toggled" from="Buttons/Grass" to="." method="_on_Grass_toggled"]
+[connection signal="toggled" from="Buttons/Electric" to="." method="_on_Electric_toggled"]
+[connection signal="toggled" from="Buttons/Ice" to="." method="_on_Ice_toggled"]
+[connection signal="toggled" from="Buttons/Fighting" to="." method="_on_Fighting_toggled"]
+[connection signal="toggled" from="Buttons/Poison" to="." method="_on_Poison_toggled"]
+[connection signal="toggled" from="Buttons/Ground" to="." method="_on_Ground_toggled"]
+[connection signal="toggled" from="Buttons/Flying" to="." method="_on_Flying_toggled"]
+[connection signal="toggled" from="Buttons/Psychic" to="." method="_on_Psychic_toggled"]
+[connection signal="toggled" from="Buttons/Bug" to="." method="_on_Bug_toggled"]
+[connection signal="toggled" from="Buttons/Rock" to="." method="_on_Rock_toggled"]
+[connection signal="toggled" from="Buttons/Ghost" to="." method="_on_Ghost_toggled"]
+[connection signal="toggled" from="Buttons/Dark" to="." method="_on_Dark_toggled"]
+[connection signal="toggled" from="Buttons/Dragon" to="." method="_on_Dragon_toggled"]
+[connection signal="toggled" from="Buttons/Steel" to="." method="_on_Steel_toggled"]
+[connection signal="toggled" from="Buttons/Fairy" to="." method="_on_Fairy_toggled"]
 [connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]

@@ -86,9 +86,6 @@ margin_bottom = -488.0
 text = "All"
 items = [ "All", null, false, 0, null, "Normal", null, false, 1, null, "Fire", null, false, 2, null, "Water", null, false, 3, null, "Grass", null, false, 4, null, "Electric", null, false, 5, null, "Ice", null, false, 6, null, "Fighting", null, false, 7, null, "Poison", null, false, 8, null, "Ground", null, false, 9, null, "Flying", null, false, 10, null, "Psychic", null, false, 11, null, "Bug", null, false, 12, null, "Rock", null, false, 13, null, "Ghost", null, false, 14, null, "Dark", null, false, 15, null, "Dragon", null, false, 16, null, "Steel", null, false, 17, null, "Fairy", null, false, 18, null ]
 selected = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Gender" type="OptionButton" parent="Panel"]
 anchor_right = 1.0
@@ -98,7 +95,7 @@ margin_top = 100.0
 margin_right = -28.0
 margin_bottom = -456.0
 text = "All"
-items = [ "All", null, false, 1, null, "Male", null, false, 0, null, "Female", null, false, 2, null, "N/A", null, false, 4, null ]
+items = [ "All", null, false, 3, null, "Male", null, false, 0, null, "Female", null, false, 1, null, "N/A", null, false, 2, null ]
 selected = 0
 __meta__ = {
 "_edit_use_anchors_": false

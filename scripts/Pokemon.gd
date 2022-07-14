@@ -607,6 +607,32 @@ const rates = {
 		68116
 	]
 }
+const types_def = {
+		1:{"fighting":2,"ghost":0},
+		2:{"fire":0.5,"water":2,"grass":0.5,"ice":0.5,"ground":2,"bug":0.5,"rock":2,"steel":0.5,"fairy":0.5},
+		3:{"fire":0.5,"water":0.5,"electric":2,"grass":2,"ice":0.5,"steel":0.5},
+		4:{"fire":2,"water":0.5,"electric":0.5,"grass":0.5,"ice":2,"poison":2,"ground":0.5,"flying":2,"bug":2},
+		5:{"electric":0.5,"ground":2,"flying":0.5,"steel":0.5},
+		6:{"fire":2,"ice":0.5,"fighting":2,"rock":2,"steel":2},
+		7:{"flying":2,"psychic":2,"bug":0.5,"rock":0.5,"dark":0.5,"fairy":2},
+		8:{"grass":0.5,"fighting":0.5,"poison":0.5,"ground":2,"psychic":2,"bug":0.5,"fairy":0.5},
+		9:{"water":2,"electric":0,"grass":2,"ice":2,"poison":0.5,"rock":0.5},
+		10:{"electric":2,"grass":0.5,"ice":2,"fighting":0.5,"ground":0,"bug":0.5,"rock":2},
+		11:{"fighting":0.5,"psychic":0.5,"bug":2,"ghost":2,"dark":2},
+		12:{"fire":2,"grass":0.5,"fighting":0.5,"ground":0.5,"flying":2,"rock":2},
+		13:{"normal":0.5,"fire":0.5,"water":2,"grass":2,"fighting":2,"poison":0.5,"ground":2,"flying":0.5,"steel":2},
+		14:{"normal":0,"fighting":0,"poison":0.5,"bug":0.5,"ghost":2,"dark":2},
+		15:{"fighting":2,"psychic":0,"bug":2,"ghost":0.5,"dark":0.5,"fairy":2},
+		16:{"fire":0.5,"water":0.5,"electric":0.5,"grass":0.5,"ice":2,"dragon":2,"fairy":2},
+		17:{"normal":0.5,"fire":2,"grass":0.5,"ice":0.5,"fighting":2,"poison":0,"ground":2,"flying":0.5,"psychic":0.5,"bug":0.5,"rock":0.5,"dragon":0.5,"steel":0.5,"fairy":0.5},
+		18:{"fighting":0.5,"poison":2,"bug":0.5,"dragon":0,"dark":0.5,"steel":2}
+}
+const types_atk = {
+	"normal":[13,14,17],
+	"fire":[2,3,4,6,12,16],
+	"water":[2,3,4,9,16],
+	"grass":[2,3,4]
+}
 enum {
 	# Pokémon Sapphire (GBA)
 	S = 1,
@@ -700,7 +726,7 @@ func search(search):
 			if pokemon[x]["type2"] != search["type2"]:
 				print("Erased "+x+" because of "+str(pokemon[x]["type2"]))
 				results.erase(x)
-	if search["gender"] != 1:
+	if search["gender"] != 3:
 		var ids = results.duplicate()
 		for x in ids:
 			if pokemon[x]["gender"] != search["gender"]:

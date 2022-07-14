@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Menu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Panel.tscn" type="PackedScene" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://box.png" type="Texture" id=16]
 [ext_resource path="res://Folder_Icon.png" type="Texture" id=17]
 [ext_resource path="res://box_top.png" type="Texture" id=18]
+[ext_resource path="res://scenes/Trading.tscn" type="PackedScene" id=19]
 
 [sub_resource type="DynamicFont" id=11]
 font_data = ExtResource( 7 )
@@ -30,6 +31,7 @@ var text = {
 	\"api\":\"Fetching info from the web...\",
 	\"reading\":\"Reading bank file...\",
 	\"layout\":\"Organizing the bank...\",
+	\"welcome\":\"Welcome to Pokémon Manager!\"
 }
 
 func _ready():
@@ -40,6 +42,8 @@ func switch(x):
 	$Label.text = text[x]
 
 func finised():
+	$Label.text = text[\"welcome\"]
+	$ProgressBar.visible = false
 	$Control/AnimationPlayer.play(\"Finished\")
 	yield($Control/AnimationPlayer,\"animation_finished\")
 	$WalkingPokemon.visible = false
@@ -457,8 +461,8 @@ __meta__ = {
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 17408.0
-margin_bottom = 10200.0
+margin_right = 25600.0
+margin_bottom = 15000.0
 
 [node name="Sprite" type="Sprite" parent="Loading Screen/Control"]
 position = Vector2( 512, 256 )
@@ -513,7 +517,7 @@ anchor_bottom = 1.0
 [node name="PopupMenu" type="PopupMenu" parent="."]
 margin_right = 88.0
 margin_bottom = 128.0
-items = [ "Box", null, 0, false, true, -1, 0, null, "", true, "Add a new box", null, 0, false, false, 0, 0, null, "", false, "Remove this box", null, 0, false, true, 5, 0, null, "", false, "Rename box", null, 0, false, false, 1, 0, null, "", false, "Copy box to clipboard", null, 0, false, false, 2, 0, null, "", false, "Pokémon", null, 0, false, true, -1, 0, null, "", true, "Search for Pokémon", null, 0, false, false, 2, 0, null, "", false, "Manage parties", null, 0, false, false, 3, 0, null, "", false ]
+items = [ "Box", null, 0, false, true, -1, 0, null, "", true, "Add a new box", null, 0, false, false, 0, 0, null, "", false, "Remove this box", null, 0, false, true, 5, 0, null, "", false, "Rename box", null, 0, false, false, 1, 0, null, "", false, "Copy box to clipboard", null, 0, false, false, 4, 0, null, "", false, "Pokémon", null, 0, false, true, -1, 0, null, "", true, "Search for Pokémon", null, 0, false, false, 2, 0, null, "", false, "Manage parties", null, 0, false, false, 3, 0, null, "", false, "Trade with someone else", null, 0, false, false, 6, 0, null, "", false ]
 script = ExtResource( 10 )
 
 [node name="Rename" type="PopupDialog" parent="."]
@@ -665,6 +669,9 @@ current_path = "/Users/Colly/OneDrive/Documents/GitHub/Pokemon-Manager/"
 visible = false
 
 [node name="Panel" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="Trade" parent="." instance=ExtResource( 19 )]
 visible = false
 
 [node name="Menu" parent="." instance=ExtResource( 1 )]
