@@ -2,8 +2,8 @@ extends Control
 
 onready var list = $Panel/ScrollContainer/VBoxContainer
 onready var parties = $Panel/Parties
-var button = load("res://Pokemon_Button.tscn")
-var party = load("res://Party.tscn")
+var button = load("res://scenes/Pokemon_Button.tscn")
+var party = load("res://scenes/Party.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body

@@ -1,7 +1,7 @@
 extends Control
 
 signal search(search)
-var button = load("res://Pokemon_Button.tscn")
+var button = load("res://scenes/Pokemon_Button.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body

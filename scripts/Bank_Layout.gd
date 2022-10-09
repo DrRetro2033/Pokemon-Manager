@@ -1,6 +1,6 @@
 extends TabContainer
 
-onready var box = load("res://Box.tscn")
+onready var box = load("res://scenes/Box.tscn")
 var page = 0
 var max_per_page = 24
 var boxes = {}

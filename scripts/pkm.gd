@@ -6,7 +6,7 @@ var data_translate = load("res://scripts/Pokemon_Database.gd").new()
 var pk5 = load("res://scripts/pk5.gd").new()
 var pk6 = load("res://scripts/pk6.gd").new()
 var pk7 = load("res://scripts/pk7.gd").new()
-var walking_pokemon = load("res://WalkingPokemon.tscn") #this is the scene that contains the animations and sprite of the pokemon walking into the bank
+var walking_pokemon = load("res://scenes/WalkingPokemon.tscn") #this is the scene that contains the animations and sprite of the pokemon walking into the bank
 var info : Dictionary #basic info for the pokemon
 var moves : Dictionary #hold all known moves a pokemon has
 var flavor_text : String #the first pokedex entry that a pokemon has
