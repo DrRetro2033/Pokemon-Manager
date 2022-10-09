@@ -1,6 +1,6 @@
 # Pokémon Manager
 View, organize, and manage your Pokémon.
-![Pokemon_Manager](https://user-images.githubusercontent.com/86109384/159138854-56a10d73-51c9-40c5-933a-49c70699991b.png)
+![Untitled](https://user-images.githubusercontent.com/86109384/179224180-46bb607f-da88-4f87-8280-dcc0fba9d209.png)
 
 What is Pokémon Manager?
 -
@@ -32,9 +32,10 @@ Features:
  - By my understanding of the Godot Engine, you could theoretically keep Pokémon Manager, [PKHeX](https://github.com/kwsch/PKHeX), and your pokémon on a usb stick and plug it into a brand new computer and it should work. Although [PKHeX](https://github.com/kwsch/PKHeX) will not work unless you install .NET Core onto the computer
  - Level of Pokémon is displayed next to the gender of the pokemon.
  - Ability to make multiple parties.
- - Compatibility with alternate forms (Currently, there are no PokéDex entries for alternate Pokémon in PokéAPI so alternate forms will show the first form's entry and not the correct form's entry. This will be fixed in a future update)
+ - Compatibility with alternate forms (Currently, there are no PokéDex entries for alternate Pokémon in PokéAPI so alternate forms will show the first form's entry and not the correct form's entry. This will be fixed in a future update).
  - Make a personalized profile.
  - Copy parties and boxes to your clipboard and paste them into Pokémon Showdown.
+ - View a party and select two types to see type advantages and disadvantages.
 
 In progress/Planned:
 -
