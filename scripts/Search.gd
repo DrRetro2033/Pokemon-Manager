@@ -28,6 +28,7 @@ func showResults(database):
 		for x in database:
 			var new_button = button.instance()
 			new_button.rect_min_size = Vector2(0,100)
+			new_button.rect_max_size = Vector2(695,100)
 			new_button.can_drag = false
 			new_button.set_size(Vector2(695,100))
 			new_button.pokeButton(x)

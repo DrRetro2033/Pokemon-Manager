@@ -458,6 +458,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="WalkingPokemon" type="Control" parent="Loading Screen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -478,8 +482,6 @@ light_mask = 2
 position = Vector2( 704, 384 )
 rotation = -1.5708
 scale = Vector2( 0.05, 0.05 )
-z_index = 1
-z_as_relative = false
 texture = ExtResource( 16 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Loading Screen/Control/Folder2"]
@@ -499,18 +501,12 @@ texture = ExtResource( 18 )
 light_mask = 2
 position = Vector2( 320, 392 )
 scale = Vector2( 0.09, 0.09 )
-z_index = 1
-z_as_relative = false
 texture = ExtResource( 17 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Loading Screen/Control"]
 anims/Finished = SubResource( 12 )
 anims/FinishedClose = SubResource( 13 )
 anims/RESET = SubResource( 14 )
-
-[node name="WalkingPokemon" type="Control" parent="Loading Screen"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 
 [node name="SpeciesRequest" type="HTTPRequest" parent="."]
 
@@ -662,8 +658,6 @@ window_title = "Open a File"
 mode = 0
 access = 2
 filters = PoolStringArray( "*.png ; PNG Images" )
-current_dir = "/Users/Colly/OneDrive/Documents/GitHub/Pokemon-Manager"
-current_path = "/Users/Colly/OneDrive/Documents/GitHub/Pokemon-Manager/"
 
 [node name="PartyCreator" parent="." instance=ExtResource( 3 )]
 visible = false
@@ -687,6 +681,19 @@ margin_top = -16.0
 margin_right = 200.0
 margin_bottom = 42.0
 window_title = "Successfully copied pokemon to clipboard!"
+
+[node name="PathSelector" type="FileDialog" parent="."]
+light_mask = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = 68.0
+margin_right = -128.0
+margin_bottom = -68.0
+window_title = "Select the pkmdb folder"
+mode_overrides_title = false
+mode = 2
+access = 2
 
 [connection signal="pressed" from="PopupPanel/VBoxContainer/Showdown" to="PopupPanel" method="_on_Showdown_pressed"]
 [connection signal="pressed" from="PopupPanel/VBoxContainer/Main Menu" to="PopupPanel" method="_on_Main_Menu_pressed"]

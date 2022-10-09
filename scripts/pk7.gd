@@ -1,19 +1,11 @@
 extends PKM_FILE
 
-var folder = "res://pkmdb/"
-
 func readpk(var path):
 	print(path)
 	var info = {}
-	info["id"] = path
 	var file = File.new()
-	var temp_path
-	if OS.get_executable_path().get_base_dir() != "C:/Program Files (x86)/Steam/steamapps/common/Godot Engine":
-		temp_path = OS.get_executable_path().get_base_dir()+"/pkmdb/"+path
-	else:
-		temp_path = folder+path
-	print(temp_path)
-	file.open(temp_path,File.READ)
+	file.open(path,File.READ)
+	info["id"] = path.get_file()
 	info["species"] = read_16(file,0x08)
 	info["move1"] = read_16(file,0x5A)
 	info["move2"] = read_16(file,0x5C)

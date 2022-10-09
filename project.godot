@@ -45,6 +45,7 @@ Trading="*res://scripts/Trading.gd"
 
 [display]
 
+mouse_cursor/custom_image="res://Hover.png"
 window/stretch/aspect="expand"
 
 [importer_defaults]

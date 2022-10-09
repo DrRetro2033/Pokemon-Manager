@@ -12,16 +12,13 @@ var moves : Dictionary #hold all known moves a pokemon has
 var flavor_text : String #the first pokedex entry that a pokemon has
 var form : int #what alt form the pokemon is
 var pokemon_url : String
+var folder_path : String = "/"
 func _ready():
 	print(BinaryTranslator.bin_to_int(BinaryTranslator.int_to_bin(2254250705))) #this is for testing the binary translator by having it convert this number to binary and back
 	var dir = Directory.new() #instances a new directory object
-	var path : String = OS.get_executable_path().get_base_dir()+"/pkmdb"
+	dir.open(folder_path)
 	$"Loading Screen".switch("reading")
 	var user_pokemon
-	if path == "C:/Program Files (x86)/Steam/steamapps/common/Godot Engine/pkmdb": #this is only for testing purposes as I keep the pkmdb folder in this directory
-		user_pokemon = list_files_in_directory(pokemon_path) #lists all of the pk files in pkmdb folder
-	else:
-		user_pokemon = list_files_in_directory(path)
 	var existing_pokemon = bank.load() #loads the bank file of existing pokemon info
 	if existing_pokemon.first_time_setup: #checks to see if this the first time the user is using pokemon manager 
 		Trainer.first_time_setup = true
@@ -29,10 +26,12 @@ func _ready():
 		Trainer.trainer_name = existing_pokemon.trainer_name
 		Trainer.trainer_picture = existing_pokemon.trainer_picture
 		Trainer.first_time_setup = false
+		folder_path = existing_pokemon.folder_path
 		$ProfilePic/Pic.texture = existing_pokemon.trainer_picture
 		Trainer.trainers = existing_pokemon.trainers
 	#this chunk of code's job is to get all of the pokemon that already exists in the bank and remove null/empty slots
 	var without_null = []
+	user_pokemon = list_files_in_directory(folder_path)
 	if existing_pokemon.data != {}:
 		for x in existing_pokemon.data:
 			if x == null:
@@ -51,6 +50,7 @@ func _ready():
 
 
 func get_info(user_pokemon, existing_pokemon):
+	print(user_pokemon)
 	var id = 0 #this is for giving the pokemon unqie keys
 	var pokemon = {}
 	var new_pokemon = []
@@ -63,15 +63,15 @@ func get_info(user_pokemon, existing_pokemon):
 		user_pokemon.remove(0) #removes the pokemon so that godot does not read it again and get stuck in a loop
 		match file.get_extension(): #switches to the correct pk script to read the pk file
 			"pk5":
-				array = pk5.readpk(file)
+				array = pk5.readpk(folder_path+"/"+file)
 			"pk6":
-				array = pk6.readpk(file)
+				array = pk6.readpk(folder_path+"/"+file)
 			"pk7":
-				array = pk7.readpk(file)
+				array = pk7.readpk(folder_path+"/"+file)
 		if existing_pokemon != null and not existing_pokemon.data.empty() and pokemon.has(array["id"]): #if the pokemon is already in the database, skip it
 				id += 1
 				continue
-		else: #asks PokeAPI for infomation about the pokemons species and known moves
+		elif array != null and not array.empty(): #asks PokeAPI for infomation about the pokemons species and known moves
 			$"Loading Screen".switch("api") #changes loading screen text
 			form = array["form"] #tells the species request which form the pokemon is
 			$SpeciesRequest.request(url+"pokemon-species/"+str(int(array["species"])))
@@ -142,9 +142,18 @@ func get_info(user_pokemon, existing_pokemon):
 			$"Loading Screen/ProgressBar".value += 1
 			id += 1
 		#
-	Pokemon.set_data(pokemon) #makes a copy of the temporary dictionary and gives it to the object Pokemon for public access
-	$"Loading Screen".switch("layout")
-	$TabContainer.addPokemon(new_pokemon,existing_pokemon)
+	if pokemon.empty():
+		print("Incorrect")
+		$PathSelector.popup()
+		folder_path = yield($PathSelector,"dir_selected")
+		print(folder_path)
+		get_info(list_files_in_directory(folder_path),existing_pokemon)
+	else:
+		Trainer.folder_path = folder_path
+		Pokemon.set_data(pokemon) #makes a copy of the temporary dictionary and gives it to the object Pokemon for public access
+		$"Loading Screen".switch("layout")
+		$TabContainer.addPokemon(new_pokemon,existing_pokemon)
+
 
 	
 func list_files_in_directory(path): #lists all the pk files in the pkmdb folder

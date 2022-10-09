@@ -9,4 +9,5 @@ export var boxes : Dictionary = {}
 export var trainer_name : String
 export var trainer_picture : Texture
 export var first_time_setup : bool = true
+export var folder_path : String = ""
 export var trainers : Array = []

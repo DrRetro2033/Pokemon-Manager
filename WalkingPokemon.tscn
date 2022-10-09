@@ -239,6 +239,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [ Vector2( 1, 1 ), Vector2( -1, 1 ), Vector2( 1, 1 ) ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("Splash:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 1.6, 8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
 
 [sub_resource type="Curve" id=7]
 min_value = -5.0
@@ -255,7 +267,7 @@ max_value = 360.0
 _data = [ Vector2( 0, 167.727 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=5]
-offsets = PoolRealArray( 0, 0.712418, 1 )
+offsets = PoolRealArray( 0, 0.586592, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [node name="Node2D" type="Node2D"]
@@ -270,17 +282,15 @@ anims/Walking = ExtResource( 2 )
 
 [node name="Water" type="Node2D" parent="."]
 visible = false
-position = Vector2( 599.099, 416 )
+position = Vector2( 434.422, 416 )
 scale = Vector2( 0.7, 0.7 )
 
 [node name="WaterBack" type="Sprite" parent="Water"]
-modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 70, 144, 64, 54 )
 
 [node name="WaterFront" type="Sprite" parent="Water"]
-modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, 9.02319 )
 z_index = 1
 texture = ExtResource( 4 )
@@ -324,5 +334,21 @@ gravity = Vector2( 2, 98 )
 initial_velocity = 50.0
 angle_random = 0.4
 angle_curve = SubResource( 4 )
+scale_amount = 0.05
+color_ramp = SubResource( 5 )
+
+[node name="Splash" type="CPUParticles2D" parent="."]
+position = Vector2( 435, 410 )
+emitting = false
+one_shot = true
+preprocess = 0.1
+speed_scale = 1.5
+explosiveness = 0.9
+texture = ExtResource( 5 )
+flag_align_y = true
+direction = Vector2( 0, -2 )
+spread = 31.84
+gravity = Vector2( 2, 98 )
+initial_velocity = 71.51
 scale_amount = 0.05
 color_ramp = SubResource( 5 )
