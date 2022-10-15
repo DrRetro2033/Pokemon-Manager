@@ -5,9 +5,9 @@
 [ext_resource path="res://scenes/PartyCreator.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Search.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/pkm.gd" type="Script" id=5]
-[ext_resource path="res://Waiting.tres" type="Animation" id=6]
+[ext_resource path="res://animations/Waiting.tres" type="Animation" id=6]
 [ext_resource path="res://fonts/OpenSans-VariableFont_wdth,wght.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://icon.png" type="Texture" id=8]
+[ext_resource path="res://sprites/icons/icon.png" type="Texture" id=8]
 [ext_resource path="res://abomasnow-mega.png" type="Texture" id=9]
 [ext_resource path="res://scripts/RightClickMenu.gd" type="Script" id=10]
 [ext_resource path="res://scripts/RenamePanel.gd" type="Script" id=11]
@@ -15,9 +15,9 @@
 [ext_resource path="res://scripts/ProfileInfo.gd" type="Script" id=13]
 [ext_resource path="res://scripts/ProfileMaker.gd" type="Script" id=14]
 [ext_resource path="res://scripts/bank_manager.gd" type="Script" id=15]
-[ext_resource path="res://box.png" type="Texture" id=16]
-[ext_resource path="res://Folder_Icon.png" type="Texture" id=17]
-[ext_resource path="res://box_top.png" type="Texture" id=18]
+[ext_resource path="res://sprites/ui/box.png" type="Texture" id=16]
+[ext_resource path="res://sprites/ui/Folder_Icon.png" type="Texture" id=17]
+[ext_resource path="res://sprites/ui/box_top.png" type="Texture" id=18]
 [ext_resource path="res://scenes/Trading.tscn" type="PackedScene" id=19]
 
 [sub_resource type="DynamicFont" id=11]
@@ -658,6 +658,7 @@ window_title = "Open a File"
 mode = 0
 access = 2
 filters = PoolStringArray( "*.png ; PNG Images" )
+show_hidden_files = true
 
 [node name="PartyCreator" parent="." instance=ExtResource( 3 )]
 visible = false
@@ -694,6 +695,7 @@ window_title = "Select the pkmdb folder"
 mode_overrides_title = false
 mode = 2
 access = 2
+show_hidden_files = true
 
 [connection signal="pressed" from="PopupPanel/VBoxContainer/Showdown" to="PopupPanel" method="_on_Showdown_pressed"]
 [connection signal="pressed" from="PopupPanel/VBoxContainer/Main Menu" to="PopupPanel" method="_on_Main_Menu_pressed"]

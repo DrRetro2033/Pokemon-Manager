@@ -1,11 +1,11 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://abomasnow-mega.png" type="Texture" id=1]
-[ext_resource path="res://Walking.tres" type="Animation" id=2]
-[ext_resource path="res://Flying.tres" type="Animation" id=3]
-[ext_resource path="res://Water.png" type="Texture" id=4]
-[ext_resource path="res://WaterDrop.png" type="Texture" id=5]
-[ext_resource path="res://fire1.png" type="Texture" id=6]
+[ext_resource path="res://animations/Walking.tres" type="Animation" id=2]
+[ext_resource path="res://animations/Flying.tres" type="Animation" id=3]
+[ext_resource path="res://sprites/effects/Water.png" type="Texture" id=4]
+[ext_resource path="res://sprites/effects/WaterDrop.png" type="Texture" id=5]
+[ext_resource path="res://sprites/effects/fire1.png" type="Texture" id=6]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Node2D

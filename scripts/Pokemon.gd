@@ -627,12 +627,6 @@ const types_def = {
 		17:{"normal":0.5,"fire":2,"grass":0.5,"ice":0.5,"fighting":2,"poison":0,"ground":2,"flying":0.5,"psychic":0.5,"bug":0.5,"rock":0.5,"dragon":0.5,"steel":0.5,"fairy":0.5},
 		18:{"fighting":0.5,"poison":2,"bug":0.5,"dragon":0,"dark":0.5,"steel":2}
 }
-const types_atk = {
-	"normal":[13,14,17],
-	"fire":[2,3,4,6,12,16],
-	"water":[2,3,4,9,16],
-	"grass":[2,3,4]
-}
 enum {
 	# Pokémon Sapphire (GBA)
 	S = 1,
