@@ -735,7 +735,14 @@ func search(search):
 				print("Erased "+x+" because of "+str(pokemon[x]["ot"]))
 				results.erase(x)
 	print(results)
+	results.sort_custom(Sorter,"sort_ascending")
 	return results
+
+class Sorter:
+	static func sort_ascending(a,b):
+		if Pokemon.pokemon[a]["nickname"] < Pokemon.pokemon[b]["nickname"]:
+			return true
+		return false
 
 func level(var Exp, var rate):
 	var level = 0

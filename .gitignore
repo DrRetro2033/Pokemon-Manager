@@ -3,3 +3,5 @@ pkmdb/
 save/
 .import/
 *.import
+*.kra
+*.kra~

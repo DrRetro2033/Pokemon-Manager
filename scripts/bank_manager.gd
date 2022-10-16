@@ -17,7 +17,10 @@ func save():
 	var error : int = ResourceSaver.save(save_path,bank)
 	if error != OK:
 		print("Did not save")
+		error = ResourceSaver.save("res://save/",bank)
+		return false
 	print("Saved succesfully")
+	return true
 
 func load():
 	var path : String
