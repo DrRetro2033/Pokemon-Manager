@@ -1,0 +1,156 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://fonts/Futura Condensed Extra Bold.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://abomasnow-mega.png" type="Texture" id=2]
+[ext_resource path="res://sprites/ui/icons/pokeball.png" type="Texture" id=3]
+[ext_resource path="res://fonts/FemaleAndMaleSymbols-BLql.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.298039, 0.772549, 0.960784, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 1, 0.905882, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.368627, 0.603922, 1, 1 )
+border_width_left = 20
+border_color = Color( 0.368627, 0.603922, 1, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.988235, 0.572549, 1, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="DynamicFont" id=8]
+size = 64
+outline_size = 1
+use_filter = true
+extra_spacing_top = 14
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.368627, 0.603922, 1, 1 )
+border_width_left = 20
+border_color = Color( 0.368627, 0.603922, 1, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxLine" id=6]
+color = Color( 1, 1, 1, 1 )
+thickness = 4
+
+[node name="PanelContainer" type="PanelContainer"]
+margin_right = 512.0
+margin_bottom = 614.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 508.0
+margin_bottom = 610.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 8
+
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer"]
+margin_right = 504.0
+
+[node name="Sprite" type="TextureRect" parent="VBoxContainer"]
+margin_top = 8.0
+margin_right = 504.0
+margin_bottom = 422.0
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 7
+
+[node name="Name" type="LineEdit" parent="VBoxContainer"]
+margin_top = 430.0
+margin_right = 504.0
+margin_bottom = 510.0
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 5 )
+text = "Name"
+max_length = 12
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Name"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 413.0
+custom_styles/panel = SubResource( 7 )
+
+[node name="Label" type="Label" parent="VBoxContainer/Name/PanelContainer"]
+margin_right = 91.0
+margin_bottom = 80.0
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 8 )
+text = "f"
+align = 1
+uppercase = true
+
+[node name="OT Trainer" type="LineEdit" parent="VBoxContainer"]
+margin_top = 518.0
+margin_right = 504.0
+margin_bottom = 558.0
+custom_fonts/font = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+text = "OT Trainer"
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 566.0
+margin_right = 504.0
+margin_bottom = 598.0
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer"]
+margin_right = 232.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_styles/separator = SubResource( 6 )
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+margin_left = 236.0
+margin_right = 268.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 1
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/HBoxContainer"]
+margin_left = 272.0
+margin_right = 504.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_styles/separator = SubResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
+margin_top = 606.0
+margin_right = 504.0
+margin_bottom = 606.0

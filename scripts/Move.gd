@@ -43,15 +43,15 @@ func damage_form(var form,var node):
 	match form:
 		damage_class.PHYSICAL:
 			new_form.set_bg_color(Color("#9f0000"))
-			var texture = load("res://Physical.svg")
+			var texture = load("res://sprites/ui/Physical.svg")
 			node.get_child(0).set_texture(texture)
 		damage_class.SPECIAL:
 			new_form.set_bg_color(Color("#18203a"))
-			var texture = load("res://Special.svg")
+			var texture = load("res://sprites/ui/Special.svg")
 			node.get_child(0).set_texture(texture)
 		damage_class.STATUS:
 			new_form.set_bg_color(Color("#525252"))
-			var texture = load("res://Status.svg")
+			var texture = load("res://sprites/ui/Status.svg")
 			node.get_child(0).set_texture(texture)
 	node.add_stylebox_override("panel",new_form)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scenes/Menu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Panel.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://sprites/ui/Folder_Icon.png" type="Texture" id=17]
 [ext_resource path="res://sprites/ui/box_top.png" type="Texture" id=18]
 [ext_resource path="res://scenes/Trading.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/Login.tscn" type="PackedScene" id=20]
 
 [sub_resource type="DynamicFont" id=11]
 font_data = ExtResource( 7 )
@@ -50,8 +51,8 @@ func finised():
 	$Control/AnimationPlayer.play(\"FinishedClose\")
 	yield($Control/AnimationPlayer,\"animation_finished\")
 	visible = false
-	if Trainer.first_time_setup:
-		$\"../ProfileMaker\".popup()
+#	if Trainer.first_time_setup:
+#		$\"../Login\".popup()
 	OS.window_resizable = true
 "
 
@@ -62,21 +63,40 @@ script/source = "extends Sprite
 # Declare member variables here. Examples:
 # var a = 2
 # var b = \"text\"
-
-
+const folder_path = \"res://sprites/pokemon/icons/\"
+var last_animation : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$\"AnimationPlayer\".play(\"Waiting\")
-	var sprites = list_files_in_directory(\"res://sprites/pokemon/icons/\")
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	var rand = rng.randi_range(0,sprites.size())
-	print(rand)
-	var path = sprites[rand]
-	if path.ends_with(\".import\"):
-		path.erase(path.length()-7,7)
+	rand_animation()
+	var sprites = list_files_in_directory(folder_path)
+	var path = \"\"
+	while true:
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+		var rand = rng.randi_range(0,sprites.size())
+		print(rand)
+		path = sprites[rand]
+		if path.get_extension() == \"png\":
+			break
+		else:
+			continue
 	print(path)
-	set_texture(load(\"res://pokemon-gen7x/regular/\"+path))
+	set_texture(load(folder_path+path))
+
+func rand_animation():
+	var rng = RandomNumberGenerator.new()
+	while true:
+		rng.randomize()
+		var rand = rng.randi_range(0,$AnimationPlayer.get_animation_list().size()-1)
+		print(rand)
+		if last_animation == rand or $AnimationPlayer.get_animation_list()[rand] == \"RESET\":
+			print(\"Try again\")
+			continue
+		else:
+			last_animation = rand
+			$AnimationPlayer.play($AnimationPlayer.get_animation_list()[rand])
+			break
+
 
 
 func list_files_in_directory(path): 
@@ -93,6 +113,10 @@ func list_files_in_directory(path):
 			files.append(file)
 	dir.list_dir_end()
 	return files
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	rand_animation()
 "
 
 [sub_resource type="Animation" id=10]
@@ -156,6 +180,122 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "Roll"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.2, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 512, 269 ), Vector2( 408, 269 ), Vector2( 646, 269 ), Vector2( 512, 269 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1.2, 1.21, 1.4, 1.7, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1e-05, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 360.0, 0.0, 0.0, 45.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -13 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "Wrap Around"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2, 2.1, 3, 4.3, 5, 5.1, 5.7, 5.9, 6.1, 6.7, 7.5 ),
+"transitions": PoolRealArray( 1, 1e-05, 1, 1, 1, 1e-05, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 512, 256 ), Vector2( -75, 256 ), Vector2( 1074, 256 ), Vector2( 999, 256 ), Vector2( 999, 256 ), Vector2( 1074, 256 ), Vector2( 410, -50 ), Vector2( 410, 256 ), Vector2( 410, 276 ), Vector2( 410, 256 ), Vector2( 410, 256 ), Vector2( 512, 256 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 3.5, 3.7, 3.9, 4.1, 4.3, 5, 6.1, 6.3, 6.5, 6.7, 7.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true, false, false, true, false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 5.7, 5.9, 6.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.25, 0.25 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -412,15 +552,10 @@ texture = ExtResource( 8 )
 expand = true
 stretch_mode = 5
 
-[node name="PokemonRequest" type="HTTPRequest" parent="."]
-
-[node name="MoveRequest" type="HTTPRequest" parent="."]
-
 [node name="Bank Manager" type="Node" parent="."]
 script = ExtResource( 15 )
 
 [node name="Loading Screen" type="Panel" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_default_cursor_shape = 4
@@ -465,8 +600,8 @@ anchor_bottom = 1.0
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 25600.0
-margin_bottom = 15000.0
+margin_right = 45056.0
+margin_bottom = 26400.0
 
 [node name="Sprite" type="Sprite" parent="Loading Screen/Control"]
 position = Vector2( 512, 256 )
@@ -474,8 +609,10 @@ texture = ExtResource( 9 )
 script = SubResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Loading Screen/Control/Sprite"]
+anims/Jumping = ExtResource( 6 )
 anims/RESET = SubResource( 10 )
-anims/Waiting = ExtResource( 6 )
+anims/Roll = SubResource( 15 )
+"anims/Wrap Around" = SubResource( 16 )
 
 [node name="Folder2" type="Sprite" parent="Loading Screen/Control"]
 light_mask = 2
@@ -507,8 +644,6 @@ texture = ExtResource( 17 )
 anims/Finished = SubResource( 12 )
 anims/FinishedClose = SubResource( 13 )
 anims/RESET = SubResource( 14 )
-
-[node name="SpeciesRequest" type="HTTPRequest" parent="."]
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
 margin_right = 88.0
@@ -558,6 +693,8 @@ placeholder_text = "Box"
 [node name="Search" parent="." instance=ExtResource( 4 )]
 visible = false
 
+[node name="Login" parent="." instance=ExtResource( 20 )]
+
 [node name="ProfileMaker" type="WindowDialog" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -580,9 +717,13 @@ margin_left = -240.0
 margin_top = -172.0
 margin_right = 240.0
 margin_bottom = -126.0
-text = "Welcome to Pokemon Manager!"
+text = "Sign In:"
 align = 1
 valign = 1
+
+[node name="Button2" type="Button" parent="ProfileMaker"]
+margin_right = 12.0
+margin_bottom = 20.0
 
 [node name="Button" type="Button" parent="ProfileMaker"]
 anchor_left = 0.5
@@ -595,55 +736,20 @@ margin_right = 39.0
 margin_bottom = 185.0
 text = "Ok"
 
-[node name="Name" type="LineEdit" parent="ProfileMaker"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = 84.0
-margin_right = 128.0
-margin_bottom = 108.0
-align = 1
-placeholder_text = "Name"
-
-[node name="ProfilePic" type="Button" parent="ProfileMaker"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -80.0
-margin_top = -108.0
-margin_right = 80.0
-margin_bottom = 52.0
-
-[node name="Pic" type="TextureRect" parent="ProfileMaker/ProfilePic"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -72.0
-margin_top = -72.0
-margin_right = 72.0
-margin_bottom = 72.0
-texture = ExtResource( 8 )
-expand = true
-stretch_mode = 5
-
 [node name="Warning" type="Label" parent="ProfileMaker"]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -96.0
-margin_top = 119.0
-margin_right = 94.0
-margin_bottom = 133.0
+margin_left = -213.5
+margin_top = 124.0
+margin_right = 213.5
+margin_bottom = 138.0
 custom_colors/font_color = Color( 1, 0.247059, 0.247059, 1 )
-text = "Please enter a name."
+text = "You can skip this part, but it means that you cannot send Pokémon to others."
 align = 1
 valign = 1
+autowrap = true
 
 [node name="FileDialog" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -701,9 +807,7 @@ show_hidden_files = true
 [connection signal="pressed" from="PopupPanel/VBoxContainer/Main Menu" to="PopupPanel" method="_on_Main_Menu_pressed"]
 [connection signal="pressed" from="PopupPanel/VBoxContainer/Main Menu" to="Menu" method="_on_Main_Menu_pressed"]
 [connection signal="pressed" from="ProfilePic" to="PopupPanel" method="_on_ProfilePic_pressed"]
-[connection signal="request_completed" from="PokemonRequest" to="." method="_on_PokemonRequest_request_completed"]
-[connection signal="request_completed" from="MoveRequest" to="." method="_on_MoveRequest_request_completed"]
-[connection signal="request_completed" from="SpeciesRequest" to="." method="_on_SpeciesRequest_request_completed"]
+[connection signal="animation_finished" from="Loading Screen/Control/Sprite/AnimationPlayer" to="Loading Screen/Control/Sprite" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="about_to_show" from="PopupMenu" to="PopupMenu" method="_on_PopupMenu_about_to_show"]
 [connection signal="export_box" from="PopupMenu" to="TabContainer" method="_on_PopupMenu_export_box"]
 [connection signal="id_pressed" from="PopupMenu" to="PopupMenu" method="_on_PopupMenu_id_pressed"]
@@ -711,5 +815,3 @@ show_hidden_files = true
 [connection signal="newName" from="Rename" to="TabContainer" method="_on_Rename_newName"]
 [connection signal="text_entered" from="Rename/Name" to="Rename" method="_on_Name_text_entered"]
 [connection signal="pressed" from="ProfileMaker/Button" to="ProfileMaker" method="_on_Button_pressed"]
-[connection signal="pressed" from="ProfileMaker/ProfilePic" to="ProfileMaker" method="_on_ProfilePic_pressed"]
-[connection signal="file_selected" from="FileDialog" to="ProfileMaker" method="_on_FileDialog_file_selected"]

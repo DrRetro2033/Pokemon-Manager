@@ -41,6 +41,7 @@ func _on_Move4_pressed():
 [node name="Popup" type="PopupPanel"]
 margin_right = 65.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 75, 50 )
 size_flags_vertical = 15
 script = SubResource( 2 )
 

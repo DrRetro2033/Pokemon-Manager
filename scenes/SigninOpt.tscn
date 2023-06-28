@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sprites/ui/login/google_signin_buttons/web/1x/btn_google_signin_dark_focus_web.png" type="Texture" id=1]
+[ext_resource path="res://sprites/ui/login/google_signin_buttons/web/1x/btn_google_signin_dark_pressed_web.png" type="Texture" id=2]
+[ext_resource path="res://sprites/ui/login/google_signin_buttons/web/1x/btn_google_signin_dark_disabled_web.png" type="Texture" id=3]
+[ext_resource path="res://sprites/ui/login/google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png" type="Texture" id=4]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VFlowContainer" type="HFlowContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureButton2" type="TextureButton" parent="VFlowContainer"]
+margin_right = 1024.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 2 )
+texture_disabled = ExtResource( 3 )
+texture_focused = ExtResource( 1 )
+stretch_mode = 5

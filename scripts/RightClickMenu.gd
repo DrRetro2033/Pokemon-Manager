@@ -37,7 +37,8 @@ func _on_PopupMenu_id_pressed(id):
 
 func _on_PopupMenu_about_to_show():
 	var tab = tabs.get_tab_control(tabs.current_tab)
-	if tab.isEmpty():
-		set_item_disabled(2,false)
-	else:
-		set_item_disabled(2,true)
+	if tab != null:
+		if tab.isEmpty():
+			set_item_disabled(2,false)
+		else:
+			set_item_disabled(2,true)

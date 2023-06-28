@@ -869,3 +869,6 @@ func getLocation(location_id,game):
 	print(location)
 	file.close()
 	return location
+
+func add_pokemon(pokemon):
+	pokemon.merge(pokemon)

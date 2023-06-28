@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/PokeAPI.gd" type="Script" id=1]
+
+[node name="API" type="Node"]
+script = ExtResource( 1 )
+
+[node name="SpeciesRequest" type="HTTPRequest" parent="."]
+
+[node name="MoveRequest" type="HTTPRequest" parent="."]
+
+[node name="PokemonRequest" type="HTTPRequest" parent="."]
+
+[connection signal="request_completed" from="SpeciesRequest" to="." method="_on_SpeciesRequest_request_completed"]
+[connection signal="request_completed" from="MoveRequest" to="." method="_on_MoveRequest_request_completed"]
+[connection signal="request_completed" from="PokemonRequest" to="." method="_on_PokemonRequest_request_completed"]
