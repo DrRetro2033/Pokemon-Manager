@@ -14,7 +14,6 @@ viewport_path = NodePath("Viewport")
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 2 )
-material/0 = null
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 1024, 1024 )

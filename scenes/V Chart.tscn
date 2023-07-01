@@ -1,13 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/Path.gd" type="Script" id=1]
 [ext_resource path="res://scripts/V_Chart.gd" type="Script" id=2]
-[ext_resource path="res://sprites/ui/icons/hp_icon.png" type="Texture" id=3]
-[ext_resource path="res://sprites/ui/icons/atk_icon.png" type="Texture" id=4]
-[ext_resource path="res://sprites/ui/icons/def_icon.png" type="Texture" id=5]
-[ext_resource path="res://sprites/ui/icons/speed_icon.png" type="Texture" id=6]
-[ext_resource path="res://sprites/ui/icons/spd_icon.png" type="Texture" id=7]
-[ext_resource path="res://sprites/ui/icons/spa_icon.png" type="Texture" id=8]
 
 [sub_resource type="Curve2D" id=55]
 _data = {
@@ -57,13 +51,6 @@ rotation = 1.5708
 rotate = false
 loop = false
 
-[node name="Sprite" type="Sprite" parent="Stats/HP/PathFollow2D"]
-rotation = -1.5708
-scale = Vector2( 0.25, 0.25 )
-z_index = 1
-z_as_relative = false
-texture = ExtResource( 3 )
-
 [node name="Attack" type="Path2D" parent="Stats"]
 scale = Vector2( 1, -1 )
 curve = SubResource( 56 )
@@ -73,13 +60,6 @@ script = ExtResource( 1 )
 rotation = 0.519146
 rotate = false
 loop = false
-
-[node name="Sprite" type="Sprite" parent="Stats/Attack/PathFollow2D"]
-rotation = -0.523599
-scale = Vector2( 0.25, 0.25 )
-z_index = 1
-z_as_relative = false
-texture = ExtResource( 4 )
 
 [node name="Defense" type="Path2D" parent="Stats"]
 scale = Vector2( 1, -1 )
@@ -91,13 +71,6 @@ rotation = -0.519146
 rotate = false
 loop = false
 
-[node name="Sprite" type="Sprite" parent="Stats/Defense/PathFollow2D"]
-rotation = -2.61799
-scale = Vector2( 0.25, 0.25 )
-z_index = 1
-z_as_relative = false
-texture = ExtResource( 5 )
-
 [node name="Speed" type="Path2D" parent="Stats"]
 curve = SubResource( 58 )
 script = ExtResource( 1 )
@@ -106,13 +79,6 @@ script = ExtResource( 1 )
 rotation = 1.5708
 rotate = false
 loop = false
-
-[node name="Sprite" type="Sprite" parent="Stats/Speed/PathFollow2D"]
-rotation = -1.5708
-scale = Vector2( 0.25, 0.25 )
-z_index = 1
-z_as_relative = false
-texture = ExtResource( 6 )
 
 [node name="Sp Def" type="Path2D" parent="Stats"]
 scale = Vector2( 1, -1 )
@@ -124,13 +90,6 @@ rotation = -2.62245
 rotate = false
 loop = false
 
-[node name="Sprite" type="Sprite" parent="Stats/Sp Def/PathFollow2D"]
-rotation = -0.523599
-scale = Vector2( 0.25, 0.25 )
-z_index = 1
-z_as_relative = false
-texture = ExtResource( 7 )
-
 [node name="Sp Atk" type="Path2D" parent="Stats"]
 scale = Vector2( 1, -1 )
 curve = SubResource( 60 )
@@ -140,13 +99,6 @@ script = ExtResource( 1 )
 rotation = 2.62245
 rotate = false
 loop = false
-
-[node name="Sprite" type="Sprite" parent="Stats/Sp Atk/PathFollow2D"]
-rotation = -2.61799
-scale = Vector2( 0.25, 0.25 )
-z_index = 1
-z_as_relative = false
-texture = ExtResource( 8 )
 
 [node name="EVs Vis" type="Polygon2D" parent="Stats"]
 color = Color( 0, 0.529412, 1, 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scenes/Move.tscn" type="PackedScene" id=1]
 [ext_resource path="res://abomasnow.png" type="Texture" id=2]
@@ -211,6 +211,8 @@ func open(id):
 	\" met \"+pokemon[\"ot\"][\"nickname\"]+
 	\" at level \"+str(pokemon[\"met_level\"])+
 	location+\".\")
+	$LV/Panel/ProgressBar.max_value = Pokemon.rates[pokemon[\"growth\"]][pokemon[\"level\"]-1]
+	$LV/Panel/ProgressBar.value = Pokemon.exp_until_next_level(pokemon[\"level\"],pokemon[\"growth\"],pokemon[\"exp\"])
 	print(pokemon)
 
 func _process(delta):
@@ -348,6 +350,28 @@ font_data = ExtResource( 4 )
 [sub_resource type="DynamicFont" id=50]
 size = 28
 font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=57]
+bg_color = Color( 0.145098, 0.145098, 0.164706, 1 )
+draw_center = false
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color( 0.145098, 0.145098, 0.164706, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+expand_margin_left = 20.0
+expand_margin_right = 20.0
+expand_margin_top = 20.0
+expand_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxFlat" id=56]
+bg_color = Color( 0, 0.6, 1, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=58]
 
 [sub_resource type="StyleBoxFlat" id=47]
 corner_radius_top_left = 8
@@ -593,6 +617,24 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": true
 }
+
+[node name="Panel" type="Panel" parent="LV"]
+margin_right = 108.0
+margin_bottom = 27.9996
+rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 57 )
+
+[node name="ProgressBar" type="ProgressBar" parent="LV/Panel"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/fg = SubResource( 56 )
+custom_styles/bg = SubResource( 58 )
+percent_visible = false
 
 [node name="Label" type="Label" parent="LV"]
 margin_top = 6.0
@@ -1167,6 +1209,7 @@ window_title = "Save Pokémon"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.png;PNG File", "*.pka;Pokémon Manager File" )
+show_hidden_files = true
 __meta__ = {
 "_edit_use_anchors_": true
 }

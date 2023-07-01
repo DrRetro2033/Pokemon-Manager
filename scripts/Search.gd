@@ -30,6 +30,7 @@ func showResults(database):
 			new_button.rect_min_size = Vector2(0,100)
 			new_button.can_drag = false
 			new_button.set_size(Vector2(695,100))
+			new_button.set_v_size_flags(1)
 			new_button.pokeButton(x)
 			$Panel/ScrollContainer/VBoxContainer.add_child(new_button)
 

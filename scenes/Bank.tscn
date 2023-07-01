@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scenes/Menu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Panel.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://sprites/ui/box_top.png" type="Texture" id=18]
 [ext_resource path="res://scenes/Trading.tscn" type="PackedScene" id=19]
 [ext_resource path="res://scenes/Login.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sprites/icons/Poké_Ball_icon.svg.png" type="Texture" id=21]
 
 [sub_resource type="DynamicFont" id=11]
 font_data = ExtResource( 7 )
@@ -600,8 +601,8 @@ anchor_bottom = 1.0
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 45056.0
-margin_bottom = 26400.0
+margin_right = 52224.0
+margin_bottom = 30600.0
 
 [node name="Sprite" type="Sprite" parent="Loading Screen/Control"]
 position = Vector2( 512, 256 )
@@ -717,13 +718,30 @@ margin_left = -240.0
 margin_top = -172.0
 margin_right = 240.0
 margin_bottom = -126.0
-text = "Sign In:"
+text = "Welcome to Pokemon Manager!"
 align = 1
 valign = 1
 
-[node name="Button2" type="Button" parent="ProfileMaker"]
-margin_right = 12.0
-margin_bottom = 20.0
+[node name="ProfilePic" type="Button" parent="ProfileMaker"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -64.0
+margin_top = -75.0
+margin_right = 64.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 128, 128 )
+
+[node name="Pic" type="TextureRect" parent="ProfileMaker/ProfilePic"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 128, 128 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 7
 
 [node name="Button" type="Button" parent="ProfileMaker"]
 anchor_left = 0.5
@@ -737,6 +755,7 @@ margin_bottom = 185.0
 text = "Ok"
 
 [node name="Warning" type="Label" parent="ProfileMaker"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -746,10 +765,23 @@ margin_top = 124.0
 margin_right = 213.5
 margin_bottom = 138.0
 custom_colors/font_color = Color( 1, 0.247059, 0.247059, 1 )
-text = "You can skip this part, but it means that you cannot send Pokémon to others."
+text = "Please insert a name"
 align = 1
 valign = 1
 autowrap = true
+
+[node name="Name" type="LineEdit" parent="ProfileMaker"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = 72.0
+margin_right = 100.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 200, 0 )
+align = 1
+placeholder_text = "Name"
 
 [node name="FileDialog" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -814,4 +846,6 @@ show_hidden_files = true
 [connection signal="new_box" from="PopupMenu" to="TabContainer" method="_on_PopupMenu_new_box"]
 [connection signal="newName" from="Rename" to="TabContainer" method="_on_Rename_newName"]
 [connection signal="text_entered" from="Rename/Name" to="Rename" method="_on_Name_text_entered"]
+[connection signal="pressed" from="ProfileMaker/ProfilePic" to="ProfileMaker" method="_on_ProfilePic_pressed"]
 [connection signal="pressed" from="ProfileMaker/Button" to="ProfileMaker" method="_on_Button_pressed"]
+[connection signal="file_selected" from="FileDialog" to="ProfileMaker" method="_on_FileDialog_file_selected"]

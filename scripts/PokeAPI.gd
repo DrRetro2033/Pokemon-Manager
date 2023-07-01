@@ -25,6 +25,7 @@ func update_info(array):
 	$SpeciesRequest.request(url+"pokemon-species/"+str(int(array["species"])))
 	yield($SpeciesRequest, "request_completed")
 	array["level"] = Pokemon.level(array["exp"],info["growth"]) #converts the pokemon total exp and converts it the pokemon's level
+	array["growth"] = info["growth"]
 	array["egg_groups"] = info["egg_groups"]
 	$PokemonRequest.request(pokemon_url)
 	yield($PokemonRequest, "request_completed")

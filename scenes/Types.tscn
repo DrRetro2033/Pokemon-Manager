@@ -34,6 +34,10 @@ func setChart(type1,type2):
 			$HBoxContainer/Multipliers.get_node(key.capitalize()).visible = true
 			$HBoxContainer/Multipliers.get_node(key.capitalize()).text = str(int($HBoxContainer/Multipliers.get_node(key.capitalize()).text)*type2_interactions[key])
 	for child in $HBoxContainer/Multipliers.get_children():
+		if child.text == '1':
+			child.visible = false
+			$HBoxContainer/Rows.get_node(child.name).visible = false
+	for child in $HBoxContainer/Multipliers.get_children():
 		child.text = child.text+\"x\"
 
 
@@ -189,14 +193,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Rows" type="VBoxContainer" parent="HBoxContainer"]
-margin_right = 494.0
-margin_bottom = 568.0
+margin_right = 506.0
+margin_bottom = 592.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Normal" type="PanelContainer" parent="HBoxContainer/Rows"]
-margin_right = 494.0
-margin_bottom = 568.0
+margin_right = 506.0
+margin_bottom = 592.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -208,8 +212,8 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="HBoxContainer/Rows/Normal"]
-margin_right = 494.0
-margin_bottom = 568.0
+margin_right = 506.0
+margin_bottom = 592.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 custom_fonts/font = SubResource( 52 )
@@ -657,16 +661,16 @@ valign = 1
 max_lines_visible = 1
 
 [node name="Multipliers" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 498.0
-margin_right = 992.0
-margin_bottom = 568.0
+margin_left = 510.0
+margin_right = 1016.0
+margin_bottom = 592.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Normal" type="Label" parent="HBoxContainer/Multipliers"]
-margin_top = 277.0
-margin_right = 494.0
-margin_bottom = 291.0
+margin_top = 289.0
+margin_right = 506.0
+margin_bottom = 303.0
 size_flags_vertical = 6
 text = "2"
 align = 1
