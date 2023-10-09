@@ -1,15 +1,17 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://scenes/Move.tscn" type="PackedScene" id=1]
 [ext_resource path="res://abomasnow.png" type="Texture" id=2]
 [ext_resource path="res://fonts/Futura Condensed Extra Bold.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://fonts/Essentiarum Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://scenes/V Chart.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/ExpChart.tscn" type="PackedScene" id=6]
 [ext_resource path="res://fonts/FemaleAndMaleSymbols-BLql.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://scenes/Context.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/native_dialogs/bin/native_dialog_save_file.gdns" type="Script" id=8]
 [ext_resource path="res://PanelTheme.tres" type="Theme" id=9]
 [ext_resource path="res://scenes/Types.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sprites/ui/icons/share.png" type="Texture" id=11]
+[ext_resource path="res://fonts/OpenSans-VariableFont_wdth,wght.ttf" type="DynamicFontData" id=12]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Panel
@@ -22,6 +24,8 @@ const name_default_rect_size = 88
 const text_font_size = 16
 const text_default_rect_size = 312
 const path = \"res://sprites/pokemon/official-artwork/\"
+const alpha = 255
+const user_path_windows = \"\"
 onready var sprite = $TextureRect
 onready var type1_color = $Type1
 onready var type2_color = $Type2
@@ -63,64 +67,8 @@ func _on_Back_pressed():
 
 func types(var type, var node):
 	var style = node.get_stylebox(\"panel\").duplicate()
-	match type: #sets the text and color for the type2
-		types.NULL:
-			node.get_child(0).text = \"n/a\"
-			style.set_bg_color(Color8(66,66,66,255))
-		types.NORMAL:
-			node.get_child(0).text = \"c\"
-			style.set_bg_color(Color(\"#c3c2a4\"))
-		types.FIRE:
-			node.get_child(0).text = \"r\"
-			style.set_bg_color(Color(\"#df2c04\"))
-		types.WATER:
-			node.get_child(0).text = \"w\"
-			style.set_bg_color(Color(\"#3578f4\"))
-		types.GRASS:
-			node.get_child(0).text = \"g\"
-			style.set_bg_color(Color(\"#57a031\"))
-		types.ELECTRIC:
-			node.get_child(0).text = \"l\"
-			style.set_bg_color(Color(\"#f8c81d\"))
-		types.ICE:
-			node.get_child(0).text = \"i\"
-			style.set_bg_color(Color(\"#81e0e5\"))
-		types.FIGHTING:
-			node.get_child(0).text = \"f\"
-			style.set_bg_color(Color(\"#6d2818\"))
-		types.POISON:
-			node.get_child(0).text = \"o\"
-			style.set_bg_color(Color(\"#9345b3\"))
-		types.GROUND:
-			node.get_child(0).text = \"a\"
-			style.set_bg_color(Color(\"#d1b85e\"))
-		types.FLYING:
-			node.get_child(0).text = \"v\"
-			style.set_bg_color(Color(\"#84afff\"))
-		types.PSYCHIC:
-			node.get_child(0).text = \"p\"
-			style.set_bg_color(Color(\"#ff398b\"))
-		types.BUG:
-			node.get_child(0).text = \"b\"
-			style.set_bg_color(Color(\"#bdc45b\"))
-		types.ROCK:
-			node.get_child(0).text = \"k\"
-			style.set_bg_color(Color(\"#b29e59\"))
-		types.GHOST:
-			node.get_child(0).text = \"h\"
-			style.set_bg_color(Color(\"#5d66a6\"))
-		types.DARK:
-			node.get_child(0).text = \"d\"
-			style.set_bg_color(Color(\"#442d04\"))
-		types.DRAGON:
-			node.get_child(0).text = \"n\"
-			style.set_bg_color(Color(\"#8c79dc\"))
-		types.STEEL:
-			node.get_child(0).text = \"m\"
-			style.set_bg_color(Color(\"#b7b7ce\"))
-		types.FAIRY:
-			node.get_child(0).text = \"y\"
-			style.set_bg_color(Color(\"#f0aee1\"))
+	node.get_child(0).text = Pokemon.type_chars[type]
+	style.set_bg_color(Pokemon.type_colors[type])
 	node.add_stylebox_override(\"panel\",style)
 
 
@@ -178,6 +126,9 @@ func open(id):
 		moves -= 1
 	text.text = pokemon[\"text\"]
 	lv.text = \"Lv. \"+str(pokemon[\"level\"])
+	$LV/Panel/ProgressBar.max_value = Pokemon.rates[pokemon[\"growth\"]][pokemon[\"level\"]]
+	$LV/Panel/ProgressBar.value = Pokemon.exp_until_next_level(pokemon[\"level\"],pokemon[\"growth\"],pokemon[\"exp\"])
+	$Chart.set_chart(pokemon[\"growth\"])
 	var path_name = str(pokemon[\"species\"])
 	var temp_path = path+path_name+\".png\"
 	sprite.set_texture(load(temp_path))
@@ -211,8 +162,32 @@ func open(id):
 	\" met \"+pokemon[\"ot\"][\"nickname\"]+
 	\" at level \"+str(pokemon[\"met_level\"])+
 	location+\".\")
-	$LV/Panel/ProgressBar.max_value = Pokemon.rates[pokemon[\"growth\"]][pokemon[\"level\"]-1]
-	$LV/Panel/ProgressBar.value = Pokemon.exp_until_next_level(pokemon[\"level\"],pokemon[\"growth\"],pokemon[\"exp\"])
+	$Ability/Label.text = pokemon[\"ability\"][\"ability\"][\"name\"].capitalize()
+	var file = File.new()
+	var data = API.get_data(pokemon[\"ability\"][\"ability\"][\"url\"])
+	for entry in data.effect_entries:
+		if entry.language.name == 'en':
+			$Ability/Control.hint_tooltip = entry.short_effect
+			break
+	var ability_text : String = $Ability/Control.hint_tooltip
+	var new_text = \"\"
+	var words = ability_text.split(\" \")
+	var len_str_check = \"\"
+	var word_buffer = []
+	for word in words:
+		len_str_check += word
+		if len_str_check.length() > 35:
+			len_str_check = \"\"
+			for x in word_buffer:
+				new_text += x+\" \"
+			word_buffer.clear()
+			new_text += '\\n'
+		word_buffer.append(word)
+	for x in word_buffer:
+		new_text += x+\" \"
+	ability_text = new_text.replace(\". \",\". \\n\")
+	ability_text = ability_text.replace(\"\\n \",\"\\n\")
+	$Ability/Control.hint_tooltip = ability_text
 	print(pokemon)
 
 func _process(delta):
@@ -235,14 +210,22 @@ func _process(delta):
 
 
 func _on_Share_pressed():
-	var file_save = $FileDialog
-	file_save.filename = info.nickname+str(info.hash())+\".png\"
-	file_save.popup()
+	var file_save = $NativeDialogSaveFile
+	print(OS.get_system_dir(OS.SYSTEM_DIR_PICTURES))
+	file_save.initial_path = OS.get_system_dir(OS.SYSTEM_DIR_PICTURES)+'/'+info.id.split('.')[0]+\".png\"
+	file_save.show()
 
 func on_select_save_pos(path):
+	var pixels = convert_info_to_pixels(info)
+	var x_pos = 0
+	var checksum = pixels.hash()
+	print(\"HASH: \"+str(checksum))
+	pixels = add_new_colors_to_array(pixels,convert_multiple_bytes_to_colors(BinaryTranslator.int_to_hex(checksum)),\"checksum\")
 	var card = load(\"res://scenes/TradingCard.tscn\").instance()
 	add_child(card)
 	card.set_card(info)
+	yield(VisualServer,\"frame_post_draw\")
+	card.set_code(pixels)
 	yield(VisualServer,\"frame_post_draw\")
 	var vis_card = card.get_card()
 	var img : Image = vis_card
@@ -250,9 +233,6 @@ func on_select_save_pos(path):
 	img.resize(img.get_width(),img.get_height()+1)
 	img.lock()
 	img.flip_y()
-	var pixels = convert_info_to_pixels(info)
-	var x_pos = 1
-	print(pixels)
 	for pixel in pixels:
 		img.set_pixel(x_pos,img.get_height()-1,pixel)
 		x_pos += 1
@@ -260,40 +240,87 @@ func on_select_save_pos(path):
 	card.queue_free()
 	print(path)
 
+func convert_info_to_bars(info):
+	var array = []
+	array.append_array(convert_string_to_bars(info.nickname))
+	var exper = BinaryTranslator.int_to_bin(info.exp)
+	array.append_array(convert_bin_to_bars(exper))
+	return array
+
+func convert_string_to_bars(string:String):
+	var pool = string.to_utf8()
+	var bars : Array = []
+	for charater in pool:
+		var bin : String = BinaryTranslator.int_to_bin(charater)
+		bars.append(convert_bin_to_bars(bin))
+	return bars
+
+func convert_bin_to_bars(string:String):
+	var byte : PoolByteArray = []
+	var x = 0
+	while x < string.length():
+		if string[x] == '1':
+			byte.append(wrapi(x+1,1,8))
+		x += 1
+	return byte
+
 func convert_info_to_pixels(info):
 	var array : Array = []
 	var pos = 0
 	var nickname : String = info.nickname
-	array = add_new_colors_to_array(array,convert_string_to_colors(nickname,12))
+	array = add_new_colors_to_array(array,convert_string_to_colors(nickname,12),\"nickname\")
 	print(array)
-	array = add_new_colors_to_array(array,convert_string_to_colors(info.ot.nickname,12))
-	array.append(Color8(info.ot.game,info.ot.gender,0,255))
+	array = add_new_colors_to_array(array,convert_string_to_colors(info.ot.nickname,12),\"ot-nickname\")
+	var color : PoolColorArray = [Color8(info.ot.game,info.ot.gender,info.gender,alpha)]
+	array = add_new_colors_to_array(array,color,\"ot_info and gender\")
 	var id = BinaryTranslator.int_to_hex(info.ot.id)
-	array = add_new_colors_to_array(array,convert_multiple_bytes_to_colors(id))
+	array = add_new_colors_to_array(array,convert_multiple_bytes_to_colors(id),\"ot-id\")
 	id = BinaryTranslator.int_to_bin(id[0])+BinaryTranslator.int_to_bin(id[1])
+	print(id)
+	id = BinaryTranslator.int_to_hex(info.met_location)
+	id.append(info.met_level)
+	array = add_new_colors_to_array(array,convert_multiple_bytes_to_colors(id),\"met_info\")
 	var stat_array = [
-		Color8(info.atk,info.def,info.hp,255),
-		Color8(info.spe,info.spa,info.spd,255)
+		Color8(info.atk,info.def,info.hp,alpha),
+		Color8(info.spe,info.spa,info.spd,alpha)
 	]
-	array = add_new_colors_to_array(array,stat_array)
+	array = add_new_colors_to_array(array,stat_array,\"base_stats\")
 	stat_array = [
-		Color8(info.iv_atk,info.iv_def,info.iv_hp,255),
-		Color8(info.iv_spe,info.iv_spa,info.iv_spd,255)
+		Color8(info.iv_atk,info.iv_def,info.iv_hp,alpha),
+		Color8(info.iv_spe,info.iv_spa,info.iv_spd,alpha)
 	]
-	array = add_new_colors_to_array(array,stat_array)
+	array = add_new_colors_to_array(array,stat_array,\"iv-stats\")
 	stat_array = [
-		Color8(info.ev_atk,info.ev_def,info.ev_hp,255),
-		Color8(info.ev_spe,info.ev_spa,info.ev_spd,255)
+		Color8(info.ev_atk,info.ev_def,info.ev_hp,alpha),
+		Color8(info.ev_spe,info.ev_spa,info.ev_spd,alpha)
 	]
-	array = add_new_colors_to_array(array,stat_array)
-	var move_array = [
-		Color8(info.move1.id,info.move2.id,info.move3.id,255),
-		Color8(info.move4.id,info.form,info.species,255)
-	]
-	array = add_new_colors_to_array(array,move_array)
+	array = add_new_colors_to_array(array,stat_array,\"ev-stats\")
+	var moves = [\"move1\",\"move2\",\"move3\",\"move4\"]
+	for move in moves:
+		var bytes = BinaryTranslator.int_to_hex(info[move].id)
+		array = add_new_colors_to_array(array,convert_multiple_bytes_to_colors(bytes),move)
+	id = BinaryTranslator.int_to_hex(info.exp)
+	if id.size() != 4:
+		var start = id.size()-1
+		id.resize(4)
+		while start < id.size():
+			id[start] = 0
+			start += 1
+	array = add_new_colors_to_array(array,convert_multiple_bytes_to_colors(id),\"exp\")
+	id = BinaryTranslator.int_to_hex(info.species)
+	if id.size() == 1:
+		id.resize(2)
+		id[1] = 0
+	color = [Color8(id[0],id[1],info[\"form\"],alpha)]
+	array = add_new_colors_to_array(array,color,\"species\")
+	color = [Color8(info[\"ability_number\"],0,0,alpha)]
+	array = add_new_colors_to_array(array,color,\"ability_number\")
+	array = add_new_colors_to_array(array,convert_string_to_colors(info.id.trim_prefix(' ').get_slice('-',2),12),\"hash\")
 	return array
 
-func add_new_colors_to_array(array:PoolColorArray, new_colors:PoolColorArray):
+func add_new_colors_to_array(array:PoolColorArray, new_colors:PoolColorArray, id:String):
+	var size = array.size()
+	print(\"Pixel Location: \"+str(size)+\"-\"+str((size)+new_colors.size())+\" ID: \"+id)
 	for color in new_colors:
 		array.append(color)
 	return array
@@ -303,15 +330,15 @@ func convert_multiple_bytes_to_colors(pool:PoolByteArray):
 	while not pool.empty():
 		if pool.size() == 2:
 			print(\"Only two bytes left\")
-			array.append(Color8(pool[0],pool[1],0,255))
+			array.append(Color8(pool[0],pool[1],0,alpha))
 			pool.remove(0)
 			pool.remove(0)
 		elif pool.size() == 1:
 			print(\"Only one byte left\")
-			array.append(Color8(pool[0],0,0,255))
+			array.append(Color8(pool[0],0,0,alpha))
 			pool.remove(0)
 		else:
-			array.append(Color8(pool[0],pool[1],pool[2],255))
+			array.append(Color8(pool[0],pool[1],pool[2],alpha))
 			pool.remove(0)
 			pool.remove(0)
 			pool.remove(0)
@@ -327,25 +354,38 @@ func convert_string_to_colors(string:String,max_chars:int):
 	while not pool.empty():
 		if pool.size() == 2:
 			print(\"Only two bytes left\")
-			array.append(Color8(pool[0],pool[1],0,255))
+			array.append(Color8(pool[0],pool[1],0,alpha))
 			pool.remove(0)
 			pool.remove(0)
 		elif pool.size() == 1:
 			print(\"Only one byte left\")
-			array.append(Color8(pool[0],0,0,255))
+			array.append(Color8(pool[0],0,0,alpha))
 			pool.remove(0)
 		else:
-			array.append(Color8(pool[0],pool[1],pool[2],255))
+			array.append(Color8(pool[0],pool[1],pool[2],alpha))
 			pool.remove(0)
 			pool.remove(0)
 			pool.remove(0)
 	print(array)
 	return array
+
+
+func _on_ExpButton_pressed():
+	$Chart.popup()
+
 "
 
 [sub_resource type="DynamicFont" id=53]
 size = 26
 font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxEmpty" id=60]
+
+[sub_resource type="StyleBoxEmpty" id=61]
+
+[sub_resource type="StyleBoxEmpty" id=62]
+
+[sub_resource type="StyleBoxEmpty" id=63]
 
 [sub_resource type="DynamicFont" id=50]
 size = 28
@@ -371,7 +411,22 @@ expand_margin_bottom = 20.0
 [sub_resource type="StyleBoxFlat" id=56]
 bg_color = Color( 0, 0.6, 1, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=58]
+[sub_resource type="StyleBoxFlat" id=55]
+bg_color = Color( 0.258824, 0.258824, 0.258824, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=59]
+bg_color = Color( 0.258824, 0.258824, 0.258824, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="DynamicFont" id=58]
+font_data = ExtResource( 12 )
 
 [sub_resource type="StyleBoxFlat" id=47]
 corner_radius_top_left = 8
@@ -399,6 +454,14 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="ViewportTexture" id=49]
 viewport_path = NodePath("Viewport")
+
+[sub_resource type="StyleBoxEmpty" id=64]
+
+[sub_resource type="StyleBoxEmpty" id=65]
+
+[sub_resource type="StyleBoxEmpty" id=66]
+
+[sub_resource type="StyleBoxEmpty" id=67]
 
 [sub_resource type="StyleBoxFlat" id=24]
 
@@ -451,7 +514,6 @@ script/source = "extends PopupPanel
 # Declare member variables here. Examples:
 # var a = 2
 # var b = \"text\"
-var on_graph = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -460,18 +522,15 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed(\"right_click\") and visible != true and on_graph:
-		set_global_position(get_viewport().get_mouse_position())
-		$RichTextLabel.scroll_to_line(0) 
-		popup()
+	pass
 
 
-func _on_Control_mouse_entered():
-	on_graph = true
 
+func _on_GraphTool_pressed():
+	set_global_position(get_viewport().get_mouse_position())
+	$RichTextLabel.scroll_to_line(0) 
+	popup()
 
-func _on_Control_mouse_exited():
-	on_graph = false
 "
 
 [node name="Panel" type="Panel" groups=["Info Panel"]]
@@ -498,26 +557,18 @@ stretch_mode = 6
 margin_right = -884.0
 margin_bottom = -312.0
 
-[node name="Popup" parent="." instance=ExtResource( 8 )]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -512.0
-margin_top = -300.0
-margin_right = -392.0
-margin_bottom = -268.0
+[node name="Chart" parent="." instance=ExtResource( 6 )]
 
 [node name="Type1" type="PanelContainer" parent="."]
 anchor_left = 0.765625
-anchor_top = 0.486667
+anchor_top = 0.546667
 anchor_right = 0.871094
-anchor_bottom = 0.533333
-margin_bottom = -3.05176e-05
+anchor_bottom = 0.593333
 rect_min_size = Vector2( 0, 20 )
 theme = ExtResource( 9 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_use_anchors_": true
 }
 
 [node name="Label" type="Label" parent="Type1"]
@@ -532,14 +583,14 @@ valign = 2
 
 [node name="Type2" type="PanelContainer" parent="."]
 anchor_left = 0.878906
-anchor_top = 0.486667
+anchor_top = 0.546667
 anchor_right = 0.984375
-anchor_bottom = 0.533333
-margin_bottom = -3.05176e-05
+anchor_bottom = 0.593333
 rect_min_size = Vector2( 0, 20 )
 theme = ExtResource( 9 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_use_anchors_": true
 }
 
 [node name="Label" type="Label" parent="Type2"]
@@ -554,14 +605,14 @@ valign = 2
 
 [node name="OnlyOneType" type="PanelContainer" parent="."]
 anchor_left = 0.765625
-anchor_top = 0.486667
+anchor_top = 0.546667
 anchor_right = 0.984375
-anchor_bottom = 0.533333
-margin_bottom = -3.05176e-05
+anchor_bottom = 0.593333
 rect_min_size = Vector2( 0, 20 )
 theme = ExtResource( 9 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_use_anchors_": true
 }
 
 [node name="Label" type="Label" parent="OnlyOneType"]
@@ -576,11 +627,14 @@ valign = 2
 
 [node name="TypeButton" type="ToolButton" parent="."]
 anchor_left = 0.765625
-anchor_top = 0.486667
+anchor_top = 0.546666
 anchor_right = 0.984375
-anchor_bottom = 0.533333
-margin_bottom = -3.05176e-05
+anchor_bottom = 0.593332
 mouse_default_cursor_shape = 16
+custom_styles/hover = SubResource( 60 )
+custom_styles/pressed = SubResource( 61 )
+custom_styles/focus = SubResource( 62 )
+custom_styles/disabled = SubResource( 63 )
 action_mode = 0
 button_mask = 2
 __meta__ = {
@@ -589,12 +643,14 @@ __meta__ = {
 
 [node name="Gender" type="PanelContainer" parent="."]
 anchor_left = 0.765625
-anchor_top = 0.426667
+anchor_top = 0.486667
 anchor_right = 0.871094
-anchor_bottom = 0.473333
+anchor_bottom = 0.533333
+margin_bottom = 3.05176e-05
 theme = ExtResource( 9 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_use_anchors_": true
 }
 
 [node name="Label" type="Label" parent="Gender"]
@@ -609,9 +665,10 @@ valign = 1
 
 [node name="LV" type="PanelContainer" parent="."]
 anchor_left = 0.878906
-anchor_top = 0.426667
+anchor_top = 0.486667
 anchor_right = 0.984375
-anchor_bottom = 0.473333
+anchor_bottom = 0.533333
+margin_bottom = 3.05176e-05
 theme = ExtResource( 9 )
 __meta__ = {
 "_edit_group_": true,
@@ -633,7 +690,7 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/fg = SubResource( 56 )
-custom_styles/bg = SubResource( 58 )
+custom_styles/bg = SubResource( 55 )
 percent_visible = false
 
 [node name="Label" type="Label" parent="LV"]
@@ -643,6 +700,46 @@ margin_bottom = 20.0
 text = "Lv. "
 align = 1
 valign = 1
+
+[node name="Ability" type="PanelContainer" parent="."]
+anchor_left = 0.765625
+anchor_top = 0.426667
+anchor_right = 0.984375
+anchor_bottom = 0.473333
+rect_min_size = Vector2( 0, 20 )
+mouse_default_cursor_shape = 16
+custom_styles/panel = SubResource( 59 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Ability"]
+margin_right = 224.0
+margin_bottom = 27.9996
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 58 )
+text = "Ability"
+align = 1
+valign = 1
+
+[node name="Control" type="Control" parent="Ability"]
+margin_right = 224.0
+margin_bottom = 27.9996
+
+[node name="ExpButton" type="ToolButton" parent="."]
+anchor_left = 0.878906
+anchor_top = 0.486667
+anchor_right = 0.984375
+anchor_bottom = 0.533333
+mouse_default_cursor_shape = 16
+action_mode = 0
+button_mask = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Back" type="Button" parent="."]
 anchor_left = 0.0078125
@@ -699,13 +796,14 @@ __meta__ = {
 
 [node name="GridContainer" type="GridContainer" parent="."]
 anchor_left = 0.765625
-anchor_top = 0.546667
+anchor_top = 0.608333
 anchor_right = 0.984375
-anchor_bottom = 0.853333
+anchor_bottom = 0.914999
 custom_constants/vseparation = 12
 columns = 2
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_use_anchors_": true
 }
 
 [node name="Move1" parent="GridContainer" instance=ExtResource( 1 )]
@@ -713,6 +811,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 110.0
 margin_bottom = 86.0
+mouse_default_cursor_shape = 0
 
 [node name="Move2" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
@@ -720,6 +819,7 @@ anchor_bottom = 0.0
 margin_left = 114.0
 margin_right = 224.0
 margin_bottom = 86.0
+mouse_default_cursor_shape = 0
 
 [node name="Move3" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
@@ -727,6 +827,7 @@ anchor_bottom = 0.0
 margin_top = 98.0
 margin_right = 110.0
 margin_bottom = 183.0
+mouse_default_cursor_shape = 0
 
 [node name="Move4" parent="GridContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
@@ -735,58 +836,7 @@ margin_left = 114.0
 margin_top = 98.0
 margin_right = 224.0
 margin_bottom = 183.0
-
-[node name="GridContainer2" type="GridContainer" parent="."]
-anchor_left = 0.765625
-anchor_top = 0.546667
-anchor_right = 0.984375
-anchor_bottom = 0.853333
-mouse_default_cursor_shape = 16
-custom_constants/vseparation = 12
-columns = 2
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Move1" type="ToolButton" parent="GridContainer2"]
-margin_right = 110.0
-margin_bottom = 86.0
-mouse_default_cursor_shape = 16
-size_flags_horizontal = 3
-size_flags_vertical = 3
-action_mode = 0
-button_mask = 2
-
-[node name="Move2" type="ToolButton" parent="GridContainer2"]
-margin_left = 114.0
-margin_right = 224.0
-margin_bottom = 86.0
-mouse_default_cursor_shape = 16
-size_flags_horizontal = 3
-size_flags_vertical = 3
-action_mode = 0
-button_mask = 2
-
-[node name="Move3" type="ToolButton" parent="GridContainer2"]
-margin_top = 98.0
-margin_right = 110.0
-margin_bottom = 183.0
-mouse_default_cursor_shape = 16
-size_flags_horizontal = 3
-size_flags_vertical = 3
-action_mode = 0
-button_mask = 2
-
-[node name="Move4" type="ToolButton" parent="GridContainer2"]
-margin_left = 114.0
-margin_top = 98.0
-margin_right = 224.0
-margin_bottom = 183.0
-mouse_default_cursor_shape = 16
-size_flags_horizontal = 3
-size_flags_vertical = 3
-action_mode = 0
-button_mask = 2
+mouse_default_cursor_shape = 0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 anchor_left = 0.046875
@@ -808,6 +858,7 @@ __meta__ = {
 size = Vector2( 896, 1024 )
 transparent_bg = true
 handle_input_locally = false
+hdr = false
 disable_3d = true
 usage = 0
 render_target_v_flip = true
@@ -832,10 +883,23 @@ anchor_top = 0.288333
 anchor_right = 0.645508
 anchor_bottom = 0.671667
 rect_min_size = Vector2( 202, 230 )
+mouse_filter = 0
 mouse_default_cursor_shape = 16
+input_pass_on_modal_close_click = false
 texture = SubResource( 49 )
 expand = true
 stretch_mode = 6
+
+[node name="GraphTool" type="ToolButton" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_default_cursor_shape = 16
+custom_styles/hover = SubResource( 64 )
+custom_styles/pressed = SubResource( 65 )
+custom_styles/focus = SubResource( 66 )
+custom_styles/disabled = SubResource( 67 )
+action_mode = 0
+button_mask = 2
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
 margin_right = 112.0
@@ -1200,27 +1264,13 @@ EVs:
 	Spd: 1
 	SpA: 1"
 
-[node name="FileDialog" type="FileDialog" parent="."]
-anchor_left = 0.121094
-anchor_top = 0.09
-anchor_right = 0.878906
-anchor_bottom = 0.91
-window_title = "Save Pokémon"
-resizable = true
-access = 2
-filters = PoolStringArray( "*.png;PNG File", "*.pka;Pokémon Manager File" )
-show_hidden_files = true
-__meta__ = {
-"_edit_use_anchors_": true
-}
+[node name="NativeDialogSaveFile" type="Node" parent="."]
+script = ExtResource( 8 )
+title = "Save Pokémon"
+filters = PoolStringArray( "*.png ; PNG Image", "* ; All Files" )
 
 [connection signal="pressed" from="TypeButton" to="TypeChart" method="_on_TypeButton_pressed"]
+[connection signal="pressed" from="ExpButton" to="." method="_on_ExpButton_pressed"]
 [connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="Share" to="." method="_on_Share_pressed"]
-[connection signal="pressed" from="GridContainer2/Move1" to="Popup" method="_on_Move1_pressed"]
-[connection signal="pressed" from="GridContainer2/Move2" to="Popup" method="_on_Move2_pressed"]
-[connection signal="pressed" from="GridContainer2/Move3" to="Popup" method="_on_Move3_pressed"]
-[connection signal="pressed" from="GridContainer2/Move4" to="Popup" method="_on_Move4_pressed"]
-[connection signal="mouse_entered" from="Control" to="StatsInfo" method="_on_Control_mouse_entered"]
-[connection signal="mouse_exited" from="Control" to="StatsInfo" method="_on_Control_mouse_exited"]
-[connection signal="file_selected" from="FileDialog" to="." method="on_select_save_pos"]
+[connection signal="pressed" from="Control/GraphTool" to="StatsInfo" method="_on_GraphTool_pressed"]

@@ -43,6 +43,7 @@ func setChart(type1,type2):
 
 func _on_TypeButton_pressed():
 	set_global_position(get_viewport().get_mouse_position())
+	rect_size.y = rect_min_size.x
 	popup()
 "
 
@@ -177,9 +178,9 @@ corner_radius_bottom_left = 128
 
 [node name="TypeChart" type="PopupPanel"]
 anchor_right = 1.0
-anchor_bottom = 1.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 0, 33 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
 script = SubResource( 20 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -190,20 +191,20 @@ margin_top = 4.0
 margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 4
 
 [node name="Rows" type="VBoxContainer" parent="HBoxContainer"]
 margin_right = 506.0
-margin_bottom = 592.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 2
 
 [node name="Normal" type="PanelContainer" parent="HBoxContainer/Rows"]
 margin_right = 506.0
-margin_bottom = 592.0
-rect_min_size = Vector2( 0, 20 )
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
@@ -213,7 +214,7 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="HBoxContainer/Rows/Normal"]
 margin_right = 506.0
-margin_bottom = 592.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 custom_fonts/font = SubResource( 52 )
@@ -226,9 +227,9 @@ visible = false
 margin_top = 286.0
 margin_right = 494.0
 margin_bottom = 568.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 3 )
 __meta__ = {
@@ -251,9 +252,9 @@ visible = false
 margin_top = 286.0
 margin_right = 494.0
 margin_bottom = 425.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 4 )
 __meta__ = {
@@ -276,9 +277,9 @@ visible = false
 margin_top = 381.0
 margin_right = 494.0
 margin_bottom = 568.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 5 )
 __meta__ = {
@@ -301,9 +302,9 @@ visible = false
 margin_top = 457.0
 margin_right = 494.0
 margin_bottom = 568.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 6 )
 __meta__ = {
@@ -326,9 +327,9 @@ visible = false
 margin_top = 476.0
 margin_right = 494.0
 margin_bottom = 568.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 7 )
 __meta__ = {
@@ -351,9 +352,9 @@ visible = false
 margin_top = 490.0
 margin_right = 494.0
 margin_bottom = 568.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 8 )
 __meta__ = {
@@ -376,9 +377,9 @@ visible = false
 margin_top = 444.0
 margin_right = 494.0
 margin_bottom = 504.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 9 )
 __meta__ = {
@@ -402,9 +403,9 @@ visible = false
 margin_top = 500.0
 margin_right = 494.0
 margin_bottom = 568.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 10 )
 __meta__ = {
@@ -428,9 +429,9 @@ visible = false
 margin_top = 468.0
 margin_right = 494.0
 margin_bottom = 516.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 11 )
 __meta__ = {
@@ -454,9 +455,9 @@ visible = false
 margin_top = 514.0
 margin_right = 494.0
 margin_bottom = 568.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 12 )
 __meta__ = {
@@ -480,9 +481,9 @@ visible = false
 margin_top = 484.0
 margin_right = 494.0
 margin_bottom = 524.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 13 )
 __meta__ = {
@@ -506,9 +507,9 @@ visible = false
 margin_top = 524.0
 margin_right = 494.0
 margin_bottom = 568.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 14 )
 __meta__ = {
@@ -532,9 +533,9 @@ visible = false
 margin_top = 531.0
 margin_right = 494.0
 margin_bottom = 568.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 15 )
 __meta__ = {
@@ -559,9 +560,9 @@ visible = false
 margin_top = 533.0
 margin_right = 494.0
 margin_bottom = 568.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 16 )
 __meta__ = {
@@ -586,9 +587,9 @@ visible = false
 margin_top = 536.0
 margin_right = 494.0
 margin_bottom = 568.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 17 )
 __meta__ = {
@@ -613,9 +614,9 @@ visible = false
 margin_top = 538.0
 margin_right = 494.0
 margin_bottom = 568.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 18 )
 __meta__ = {
@@ -639,9 +640,9 @@ visible = false
 margin_top = 540.0
 margin_right = 494.0
 margin_bottom = 568.0
-rect_min_size = Vector2( 0, 20 )
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 19 )
 __meta__ = {
@@ -663,179 +664,184 @@ max_lines_visible = 1
 [node name="Multipliers" type="VBoxContainer" parent="HBoxContainer"]
 margin_left = 510.0
 margin_right = 1016.0
-margin_bottom = 592.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 2
 
 [node name="Normal" type="Label" parent="HBoxContainer/Multipliers"]
-margin_top = 289.0
 margin_right = 506.0
-margin_bottom = 303.0
-size_flags_vertical = 6
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Fire" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 41.0
 margin_right = 510.0
 margin_bottom = 55.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Water" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 44.0
 margin_right = 510.0
 margin_bottom = 58.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Grass" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 51.0
 margin_right = 510.0
 margin_bottom = 65.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Electric" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 85.0
 margin_right = 510.0
 margin_bottom = 99.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Ice" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 60.0
 margin_right = 510.0
 margin_bottom = 74.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Fighting" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 98.0
 margin_right = 510.0
 margin_bottom = 112.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Poison" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 72.0
 margin_right = 510.0
 margin_bottom = 86.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Ground" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 116.0
 margin_right = 510.0
 margin_bottom = 130.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Flying" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 81.0
 margin_right = 510.0
 margin_bottom = 95.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Psychic" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 91.0
 margin_right = 510.0
 margin_bottom = 105.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Bug" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 104.0
 margin_right = 510.0
 margin_bottom = 118.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Rock" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 141.0
 margin_right = 510.0
 margin_bottom = 155.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Ghost" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 206.0
 margin_right = 510.0
 margin_bottom = 220.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Dark" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 171.0
 margin_right = 510.0
 margin_bottom = 185.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Dragon" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 217.0
 margin_right = 510.0
 margin_bottom = 231.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Steel" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 444.0
 margin_right = 510.0
 margin_bottom = 458.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
+valign = 1
 
 [node name="Fairy" type="Label" parent="HBoxContainer/Multipliers"]
 visible = false
 margin_top = 494.0
 margin_right = 510.0
 margin_bottom = 508.0
-size_flags_vertical = 6
+rect_min_size = Vector2( 0, 25 )
 text = "2"
 align = 1
-
-[node name="GridContainer" type="GridContainer" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 18
+valign = 1
