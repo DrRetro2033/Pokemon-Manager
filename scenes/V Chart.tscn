@@ -1,13 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/Path.gd" type="Script" id=1]
 [ext_resource path="res://scripts/V_Chart.gd" type="Script" id=2]
-[ext_resource path="res://sprites/ui/icons/hp_icon.png" type="Texture" id=3]
-[ext_resource path="res://sprites/ui/icons/spa_icon.png" type="Texture" id=4]
-[ext_resource path="res://sprites/ui/icons/speed_icon.png" type="Texture" id=5]
-[ext_resource path="res://sprites/ui/icons/def_icon.png" type="Texture" id=6]
-[ext_resource path="res://sprites/ui/icons/atk_icon.png" type="Texture" id=7]
-[ext_resource path="res://sprites/ui/icons/spd_icon.png" type="Texture" id=8]
 
 [sub_resource type="Curve2D" id=55]
 _data = {
@@ -38,10 +32,6 @@ _data = {
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -56, 32 )
 }
-
-[sub_resource type="CanvasItemMaterial" id=61]
-blend_mode = 1
-light_mode = 1
 
 [node name="V Chart" type="Polygon2D"]
 position = Vector2( 448, 512 )
@@ -358,45 +348,3 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="HPIcon" type="Sprite" parent="."]
-modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
-material = SubResource( 61 )
-scale = Vector2( 0.3, 0.3 )
-texture = ExtResource( 3 )
-offset = Vector2( 0, -164 )
-
-[node name="SpeIcon" type="Sprite" parent="."]
-modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
-material = SubResource( 61 )
-scale = Vector2( 0.3, 0.3 )
-texture = ExtResource( 5 )
-offset = Vector2( 0, 164 )
-
-[node name="AtkIcon" type="Sprite" parent="."]
-modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
-material = SubResource( 61 )
-scale = Vector2( 0.3, 0.3 )
-texture = ExtResource( 7 )
-offset = Vector2( 150, -82 )
-
-[node name="SpAIcon" type="Sprite" parent="."]
-modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
-material = SubResource( 61 )
-scale = Vector2( 0.3, 0.3 )
-texture = ExtResource( 4 )
-offset = Vector2( -150, -82 )
-
-[node name="DefIcon" type="Sprite" parent="."]
-modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
-material = SubResource( 61 )
-scale = Vector2( 0.3, 0.3 )
-texture = ExtResource( 6 )
-offset = Vector2( 150, 82 )
-
-[node name="SpDIcon" type="Sprite" parent="."]
-modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
-material = SubResource( 61 )
-scale = Vector2( 0.3, 0.3 )
-texture = ExtResource( 8 )
-offset = Vector2( -150, 82 )
