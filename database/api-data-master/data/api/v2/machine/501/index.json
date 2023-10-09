@@ -1,0 +1,15 @@
+{
+    "id": 501,
+    "item": {
+        "name": "tm25",
+        "url": "/api/v2/item/329/"
+    },
+    "move": {
+        "name": "protect",
+        "url": "/api/v2/move/182/"
+    },
+    "version_group": {
+        "name": "sword-shield",
+        "url": "/api/v2/version-group/20/"
+    }
+}

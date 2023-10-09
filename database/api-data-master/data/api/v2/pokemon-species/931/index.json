@@ -1,0 +1,212 @@
+{
+    "base_happiness": 50,
+    "capture_rate": 190,
+    "color": {
+        "name": "green",
+        "url": "/api/v2/pokemon-color/5/"
+    },
+    "egg_groups": [
+        {
+            "name": "flying",
+            "url": "/api/v2/egg-group/4/"
+        }
+    ],
+    "evolution_chain": {
+        "url": "/api/v2/evolution-chain/488/"
+    },
+    "evolves_from_species": null,
+    "flavor_text_entries": [
+        {
+            "flavor_text": "These Pok\u00e9mon prefer to live in cities. They form flocks based on the color of their feathers, and they fight over territory.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "scarlet",
+                "url": "/api/v2/version/40/"
+            }
+        },
+        {
+            "flavor_text": "Green-feathered flocks hold the most sway. When they\u2019re out searching for food in the mornings and evenings, it gets very noisy.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "violet",
+                "url": "/api/v2/version/41/"
+            }
+        }
+    ],
+    "form_descriptions": [],
+    "forms_switchable": false,
+    "gender_rate": 4,
+    "genera": [
+        {
+            "genus": "\u30a4\u30f3\u30b3\u30dd\u30b1\u30e2\u30f3",
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            }
+        },
+        {
+            "genus": "\u9e1a\u9d61\u5bf6\u53ef\u5922",
+            "language": {
+                "name": "zh-Hant",
+                "url": "/api/v2/language/4/"
+            }
+        },
+        {
+            "genus": "Sittich",
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            }
+        },
+        {
+            "genus": "Parrot Pok\u00e9mon",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            }
+        },
+        {
+            "genus": "\u9e66\u9e49\u5b9d\u53ef\u68a6",
+            "language": {
+                "name": "zh-Hans",
+                "url": "/api/v2/language/12/"
+            }
+        }
+    ],
+    "generation": {
+        "name": "generation-ix",
+        "url": "/api/v2/generation/9/"
+    },
+    "growth_rate": {
+        "name": "slow-then-very-fast",
+        "url": "/api/v2/growth-rate/5/"
+    },
+    "habitat": null,
+    "has_gender_differences": false,
+    "hatch_counter": 15,
+    "id": 931,
+    "is_baby": false,
+    "is_legendary": false,
+    "is_mythical": false,
+    "name": "squawkabilly",
+    "names": [
+        {
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "name": "\u30a4\u30ad\u30ea\u30f3\u30b3"
+        },
+        {
+            "language": {
+                "name": "roomaji",
+                "url": "/api/v2/language/2/"
+            },
+            "name": "Ikirinko"
+        },
+        {
+            "language": {
+                "name": "ko",
+                "url": "/api/v2/language/3/"
+            },
+            "name": "\uc2dc\ube44\uaf2c"
+        },
+        {
+            "language": {
+                "name": "zh-Hant",
+                "url": "/api/v2/language/4/"
+            },
+            "name": "\u6012\u9e1a\u54e5"
+        },
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Tapato\u00e8s"
+        },
+        {
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "name": "Krawalloro"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Squawkabilly"
+        },
+        {
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "name": "\u30a4\u30ad\u30ea\u30f3\u30b3"
+        },
+        {
+            "language": {
+                "name": "zh-Hans",
+                "url": "/api/v2/language/12/"
+            },
+            "name": "\u6012\u9e66\u54e5"
+        }
+    ],
+    "order": 960,
+    "pal_park_encounters": [],
+    "pokedex_numbers": [
+        {
+            "entry_number": 931,
+            "pokedex": {
+                "name": "national",
+                "url": "/api/v2/pokedex/1/"
+            }
+        },
+        {
+            "entry_number": 113,
+            "pokedex": {
+                "name": "paldea",
+                "url": "/api/v2/pokedex/31/"
+            }
+        }
+    ],
+    "shape": null,
+    "varieties": [
+        {
+            "is_default": true,
+            "pokemon": {
+                "name": "squawkabilly",
+                "url": "/api/v2/pokemon/931/"
+            }
+        },
+        {
+            "is_default": false,
+            "pokemon": {
+                "name": "squawkabilly-blue-plumage",
+                "url": "/api/v2/pokemon/10260/"
+            }
+        },
+        {
+            "is_default": false,
+            "pokemon": {
+                "name": "squawkabilly-yellow-plumage",
+                "url": "/api/v2/pokemon/10261/"
+            }
+        },
+        {
+            "is_default": false,
+            "pokemon": {
+                "name": "squawkabilly-white-plumage",
+                "url": "/api/v2/pokemon/10262/"
+            }
+        }
+    ]
+}

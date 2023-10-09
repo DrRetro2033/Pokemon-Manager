@@ -6,20 +6,17 @@ var data_translate = load("res://scripts/Pokemon_Database.gd").new()
 var pk5 = load("res://scripts/pk5.gd").new()
 var pk6 = load("res://scripts/pk6.gd").new()
 var pk7 = load("res://scripts/pk7.gd").new()
-var walking_pokemon = load("res://scenes/WalkingPokemon.tscn") #this is the scene that contains the animations and sprite of the pokemon walking into the bank
-var info : Dictionary #basic info for the pokemon
-var moves : Dictionary #hold all known moves a pokemon has
-var flavor_text : String #the first pokedex entry that a pokemon has
-var form : int #what alt form the pokemon is
-var pokemon_url : String
 var folder_path : String = "/"
+var existing_pokemon : Resource
 func _ready():
+	get_tree().set_auto_accept_quit(false)
 	print(BinaryTranslator.bin_to_int(BinaryTranslator.int_to_bin(2254250705))) #this is for testing the binary translator by having it convert this number to binary and back
 	var dir = Directory.new() #instances a new directory object
 	dir.open(folder_path)
 	$"Loading Screen".switch("reading")
 	var user_pokemon
-	var existing_pokemon = bank.load() #loads the bank file of existing pokemon info
+	existing_pokemon = bank.load() #loads the bank file of existing pokemon info
+	Pokemon.connect("refresh_bank",self,"refresh_bank")
 	if existing_pokemon.first_time_setup: #checks to see if this the first time the user is using pokemon manager 
 		Trainer.first_time_setup = true
 	else:
@@ -32,14 +29,29 @@ func _ready():
 	#this chunk of code's job is to get all of the pokemon that already exists in the bank and remove null/empty slots
 	var without_null = []
 	user_pokemon = list_files_in_directory(folder_path)
+	var final_list = []
+	for file in user_pokemon:
+		if file.get_extension() == "pk5":
+			pass
+		elif file.get_extension() == "pk6":
+			pass
+		elif file.get_extension() == "pk7":
+			pass
+		else:
+			continue
+		final_list.append(file)
+	user_pokemon = final_list
 	if existing_pokemon.data != {}:
 		for x in existing_pokemon.data:
 			if x == null:
 				continue
 			elif x != null:
 				without_null.push_back(x)
-	# 
+		print(existing_pokemon)
+		print(without_null)
 		if user_pokemon.size() > without_null.size(): #if the user_pokemon is bigger than without_null then that means that there is new pokemon in the pkmdb folder
+			get_info(user_pokemon,existing_pokemon)
+		elif without_null.size() == 0:
 			get_info(user_pokemon,existing_pokemon)
 		else:
 			Pokemon.set_data(existing_pokemon.data)
@@ -48,13 +60,21 @@ func _ready():
 	else:
 		get_info(user_pokemon,existing_pokemon)
 
-
 func get_info(user_pokemon, existing_pokemon):
 	print(user_pokemon)
 	var id = 0 #this is for giving the pokemon unqie keys
 	var pokemon = {}
 	var new_pokemon = []
+	$"Loading Screen".switch("api")
+	API.check_for_update()
+	var needs_update = yield(API,"finished_checking")
+	print("Needs Update: "+str(needs_update))
+	if needs_update:
+		$"Loading Screen".switch("extracting")
+		API.update_database()
+		yield(API,"finished_updating")
 	$"Loading Screen/ProgressBar".max_value = user_pokemon.size() #sets the progress bar's max value to the amount of pokemon the user has
+	$"Loading Screen/ProgressBar".value = 0
 	if existing_pokemon != null and not existing_pokemon.data.empty(): #checks to see if there is any existing pokemon in the bank file and if there is then add them to the database
 		pokemon = existing_pokemon.data
 	while user_pokemon.size() > 0:
@@ -68,53 +88,47 @@ func get_info(user_pokemon, existing_pokemon):
 				array = pk6.readpk(folder_path+"/"+file)
 			"pk7":
 				array = pk7.readpk(folder_path+"/"+file)
+		if array == null:
+			continue
 		if existing_pokemon != null and not existing_pokemon.data.empty() and pokemon.has(array["id"]): #if the pokemon is already in the database, skip it
 				id += 1
 				continue
 		elif array != null and not array.empty(): #asks PokeAPI for infomation about the pokemons species and known moves
-			$"Loading Screen".switch("api") #changes loading screen text
-			API.update_info(array)
-			info = yield(API,"done")
+			$"Loading Screen".switch("moving") #changes loading screen text
+			var info = API.get_info(array).duplicate()
 			#this should be removed in the future
 			if existing_pokemon != null and existing_pokemon.data.has(array["id"]): 
 				id += 1
-				moves.clear()
 				info.clear()
-				flavor_text = ""
-				pokemon_url = ""
-				continue
 			else:
-			#
 				pokemon[array["id"]] = {}
 				pokemon[array["id"]] = array
 				new_pokemon.push_back(array["id"])
 				#this part creates and starts the walking pokemon
-				var walk = walking_pokemon.instance()
-				$"Loading Screen/WalkingPokemon".add_child(walk)
-				walk.start(array)
-				#
+				$"Loading Screen/WalkingPokemon".add_pokemon(array)
 #			print(array)
-			moves.clear()
-			info.clear()
-			flavor_text = ""
-			pokemon_url = ""
 			$"Loading Screen/ProgressBar".value += 1
 			id += 1
+			yield(get_tree().create_timer(1),"timeout")
 		#
 	if pokemon.empty():
 		print("Incorrect")
-		$PathSelector.popup()
-		folder_path = yield($PathSelector,"dir_selected")
+		$NativeDialogSelectFolder.show()
+		folder_path = yield($NativeDialogSelectFolder,"folder_selected")
 		print(folder_path)
 		get_info(list_files_in_directory(folder_path),existing_pokemon)
 	else:
 		Trainer.folder_path = folder_path
 		Pokemon.set_data(pokemon) #makes a copy of the temporary dictionary and gives it to the object Pokemon for public access
 		$"Loading Screen".switch("layout")
-		$TabContainer.addPokemon(new_pokemon,existing_pokemon)
+		$TabContainer.addPokemon(new_pokemon)
 
 
+func refresh_bank(new_pokemon):
+	print("refresh")
+	$TabContainer.addPokemon(new_pokemon)
 	
+
 func list_files_in_directory(path): #lists all the pk files in the pkmdb folder
 	var files = []
 	var dir = Directory.new()
@@ -130,12 +144,52 @@ func list_files_in_directory(path): #lists all the pk files in the pkmdb folder
 	return files
 
 func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel"):
-		bank.save()
-		get_tree().quit()
-	elif Input.is_action_just_pressed("reset"):
-		bank.reset()
-		get_tree().quit()
-	elif Input.is_action_just_pressed("right_click") and $Panel.visible != true:
-		$PopupMenu.popup()
-		$PopupMenu.set_global_position(get_viewport().get_mouse_position())
+	$RightClickContext.position = get_viewport().get_mouse_position()
+	if Input.is_action_just_pressed("right_click") and $CanvasLayer/Panel.visible != true:
+		print($RightClickContext.get_overlapping_areas())
+		if $RightClickContext.get_overlapping_areas().size() > 0:
+			var areas = $RightClickContext.get_overlapping_areas()
+			areas.invert()
+			var x = 0
+			while x < $RightClickContext.get_overlapping_areas().size():
+				if not $RightClickContext.get_overlapping_areas()[x].visible:
+					x += 1
+					continue
+				else:
+					$PopupMenu.clear()
+					var items = $RightClickContext.get_overlapping_areas()[x].get_items()
+					for item in items:
+						$PopupMenu.add_item(item)
+					$PopupMenu.context = $RightClickContext.get_overlapping_areas()[x]
+					break
+			if $RightClickContext.get_overlapping_areas()[x].is_active and not $PopupMenu.items.empty():
+				$PopupMenu.popup()
+			else:
+				$PopupMenu.visible = false
+			$PopupMenu.set_global_position(get_viewport().get_mouse_position())
+	elif Input.is_action_just_pressed("dev_tool_menu_open"):
+		pass
+
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		$NativeDialogMessage.show()
+
+func _on_Search_pressed():
+	$TagSearch.show()
+#	$Search.show()
+
+
+func _on_Party_pressed():
+	$PartyCreator.show()
+
+
+func _on_NativeDialogMessage_result_selected(result):
+	print(result)
+	match result:
+		2:
+			bank.save()
+			get_tree().quit()
+		3:
+			get_tree().quit()
+		1:
+			pass

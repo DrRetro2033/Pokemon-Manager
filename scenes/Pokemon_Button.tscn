@@ -1,42 +1,64 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://abomasnow.png" type="Texture" id=1]
+[ext_resource path="res://scenes/RightClickArea.tscn" type="PackedScene" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Button
-
+signal dragged_and_dropped(node)
+signal on_right_click(id)
 const path = \"res://sprites/pokemon/icons/\"
 onready var label = $VBoxContainer/Label
 onready var sprite = $VBoxContainer/TextureRect
 onready var hold_timer = $Timer
-var id
-var can_drag = true
+export var can_drag = true
+export var make_a_copy_for = [\"party\"]
+export var ids_allowed = [
+	\"bank\"
+]
+export var id = \"bank\"
+export var right_click_items : PoolStringArray = []
+var info
 func _ready():
-	pass
+	$Area2D.items = right_click_items
 
-func pokeButton(var info):
+func _process(delta):
+	if $Area2D/CollisionShape2D.position != get_global_rect().size/2:
+		var shape : RectangleShape2D = RectangleShape2D.new()
+		shape.extents = get_global_rect().size/2
+		$Area2D/CollisionShape2D.shape = shape
+		$Area2D/CollisionShape2D.position = get_global_rect().size/2
+
+func pokeButton(data):
 	label = $VBoxContainer/Label
 	sprite = $VBoxContainer/TextureRect
-	if info != null:
-		id = info
-		var pokemon = Pokemon.pokemon[info]
+	if data != null:
+		info = data
+		var pokemon = Pokemon.pokemon[data]
 		disabled = false
 		label.visible = true
 		sprite.visible = true
 		label.text = pokemon[\"nickname\"]
 		var path_name = str(pokemon[\"sprite\"])
 		var temp_path = path+path_name
-		sprite.set_texture(load(temp_path))
+		if File.new().file_exists(temp_path):
+			sprite.set_texture(load(temp_path))
+		else:
+			sprite.set_texture(load(\"res://sprites/ui/icons/error.svg\"))
+		$Area2D.is_active = true
+		$Area2D/CollisionShape2D.disabled = false
 	else:
-		id = null
+		$Area2D/CollisionShape2D.disabled = true
+		info = null
 		disabled = true
 		label.visible = false
 		sprite.visible = false
+		$Area2D.is_active = false
 
 
 func _on_Button_pressed():
 	for panel in get_tree().get_nodes_in_group(\"Info Panel\"):
-		panel.open(id)
+		panel.open(info)
 	hold_timer.stop()
 
 
@@ -48,7 +70,7 @@ func get_drag_data(position):
 	if not disabled and can_drag:
 		var data = {}
 		data[\"origin\"] = self
-		data[\"pokemon\"] = id
+		data[\"pokemon\"] = info
 		var drag_button = TextureRect.new()
 		drag_button.texture = get_child(0).get_child(0).texture
 		drag_button.rect_size = Vector2(100,100)
@@ -59,12 +81,26 @@ func get_drag_data(position):
 		return data
 
 func can_drop_data(position, data):
+	if not ids_allowed.has(data[\"origin\"].id):
+		return false
 	return true
 
 func drop_data(position, data):
-	data[\"origin\"].pokeButton(id)
+	if not data[\"origin\"].make_a_copy_for.has(id):
+		data[\"origin\"].pokeButton(info)
 	pokeButton(data[\"pokemon\"])
+	emit_signal(\"dragged_and_dropped\",self)
 
+
+
+func _on_Area2D_item_selected(id):
+	print(\"Item: \"+str(id))
+	match self.id:
+		\"party\":
+			match id:
+				0:
+					pokeButton(null)
+	emit_signal(\"on_right_click\",id)
 "
 
 [node name="Button" type="Button"]
@@ -104,6 +140,8 @@ valign = 1
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="Area2D" parent="." instance=ExtResource( 2 )]
 
 [connection signal="button_down" from="." to="." method="_on_Button_button_down"]
 [connection signal="button_up" from="." to="." method="_on_Button_button_up"]

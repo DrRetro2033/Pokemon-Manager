@@ -1,0 +1,219 @@
+{
+    "base_happiness": 0,
+    "capture_rate": 3,
+    "color": {
+        "name": "blue",
+        "url": "/api/v2/pokemon-color/2/"
+    },
+    "egg_groups": [
+        {
+            "name": "no-eggs",
+            "url": "/api/v2/egg-group/15/"
+        }
+    ],
+    "evolution_chain": {
+        "url": "/api/v2/evolution-chain/536/"
+    },
+    "evolves_from_species": null,
+    "flavor_text_entries": [
+        {
+            "flavor_text": "Much remains unknown about this creature. It resembles Cyclizar, but it is far more ruthless and powerful.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "scarlet",
+                "url": "/api/v2/version/40/"
+            }
+        },
+        {
+            "flavor_text": "This seems to be the Iron Serpent mentioned in an old book. The Iron Serpent is said to have turned the land to ash with its lightning.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "violet",
+                "url": "/api/v2/version/41/"
+            }
+        }
+    ],
+    "form_descriptions": [],
+    "forms_switchable": false,
+    "gender_rate": -1,
+    "genera": [
+        {
+            "genus": "\u30d1\u30e9\u30c9\u30c3\u30af\u30b9\u30dd\u30b1\u30e2\u30f3",
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            }
+        },
+        {
+            "genus": "\u6096\u8b2c\u5bf6\u53ef\u5922",
+            "language": {
+                "name": "zh-Hant",
+                "url": "/api/v2/language/4/"
+            }
+        },
+        {
+            "genus": "Paradox",
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            }
+        },
+        {
+            "genus": "Paradox Pok\u00e9mon",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            }
+        },
+        {
+            "genus": "\u6096\u8c2c\u5b9d\u53ef\u68a6",
+            "language": {
+                "name": "zh-Hans",
+                "url": "/api/v2/language/12/"
+            }
+        }
+    ],
+    "generation": {
+        "name": "generation-ix",
+        "url": "/api/v2/generation/9/"
+    },
+    "growth_rate": {
+        "name": "slow",
+        "url": "/api/v2/growth-rate/1/"
+    },
+    "habitat": null,
+    "has_gender_differences": false,
+    "hatch_counter": 50,
+    "id": 1008,
+    "is_baby": false,
+    "is_legendary": true,
+    "is_mythical": false,
+    "name": "miraidon",
+    "names": [
+        {
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "name": "\u30df\u30e9\u30a4\u30c9\u30f3"
+        },
+        {
+            "language": {
+                "name": "roomaji",
+                "url": "/api/v2/language/2/"
+            },
+            "name": "Miraidon"
+        },
+        {
+            "language": {
+                "name": "ko",
+                "url": "/api/v2/language/3/"
+            },
+            "name": "\ubbf8\ub77c\uc774\ub3c8"
+        },
+        {
+            "language": {
+                "name": "zh-Hant",
+                "url": "/api/v2/language/4/"
+            },
+            "name": "\u5bc6\u52d2\u9813"
+        },
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Miraidon"
+        },
+        {
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "name": "Miraidon"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Miraidon"
+        },
+        {
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "name": "\u30df\u30e9\u30a4\u30c9\u30f3"
+        },
+        {
+            "language": {
+                "name": "zh-Hans",
+                "url": "/api/v2/language/12/"
+            },
+            "name": "\u5bc6\u52d2\u987f"
+        }
+    ],
+    "order": 999,
+    "pal_park_encounters": [],
+    "pokedex_numbers": [
+        {
+            "entry_number": 1008,
+            "pokedex": {
+                "name": "national",
+                "url": "/api/v2/pokedex/1/"
+            }
+        },
+        {
+            "entry_number": 400,
+            "pokedex": {
+                "name": "paldea",
+                "url": "/api/v2/pokedex/31/"
+            }
+        }
+    ],
+    "shape": null,
+    "varieties": [
+        {
+            "is_default": true,
+            "pokemon": {
+                "name": "miraidon",
+                "url": "/api/v2/pokemon/1008/"
+            }
+        },
+        {
+            "is_default": false,
+            "pokemon": {
+                "name": "miraidon-low-power-mode",
+                "url": "/api/v2/pokemon/10268/"
+            }
+        },
+        {
+            "is_default": false,
+            "pokemon": {
+                "name": "miraidon-drive-mode",
+                "url": "/api/v2/pokemon/10269/"
+            }
+        },
+        {
+            "is_default": false,
+            "pokemon": {
+                "name": "miraidon-aquatic-mode",
+                "url": "/api/v2/pokemon/10270/"
+            }
+        },
+        {
+            "is_default": false,
+            "pokemon": {
+                "name": "miraidon-glide-mode",
+                "url": "/api/v2/pokemon/10271/"
+            }
+        }
+    ]
+}

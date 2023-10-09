@@ -1,0 +1,73 @@
+{
+    "effect_changes": [],
+    "effect_entries": [],
+    "flavor_text_entries": [],
+    "generation": {
+        "name": "generation-ix",
+        "url": "/api/v2/generation/9/"
+    },
+    "id": 276,
+    "is_main_series": true,
+    "name": "rocky-payload",
+    "names": [
+        {
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "name": "\u3044\u308f\u306f\u3053\u3073"
+        },
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Porte-Roche"
+        },
+        {
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "name": "Steintr\u00e4ger"
+        },
+        {
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            },
+            "name": "Transportarrocas"
+        },
+        {
+            "language": {
+                "name": "it",
+                "url": "/api/v2/language/8/"
+            },
+            "name": "Portamassi"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Rocky Payload"
+        },
+        {
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "name": "\u3044\u308f\u306f\u3053\u3073"
+        }
+    ],
+    "pokemon": [
+        {
+            "is_hidden": true,
+            "pokemon": {
+                "name": "bombirdier",
+                "url": "/api/v2/pokemon/962/"
+            },
+            "slot": 3
+        }
+    ]
+}

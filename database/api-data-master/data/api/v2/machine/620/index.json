@@ -1,0 +1,15 @@
+{
+    "id": 620,
+    "item": {
+        "name": "tm31",
+        "url": "/api/v2/item/335/"
+    },
+    "move": {
+        "name": "fire-punch",
+        "url": "/api/v2/move/7/"
+    },
+    "version_group": {
+        "name": "lets-go-pikachu-lets-go-eevee",
+        "url": "/api/v2/version-group/19/"
+    }
+}

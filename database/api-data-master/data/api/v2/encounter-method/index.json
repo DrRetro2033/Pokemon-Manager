@@ -1,0 +1,131 @@
+{
+    "count": 31,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "name": "walk",
+            "url": "/api/v2/encounter-method/1/"
+        },
+        {
+            "name": "old-rod",
+            "url": "/api/v2/encounter-method/2/"
+        },
+        {
+            "name": "good-rod",
+            "url": "/api/v2/encounter-method/3/"
+        },
+        {
+            "name": "super-rod",
+            "url": "/api/v2/encounter-method/4/"
+        },
+        {
+            "name": "surf",
+            "url": "/api/v2/encounter-method/5/"
+        },
+        {
+            "name": "rock-smash",
+            "url": "/api/v2/encounter-method/6/"
+        },
+        {
+            "name": "headbutt",
+            "url": "/api/v2/encounter-method/7/"
+        },
+        {
+            "name": "dark-grass",
+            "url": "/api/v2/encounter-method/8/"
+        },
+        {
+            "name": "grass-spots",
+            "url": "/api/v2/encounter-method/9/"
+        },
+        {
+            "name": "cave-spots",
+            "url": "/api/v2/encounter-method/10/"
+        },
+        {
+            "name": "bridge-spots",
+            "url": "/api/v2/encounter-method/11/"
+        },
+        {
+            "name": "super-rod-spots",
+            "url": "/api/v2/encounter-method/12/"
+        },
+        {
+            "name": "surf-spots",
+            "url": "/api/v2/encounter-method/13/"
+        },
+        {
+            "name": "yellow-flowers",
+            "url": "/api/v2/encounter-method/14/"
+        },
+        {
+            "name": "purple-flowers",
+            "url": "/api/v2/encounter-method/15/"
+        },
+        {
+            "name": "red-flowers",
+            "url": "/api/v2/encounter-method/16/"
+        },
+        {
+            "name": "rough-terrain",
+            "url": "/api/v2/encounter-method/17/"
+        },
+        {
+            "name": "gift",
+            "url": "/api/v2/encounter-method/18/"
+        },
+        {
+            "name": "gift-egg",
+            "url": "/api/v2/encounter-method/19/"
+        },
+        {
+            "name": "only-one",
+            "url": "/api/v2/encounter-method/20/"
+        },
+        {
+            "name": "pokeflute",
+            "url": "/api/v2/encounter-method/21/"
+        },
+        {
+            "name": "headbutt-low",
+            "url": "/api/v2/encounter-method/22/"
+        },
+        {
+            "name": "headbutt-normal",
+            "url": "/api/v2/encounter-method/23/"
+        },
+        {
+            "name": "headbutt-high",
+            "url": "/api/v2/encounter-method/24/"
+        },
+        {
+            "name": "squirt-bottle",
+            "url": "/api/v2/encounter-method/25/"
+        },
+        {
+            "name": "wailmer-pail",
+            "url": "/api/v2/encounter-method/26/"
+        },
+        {
+            "name": "seaweed",
+            "url": "/api/v2/encounter-method/27/"
+        },
+        {
+            "name": "roaming-grass",
+            "url": "/api/v2/encounter-method/28/"
+        },
+        {
+            "name": "roaming-water",
+            "url": "/api/v2/encounter-method/29/"
+        },
+        {
+            "name": "devon-scope",
+            "url": "/api/v2/encounter-method/30/"
+        },
+        {
+            "name": "feebas-tile-fishing",
+            "url": "/api/v2/encounter-method/31/"
+        }
+    ]
+}

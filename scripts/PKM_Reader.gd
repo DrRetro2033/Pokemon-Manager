@@ -17,3 +17,15 @@ func read_32(file,pos):
 	var value = file.get_32()
 	return value
 
+func write_8(file:File,pos,data):
+	file.seek(pos)
+	file.store_8(data)
+
+func write_16(file:File,pos,data):
+	file.seek(pos)
+	file.store_16(data)
+
+func write_32(file:File,pos,data):
+	file.seek(pos)
+	file.store_32(data)
+

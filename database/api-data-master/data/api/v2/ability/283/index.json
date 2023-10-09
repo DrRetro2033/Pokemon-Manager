@@ -1,0 +1,81 @@
+{
+    "effect_changes": [],
+    "effect_entries": [],
+    "flavor_text_entries": [],
+    "generation": {
+        "name": "generation-ix",
+        "url": "/api/v2/generation/9/"
+    },
+    "id": 283,
+    "is_main_series": true,
+    "name": "good-as-gold",
+    "names": [
+        {
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "name": "\u304a\u3046\u3054\u3093\u306e\u304b\u3089\u3060"
+        },
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Corps en Or"
+        },
+        {
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "name": "Goldk\u00f6rper"
+        },
+        {
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            },
+            "name": "Cuerpo \u00c1ureo"
+        },
+        {
+            "language": {
+                "name": "it",
+                "url": "/api/v2/language/8/"
+            },
+            "name": "Corpo Aureo"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Good as Gold"
+        },
+        {
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "name": "\u304a\u3046\u3054\u3093\u306e\u304b\u3089\u3060"
+        }
+    ],
+    "pokemon": [
+        {
+            "is_hidden": false,
+            "pokemon": {
+                "name": "gholdengo",
+                "url": "/api/v2/pokemon/1000/"
+            },
+            "slot": 1
+        },
+        {
+            "is_hidden": true,
+            "pokemon": {
+                "name": "gholdengo",
+                "url": "/api/v2/pokemon/1000/"
+            },
+            "slot": 3
+        }
+    ]
+}

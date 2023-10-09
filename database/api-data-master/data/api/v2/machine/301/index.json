@@ -1,0 +1,15 @@
+{
+    "id": 301,
+    "item": {
+        "name": "tm15",
+        "url": "/api/v2/item/319/"
+    },
+    "move": {
+        "name": "dig",
+        "url": "/api/v2/move/91/"
+    },
+    "version_group": {
+        "name": "sword-shield",
+        "url": "/api/v2/version-group/20/"
+    }
+}

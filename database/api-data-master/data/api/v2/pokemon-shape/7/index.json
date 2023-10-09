@@ -1,0 +1,130 @@
+{
+    "awesome_names": [
+        {
+            "awesome_name": "Crural",
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            }
+        },
+        {
+            "awesome_name": "Crural",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            }
+        }
+    ],
+    "id": 7,
+    "name": "legs",
+    "names": [
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Jambes"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Legs"
+        }
+    ],
+    "pokemon_species": [
+        {
+            "name": "oddish",
+            "url": "/api/v2/pokemon-species/43/"
+        },
+        {
+            "name": "poliwag",
+            "url": "/api/v2/pokemon-species/60/"
+        },
+        {
+            "name": "doduo",
+            "url": "/api/v2/pokemon-species/84/"
+        },
+        {
+            "name": "tangela",
+            "url": "/api/v2/pokemon-species/114/"
+        },
+        {
+            "name": "porygon",
+            "url": "/api/v2/pokemon-species/137/"
+        },
+        {
+            "name": "wooper",
+            "url": "/api/v2/pokemon-species/194/"
+        },
+        {
+            "name": "torchic",
+            "url": "/api/v2/pokemon-species/255/"
+        },
+        {
+            "name": "seedot",
+            "url": "/api/v2/pokemon-species/273/"
+        },
+        {
+            "name": "shroomish",
+            "url": "/api/v2/pokemon-species/285/"
+        },
+        {
+            "name": "azurill",
+            "url": "/api/v2/pokemon-species/298/"
+        },
+        {
+            "name": "bonsly",
+            "url": "/api/v2/pokemon-species/438/"
+        },
+        {
+            "name": "roggenrola",
+            "url": "/api/v2/pokemon-species/524/"
+        },
+        {
+            "name": "swirlix",
+            "url": "/api/v2/pokemon-species/684/"
+        },
+        {
+            "name": "dewpider",
+            "url": "/api/v2/pokemon-species/751/"
+        },
+        {
+            "name": "bounsweet",
+            "url": "/api/v2/pokemon-species/761/"
+        },
+        {
+            "name": "hatenna",
+            "url": "/api/v2/pokemon-species/856/"
+        },
+        {
+            "name": "stonjourner",
+            "url": "/api/v2/pokemon-species/874/"
+        },
+        {
+            "name": "dracovish",
+            "url": "/api/v2/pokemon-species/882/"
+        },
+        {
+            "name": "dodrio",
+            "url": "/api/v2/pokemon-species/85/"
+        },
+        {
+            "name": "exeggutor",
+            "url": "/api/v2/pokemon-species/103/"
+        },
+        {
+            "name": "porygon2",
+            "url": "/api/v2/pokemon-species/233/"
+        },
+        {
+            "name": "cherrim",
+            "url": "/api/v2/pokemon-species/421/"
+        },
+        {
+            "name": "carkol",
+            "url": "/api/v2/pokemon-species/838/"
+        }
+    ]
+}

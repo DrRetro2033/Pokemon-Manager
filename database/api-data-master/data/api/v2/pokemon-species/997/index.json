@@ -1,0 +1,198 @@
+{
+    "base_happiness": 50,
+    "capture_rate": 25,
+    "color": {
+        "name": "gray",
+        "url": "/api/v2/pokemon-color/4/"
+    },
+    "egg_groups": [
+        {
+            "name": "dragon",
+            "url": "/api/v2/egg-group/14/"
+        },
+        {
+            "name": "mineral",
+            "url": "/api/v2/egg-group/10/"
+        }
+    ],
+    "evolution_chain": {
+        "url": "/api/v2/evolution-chain/527/"
+    },
+    "evolves_from_species": {
+        "name": "frigibax",
+        "url": "/api/v2/pokemon-species/996/"
+    },
+    "flavor_text_entries": [
+        {
+            "flavor_text": "Arctibax freezes the air around it, protecting its face with an ice mask and turning its dorsal fin into a blade of ice.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "scarlet",
+                "url": "/api/v2/version/40/"
+            }
+        },
+        {
+            "flavor_text": "It attacks with the blade of its frozen dorsal fin by doing a front flip in the air. Arctibax\u2019s strong back and legs allow it to pull off this technique.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "violet",
+                "url": "/api/v2/version/41/"
+            }
+        }
+    ],
+    "form_descriptions": [],
+    "forms_switchable": false,
+    "gender_rate": 4,
+    "genera": [
+        {
+            "genus": "\u3053\u304a\u308a\u30d3\u30ec\u30dd\u30b1\u30e2\u30f3",
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            }
+        },
+        {
+            "genus": "\u51b0\u9c2d\u5bf6\u53ef\u5922",
+            "language": {
+                "name": "zh-Hant",
+                "url": "/api/v2/language/4/"
+            }
+        },
+        {
+            "genus": "Eisfinne",
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            }
+        },
+        {
+            "genus": "Ice Fin Pok\u00e9mon",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            }
+        },
+        {
+            "genus": "\u51b0\u9ccd\u5b9d\u53ef\u68a6",
+            "language": {
+                "name": "zh-Hans",
+                "url": "/api/v2/language/12/"
+            }
+        }
+    ],
+    "generation": {
+        "name": "generation-ix",
+        "url": "/api/v2/generation/9/"
+    },
+    "growth_rate": {
+        "name": "slow",
+        "url": "/api/v2/growth-rate/1/"
+    },
+    "habitat": null,
+    "has_gender_differences": false,
+    "hatch_counter": 40,
+    "id": 997,
+    "is_baby": false,
+    "is_legendary": false,
+    "is_mythical": false,
+    "name": "arctibax",
+    "names": [
+        {
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "name": "\u30bb\u30b4\u30fc\u30eb"
+        },
+        {
+            "language": {
+                "name": "roomaji",
+                "url": "/api/v2/language/2/"
+            },
+            "name": "Segohru"
+        },
+        {
+            "language": {
+                "name": "ko",
+                "url": "/api/v2/language/3/"
+            },
+            "name": "\ub4dc\ub2c8\uaf41"
+        },
+        {
+            "language": {
+                "name": "zh-Hant",
+                "url": "/api/v2/language/4/"
+            },
+            "name": "\u51cd\u810a\u9f8d"
+        },
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Cryodo"
+        },
+        {
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "name": "Cryospino"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Arctibax"
+        },
+        {
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "name": "\u30bb\u30b4\u30fc\u30eb"
+        },
+        {
+            "language": {
+                "name": "zh-Hans",
+                "url": "/api/v2/language/12/"
+            },
+            "name": "\u51bb\u810a\u9f99"
+        }
+    ],
+    "order": 950,
+    "pal_park_encounters": [],
+    "pokedex_numbers": [
+        {
+            "entry_number": 997,
+            "pokedex": {
+                "name": "national",
+                "url": "/api/v2/pokedex/1/"
+            }
+        },
+        {
+            "entry_number": 389,
+            "pokedex": {
+                "name": "paldea",
+                "url": "/api/v2/pokedex/31/"
+            }
+        }
+    ],
+    "shape": null,
+    "varieties": [
+        {
+            "is_default": true,
+            "pokemon": {
+                "name": "arctibax",
+                "url": "/api/v2/pokemon/997/"
+            }
+        }
+    ]
+}

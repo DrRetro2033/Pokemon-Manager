@@ -15,12 +15,12 @@ func save(bank):
 
 func get_pokemon_in_party():
 	var party = []
-	party.push_back($VBoxContainer/Member1.id)
-	party.push_back($VBoxContainer2/Member2.id)
-	party.push_back($VBoxContainer/Member3.id)
-	party.push_back($VBoxContainer2/Member4.id)
-	party.push_back($VBoxContainer/Member5.id)
-	party.push_back($VBoxContainer2/Member6.id)
+	party.push_back($VBoxContainer/Member1.info)
+	party.push_back($VBoxContainer2/Member2.info)
+	party.push_back($VBoxContainer/Member3.info)
+	party.push_back($VBoxContainer2/Member4.info)
+	party.push_back($VBoxContainer/Member5.info)
+	party.push_back($VBoxContainer2/Member6.info)
 	return party
 
 func set_pokemon_in_party(party):
@@ -30,25 +30,9 @@ func set_pokemon_in_party(party):
 	$VBoxContainer2/Member4.pokeButton(party[3])
 	$VBoxContainer/Member5.pokeButton(party[4])
 	$VBoxContainer2/Member6.pokeButton(party[5])
-func _on_Member1_dragged_and_dropped():
-	get_parent().get_parent().get_parent().newMember(get_pokemon_in_party())
 
 
-func _on_Member3_dragged_and_dropped():
-	get_parent().get_parent().get_parent().newMember(get_pokemon_in_party())
-
-
-func _on_Member5_dragged_and_dropped():
-	get_parent().get_parent().get_parent().newMember(get_pokemon_in_party())
-
-
-func _on_Member2_dragged_and_dropped():
-	get_parent().get_parent().get_parent().newMember(get_pokemon_in_party())
-
-
-func _on_Member4_dragged_and_dropped():
-	get_parent().get_parent().get_parent().newMember(get_pokemon_in_party())
-
-
-func _on_Member6_dragged_and_dropped():
-	get_parent().get_parent().get_parent().newMember(get_pokemon_in_party())
+func _on_Member_dragged_and_dropped(node):
+	var party = get_pokemon_in_party()
+	if party.count(node.info) > 1:
+		node.pokeButton(null)

@@ -1,0 +1,1005 @@
+{
+    "base_happiness": 50,
+    "capture_rate": 45,
+    "color": {
+        "name": "red",
+        "url": "/api/v2/pokemon-color/8/"
+    },
+    "egg_groups": [
+        {
+            "name": "indeterminate",
+            "url": "/api/v2/egg-group/11/"
+        }
+    ],
+    "evolution_chain": {
+        "url": "/api/v2/evolution-chain/240/"
+    },
+    "evolves_from_species": null,
+    "flavor_text_entries": [
+        {
+            "flavor_text": "\u67d0\u4f4d\u5c11\u5e74\u7684\u53d1\u660e\n\u4fc3\u4f7f\u4eba\u4eec\u5f00\u59cb\u5236\u9020\n\u5404\u79cd\u6d3b\u7528\u6d1b\u6258\u59c6\u7684\u673a\u5668 \u3002",
+            "language": {
+                "name": "zh-Hans",
+                "url": "/api/v2/language/12/"
+            },
+            "version": {
+                "name": "sword",
+                "url": "/api/v2/version/33/"
+            }
+        },
+        {
+            "flavor_text": "Its body is composed of plasma. It\nis known to infiltrate electronic\ndevices and wreak havoc.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "diamond",
+                "url": "/api/v2/version/12/"
+            }
+        },
+        {
+            "flavor_text": "Its body is composed of plasma. It\nis known to infiltrate electronic\ndevices and wreak havoc.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "pearl",
+                "url": "/api/v2/version/13/"
+            }
+        },
+        {
+            "flavor_text": "Its electric-like body can enter\nsome kinds of machines and take\ncontrol in order to make mischief.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "platinum",
+                "url": "/api/v2/version/14/"
+            }
+        },
+        {
+            "flavor_text": "Research continues on this Pok\u00e9mon,\nwhich could be the power source of a\nunique motor.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "heartgold",
+                "url": "/api/v2/version/15/"
+            }
+        },
+        {
+            "flavor_text": "Research continues on this Pok\u00e9mon,\nwhich could be the power source of a\nunique motor.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "soulsilver",
+                "url": "/api/v2/version/16/"
+            }
+        },
+        {
+            "flavor_text": "Son corps parcouru d\u2019\u00e9lectricit\u00e9\nlui permet de prendre le contr\u00f4le\nde certains appareils m\u00e9nagers.",
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "version": {
+                "name": "black",
+                "url": "/api/v2/version/17/"
+            }
+        },
+        {
+            "flavor_text": "Its electric-like body can enter\nsome kinds of machines and take\ncontrol in order to make mischief.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "black",
+                "url": "/api/v2/version/17/"
+            }
+        },
+        {
+            "flavor_text": "Son corps parcouru d\u2019\u00e9lectricit\u00e9\nlui permet de prendre le contr\u00f4le\nde certains appareils m\u00e9nagers.",
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "version": {
+                "name": "white",
+                "url": "/api/v2/version/18/"
+            }
+        },
+        {
+            "flavor_text": "Its electric-like body can enter\nsome kinds of machines and take\ncontrol in order to make mischief.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "white",
+                "url": "/api/v2/version/18/"
+            }
+        },
+        {
+            "flavor_text": "Its electric-like body can enter\nsome kinds of machines and take\ncontrol in order to make mischief.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "black-2",
+                "url": "/api/v2/version/21/"
+            }
+        },
+        {
+            "flavor_text": "Its electric-like body can enter\nsome kinds of machines and take\ncontrol in order to make mischief.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "white-2",
+                "url": "/api/v2/version/22/"
+            }
+        },
+        {
+            "flavor_text": "\u3068\u304f\u3057\u3085\u306a\u3000\u30e2\u30fc\u30bf\u30fc\u3092\u3000\u3046\u3054\u304b\u3059\n\u3069\u3046\u308a\u3087\u304f\u3052\u3093\u3068\u3057\u3066\u3000\u306a\u304c\u3044\u3000\u3042\u3044\u3060\n\u3051\u3093\u304d\u3085\u3046\u3055\u308c\u3066\u3044\u305f\u3000\u30dd\u30b1\u30e2\u30f3\u3002",
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "version": {
+                "name": "x",
+                "url": "/api/v2/version/23/"
+            }
+        },
+        {
+            "flavor_text": "\ud2b9\uc218\ud55c \ubaa8\ud130\ub97c \uc6c0\uc9c1\uc774\ub294\n\ub3d9\ub825\uc6d0\uc73c\ub85c\uc11c \uae34 \uc2dc\uac04 \ub3d9\uc548\n\uc5f0\uad6c\ub418\uc5c8\ub358 \ud3ec\ucf13\ubaac\uc774\ub2e4.",
+            "language": {
+                "name": "ko",
+                "url": "/api/v2/language/3/"
+            },
+            "version": {
+                "name": "x",
+                "url": "/api/v2/version/23/"
+            }
+        },
+        {
+            "flavor_text": "Un Pok\u00e9mon longtemps \u00e9tudi\u00e9 comme source\nd\u2019\u00e9nergie pour un moteur tr\u00e8s sp\u00e9cial.",
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "version": {
+                "name": "x",
+                "url": "/api/v2/version/23/"
+            }
+        },
+        {
+            "flavor_text": "Dieses Pok\u00e9mon wurde lange Zeit erforscht,\num als Energiequelle f\u00fcr einen besonderen\nMotor zu dienen.",
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "version": {
+                "name": "x",
+                "url": "/api/v2/version/23/"
+            }
+        },
+        {
+            "flavor_text": "Desde hace mucho tiempo se estudia su singular\nmotor como fuente de energ\u00eda motriz.",
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            },
+            "version": {
+                "name": "x",
+                "url": "/api/v2/version/23/"
+            }
+        },
+        {
+            "flavor_text": "Questo Pok\u00e9mon \u00e8 stato usato a lungo per ricerche\ncome forza motrice su motori speciali.",
+            "language": {
+                "name": "it",
+                "url": "/api/v2/language/8/"
+            },
+            "version": {
+                "name": "x",
+                "url": "/api/v2/version/23/"
+            }
+        },
+        {
+            "flavor_text": "Research continues on this Pok\u00e9mon, which could\nbe the power source of a unique motor.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "x",
+                "url": "/api/v2/version/23/"
+            }
+        },
+        {
+            "flavor_text": "\u7279\u6b8a\u306a\u3000\u30e2\u30fc\u30bf\u30fc\u3092\u3000\u52d5\u304b\u3059\n\u52d5\u529b\u6e90\u3068\u3057\u3066\u3000\u9577\u3044\u3000\u3042\u3044\u3060\n\u7814\u7a76\u3055\u308c\u3066\u3044\u305f\u3000\u30dd\u30b1\u30e2\u30f3\u3002",
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "version": {
+                "name": "x",
+                "url": "/api/v2/version/23/"
+            }
+        },
+        {
+            "flavor_text": "\u30d7\u30e9\u30ba\u30de\u3067\u3000\u3067\u304d\u305f\u3000\u304b\u3089\u3060\u3092\u3000\u3082\u3064\u3002\n\u3067\u3093\u304b\u305b\u3044\u3072\u3093\u306b\u3000\u3082\u3050\u308a\u3053\u307f\n\u308f\u308b\u3055\u3092\u3000\u3059\u308b\u3053\u3068\u3067\u3000\u3057\u3089\u308c\u3066\u3044\u308b\u3002",
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "version": {
+                "name": "y",
+                "url": "/api/v2/version/24/"
+            }
+        },
+        {
+            "flavor_text": "\ud50c\ub77c\uc2a4\ub9c8\ub85c \ub41c \ubab8\uc744 \uac00\uc9c0\uace0 \uc788\ub2e4.\n\uc804\uc790 \uc81c\ud488\uc5d0 \uc228\uc5b4\ub4e4\uc5b4\n\ub098\uc05c \uc9d3\uc744 \ud558\ub294 \uac83\uc73c\ub85c \uc54c\ub824\uc84c\ub2e4.",
+            "language": {
+                "name": "ko",
+                "url": "/api/v2/language/3/"
+            },
+            "version": {
+                "name": "y",
+                "url": "/api/v2/version/24/"
+            }
+        },
+        {
+            "flavor_text": "Son corps est fait de plasma. Il cause de gros d\u00e9g\u00e2ts\nen infiltrant des appareils \u00e9lectroniques.",
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "version": {
+                "name": "y",
+                "url": "/api/v2/version/24/"
+            }
+        },
+        {
+            "flavor_text": "Sein K\u00f6rper besteht aus Plasma. Mit ihm kann es\nin elektrische Ger\u00e4te eindringen und f\u00fcr Chaos sorgen.",
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "version": {
+                "name": "y",
+                "url": "/api/v2/version/24/"
+            }
+        },
+        {
+            "flavor_text": "Su cuerpo est\u00e1 hecho de plasma. Puede infiltrarse en\ndispositivos electr\u00f3nicos e inutilizarlos.",
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            },
+            "version": {
+                "name": "y",
+                "url": "/api/v2/version/24/"
+            }
+        },
+        {
+            "flavor_text": "Il suo corpo \u00e8 composto di plasma. \u00c8 solito infiltrarsi\nnegli strumenti elettronici per provocare caos.",
+            "language": {
+                "name": "it",
+                "url": "/api/v2/language/8/"
+            },
+            "version": {
+                "name": "y",
+                "url": "/api/v2/version/24/"
+            }
+        },
+        {
+            "flavor_text": "Its body is composed of plasma. It is known to\ninfiltrate electronic devices and wreak havoc.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "y",
+                "url": "/api/v2/version/24/"
+            }
+        },
+        {
+            "flavor_text": "\u30d7\u30e9\u30ba\u30de\u3067\u3000\u3067\u304d\u305f\u3000\u4f53\u3092\u3000\u6301\u3064\u3002\n\u96fb\u5316\u88fd\u54c1\u306b\u3000\u6f5c\u308a\u3053\u307f\n\u60aa\u3055\u3092\u3000\u3059\u308b\u3053\u3068\u3067\u3000\u77e5\u3089\u308c\u3066\u3044\u308b\u3002",
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "version": {
+                "name": "y",
+                "url": "/api/v2/version/24/"
+            }
+        },
+        {
+            "flavor_text": "\u3068\u304f\u3057\u3085\u306a\u3000\u30e2\u30fc\u30bf\u30fc\u3092\u3000\u3046\u3054\u304b\u3059\n\u3069\u3046\u308a\u3087\u304f\u3052\u3093\u3068\u3057\u3066\u3000\u306a\u304c\u3044\u3000\u3042\u3044\u3060\n\u3051\u3093\u304d\u3085\u3046\u3055\u308c\u3066\u3044\u305f\u3000\u30dd\u30b1\u30e2\u30f3\u3002",
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "version": {
+                "name": "omega-ruby",
+                "url": "/api/v2/version/25/"
+            }
+        },
+        {
+            "flavor_text": "\ud2b9\uc218\ud55c \ubaa8\ud130\ub97c \uc6c0\uc9c1\uc774\ub294\n\ub3d9\ub825\uc6d0\uc73c\ub85c\uc11c \uae34 \uc2dc\uac04 \ub3d9\uc548\n\uc5f0\uad6c\ub418\uc5c8\ub358 \ud3ec\ucf13\ubaac\uc774\ub2e4.",
+            "language": {
+                "name": "ko",
+                "url": "/api/v2/language/3/"
+            },
+            "version": {
+                "name": "omega-ruby",
+                "url": "/api/v2/version/25/"
+            }
+        },
+        {
+            "flavor_text": "Un Pok\u00e9mon longtemps \u00e9tudi\u00e9 comme source d\u2019\u00e9nergie\npour un moteur tr\u00e8s sp\u00e9cial.",
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "version": {
+                "name": "omega-ruby",
+                "url": "/api/v2/version/25/"
+            }
+        },
+        {
+            "flavor_text": "Dieses Pok\u00e9mon wurde lange Zeit erforscht, um als\nEnergiequelle f\u00fcr einen besonderen Motor zu dienen.",
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "version": {
+                "name": "omega-ruby",
+                "url": "/api/v2/version/25/"
+            }
+        },
+        {
+            "flavor_text": "Desde hace mucho tiempo se estudia su singular motor como\nfuente de energ\u00eda motriz.",
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            },
+            "version": {
+                "name": "omega-ruby",
+                "url": "/api/v2/version/25/"
+            }
+        },
+        {
+            "flavor_text": "Questo Pok\u00e9mon \u00e8 stato usato a lungo per ricerche come\nforza motrice su motori speciali.",
+            "language": {
+                "name": "it",
+                "url": "/api/v2/language/8/"
+            },
+            "version": {
+                "name": "omega-ruby",
+                "url": "/api/v2/version/25/"
+            }
+        },
+        {
+            "flavor_text": "Research continues on this Pok\u00e9mon, which could\nbe the power source of a unique motor.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "omega-ruby",
+                "url": "/api/v2/version/25/"
+            }
+        },
+        {
+            "flavor_text": "\u7279\u6b8a\u306a\u3000\u30e2\u30fc\u30bf\u30fc\u3092\u3000\u52d5\u304b\u3059\n\u52d5\u529b\u6e90\u3068\u3057\u3066\u3000\u9577\u3044\u3000\u3042\u3044\u3060\n\u7814\u7a76\u3055\u308c\u3066\u3044\u305f\u3000\u30dd\u30b1\u30e2\u30f3\u3002",
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "version": {
+                "name": "omega-ruby",
+                "url": "/api/v2/version/25/"
+            }
+        },
+        {
+            "flavor_text": "\u30d7\u30e9\u30ba\u30de\u3067\u3000\u3067\u304d\u305f\u3000\u304b\u3089\u3060\u3092\u3000\u3082\u3064\u3002\n\u3067\u3093\u304b\u305b\u3044\u3072\u3093\u306b\u3000\u3082\u3050\u308a\u3053\u307f\n\u308f\u308b\u3055\u3092\u3000\u3059\u308b\u3053\u3068\u3067\u3000\u3057\u3089\u308c\u3066\u3044\u308b\u3002",
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "version": {
+                "name": "alpha-sapphire",
+                "url": "/api/v2/version/26/"
+            }
+        },
+        {
+            "flavor_text": "\ud50c\ub77c\uc2a4\ub9c8\ub85c \ub41c \ubab8\uc744 \uac00\uc9c0\uace0 \uc788\ub2e4.\n\uc804\uc790 \uc81c\ud488\uc5d0 \uc228\uc5b4\ub4e4\uc5b4\n\ub098\uc05c \uc9d3\uc744 \ud558\ub294 \uac83\uc73c\ub85c \uc54c\ub824\uc84c\ub2e4.",
+            "language": {
+                "name": "ko",
+                "url": "/api/v2/language/3/"
+            },
+            "version": {
+                "name": "alpha-sapphire",
+                "url": "/api/v2/version/26/"
+            }
+        },
+        {
+            "flavor_text": "Son corps est fait de plasma. Il cause de gros d\u00e9g\u00e2ts\nen infiltrant des appareils \u00e9lectroniques.",
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "version": {
+                "name": "alpha-sapphire",
+                "url": "/api/v2/version/26/"
+            }
+        },
+        {
+            "flavor_text": "Sein K\u00f6rper besteht aus Plasma. Mit ihm kann es in elektrische\nGer\u00e4te eindringen und f\u00fcr Chaos sorgen.",
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "version": {
+                "name": "alpha-sapphire",
+                "url": "/api/v2/version/26/"
+            }
+        },
+        {
+            "flavor_text": "Su cuerpo est\u00e1 hecho de plasma. Puede infiltrarse en\ndispositivos electr\u00f3nicos e inutilizarlos.",
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            },
+            "version": {
+                "name": "alpha-sapphire",
+                "url": "/api/v2/version/26/"
+            }
+        },
+        {
+            "flavor_text": "Il suo corpo \u00e8 composto di plasma. \u00c8 solito infiltrarsi negli\nstrumenti elettronici per provocare caos.",
+            "language": {
+                "name": "it",
+                "url": "/api/v2/language/8/"
+            },
+            "version": {
+                "name": "alpha-sapphire",
+                "url": "/api/v2/version/26/"
+            }
+        },
+        {
+            "flavor_text": "Its body is composed of plasma. It is known to\ninfiltrate electronic devices and wreak havoc.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "alpha-sapphire",
+                "url": "/api/v2/version/26/"
+            }
+        },
+        {
+            "flavor_text": "\u30d7\u30e9\u30ba\u30de\u3067\u3000\u3067\u304d\u305f\u3000\u4f53\u3092\u3000\u6301\u3064\u3002\n\u96fb\u5316\u88fd\u54c1\u306b\u3000\u6f5c\u308a\u3053\u307f\n\u60aa\u3055\u3092\u3000\u3059\u308b\u3053\u3068\u3067\u3000\u77e5\u3089\u308c\u3066\u3044\u308b\u3002",
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "version": {
+                "name": "alpha-sapphire",
+                "url": "/api/v2/version/26/"
+            }
+        },
+        {
+            "flavor_text": "\u3042\u308b\u3000\u3057\u3087\u3046\u306d\u3093\u306e\u3000\u306f\u3064\u3081\u3044\u304b\u3089\n\u30ed\u30c8\u30e0\u3092\u3000\u3044\u304b\u3057\u305f\u3000\u3044\u308d\u3044\u308d\u306a\n\u304d\u304b\u3044\u304c\u3000\u3064\u304f\u3089\u308c\u306f\u3058\u3081\u305f\u306e\u3060\u3002",
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "version": {
+                "name": "sword",
+                "url": "/api/v2/version/33/"
+            }
+        },
+        {
+            "flavor_text": "\uc5b4\ub5a4 \uc18c\ub144\uc758 \ubc1c\uba85\uc5d0 \uc758\ud574\n\ub85c\ud1a0\ubb34\ub97c \ud65c\uc6a9\ud55c \ub2e4\uc591\ud55c\n\uae30\uacc4\uac00 \ub9cc\ub4e4\uc5b4\uc9c0\uae30 \uc2dc\uc791\ud588\ub2e4.",
+            "language": {
+                "name": "ko",
+                "url": "/api/v2/language/3/"
+            },
+            "version": {
+                "name": "sword",
+                "url": "/api/v2/version/33/"
+            }
+        },
+        {
+            "flavor_text": "\u67d0\u4f4d\u5c11\u5e74\u7684\u767c\u660e\n\u4fc3\u4f7f\u4eba\u5011\u958b\u59cb\u88fd\u9020\n\u5404\u7a2e\u6d3b\u7528\u6d1b\u6258\u59c6\u7684\u6a5f\u5668\u3002",
+            "language": {
+                "name": "zh-Hant",
+                "url": "/api/v2/language/4/"
+            },
+            "version": {
+                "name": "sword",
+                "url": "/api/v2/version/33/"
+            }
+        },
+        {
+            "flavor_text": "L\u2019invention d\u2019un jeune homme a inspir\u00e9\nla cr\u00e9ation de machines permettant de profiter\ndes comp\u00e9tences de ce Pok\u00e9mon.",
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "version": {
+                "name": "sword",
+                "url": "/api/v2/version/33/"
+            }
+        },
+        {
+            "flavor_text": "Die Erfindung eines jungen T\u00fcftlers hat zu der\nHerstellung verschiedener Ger\u00e4te gef\u00fchrt, die\ndas Potenzial von Rotom nutzen k\u00f6nnen.",
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "version": {
+                "name": "sword",
+                "url": "/api/v2/version/33/"
+            }
+        },
+        {
+            "flavor_text": "Gracias a la inventiva de cierto joven, se ha\niniciado la fabricaci\u00f3n de diversos artilugios\nque aprovechan todo el potencial de Rotom.",
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            },
+            "version": {
+                "name": "sword",
+                "url": "/api/v2/version/33/"
+            }
+        },
+        {
+            "flavor_text": "L\u2019invenzione di un ragazzo ha dato l\u2019avvio\nalla fabbricazione di vari apparecchi che\nsfruttano le caratteristiche peculiari di Rotom.",
+            "language": {
+                "name": "it",
+                "url": "/api/v2/language/8/"
+            },
+            "version": {
+                "name": "sword",
+                "url": "/api/v2/version/33/"
+            }
+        },
+        {
+            "flavor_text": "One boy\u2019s invention led to the development of\nmany different machines that take advantage of\nRotom\u2019s unique capabilities.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "sword",
+                "url": "/api/v2/version/33/"
+            }
+        },
+        {
+            "flavor_text": "\u3042\u308b\u3000\u5c11\u5e74\u306e\u3000\u767a\u660e\u304b\u3089\n\u30ed\u30c8\u30e0\u3092\u3000\u6d3b\u304b\u3057\u305f\u3000\u3044\u308d\u3044\u308d\u306a\n\u6a5f\u68b0\u304c\u3000\u4f5c\u3089\u308c\u59cb\u3081\u305f\u306e\u3060\u3002",
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "version": {
+                "name": "sword",
+                "url": "/api/v2/version/33/"
+            }
+        },
+        {
+            "flavor_text": "\u30d7\u30e9\u30ba\u30de\u3067\u3000\u3067\u304d\u305f\u3000\u304b\u3089\u3060\u3067\n\u3044\u308d\u3093\u306a\u3000\u304d\u304b\u3044\u306b\u3000\u3082\u3050\u308a\u3053\u3080\u3002\n\u304a\u3069\u308d\u304b\u305b\u308b\u306e\u304c\u3000\u3060\u3044\u3059\u304d\u3060\u3002",
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "version": {
+                "name": "shield",
+                "url": "/api/v2/version/34/"
+            }
+        },
+        {
+            "flavor_text": "\ud50c\ub77c\uc2a4\ub9c8\ub85c \ub41c \ubab8\uc73c\ub85c\n\ub2e4\uc591\ud55c \uae30\uacc4\uc5d0 \uc228\ub294\ub2e4.\n\ub180\ub77c\uac8c \ud558\ub294 \uac78 \ub9e4\uc6b0 \uc88b\uc544\ud55c\ub2e4.",
+            "language": {
+                "name": "ko",
+                "url": "/api/v2/language/3/"
+            },
+            "version": {
+                "name": "shield",
+                "url": "/api/v2/version/34/"
+            }
+        },
+        {
+            "flavor_text": "\u6703\u7528\u7b49\u96e2\u5b50\u69cb\u6210\u7684\u8eab\u9ad4\n\u6f5b\u5165\u5404\u5f0f\u5404\u6a23\u7684\u6a5f\u5668\u88e1\u3002\n\u6700\u559c\u6b61\u60e1\u4f5c\u5287\u5687\u4eba\u3002",
+            "language": {
+                "name": "zh-Hant",
+                "url": "/api/v2/language/4/"
+            },
+            "version": {
+                "name": "shield",
+                "url": "/api/v2/version/34/"
+            }
+        },
+        {
+            "flavor_text": "Son corps compos\u00e9 de plasma lui permet\nd\u2019infiltrer diverses machines.\nIl adore surprendre les gens.",
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "version": {
+                "name": "shield",
+                "url": "/api/v2/version/34/"
+            }
+        },
+        {
+            "flavor_text": "Mit seinem aus Plasma bestehenden K\u00f6rper kann\nes in verschiedene Ger\u00e4te schl\u00fcpfen. Es liebt es,\nandere zu erschrecken.",
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "version": {
+                "name": "shield",
+                "url": "/api/v2/version/34/"
+            }
+        },
+        {
+            "flavor_text": "Su cuerpo de plasma le permite infiltrarse en\ntoda clase de dispositivos electr\u00f3nicos. Adora\nsobresaltar a la gente.",
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            },
+            "version": {
+                "name": "shield",
+                "url": "/api/v2/version/34/"
+            }
+        },
+        {
+            "flavor_text": "Si intrufola in diversi apparecchi con il suo corpo\ncomposto di plasma. Gli piace tanto sorprendere\nle persone.",
+            "language": {
+                "name": "it",
+                "url": "/api/v2/language/8/"
+            },
+            "version": {
+                "name": "shield",
+                "url": "/api/v2/version/34/"
+            }
+        },
+        {
+            "flavor_text": "With a body made of plasma, it can inhabit all\nsorts of machines. It loves to surprise others.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "shield",
+                "url": "/api/v2/version/34/"
+            }
+        },
+        {
+            "flavor_text": "\u30d7\u30e9\u30ba\u30de\u3067\u3000\u3067\u304d\u305f\u3000\u4f53\u3067\n\u3044\u308d\u3093\u306a\u3000\u6a5f\u68b0\u306b\u3000\u6f5c\u308a\u3053\u3080\u3002\n\u9a5a\u304b\u305b\u308b\u306e\u304c\u3000\u5927\u597d\u304d\u3060\u3002",
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "version": {
+                "name": "shield",
+                "url": "/api/v2/version/34/"
+            }
+        },
+        {
+            "flavor_text": "\u4f1a\u7528\u7531\u79bb\u5b50\u6784\u6210\u7684\u8eab\u4f53\n\u6f5c\u5165\u5404\u79cd\u5404\u6837\u7684\u673a\u5668\u91cc\u3002\n\u6700\u559c\u6b22\u6076\u4f5c\u5267\u5413\u4eba\u3002",
+            "language": {
+                "name": "zh-Hans",
+                "url": "/api/v2/language/12/"
+            },
+            "version": {
+                "name": "shield",
+                "url": "/api/v2/version/34/"
+            }
+        },
+        {
+            "flavor_text": "This bizarre Pok\u00e9mon appears to be a will-o'-the-wisp powered\nby electricity. Be wary, as Rotom is both smart and mischievous.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "legends-arceus",
+                "url": "/api/v2/version/39/"
+            }
+        }
+    ],
+    "form_descriptions": [
+        {
+            "description": "Forms have different signature moves and types, and the appliance forms' stats are different from the normal form's.  In Generation IV, all forms are Electric/Ghost type.\n\nWhen switching forms, the old signature move (if any) is removed and the new one must be learned, overwriting another move if need be, or the switch will be cancelled; however, it can be forgotten while in the new form.  If Rotom only knows its signature move upon reverting to its default form, it learns thunder shock to avoid having no moves.\n\nAppliances for switching Rotom's form can be found in the following locations, depending on the game:\n\n* Platinum: In the Team Galactic Eterna Building.  Requires a secret key.\n* HeartGold and SoulSilver: In the Silph Co. Office Building.  Enter the building when walking with Rotom and enter the broken elevator.\n* Black and White 1 & 2: In Shopping Mall Nine.  Found in boxes in a storage room on the first floor on the far right.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            }
+        }
+    ],
+    "forms_switchable": true,
+    "gender_rate": -1,
+    "genera": [
+        {
+            "genus": "\u30d7\u30e9\u30ba\u30de\u30dd\u30b1\u30e2\u30f3",
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            }
+        },
+        {
+            "genus": "\ud50c\ub77c\uc2a4\ub9c8\ud3ec\ucf13\ubaac",
+            "language": {
+                "name": "ko",
+                "url": "/api/v2/language/3/"
+            }
+        },
+        {
+            "genus": "\u7b49\u96e2\u5b50\u5bf6\u53ef\u5922",
+            "language": {
+                "name": "zh-Hant",
+                "url": "/api/v2/language/4/"
+            }
+        },
+        {
+            "genus": "Pok\u00e9mon Plasma",
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            }
+        },
+        {
+            "genus": "Plasma-Pok\u00e9mon",
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            }
+        },
+        {
+            "genus": "Pok\u00e9mon Plasma",
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            }
+        },
+        {
+            "genus": "Pok\u00e9mon Plasma",
+            "language": {
+                "name": "it",
+                "url": "/api/v2/language/8/"
+            }
+        },
+        {
+            "genus": "Plasma Pok\u00e9mon",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            }
+        },
+        {
+            "genus": "\u30d7\u30e9\u30ba\u30de\u30dd\u30b1\u30e2\u30f3",
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            }
+        },
+        {
+            "genus": "\u7b49\u79bb\u5b50\u5b9d\u53ef\u68a6",
+            "language": {
+                "name": "zh-Hans",
+                "url": "/api/v2/language/12/"
+            }
+        }
+    ],
+    "generation": {
+        "name": "generation-iv",
+        "url": "/api/v2/generation/4/"
+    },
+    "growth_rate": {
+        "name": "medium",
+        "url": "/api/v2/growth-rate/2/"
+    },
+    "habitat": null,
+    "has_gender_differences": false,
+    "hatch_counter": 20,
+    "id": 479,
+    "is_baby": false,
+    "is_legendary": false,
+    "is_mythical": false,
+    "name": "rotom",
+    "names": [
+        {
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "name": "\u30ed\u30c8\u30e0"
+        },
+        {
+            "language": {
+                "name": "roomaji",
+                "url": "/api/v2/language/2/"
+            },
+            "name": "Rotom"
+        },
+        {
+            "language": {
+                "name": "ko",
+                "url": "/api/v2/language/3/"
+            },
+            "name": "\ub85c\ud1a0\ubb34"
+        },
+        {
+            "language": {
+                "name": "zh-Hant",
+                "url": "/api/v2/language/4/"
+            },
+            "name": "\u6d1b\u6258\u59c6"
+        },
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Motisma"
+        },
+        {
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "name": "Rotom"
+        },
+        {
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            },
+            "name": "Rotom"
+        },
+        {
+            "language": {
+                "name": "it",
+                "url": "/api/v2/language/8/"
+            },
+            "name": "Rotom"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Rotom"
+        },
+        {
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "name": "\u30ed\u30c8\u30e0"
+        },
+        {
+            "language": {
+                "name": "zh-Hans",
+                "url": "/api/v2/language/12/"
+            },
+            "name": "\u6d1b\u6258\u59c6"
+        }
+    ],
+    "order": 480,
+    "pal_park_encounters": [
+        {
+            "area": {
+                "name": "field",
+                "url": "/api/v2/pal-park-area/2/"
+            },
+            "base_score": 90,
+            "rate": 3
+        }
+    ],
+    "pokedex_numbers": [
+        {
+            "entry_number": 479,
+            "pokedex": {
+                "name": "national",
+                "url": "/api/v2/pokedex/1/"
+            }
+        },
+        {
+            "entry_number": 152,
+            "pokedex": {
+                "name": "extended-sinnoh",
+                "url": "/api/v2/pokedex/6/"
+            }
+        },
+        {
+            "entry_number": 68,
+            "pokedex": {
+                "name": "kalos-mountain",
+                "url": "/api/v2/pokedex/14/"
+            }
+        },
+        {
+            "entry_number": 372,
+            "pokedex": {
+                "name": "galar",
+                "url": "/api/v2/pokedex/27/"
+            }
+        },
+        {
+            "entry_number": 194,
+            "pokedex": {
+                "name": "hisui",
+                "url": "/api/v2/pokedex/30/"
+            }
+        },
+        {
+            "entry_number": 310,
+            "pokedex": {
+                "name": "paldea",
+                "url": "/api/v2/pokedex/31/"
+            }
+        }
+    ],
+    "shape": {
+        "name": "ball",
+        "url": "/api/v2/pokemon-shape/1/"
+    },
+    "varieties": [
+        {
+            "is_default": true,
+            "pokemon": {
+                "name": "rotom",
+                "url": "/api/v2/pokemon/479/"
+            }
+        },
+        {
+            "is_default": false,
+            "pokemon": {
+                "name": "rotom-heat",
+                "url": "/api/v2/pokemon/10008/"
+            }
+        },
+        {
+            "is_default": false,
+            "pokemon": {
+                "name": "rotom-wash",
+                "url": "/api/v2/pokemon/10009/"
+            }
+        },
+        {
+            "is_default": false,
+            "pokemon": {
+                "name": "rotom-frost",
+                "url": "/api/v2/pokemon/10010/"
+            }
+        },
+        {
+            "is_default": false,
+            "pokemon": {
+                "name": "rotom-fan",
+                "url": "/api/v2/pokemon/10011/"
+            }
+        },
+        {
+            "is_default": false,
+            "pokemon": {
+                "name": "rotom-mow",
+                "url": "/api/v2/pokemon/10012/"
+            }
+        }
+    ]
+}

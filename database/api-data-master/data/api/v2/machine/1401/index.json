@@ -1,0 +1,15 @@
+{
+    "id": 1401,
+    "item": {
+        "name": "tm89",
+        "url": "/api/v2/item/393/"
+    },
+    "move": {
+        "name": "misty-terrain",
+        "url": "/api/v2/move/581/"
+    },
+    "version_group": {
+        "name": "sword-shield",
+        "url": "/api/v2/version-group/20/"
+    }
+}

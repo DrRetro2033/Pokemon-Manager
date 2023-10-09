@@ -1,0 +1,15 @@
+{
+    "id": 1141,
+    "item": {
+        "name": "tm63",
+        "url": "/api/v2/item/367/"
+    },
+    "move": {
+        "name": "drain-punch",
+        "url": "/api/v2/move/409/"
+    },
+    "version_group": {
+        "name": "sword-shield",
+        "url": "/api/v2/version-group/20/"
+    }
+}

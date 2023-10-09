@@ -1,0 +1,15 @@
+{
+    "id": 1100,
+    "item": {
+        "name": "tm59",
+        "url": "/api/v2/item/363/"
+    },
+    "move": {
+        "name": "fling",
+        "url": "/api/v2/move/374/"
+    },
+    "version_group": {
+        "name": "sword-shield",
+        "url": "/api/v2/version-group/20/"
+    }
+}

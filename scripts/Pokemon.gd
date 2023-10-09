@@ -202,7 +202,7 @@ const rates = {
 		23286,
 		23761
 	],
-	"medium_fast":[
+	"medium-fast":[
 		8,    
 		19,
 		37,  
@@ -303,7 +303,108 @@ const rates = {
 		29107,
 		29701
 	],
-	"medium_slow":[
+	"medium":[
+		8,    
+		19,
+		37,  
+		61,  
+		91,  
+		127,  
+		169,  
+		217,
+		271,
+		331,
+		397,
+		469,
+		547,
+		631,
+		721,
+		817,
+		919,
+		1027,
+		1141,
+		1261,
+		1387,
+		1519,
+		1657,
+		1801,
+		1951,
+		2107,
+		2269,
+		2437,
+		2611,
+		2791,
+		2977,
+		3169,
+		3367,
+		3571,
+		3781,
+		3997,
+		4219,
+		4447,
+		4681,
+		4921,
+		5167,
+		5419,
+		5677,
+		5941,
+		6211,
+		6487,
+		6769,
+		7057,
+		7351,
+		7651,
+		7957,
+		8269,
+		8587,
+		8911,
+		9241,
+		9577,
+		9919,
+		10267,
+		10621,
+		10981,
+		11347,
+		11719,
+		12097,
+		12481,
+		12871,
+		13267,
+		13669,
+		14077,
+		14491,
+		14911,
+		15337,
+		15769,
+		16207,
+		16651,
+		17101,
+		17557,
+		18019,
+		18487,
+		18961,
+		19441,
+		19927,
+		20419,
+		20917,
+		21421,
+		21931,
+		22447,
+		22969,
+		23497,
+		24031,
+		24571,
+		25117,
+		25669,
+		26227,
+		26791,
+		27361,
+		27937,
+		28519,
+		29107,
+		29701
+	],
+	"medium-slow":[
 		9,	  
 		48,
 		39,
@@ -695,6 +796,8 @@ enum {
 	UM = 33,
 }
 var pokemon = {}
+var trainers = {}
+signal refresh_bank(new_pokemon)
 func set_data(data):
 	pokemon = data.duplicate()
 
@@ -745,57 +848,30 @@ class Sorter:
 		return false
 
 func level(var Exp, var rate):
-	var level = 0
-	match rate:
-		"slow":
-			for exp_required in rates.slow:
-				Exp -= exp_required
-				level += 1
-				if Exp <=0:
-					break
-				else:
-					continue
-		"medium":
-			for exp_required in rates.medium_fast:
-				Exp -= exp_required
-				level += 1
-				if Exp <=0:
-					break
-				else:
-					continue
-		"fast":
-			for exp_required in rates.fast:
-				Exp -= exp_required
-				level += 1
-				if Exp <=0:
-					break
-				else:
-					continue
-		"medium-slow":
-			for exp_required in rates.medium_slow:
-				Exp -= exp_required
-				level += 1
-				if Exp <=0:
-					break
-				else:
-					continue
-		"slow then very fast":
-			for exp_required in rates.erratic:
-				Exp -= exp_required
-				level += 1
-				if Exp <=0:
-					break
-				else:
-					continue
-		"fast then very slow":
-			for exp_required in rates.fluctuating:
-				Exp -= exp_required
-				level += 1
-				if Exp < 0:
-					break
-				else:
-					continue
+	var level = 1
+	for exp_required in rates[rate]:
+		Exp -= exp_required
+		if Exp <=0:
+			break
+		level += 1
+		
 	return level
+
+func experience(var level, var rate):
+	var Exp = 0
+	if level > 99:
+		level = 99
+	while level > 0:
+		Exp += rates[rate][level-1]
+		level -= 1
+	return Exp
+
+func exp_until_next_level(level,rate,Exp):
+	var x = 0
+	while x < level-1:
+		Exp -= rates[rate][x]
+		x += 1
+	return Exp
 
 func EggGroups(var egg_groups):
 	var array = []
@@ -852,6 +928,71 @@ func gameVersion(id):
 			version = "Pokémon Ultra Moon (3DS)"
 	return version
 
+enum types {
+	NULL,
+	NORMAL,
+	FIRE,
+	WATER,
+	GRASS,
+	ELECTRIC,
+	ICE,
+	FIGHTING,
+	POISON,
+	GROUND,
+	FLYING,
+	PSYCHIC,
+	BUG,
+	ROCK,
+	GHOST,
+	DARK,
+	DRAGON,
+	STEEL,
+	FAIRY
+}
+
+const type_chars = {
+	types.NULL:"n/a",
+	types.NORMAL:"c",
+	types.FIRE:"r",
+	types.WATER:"w",
+	types.GRASS:"g",
+	types.ELECTRIC:"l",
+	types.ICE:"i",
+	types.FIGHTING:"f",
+	types.POISON:"o",
+	types.GROUND:"a",
+	types.FLYING:"v",
+	types.PSYCHIC:"p",
+	types.BUG:"b",
+	types.ROCK:"k",
+	types.GHOST:"h",
+	types.DARK:"d",
+	types.DRAGON:"n",
+	types.STEEL:"m",
+	types.FAIRY:"y"
+}
+
+const type_colors = {
+	types.NULL:Color8(66,66,66,255),
+	types.NORMAL:Color("#c3c2a4"),
+	types.FIRE:Color("#df2c04"),
+	types.WATER:Color("#3578f4"),
+	types.GRASS:Color("#57a031"),
+	types.ELECTRIC:Color("#f8c81d"),
+	types.ICE:Color("#81e0e5"),
+	types.FIGHTING:Color("#6d2818"),
+	types.POISON:Color("#9345b3"),
+	types.GROUND:Color("#d1b85e"),
+	types.FLYING:Color("#84afff"),
+	types.PSYCHIC:Color("#ff398b"),
+	types.BUG:Color("#bdc45b"),
+	types.ROCK:Color("#b29e59"),
+	types.GHOST:Color("#5d66a6"),
+	types.DARK:Color("#442d04"),
+	types.DRAGON:Color("#8c79dc"),
+	types.STEEL:Color("#b7b7ce"),
+	types.FAIRY:Color("#f0aee1")
+}
 func getLocation(location_id,game):
 	var file = File.new()
 	match game:
@@ -870,5 +1011,51 @@ func getLocation(location_id,game):
 	file.close()
 	return location
 
-func add_pokemon(pokemon):
-	pokemon.merge(pokemon)
+func tag_search(tags:Array):
+	var typing = []
+	var trainer = null
+	var matches = []
+	var gender = null
+	for tag in tags:
+		if types.has(tag):
+			typing.append(types[tag])
+		elif str(tag).begins_with("trainer:"):
+			trainer = str(tag).split(':')[1]
+		elif str(tag).begins_with("gender:"):
+			gender = int(str(tag).split(':')[1])
+	typing.resize(2)
+	for key in pokemon.keys():
+		var passes = true
+		if typing[0] == null and typing[1] == null:
+			pass
+		if typing[1] != null:
+			if typing[0] == pokemon[key].type1 and typing[1] == pokemon[key].type2:
+				pass
+			elif typing[1] == pokemon[key].type1 and typing[0] == pokemon[key].type2:
+				pass
+			else:
+				passes = false
+		elif typing[0] == pokemon[key].type1 or typing[0] == pokemon[key].type2:
+			pass
+		else:
+			passes = false
+		if trainer != null:
+			if pokemon[key].ot.nickname != trainer:
+				passes = false
+		if gender != null:
+			if pokemon[key].gender != gender:
+				passes = false
+		if passes:
+			matches.append(key)
+	if tags.empty():
+		matches = []
+	return matches
+
+func has_pokemon(id):
+	if pokemon.has(id):
+		return true
+	return false
+
+func add_pokemon(new_pokemon):
+	pokemon.merge(new_pokemon)
+	emit_signal("refresh_bank",new_pokemon.keys())

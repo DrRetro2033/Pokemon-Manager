@@ -1,0 +1,205 @@
+{
+    "base_happiness": 50,
+    "capture_rate": 45,
+    "color": {
+        "name": "blue",
+        "url": "/api/v2/pokemon-color/2/"
+    },
+    "egg_groups": [
+        {
+            "name": "ground",
+            "url": "/api/v2/egg-group/5/"
+        },
+        {
+            "name": "water2",
+            "url": "/api/v2/egg-group/12/"
+        }
+    ],
+    "evolution_chain": {
+        "url": "/api/v2/evolution-chain/504/"
+    },
+    "evolves_from_species": {
+        "name": "finizen",
+        "url": "/api/v2/pokemon-species/963/"
+    },
+    "flavor_text_entries": [
+        {
+            "flavor_text": "This Pok\u00e9mon changes its appearance if it hears its allies calling for help. Palafin will never show anybody its moment of transformation.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "scarlet",
+                "url": "/api/v2/version/40/"
+            }
+        },
+        {
+            "flavor_text": "Its physical capabilities are no different than a Finizen\u2019s, but when its allies are in danger, it transforms and powers itself up.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "version": {
+                "name": "violet",
+                "url": "/api/v2/version/41/"
+            }
+        }
+    ],
+    "form_descriptions": [],
+    "forms_switchable": false,
+    "gender_rate": 4,
+    "genera": [
+        {
+            "genus": "\u30a4\u30eb\u30ab\u30dd\u30b1\u30e2\u30f3",
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            }
+        },
+        {
+            "genus": "\u6d77\u8c5a\u5bf6\u53ef\u5922",
+            "language": {
+                "name": "zh-Hant",
+                "url": "/api/v2/language/4/"
+            }
+        },
+        {
+            "genus": "Delfin",
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            }
+        },
+        {
+            "genus": "Dolphin Pok\u00e9mon",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            }
+        },
+        {
+            "genus": "\u6d77\u8c5a\u5b9d\u53ef\u68a6",
+            "language": {
+                "name": "zh-Hans",
+                "url": "/api/v2/language/12/"
+            }
+        }
+    ],
+    "generation": {
+        "name": "generation-ix",
+        "url": "/api/v2/generation/9/"
+    },
+    "growth_rate": {
+        "name": "slow",
+        "url": "/api/v2/growth-rate/1/"
+    },
+    "habitat": null,
+    "has_gender_differences": false,
+    "hatch_counter": 40,
+    "id": 964,
+    "is_baby": false,
+    "is_legendary": false,
+    "is_mythical": false,
+    "name": "palafin",
+    "names": [
+        {
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "name": "\u30a4\u30eb\u30ab\u30de\u30f3"
+        },
+        {
+            "language": {
+                "name": "roomaji",
+                "url": "/api/v2/language/2/"
+            },
+            "name": "Irukaman"
+        },
+        {
+            "language": {
+                "name": "ko",
+                "url": "/api/v2/language/3/"
+            },
+            "name": "\ub3cc\ud540\ub9e8"
+        },
+        {
+            "language": {
+                "name": "zh-Hant",
+                "url": "/api/v2/language/4/"
+            },
+            "name": "\u6d77\u8c5a\u4fe0"
+        },
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Superdofin"
+        },
+        {
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "name": "Delfinator"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Palafin"
+        },
+        {
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "name": "\u30a4\u30eb\u30ab\u30de\u30f3"
+        },
+        {
+            "language": {
+                "name": "zh-Hans",
+                "url": "/api/v2/language/12/"
+            },
+            "name": "\u6d77\u8c5a\u4fa0"
+        }
+    ],
+    "order": 934,
+    "pal_park_encounters": [],
+    "pokedex_numbers": [
+        {
+            "entry_number": 964,
+            "pokedex": {
+                "name": "national",
+                "url": "/api/v2/pokedex/1/"
+            }
+        },
+        {
+            "entry_number": 292,
+            "pokedex": {
+                "name": "paldea",
+                "url": "/api/v2/pokedex/31/"
+            }
+        }
+    ],
+    "shape": null,
+    "varieties": [
+        {
+            "is_default": true,
+            "pokemon": {
+                "name": "palafin",
+                "url": "/api/v2/pokemon/964/"
+            }
+        },
+        {
+            "is_default": false,
+            "pokemon": {
+                "name": "palafin-hero",
+                "url": "/api/v2/pokemon/10256/"
+            }
+        }
+    ]
+}

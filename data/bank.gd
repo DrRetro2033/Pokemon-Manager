@@ -11,3 +11,4 @@ export var trainer_picture : Texture
 export var first_time_setup : bool = true
 export var folder_path : String = ""
 export var trainers : Array = []
+export var version : String = ""

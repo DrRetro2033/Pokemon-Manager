@@ -1,0 +1,139 @@
+{
+    "form_name": "blade",
+    "form_names": [
+        {
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "name": "\u30d6\u30ec\u30fc\u30c9\u30d5\u30a9\u30eb\u30e0"
+        },
+        {
+            "language": {
+                "name": "ko",
+                "url": "/api/v2/language/3/"
+            },
+            "name": "\ube14\ub808\uc774\ub4dc\ud3fc"
+        },
+        {
+            "language": {
+                "name": "zh-Hant",
+                "url": "/api/v2/language/4/"
+            },
+            "name": "\u5200\u528d\u5f62\u614b"
+        },
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Forme Assaut"
+        },
+        {
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "name": "Klingenform"
+        },
+        {
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            },
+            "name": "Forma Filo"
+        },
+        {
+            "language": {
+                "name": "it",
+                "url": "/api/v2/language/8/"
+            },
+            "name": "Forma Spada"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Blade Forme"
+        },
+        {
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "name": "\u30d6\u30ec\u30fc\u30c9\u30d5\u30a9\u30eb\u30e0"
+        },
+        {
+            "language": {
+                "name": "zh-Hans",
+                "url": "/api/v2/language/12/"
+            },
+            "name": "\u5200\u5251\u5f62\u6001"
+        }
+    ],
+    "form_order": 2,
+    "id": 10125,
+    "is_battle_only": true,
+    "is_default": true,
+    "is_mega": false,
+    "name": "aegislash-blade",
+    "names": [
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Exagide Assaut"
+        },
+        {
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "name": "Durengard (Klinge)"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Blade Aegislash"
+        }
+    ],
+    "order": 957,
+    "pokemon": {
+        "name": "aegislash-blade",
+        "url": "/api/v2/pokemon/10026/"
+    },
+    "sprites": {
+        "back_default": null,
+        "back_female": null,
+        "back_shiny": null,
+        "back_shiny_female": null,
+        "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10026.png",
+        "front_female": null,
+        "front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10026.png",
+        "front_shiny_female": null
+    },
+    "types": [
+        {
+            "slot": 1,
+            "type": {
+                "name": "steel",
+                "url": "/api/v2/type/9/"
+            }
+        },
+        {
+            "slot": 2,
+            "type": {
+                "name": "ghost",
+                "url": "/api/v2/type/8/"
+            }
+        }
+    ],
+    "version_group": {
+        "name": "x-y",
+        "url": "/api/v2/version-group/15/"
+    }
+}

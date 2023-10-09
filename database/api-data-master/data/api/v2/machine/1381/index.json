@@ -1,0 +1,15 @@
+{
+    "id": 1381,
+    "item": {
+        "name": "tm87",
+        "url": "/api/v2/item/391/"
+    },
+    "move": {
+        "name": "draining-kiss",
+        "url": "/api/v2/move/577/"
+    },
+    "version_group": {
+        "name": "sword-shield",
+        "url": "/api/v2/version-group/20/"
+    }
+}

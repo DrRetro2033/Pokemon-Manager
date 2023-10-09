@@ -1,0 +1,15 @@
+{
+    "id": 1341,
+    "item": {
+        "name": "tm83",
+        "url": "/api/v2/item/387/"
+    },
+    "move": {
+        "name": "razor-shell",
+        "url": "/api/v2/move/534/"
+    },
+    "version_group": {
+        "name": "sword-shield",
+        "url": "/api/v2/version-group/20/"
+    }
+}

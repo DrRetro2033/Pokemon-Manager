@@ -1,0 +1,15 @@
+{
+    "id": 861,
+    "item": {
+        "name": "tm43",
+        "url": "/api/v2/item/347/"
+    },
+    "move": {
+        "name": "brick-break",
+        "url": "/api/v2/move/280/"
+    },
+    "version_group": {
+        "name": "sword-shield",
+        "url": "/api/v2/version-group/20/"
+    }
+}

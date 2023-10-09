@@ -1,0 +1,19 @@
+{
+    "id": 8,
+    "name": "three-critical-hits",
+    "names": [
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Land three critical hits in a battle"
+        }
+    ],
+    "pokemon_species": [
+        {
+            "name": "sirfetchd",
+            "url": "/api/v2/pokemon-species/865/"
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "id": 7,
+    "name": "tower-of-waters",
+    "names": [
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Train in the Tower of Waters"
+        }
+    ],
+    "pokemon_species": [
+        {
+            "name": "urshifu",
+            "url": "/api/v2/pokemon-species/892/"
+        }
+    ]
+}

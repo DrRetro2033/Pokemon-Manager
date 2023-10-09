@@ -1,0 +1,32 @@
+{
+    "descriptions": [
+        {
+            "description": "All of the user's allies.",
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            }
+        }
+    ],
+    "id": 15,
+    "moves": [
+        {
+            "name": "lunar-blessing",
+            "url": "/api/v2/move/849/"
+        },
+        {
+            "name": "take-heart",
+            "url": "/api/v2/move/850/"
+        }
+    ],
+    "name": "all-allies",
+    "names": [
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "All allies"
+        }
+    ]
+}

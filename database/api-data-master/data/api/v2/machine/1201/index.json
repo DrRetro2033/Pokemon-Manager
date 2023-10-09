@@ -1,0 +1,15 @@
+{
+    "id": 1201,
+    "item": {
+        "name": "tm69",
+        "url": "/api/v2/item/373/"
+    },
+    "move": {
+        "name": "psycho-cut",
+        "url": "/api/v2/move/427/"
+    },
+    "version_group": {
+        "name": "sword-shield",
+        "url": "/api/v2/version-group/20/"
+    }
+}

@@ -1,0 +1,71 @@
+{
+    "categories": [
+        {
+            "name": "event-items",
+            "url": "/api/v2/item-category/20/"
+        },
+        {
+            "name": "gameplay",
+            "url": "/api/v2/item-category/21/"
+        },
+        {
+            "name": "plot-advancement",
+            "url": "/api/v2/item-category/22/"
+        },
+        {
+            "name": "unused",
+            "url": "/api/v2/item-category/23/"
+        },
+        {
+            "name": "apricorn-box",
+            "url": "/api/v2/item-category/40/"
+        },
+        {
+            "name": "data-cards",
+            "url": "/api/v2/item-category/41/"
+        },
+        {
+            "name": "z-crystals",
+            "url": "/api/v2/item-category/46/"
+        }
+    ],
+    "id": 8,
+    "name": "key",
+    "names": [
+        {
+            "language": {
+                "name": "zh-Hant",
+                "url": "/api/v2/language/4/"
+            },
+            "name": "\u91cd\u8981\u7269\u54c1"
+        },
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Object rares"
+        },
+        {
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            },
+            "name": "Objetos clave"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Key Items"
+        },
+        {
+            "language": {
+                "name": "zh-Hans",
+                "url": "/api/v2/language/12/"
+            },
+            "name": "\u91cd\u8981\u7269\u54c1"
+        }
+    ]
+}

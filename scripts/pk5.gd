@@ -18,13 +18,14 @@ func readpk(var path):
 		info[iv] = BinaryTranslator.bin_to_int(bin.right(bin.length() - 5))
 		bin = BinaryTranslator.bitshiftR(bin, 5)
 	bin = BinaryTranslator.bitshiftR(bin, 1)
-	print(bin)
+#	print(bin)
 	info["ev_hp"] = read_8(file,0x18)
 	info["ev_atk"] = read_8(file,0x19)
 	info["ev_def"] = read_8(file,0x1A)
 	info["ev_spe"] = read_8(file,0x1B)
 	info["ev_spa"] = read_8(file,0x1C)
 	info["ev_spd"] = read_8(file,0x1D)
+	info["ability_number"] = read_8(file,0x15)
 	var nickname = ""
 	if int(bin) == 1:
 		file.seek(0x48)
@@ -33,16 +34,17 @@ func readpk(var path):
 				break
 			file.seek(file.get_position() - 1)
 			nickname = nickname+file.get_line()
-			print(nickname)
+#			print(nickname)
 	info["nickname"] = nickname
 	nickname = ""
 	file.seek(0x68)
-	while true:
+	while true: #The developers from either Game Freak or PKHex thought to seperate charaters with a 0 byte. 
+#		I'm glad that they did. Cause it makes my life SO much easier.
 		if file.get_8() == 0:
 			break
 		file.seek(file.get_position() - 1)
 		nickname = nickname+file.get_line()
-		print(nickname)
+#		print(nickname)
 	info["ot"] = {}
 	info["ot"]["nickname"] = nickname
 	info["ot"]["game"] = read_8(file,0x5F)

@@ -1,0 +1,15 @@
+{
+    "id": 1221,
+    "item": {
+        "name": "tm71",
+        "url": "/api/v2/item/375/"
+    },
+    "move": {
+        "name": "wonder-room",
+        "url": "/api/v2/move/472/"
+    },
+    "version_group": {
+        "name": "sword-shield",
+        "url": "/api/v2/version-group/20/"
+    }
+}

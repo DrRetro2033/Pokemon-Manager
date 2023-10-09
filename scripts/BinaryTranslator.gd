@@ -1,7 +1,7 @@
 extends Node
 #proud of this :)
 #This is a binary translator that is meant to do binary calculations
-func int_to_bin(number):
+func int_to_bin(number): 
 	var binary = ""
 	var num_div = float(number)
 	while num_div != 0:
@@ -14,6 +14,18 @@ func int_to_bin(number):
 	binary = valid_size(binary)
 	return binary
 
+func int_to_bin_with_no_resize(number): #this is for when a binary string does not need to be resized to a multiple of 8.
+	var binary = ""
+	var num_div = float(number)
+	while num_div != 0:
+		num_div /= 2
+		if floor(num_div) != ceil(num_div):
+			binary = "1"+binary
+		elif floor(num_div) == ceil(num_div):
+			binary = "0"+binary
+		num_div = floor(num_div)
+	return binary
+
 func bin_to_int(binary):
 	var number = 0
 	while binary.length() > 0:
@@ -23,7 +35,7 @@ func bin_to_int(binary):
 		binary.erase(0,1)
 	return int(number)
 
-#VERY MISLEADING NAME, CHANGE IN FUTURE
+#TODO: VERY MISLEADING NAME, CHANGE IN FUTURE
 func int_to_hex(to_convert:int): #converts an integer to a PoolByteArray.
 	var pool : PoolByteArray = []
 	var bin = int_to_bin(to_convert)
@@ -35,7 +47,7 @@ func int_to_hex(to_convert:int): #converts an integer to a PoolByteArray.
 	print(pool)
 	return pool
 
-func invert_binary(binary:String):
+func invert_binary(binary:String): #inverts a binary string
 	var inv_bin : String = ""
 	var x = binary.length()-1
 	while x >= 0:

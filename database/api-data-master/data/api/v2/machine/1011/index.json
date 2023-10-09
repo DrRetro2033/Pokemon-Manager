@@ -1,0 +1,15 @@
+{
+    "id": 1011,
+    "item": {
+        "name": "tm51",
+        "url": "/api/v2/item/355/"
+    },
+    "move": {
+        "name": "blizzard",
+        "url": "/api/v2/move/59/"
+    },
+    "version_group": {
+        "name": "lets-go-pikachu-lets-go-eevee",
+        "url": "/api/v2/version-group/19/"
+    }
+}

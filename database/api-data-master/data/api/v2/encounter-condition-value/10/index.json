@@ -1,0 +1,45 @@
+{
+    "condition": {
+        "name": "slot2",
+        "url": "/api/v2/encounter-condition/4/"
+    },
+    "id": 10,
+    "name": "slot2-sapphire",
+    "names": [
+        {
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "name": "Saphir in Slot 2"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Sapphire in slot 2"
+        },
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Saphir dans le slot 2"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Have an Event Arceus in the party"
+        },
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "En ayant un Arceus \u00e9v\u00e9nementiel dans l\u2019\u00e9quipe"
+        }
+    ]
+}

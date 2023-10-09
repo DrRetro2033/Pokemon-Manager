@@ -1,0 +1,145 @@
+{
+    "effect_changes": [],
+    "effect_entries": [],
+    "flavor_text_entries": [],
+    "generation": {
+        "name": "generation-ix",
+        "url": "/api/v2/generation/9/"
+    },
+    "id": 288,
+    "is_main_series": true,
+    "name": "orichalcum-pulse",
+    "names": [
+        {
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "name": "\u3072\u3072\u3044\u308d\u306e\u3053\u3069\u3046"
+        },
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Pouls Orichalque"
+        },
+        {
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "name": "Orichalkum-Puls"
+        },
+        {
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            },
+            "name": "Latido Oricalco"
+        },
+        {
+            "language": {
+                "name": "it",
+                "url": "/api/v2/language/8/"
+            },
+            "name": "Ritmo d\u2019Oricalco"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Orichalcum Pulse"
+        },
+        {
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "name": "\u3072\u3072\u3044\u308d\u306e\u3053\u3069\u3046"
+        }
+    ],
+    "pokemon": [
+        {
+            "is_hidden": false,
+            "pokemon": {
+                "name": "koraidon",
+                "url": "/api/v2/pokemon/1007/"
+            },
+            "slot": 1
+        },
+        {
+            "is_hidden": true,
+            "pokemon": {
+                "name": "koraidon",
+                "url": "/api/v2/pokemon/1007/"
+            },
+            "slot": 3
+        },
+        {
+            "is_hidden": false,
+            "pokemon": {
+                "name": "koraidon-limited-build",
+                "url": "/api/v2/pokemon/10264/"
+            },
+            "slot": 1
+        },
+        {
+            "is_hidden": true,
+            "pokemon": {
+                "name": "koraidon-limited-build",
+                "url": "/api/v2/pokemon/10264/"
+            },
+            "slot": 3
+        },
+        {
+            "is_hidden": false,
+            "pokemon": {
+                "name": "koraidon-sprinting-build",
+                "url": "/api/v2/pokemon/10265/"
+            },
+            "slot": 1
+        },
+        {
+            "is_hidden": true,
+            "pokemon": {
+                "name": "koraidon-sprinting-build",
+                "url": "/api/v2/pokemon/10265/"
+            },
+            "slot": 3
+        },
+        {
+            "is_hidden": false,
+            "pokemon": {
+                "name": "koraidon-swimming-build",
+                "url": "/api/v2/pokemon/10266/"
+            },
+            "slot": 1
+        },
+        {
+            "is_hidden": true,
+            "pokemon": {
+                "name": "koraidon-swimming-build",
+                "url": "/api/v2/pokemon/10266/"
+            },
+            "slot": 3
+        },
+        {
+            "is_hidden": false,
+            "pokemon": {
+                "name": "koraidon-gliding-build",
+                "url": "/api/v2/pokemon/10267/"
+            },
+            "slot": 1
+        },
+        {
+            "is_hidden": true,
+            "pokemon": {
+                "name": "koraidon-gliding-build",
+                "url": "/api/v2/pokemon/10267/"
+            },
+            "slot": 3
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "id": 561,
+    "item": {
+        "name": "tm28",
+        "url": "/api/v2/item/332/"
+    },
+    "move": {
+        "name": "giga-drain",
+        "url": "/api/v2/move/202/"
+    },
+    "version_group": {
+        "name": "sword-shield",
+        "url": "/api/v2/version-group/20/"
+    }
+}

@@ -1,0 +1,155 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fonts/OpenSans-VariableFont_wdth,wght.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/TagSearch.gd" type="Script" id=2]
+[ext_resource path="res://sprites/ui/icons/search_icon.png" type="Texture" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[node name="TagSearch" type="WindowDialog"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -83.0003
+margin_top = -170.5
+margin_right = 83.0003
+margin_bottom = 170.5
+rect_min_size = Vector2( 166, 341 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+popup_exclusive = true
+window_title = "Search"
+resizable = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/VBoxContainer"]
+margin_right = 166.0
+margin_bottom = 66.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 159.0
+margin_bottom = 59.0
+
+[node name="HFlowContainer" type="HBoxContainer" parent="Panel/VBoxContainer/PanelContainer/VBoxContainer"]
+margin_right = 152.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="LineEdit" type="TextEdit" parent="Panel/VBoxContainer/PanelContainer/VBoxContainer/HFlowContainer"]
+margin_right = 122.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 100, 26 )
+focus_mode = 1
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+caret_blink = true
+
+[node name="Search" type="Button" parent="Panel/VBoxContainer/PanelContainer/VBoxContainer/HFlowContainer"]
+margin_left = 126.0
+margin_right = 152.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 26, 26 )
+rect_clip_content = true
+mouse_filter = 1
+size_flags_vertical = 2
+icon = ExtResource( 3 )
+icon_align = 1
+expand_icon = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 30.0
+margin_right = 152.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 0, 22 )
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HBoxContainer" type="HFlowContainer" parent="Panel/VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
+margin_right = 152.0
+margin_bottom = 22.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
+margin_top = 70.0
+margin_right = 166.0
+margin_bottom = 341.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/ScrollContainer"]
+margin_right = 166.0
+margin_bottom = 271.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NoResults" type="Label" parent="Panel"]
+anchor_top = -0.0542516
+anchor_right = 1.00602
+anchor_bottom = 0.684751
+margin_bottom = 1.52588e-05
+text = "Oops... You have no Pokémon that matches search criteria!
+"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+anchor_right = 0.296137
+anchor_bottom = 0.383249
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+mouse_filter = 1
+follow_focus = true
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel/ScrollContainer"]
+margin_right = 41.1589
+margin_bottom = 122.688
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="text_changed" from="Panel/VBoxContainer/PanelContainer/VBoxContainer/HFlowContainer/LineEdit" to="." method="text_changed"]
+[connection signal="pressed" from="Panel/VBoxContainer/PanelContainer/VBoxContainer/HFlowContainer/Search" to="." method="_on_Search_pressed"]

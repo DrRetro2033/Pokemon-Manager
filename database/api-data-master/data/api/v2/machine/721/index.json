@@ -1,0 +1,15 @@
+{
+    "id": 721,
+    "item": {
+        "name": "tm36",
+        "url": "/api/v2/item/340/"
+    },
+    "move": {
+        "name": "whirlpool",
+        "url": "/api/v2/move/250/"
+    },
+    "version_group": {
+        "name": "sword-shield",
+        "url": "/api/v2/version-group/20/"
+    }
+}

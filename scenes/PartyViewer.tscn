@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://PanelTheme.tres" type="Theme" id=1]
 [ext_resource path="res://fonts/Essentiarum Regular.ttf" type="DynamicFontData" id=2]
@@ -251,7 +251,7 @@ func MoveAids(type1,type2,node,member):
 		node.get_node(\"Moves/\"+(move.capitalize().replace(\" \",\"\"))).add_stylebox_override(\"panel\",style)
 		node.get_node(\"Moves/\"+(move.capitalize().replace(\" \",\"\"))).visible = true
 
-func Aids():
+func Aids(): #Don't do it. I know you want to make a joke, but just don't.
 	print(selected_types)
 	if selected_types.empty():
 		pass
@@ -595,11 +595,16 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="DynamicFont" id=60]
+size = 32
+font_data = ExtResource( 2 )
+
 [node name="Party" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = SubResource( 54 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": true
 }
 
@@ -628,8 +633,8 @@ __meta__ = {
 }
 
 [node name="Normal" type="PanelContainer" parent="Rows"]
-margin_right = 75.0
-margin_bottom = 33.0
+margin_right = 76.0
+margin_bottom = 34.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -641,8 +646,8 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Rows/Normal"]
-margin_right = 75.0
-margin_bottom = 33.0
+margin_right = 76.0
+margin_bottom = 34.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 custom_fonts/font = SubResource( 2 )
@@ -651,9 +656,9 @@ align = 1
 valign = 1
 
 [node name="Fire" type="PanelContainer" parent="Rows"]
-margin_left = 79.0
-margin_right = 154.0
-margin_bottom = 33.0
+margin_left = 80.0
+margin_right = 155.0
+margin_bottom = 34.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -666,7 +671,7 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Rows/Fire"]
 margin_right = 75.0
-margin_bottom = 33.0
+margin_bottom = 34.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 custom_fonts/font = SubResource( 2 )
@@ -675,9 +680,9 @@ align = 1
 valign = 1
 
 [node name="Water" type="PanelContainer" parent="Rows"]
-margin_left = 158.0
-margin_right = 233.0
-margin_bottom = 33.0
+margin_left = 159.0
+margin_right = 234.0
+margin_bottom = 34.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -690,7 +695,7 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Rows/Water"]
 margin_right = 75.0
-margin_bottom = 33.0
+margin_bottom = 34.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 custom_fonts/font = SubResource( 2 )
@@ -699,9 +704,9 @@ align = 1
 valign = 1
 
 [node name="Grass" type="PanelContainer" parent="Rows"]
-margin_top = 37.0
-margin_right = 75.0
-margin_bottom = 70.0
+margin_top = 38.0
+margin_right = 76.0
+margin_bottom = 72.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -713,8 +718,8 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Rows/Grass"]
-margin_right = 75.0
-margin_bottom = 33.0
+margin_right = 76.0
+margin_bottom = 34.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 custom_fonts/font = SubResource( 2 )
@@ -723,23 +728,22 @@ align = 1
 valign = 1
 
 [node name="Electric" type="PanelContainer" parent="Rows"]
-margin_left = 79.0
-margin_top = 37.0
-margin_right = 154.0
-margin_bottom = 70.0
+margin_left = 80.0
+margin_top = 38.0
+margin_right = 155.0
+margin_bottom = 72.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
 custom_styles/panel = SubResource( 6 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_use_anchors_": true
 }
 
 [node name="Label" type="Label" parent="Rows/Electric"]
 margin_right = 75.0
-margin_bottom = 33.0
+margin_bottom = 34.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 custom_fonts/font = SubResource( 2 )
@@ -748,10 +752,10 @@ align = 1
 valign = 1
 
 [node name="Ice" type="PanelContainer" parent="Rows"]
-margin_left = 158.0
-margin_top = 37.0
-margin_right = 233.0
-margin_bottom = 70.0
+margin_left = 159.0
+margin_top = 38.0
+margin_right = 234.0
+margin_bottom = 72.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -764,7 +768,7 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Rows/Ice"]
 margin_right = 75.0
-margin_bottom = 33.0
+margin_bottom = 34.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 custom_fonts/font = SubResource( 2 )
@@ -773,9 +777,9 @@ align = 1
 valign = 1
 
 [node name="Fighting" type="PanelContainer" parent="Rows"]
-margin_top = 74.0
-margin_right = 75.0
-margin_bottom = 107.0
+margin_top = 76.0
+margin_right = 76.0
+margin_bottom = 109.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -787,7 +791,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Rows/Fighting"]
-margin_right = 75.0
+margin_right = 76.0
 margin_bottom = 33.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -797,10 +801,10 @@ align = 1
 valign = 1
 
 [node name="Poison" type="PanelContainer" parent="Rows"]
-margin_left = 79.0
-margin_top = 74.0
-margin_right = 154.0
-margin_bottom = 107.0
+margin_left = 80.0
+margin_top = 76.0
+margin_right = 155.0
+margin_bottom = 109.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -823,10 +827,10 @@ valign = 1
 max_lines_visible = 1
 
 [node name="Ground" type="PanelContainer" parent="Rows"]
-margin_left = 158.0
-margin_top = 74.0
-margin_right = 233.0
-margin_bottom = 107.0
+margin_left = 159.0
+margin_top = 76.0
+margin_right = 234.0
+margin_bottom = 109.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -849,9 +853,9 @@ valign = 1
 max_lines_visible = 1
 
 [node name="Flying" type="PanelContainer" parent="Rows"]
-margin_top = 111.0
-margin_right = 75.0
-margin_bottom = 144.0
+margin_top = 113.0
+margin_right = 76.0
+margin_bottom = 146.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -863,7 +867,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Rows/Flying"]
-margin_right = 75.0
+margin_right = 76.0
 margin_bottom = 33.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -874,10 +878,10 @@ valign = 1
 max_lines_visible = 1
 
 [node name="Psychic" type="PanelContainer" parent="Rows"]
-margin_left = 79.0
-margin_top = 111.0
-margin_right = 154.0
-margin_bottom = 144.0
+margin_left = 80.0
+margin_top = 113.0
+margin_right = 155.0
+margin_bottom = 146.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -900,10 +904,10 @@ valign = 1
 max_lines_visible = 1
 
 [node name="Bug" type="PanelContainer" parent="Rows"]
-margin_left = 158.0
-margin_top = 111.0
-margin_right = 233.0
-margin_bottom = 144.0
+margin_left = 159.0
+margin_top = 113.0
+margin_right = 234.0
+margin_bottom = 146.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -926,9 +930,9 @@ valign = 1
 max_lines_visible = 1
 
 [node name="Rock" type="PanelContainer" parent="Rows"]
-margin_top = 148.0
-margin_right = 75.0
-margin_bottom = 181.0
+margin_top = 150.0
+margin_right = 76.0
+margin_bottom = 183.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -940,7 +944,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Rows/Rock"]
-margin_right = 75.0
+margin_right = 76.0
 margin_bottom = 33.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -951,10 +955,10 @@ valign = 1
 max_lines_visible = 1
 
 [node name="Ghost" type="PanelContainer" parent="Rows"]
-margin_left = 79.0
-margin_top = 148.0
-margin_right = 154.0
-margin_bottom = 181.0
+margin_left = 80.0
+margin_top = 150.0
+margin_right = 155.0
+margin_bottom = 183.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -978,10 +982,10 @@ valign = 1
 max_lines_visible = 1
 
 [node name="Dark" type="PanelContainer" parent="Rows"]
-margin_left = 158.0
-margin_top = 148.0
-margin_right = 233.0
-margin_bottom = 181.0
+margin_left = 159.0
+margin_top = 150.0
+margin_right = 234.0
+margin_bottom = 183.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1005,9 +1009,9 @@ valign = 1
 max_lines_visible = 1
 
 [node name="Dragon" type="PanelContainer" parent="Rows"]
-margin_top = 185.0
-margin_right = 75.0
-margin_bottom = 218.0
+margin_top = 187.0
+margin_right = 76.0
+margin_bottom = 220.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1019,7 +1023,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Rows/Dragon"]
-margin_right = 75.0
+margin_right = 76.0
 margin_bottom = 33.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -1031,10 +1035,10 @@ valign = 1
 max_lines_visible = 1
 
 [node name="Steel" type="PanelContainer" parent="Rows"]
-margin_left = 79.0
-margin_top = 185.0
-margin_right = 154.0
-margin_bottom = 218.0
+margin_left = 80.0
+margin_top = 187.0
+margin_right = 155.0
+margin_bottom = 220.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1057,10 +1061,10 @@ valign = 1
 max_lines_visible = 1
 
 [node name="Fairy" type="PanelContainer" parent="Rows"]
-margin_left = 158.0
-margin_top = 185.0
-margin_right = 233.0
-margin_bottom = 218.0
+margin_left = 159.0
+margin_top = 187.0
+margin_right = 234.0
+margin_bottom = 220.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1096,8 +1100,8 @@ __meta__ = {
 }
 
 [node name="Normal" type="ToolButton" parent="Buttons"]
-margin_right = 75.0
-margin_bottom = 33.0
+margin_right = 76.0
+margin_bottom = 34.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1114,9 +1118,9 @@ __meta__ = {
 }
 
 [node name="Fire" type="ToolButton" parent="Buttons"]
-margin_left = 79.0
-margin_right = 154.0
-margin_bottom = 33.0
+margin_left = 80.0
+margin_right = 155.0
+margin_bottom = 34.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1133,9 +1137,9 @@ __meta__ = {
 }
 
 [node name="Water" type="ToolButton" parent="Buttons"]
-margin_left = 158.0
-margin_right = 233.0
-margin_bottom = 33.0
+margin_left = 159.0
+margin_right = 234.0
+margin_bottom = 34.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1152,9 +1156,9 @@ __meta__ = {
 }
 
 [node name="Grass" type="ToolButton" parent="Buttons"]
-margin_top = 37.0
-margin_right = 75.0
-margin_bottom = 70.0
+margin_top = 38.0
+margin_right = 76.0
+margin_bottom = 72.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1171,10 +1175,10 @@ __meta__ = {
 }
 
 [node name="Electric" type="ToolButton" parent="Buttons"]
-margin_left = 79.0
-margin_top = 37.0
-margin_right = 154.0
-margin_bottom = 70.0
+margin_left = 80.0
+margin_top = 38.0
+margin_right = 155.0
+margin_bottom = 72.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1191,10 +1195,10 @@ __meta__ = {
 }
 
 [node name="Ice" type="ToolButton" parent="Buttons"]
-margin_left = 158.0
-margin_top = 37.0
-margin_right = 233.0
-margin_bottom = 70.0
+margin_left = 159.0
+margin_top = 38.0
+margin_right = 234.0
+margin_bottom = 72.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1211,9 +1215,9 @@ __meta__ = {
 }
 
 [node name="Fighting" type="ToolButton" parent="Buttons"]
-margin_top = 74.0
-margin_right = 75.0
-margin_bottom = 107.0
+margin_top = 76.0
+margin_right = 76.0
+margin_bottom = 109.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1230,10 +1234,10 @@ __meta__ = {
 }
 
 [node name="Poison" type="ToolButton" parent="Buttons"]
-margin_left = 79.0
-margin_top = 74.0
-margin_right = 154.0
-margin_bottom = 107.0
+margin_left = 80.0
+margin_top = 76.0
+margin_right = 155.0
+margin_bottom = 109.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1250,10 +1254,10 @@ __meta__ = {
 }
 
 [node name="Ground" type="ToolButton" parent="Buttons"]
-margin_left = 158.0
-margin_top = 74.0
-margin_right = 233.0
-margin_bottom = 107.0
+margin_left = 159.0
+margin_top = 76.0
+margin_right = 234.0
+margin_bottom = 109.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1270,9 +1274,9 @@ __meta__ = {
 }
 
 [node name="Flying" type="ToolButton" parent="Buttons"]
-margin_top = 111.0
-margin_right = 75.0
-margin_bottom = 144.0
+margin_top = 113.0
+margin_right = 76.0
+margin_bottom = 146.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1289,10 +1293,10 @@ __meta__ = {
 }
 
 [node name="Psychic" type="ToolButton" parent="Buttons"]
-margin_left = 79.0
-margin_top = 111.0
-margin_right = 154.0
-margin_bottom = 144.0
+margin_left = 80.0
+margin_top = 113.0
+margin_right = 155.0
+margin_bottom = 146.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1309,10 +1313,10 @@ __meta__ = {
 }
 
 [node name="Bug" type="ToolButton" parent="Buttons"]
-margin_left = 158.0
-margin_top = 111.0
-margin_right = 233.0
-margin_bottom = 144.0
+margin_left = 159.0
+margin_top = 113.0
+margin_right = 234.0
+margin_bottom = 146.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1329,9 +1333,9 @@ __meta__ = {
 }
 
 [node name="Rock" type="ToolButton" parent="Buttons"]
-margin_top = 148.0
-margin_right = 75.0
-margin_bottom = 181.0
+margin_top = 150.0
+margin_right = 76.0
+margin_bottom = 183.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1348,10 +1352,10 @@ __meta__ = {
 }
 
 [node name="Ghost" type="ToolButton" parent="Buttons"]
-margin_left = 79.0
-margin_top = 148.0
-margin_right = 154.0
-margin_bottom = 181.0
+margin_left = 80.0
+margin_top = 150.0
+margin_right = 155.0
+margin_bottom = 183.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1368,10 +1372,10 @@ __meta__ = {
 }
 
 [node name="Dark" type="ToolButton" parent="Buttons"]
-margin_left = 158.0
-margin_top = 148.0
-margin_right = 233.0
-margin_bottom = 181.0
+margin_left = 159.0
+margin_top = 150.0
+margin_right = 234.0
+margin_bottom = 183.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1388,9 +1392,9 @@ __meta__ = {
 }
 
 [node name="Dragon" type="ToolButton" parent="Buttons"]
-margin_top = 185.0
-margin_right = 75.0
-margin_bottom = 218.0
+margin_top = 187.0
+margin_right = 76.0
+margin_bottom = 220.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1407,10 +1411,10 @@ __meta__ = {
 }
 
 [node name="Steel" type="ToolButton" parent="Buttons"]
-margin_left = 79.0
-margin_top = 185.0
-margin_right = 154.0
-margin_bottom = 218.0
+margin_left = 80.0
+margin_top = 187.0
+margin_right = 155.0
+margin_bottom = 220.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1427,10 +1431,10 @@ __meta__ = {
 }
 
 [node name="Fairy" type="ToolButton" parent="Buttons"]
-margin_left = 158.0
-margin_top = 185.0
-margin_right = 233.0
-margin_bottom = 218.0
+margin_left = 159.0
+margin_top = 187.0
+margin_right = 234.0
+margin_bottom = 220.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1459,7 +1463,7 @@ __meta__ = {
 }
 
 [node name="Member1" type="Control" parent="Members"]
-margin_right = 206.0
+margin_right = 207.0
 margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1490,7 +1494,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member1/Type1"]
-margin_right = 102.195
+margin_right = 102.691
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -1513,7 +1517,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member1/Type2"]
-margin_right = 102.195
+margin_right = 102.691
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -1535,7 +1539,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member1/OnlyOneType"]
-margin_right = 206.0
+margin_right = 207.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -1557,7 +1561,7 @@ __meta__ = {
 }
 
 [node name="Move1" type="VBoxContainer" parent="Members/Member1/GridContainer"]
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -1568,7 +1572,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member1/GridContainer/Move1"]
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1606,13 +1610,13 @@ valign = 1
 
 [node name="Row2" type="HBoxContainer" parent="Members/Member1/GridContainer/Move1"]
 margin_top = 29.0
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Type" type="PanelContainer" parent="Members/Member1/GridContainer/Move1/Row2"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -1620,7 +1624,7 @@ size_flags_vertical = 3
 theme = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="Members/Member1/GridContainer/Move1/Row2/Type"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -1634,8 +1638,8 @@ __meta__ = {
 }
 
 [node name="Form" type="PanelContainer" parent="Members/Member1/GridContainer/Move1/Row2"]
-margin_left = 52.0
-margin_right = 101.0
+margin_left = 53.0
+margin_right = 102.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1652,8 +1656,8 @@ __meta__ = {
 }
 
 [node name="Move2" type="VBoxContainer" parent="Members/Member1/GridContainer"]
-margin_left = 105.0
-margin_right = 206.0
+margin_left = 106.0
+margin_right = 207.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -1750,7 +1754,7 @@ __meta__ = {
 
 [node name="Move3" type="VBoxContainer" parent="Members/Member1/GridContainer"]
 margin_top = 68.0
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 124.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -1761,7 +1765,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member1/GridContainer/Move3"]
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1799,13 +1803,13 @@ valign = 1
 
 [node name="Row2" type="HBoxContainer" parent="Members/Member1/GridContainer/Move3"]
 margin_top = 29.0
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Type" type="PanelContainer" parent="Members/Member1/GridContainer/Move3/Row2"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -1813,7 +1817,7 @@ size_flags_vertical = 3
 theme = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="Members/Member1/GridContainer/Move3/Row2/Type"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -1827,8 +1831,8 @@ __meta__ = {
 }
 
 [node name="Form" type="PanelContainer" parent="Members/Member1/GridContainer/Move3/Row2"]
-margin_left = 52.0
-margin_right = 101.0
+margin_left = 53.0
+margin_right = 102.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1845,9 +1849,9 @@ __meta__ = {
 }
 
 [node name="Move4" type="VBoxContainer" parent="Members/Member1/GridContainer"]
-margin_left = 105.0
+margin_left = 106.0
 margin_top = 68.0
-margin_right = 206.0
+margin_right = 207.0
 margin_bottom = 124.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -1942,8 +1946,8 @@ __meta__ = {
 }
 
 [node name="Member2" type="Control" parent="Members"]
-margin_left = 216.0
-margin_right = 422.0
+margin_left = 217.0
+margin_right = 424.0
 margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1974,7 +1978,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member2/Type1"]
-margin_right = 102.195
+margin_right = 102.691
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -1997,7 +2001,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member2/Type2"]
-margin_right = 102.195
+margin_right = 102.691
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -2019,7 +2023,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member2/OnlyOneType"]
-margin_right = 206.0
+margin_right = 207.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -2041,7 +2045,7 @@ __meta__ = {
 }
 
 [node name="Move1" type="VBoxContainer" parent="Members/Member2/GridContainer"]
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -2052,7 +2056,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member2/GridContainer/Move1"]
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -2090,13 +2094,13 @@ valign = 1
 
 [node name="Row2" type="HBoxContainer" parent="Members/Member2/GridContainer/Move1"]
 margin_top = 29.0
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Type" type="PanelContainer" parent="Members/Member2/GridContainer/Move1/Row2"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -2104,7 +2108,7 @@ size_flags_vertical = 3
 theme = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="Members/Member2/GridContainer/Move1/Row2/Type"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -2118,8 +2122,8 @@ __meta__ = {
 }
 
 [node name="Form" type="PanelContainer" parent="Members/Member2/GridContainer/Move1/Row2"]
-margin_left = 52.0
-margin_right = 101.0
+margin_left = 53.0
+margin_right = 102.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -2136,8 +2140,8 @@ __meta__ = {
 }
 
 [node name="Move2" type="VBoxContainer" parent="Members/Member2/GridContainer"]
-margin_left = 105.0
-margin_right = 206.0
+margin_left = 106.0
+margin_right = 207.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -2233,7 +2237,7 @@ __meta__ = {
 
 [node name="Move3" type="VBoxContainer" parent="Members/Member2/GridContainer"]
 margin_top = 68.0
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 124.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -2244,7 +2248,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member2/GridContainer/Move3"]
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -2282,13 +2286,13 @@ valign = 1
 
 [node name="Row2" type="HBoxContainer" parent="Members/Member2/GridContainer/Move3"]
 margin_top = 29.0
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Type" type="PanelContainer" parent="Members/Member2/GridContainer/Move3/Row2"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -2296,7 +2300,7 @@ size_flags_vertical = 3
 theme = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="Members/Member2/GridContainer/Move3/Row2/Type"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -2310,8 +2314,8 @@ __meta__ = {
 }
 
 [node name="Form" type="PanelContainer" parent="Members/Member2/GridContainer/Move3/Row2"]
-margin_left = 52.0
-margin_right = 101.0
+margin_left = 53.0
+margin_right = 102.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -2328,9 +2332,9 @@ __meta__ = {
 }
 
 [node name="Move4" type="VBoxContainer" parent="Members/Member2/GridContainer"]
-margin_left = 105.0
+margin_left = 106.0
 margin_top = 68.0
-margin_right = 206.0
+margin_right = 207.0
 margin_bottom = 124.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -2425,8 +2429,8 @@ __meta__ = {
 }
 
 [node name="Member3" type="Control" parent="Members"]
-margin_left = 432.0
-margin_right = 638.0
+margin_left = 434.0
+margin_right = 640.0
 margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -2909,7 +2913,7 @@ __meta__ = {
 
 [node name="Member4" type="Control" parent="Members"]
 margin_top = 285.0
-margin_right = 206.0
+margin_right = 207.0
 margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -2940,7 +2944,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member4/Type1"]
-margin_right = 102.195
+margin_right = 102.691
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -2963,7 +2967,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member4/Type2"]
-margin_right = 102.195
+margin_right = 102.691
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -2985,7 +2989,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member4/OnlyOneType"]
-margin_right = 206.0
+margin_right = 207.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -3007,7 +3011,7 @@ __meta__ = {
 }
 
 [node name="Move1" type="VBoxContainer" parent="Members/Member4/GridContainer"]
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -3018,7 +3022,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member4/GridContainer/Move1"]
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -3056,13 +3060,13 @@ valign = 1
 
 [node name="Row2" type="HBoxContainer" parent="Members/Member4/GridContainer/Move1"]
 margin_top = 29.0
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Type" type="PanelContainer" parent="Members/Member4/GridContainer/Move1/Row2"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -3070,7 +3074,7 @@ size_flags_vertical = 3
 theme = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="Members/Member4/GridContainer/Move1/Row2/Type"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -3084,8 +3088,8 @@ __meta__ = {
 }
 
 [node name="Form" type="PanelContainer" parent="Members/Member4/GridContainer/Move1/Row2"]
-margin_left = 52.0
-margin_right = 101.0
+margin_left = 53.0
+margin_right = 102.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -3102,8 +3106,8 @@ __meta__ = {
 }
 
 [node name="Move2" type="VBoxContainer" parent="Members/Member4/GridContainer"]
-margin_left = 105.0
-margin_right = 206.0
+margin_left = 106.0
+margin_right = 207.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -3199,7 +3203,7 @@ __meta__ = {
 
 [node name="Move3" type="VBoxContainer" parent="Members/Member4/GridContainer"]
 margin_top = 68.0
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 124.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -3210,7 +3214,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member4/GridContainer/Move3"]
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -3248,13 +3252,13 @@ valign = 1
 
 [node name="Row2" type="HBoxContainer" parent="Members/Member4/GridContainer/Move3"]
 margin_top = 29.0
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Type" type="PanelContainer" parent="Members/Member4/GridContainer/Move3/Row2"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -3262,7 +3266,7 @@ size_flags_vertical = 3
 theme = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="Members/Member4/GridContainer/Move3/Row2/Type"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -3276,8 +3280,8 @@ __meta__ = {
 }
 
 [node name="Form" type="PanelContainer" parent="Members/Member4/GridContainer/Move3/Row2"]
-margin_left = 52.0
-margin_right = 101.0
+margin_left = 53.0
+margin_right = 102.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -3294,9 +3298,9 @@ __meta__ = {
 }
 
 [node name="Move4" type="VBoxContainer" parent="Members/Member4/GridContainer"]
-margin_left = 105.0
+margin_left = 106.0
 margin_top = 68.0
-margin_right = 206.0
+margin_right = 207.0
 margin_bottom = 124.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -3391,9 +3395,9 @@ __meta__ = {
 }
 
 [node name="Member5" type="Control" parent="Members"]
-margin_left = 216.0
+margin_left = 217.0
 margin_top = 285.0
-margin_right = 422.0
+margin_right = 424.0
 margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -3424,7 +3428,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member5/Type1"]
-margin_right = 102.195
+margin_right = 102.691
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -3447,7 +3451,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member5/Type2"]
-margin_right = 102.195
+margin_right = 102.691
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -3469,7 +3473,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member5/OnlyOneType"]
-margin_right = 206.0
+margin_right = 207.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -3491,7 +3495,7 @@ __meta__ = {
 }
 
 [node name="Move1" type="VBoxContainer" parent="Members/Member5/GridContainer"]
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -3502,7 +3506,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member5/GridContainer/Move1"]
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -3540,13 +3544,13 @@ valign = 1
 
 [node name="Row2" type="HBoxContainer" parent="Members/Member5/GridContainer/Move1"]
 margin_top = 29.0
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Type" type="PanelContainer" parent="Members/Member5/GridContainer/Move1/Row2"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -3554,7 +3558,7 @@ size_flags_vertical = 3
 theme = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="Members/Member5/GridContainer/Move1/Row2/Type"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -3568,8 +3572,8 @@ __meta__ = {
 }
 
 [node name="Form" type="PanelContainer" parent="Members/Member5/GridContainer/Move1/Row2"]
-margin_left = 52.0
-margin_right = 101.0
+margin_left = 53.0
+margin_right = 102.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -3586,8 +3590,8 @@ __meta__ = {
 }
 
 [node name="Move2" type="VBoxContainer" parent="Members/Member5/GridContainer"]
-margin_left = 105.0
-margin_right = 206.0
+margin_left = 106.0
+margin_right = 207.0
 margin_bottom = 56.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -3683,7 +3687,7 @@ __meta__ = {
 
 [node name="Move3" type="VBoxContainer" parent="Members/Member5/GridContainer"]
 margin_top = 68.0
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 124.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -3694,7 +3698,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Members/Member5/GridContainer/Move3"]
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -3732,13 +3736,13 @@ valign = 1
 
 [node name="Row2" type="HBoxContainer" parent="Members/Member5/GridContainer/Move3"]
 margin_top = 29.0
-margin_right = 101.0
+margin_right = 102.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Type" type="PanelContainer" parent="Members/Member5/GridContainer/Move3/Row2"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -3746,7 +3750,7 @@ size_flags_vertical = 3
 theme = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="Members/Member5/GridContainer/Move3/Row2/Type"]
-margin_right = 48.0
+margin_right = 49.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
@@ -3760,8 +3764,8 @@ __meta__ = {
 }
 
 [node name="Form" type="PanelContainer" parent="Members/Member5/GridContainer/Move3/Row2"]
-margin_left = 52.0
-margin_right = 101.0
+margin_left = 53.0
+margin_right = 102.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -3778,9 +3782,9 @@ __meta__ = {
 }
 
 [node name="Move4" type="VBoxContainer" parent="Members/Member5/GridContainer"]
-margin_left = 105.0
+margin_left = 106.0
 margin_top = 68.0
-margin_right = 206.0
+margin_right = 207.0
 margin_bottom = 124.0
 mouse_default_cursor_shape = 16
 size_flags_horizontal = 3
@@ -3875,9 +3879,9 @@ __meta__ = {
 }
 
 [node name="Member6" type="Control" parent="Members"]
-margin_left = 432.0
+margin_left = 434.0
 margin_top = 285.0
-margin_right = 638.0
+margin_right = 640.0
 margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -4372,14 +4376,14 @@ __meta__ = {
 }
 
 [node name="Member1" type="VBoxContainer" parent="Aid"]
-margin_right = 206.0
-margin_bottom = 275.0
+margin_right = 207.0
+margin_bottom = 276.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Member" type="Panel" parent="Aid/Member1"]
-margin_right = 206.0
-margin_bottom = 146.0
+margin_right = 207.0
+margin_bottom = 147.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 58 )
@@ -4388,9 +4392,9 @@ __meta__ = {
 }
 
 [node name="Moves" type="GridContainer" parent="Aid/Member1"]
-margin_top = 150.0
-margin_right = 206.0
-margin_bottom = 275.0
+margin_top = 151.0
+margin_right = 207.0
+margin_bottom = 276.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.85
@@ -4400,8 +4404,8 @@ __meta__ = {
 }
 
 [node name="Move1" type="Panel" parent="Aid/Member1/Moves"]
-margin_right = 101.0
-margin_bottom = 60.0
+margin_right = 102.0
+margin_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4410,9 +4414,9 @@ __meta__ = {
 }
 
 [node name="Move2" type="Panel" parent="Aid/Member1/Moves"]
-margin_left = 105.0
-margin_right = 206.0
-margin_bottom = 60.0
+margin_left = 106.0
+margin_right = 207.0
+margin_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4421,9 +4425,9 @@ __meta__ = {
 }
 
 [node name="Move3" type="Panel" parent="Aid/Member1/Moves"]
-margin_top = 64.0
-margin_right = 101.0
-margin_bottom = 124.0
+margin_top = 65.0
+margin_right = 102.0
+margin_bottom = 125.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4432,10 +4436,10 @@ __meta__ = {
 }
 
 [node name="Move4" type="Panel" parent="Aid/Member1/Moves"]
-margin_left = 105.0
-margin_top = 64.0
-margin_right = 206.0
-margin_bottom = 124.0
+margin_left = 106.0
+margin_top = 65.0
+margin_right = 207.0
+margin_bottom = 125.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4444,15 +4448,15 @@ __meta__ = {
 }
 
 [node name="Member2" type="VBoxContainer" parent="Aid"]
-margin_left = 216.0
-margin_right = 422.0
-margin_bottom = 275.0
+margin_left = 217.0
+margin_right = 424.0
+margin_bottom = 276.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Member" type="Panel" parent="Aid/Member2"]
-margin_right = 206.0
-margin_bottom = 146.0
+margin_right = 207.0
+margin_bottom = 147.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 58 )
@@ -4461,9 +4465,9 @@ __meta__ = {
 }
 
 [node name="Moves" type="GridContainer" parent="Aid/Member2"]
-margin_top = 150.0
-margin_right = 206.0
-margin_bottom = 275.0
+margin_top = 151.0
+margin_right = 207.0
+margin_bottom = 276.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.85
@@ -4473,8 +4477,8 @@ __meta__ = {
 }
 
 [node name="Move1" type="Panel" parent="Aid/Member2/Moves"]
-margin_right = 101.0
-margin_bottom = 60.0
+margin_right = 102.0
+margin_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4483,9 +4487,9 @@ __meta__ = {
 }
 
 [node name="Move2" type="Panel" parent="Aid/Member2/Moves"]
-margin_left = 105.0
-margin_right = 206.0
-margin_bottom = 60.0
+margin_left = 106.0
+margin_right = 207.0
+margin_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4494,9 +4498,9 @@ __meta__ = {
 }
 
 [node name="Move3" type="Panel" parent="Aid/Member2/Moves"]
-margin_top = 64.0
-margin_right = 101.0
-margin_bottom = 124.0
+margin_top = 65.0
+margin_right = 102.0
+margin_bottom = 125.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4505,10 +4509,10 @@ __meta__ = {
 }
 
 [node name="Move4" type="Panel" parent="Aid/Member2/Moves"]
-margin_left = 105.0
-margin_top = 64.0
-margin_right = 206.0
-margin_bottom = 124.0
+margin_left = 106.0
+margin_top = 65.0
+margin_right = 207.0
+margin_bottom = 125.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4517,15 +4521,15 @@ __meta__ = {
 }
 
 [node name="Member3" type="VBoxContainer" parent="Aid"]
-margin_left = 432.0
-margin_right = 638.0
-margin_bottom = 275.0
+margin_left = 434.0
+margin_right = 640.0
+margin_bottom = 276.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Member" type="Panel" parent="Aid/Member3"]
 margin_right = 206.0
-margin_bottom = 146.0
+margin_bottom = 147.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 58 )
@@ -4534,9 +4538,9 @@ __meta__ = {
 }
 
 [node name="Moves" type="GridContainer" parent="Aid/Member3"]
-margin_top = 150.0
+margin_top = 151.0
 margin_right = 206.0
-margin_bottom = 275.0
+margin_bottom = 276.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.85
@@ -4547,7 +4551,7 @@ __meta__ = {
 
 [node name="Move1" type="Panel" parent="Aid/Member3/Moves"]
 margin_right = 101.0
-margin_bottom = 60.0
+margin_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4558,7 +4562,7 @@ __meta__ = {
 [node name="Move2" type="Panel" parent="Aid/Member3/Moves"]
 margin_left = 105.0
 margin_right = 206.0
-margin_bottom = 60.0
+margin_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4567,9 +4571,9 @@ __meta__ = {
 }
 
 [node name="Move3" type="Panel" parent="Aid/Member3/Moves"]
-margin_top = 64.0
+margin_top = 65.0
 margin_right = 101.0
-margin_bottom = 124.0
+margin_bottom = 125.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4579,9 +4583,9 @@ __meta__ = {
 
 [node name="Move4" type="Panel" parent="Aid/Member3/Moves"]
 margin_left = 105.0
-margin_top = 64.0
+margin_top = 65.0
 margin_right = 206.0
-margin_bottom = 124.0
+margin_bottom = 125.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4590,14 +4594,14 @@ __meta__ = {
 }
 
 [node name="Member4" type="VBoxContainer" parent="Aid"]
-margin_top = 285.0
-margin_right = 206.0
-margin_bottom = 560.0
+margin_top = 286.0
+margin_right = 207.0
+margin_bottom = 561.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Member" type="Panel" parent="Aid/Member4"]
-margin_right = 206.0
+margin_right = 207.0
 margin_bottom = 146.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -4608,7 +4612,7 @@ __meta__ = {
 
 [node name="Moves" type="GridContainer" parent="Aid/Member4"]
 margin_top = 150.0
-margin_right = 206.0
+margin_right = 207.0
 margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -4619,8 +4623,8 @@ __meta__ = {
 }
 
 [node name="Move1" type="Panel" parent="Aid/Member4/Moves"]
-margin_right = 101.0
-margin_bottom = 60.0
+margin_right = 102.0
+margin_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4629,9 +4633,9 @@ __meta__ = {
 }
 
 [node name="Move2" type="Panel" parent="Aid/Member4/Moves"]
-margin_left = 105.0
-margin_right = 206.0
-margin_bottom = 60.0
+margin_left = 106.0
+margin_right = 207.0
+margin_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4640,9 +4644,9 @@ __meta__ = {
 }
 
 [node name="Move3" type="Panel" parent="Aid/Member4/Moves"]
-margin_top = 64.0
-margin_right = 101.0
-margin_bottom = 124.0
+margin_top = 65.0
+margin_right = 102.0
+margin_bottom = 125.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4651,10 +4655,10 @@ __meta__ = {
 }
 
 [node name="Move4" type="Panel" parent="Aid/Member4/Moves"]
-margin_left = 105.0
-margin_top = 64.0
-margin_right = 206.0
-margin_bottom = 124.0
+margin_left = 106.0
+margin_top = 65.0
+margin_right = 207.0
+margin_bottom = 125.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4663,15 +4667,15 @@ __meta__ = {
 }
 
 [node name="Member5" type="VBoxContainer" parent="Aid"]
-margin_left = 216.0
-margin_top = 285.0
-margin_right = 422.0
-margin_bottom = 560.0
+margin_left = 217.0
+margin_top = 286.0
+margin_right = 424.0
+margin_bottom = 561.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Member" type="Panel" parent="Aid/Member5"]
-margin_right = 206.0
+margin_right = 207.0
 margin_bottom = 146.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -4682,7 +4686,7 @@ __meta__ = {
 
 [node name="Moves" type="GridContainer" parent="Aid/Member5"]
 margin_top = 150.0
-margin_right = 206.0
+margin_right = 207.0
 margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -4693,8 +4697,8 @@ __meta__ = {
 }
 
 [node name="Move1" type="Panel" parent="Aid/Member5/Moves"]
-margin_right = 101.0
-margin_bottom = 60.0
+margin_right = 102.0
+margin_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4703,9 +4707,9 @@ __meta__ = {
 }
 
 [node name="Move2" type="Panel" parent="Aid/Member5/Moves"]
-margin_left = 105.0
-margin_right = 206.0
-margin_bottom = 60.0
+margin_left = 106.0
+margin_right = 207.0
+margin_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4714,9 +4718,9 @@ __meta__ = {
 }
 
 [node name="Move3" type="Panel" parent="Aid/Member5/Moves"]
-margin_top = 64.0
-margin_right = 101.0
-margin_bottom = 124.0
+margin_top = 65.0
+margin_right = 102.0
+margin_bottom = 125.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4725,10 +4729,10 @@ __meta__ = {
 }
 
 [node name="Move4" type="Panel" parent="Aid/Member5/Moves"]
-margin_left = 105.0
-margin_top = 64.0
-margin_right = 206.0
-margin_bottom = 124.0
+margin_left = 106.0
+margin_top = 65.0
+margin_right = 207.0
+margin_bottom = 125.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4737,10 +4741,10 @@ __meta__ = {
 }
 
 [node name="Member6" type="VBoxContainer" parent="Aid"]
-margin_left = 432.0
-margin_top = 285.0
-margin_right = 638.0
-margin_bottom = 560.0
+margin_left = 434.0
+margin_top = 286.0
+margin_right = 640.0
+margin_bottom = 561.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -4768,7 +4772,7 @@ __meta__ = {
 
 [node name="Move1" type="Panel" parent="Aid/Member6/Moves"]
 margin_right = 101.0
-margin_bottom = 60.0
+margin_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4779,7 +4783,7 @@ __meta__ = {
 [node name="Move2" type="Panel" parent="Aid/Member6/Moves"]
 margin_left = 105.0
 margin_right = 206.0
-margin_bottom = 60.0
+margin_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4788,9 +4792,9 @@ __meta__ = {
 }
 
 [node name="Move3" type="Panel" parent="Aid/Member6/Moves"]
-margin_top = 64.0
+margin_top = 65.0
 margin_right = 101.0
-margin_bottom = 124.0
+margin_bottom = 125.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4800,9 +4804,9 @@ __meta__ = {
 
 [node name="Move4" type="Panel" parent="Aid/Member6/Moves"]
 margin_left = 105.0
-margin_top = 64.0
+margin_top = 65.0
 margin_right = 206.0
-margin_bottom = 124.0
+margin_bottom = 125.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 53 )
@@ -4821,6 +4825,16 @@ text = "Back"
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="OptionButton" type="OptionButton" parent="."]
+margin_right = 210.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 60 )
+text = "c"
+align = 1
+icon_align = 1
+items = [ "c", null, false, 0, null, "r", null, false, 1, null, "w", null, false, 2, null, "g", null, false, 3, null, "l", null, false, 4, null, "i", null, false, 5, null, "f", null, false, 6, null, "o", null, false, 7, null, "a", null, false, 8, null, "v", null, false, 9, null, "p", null, false, 10, null, "b", null, false, 11, null, "k", null, false, 12, null, "h", null, false, 13, null, "d", null, false, 14, null, "n", null, false, 15, null, "m", null, false, 16, null, "y", null, false, 17, null ]
+selected = 0
 
 [connection signal="toggled" from="Buttons/Normal" to="." method="_on_Normal_toggled"]
 [connection signal="toggled" from="Buttons/Fire" to="." method="_on_Fire_toggled"]

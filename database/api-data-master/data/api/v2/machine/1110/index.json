@@ -1,0 +1,15 @@
+{
+    "id": 1110,
+    "item": {
+        "name": "tm60",
+        "url": "/api/v2/item/364/"
+    },
+    "move": {
+        "name": "megahorn",
+        "url": "/api/v2/move/224/"
+    },
+    "version_group": {
+        "name": "lets-go-pikachu-lets-go-eevee",
+        "url": "/api/v2/version-group/19/"
+    }
+}

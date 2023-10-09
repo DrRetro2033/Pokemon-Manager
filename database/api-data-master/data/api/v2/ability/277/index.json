@@ -1,0 +1,81 @@
+{
+    "effect_changes": [],
+    "effect_entries": [],
+    "flavor_text_entries": [],
+    "generation": {
+        "name": "generation-ix",
+        "url": "/api/v2/generation/9/"
+    },
+    "id": 277,
+    "is_main_series": true,
+    "name": "wind-power",
+    "names": [
+        {
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "name": "\u3075\u3046\u308a\u3087\u304f\u3067\u3093\u304d"
+        },
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Turbine \u00c9olienne"
+        },
+        {
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "name": "Windkraft"
+        },
+        {
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            },
+            "name": "Energ\u00eda E\u00f3lica"
+        },
+        {
+            "language": {
+                "name": "it",
+                "url": "/api/v2/language/8/"
+            },
+            "name": "Energia Eolica"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Wind Power"
+        },
+        {
+            "language": {
+                "name": "ja",
+                "url": "/api/v2/language/11/"
+            },
+            "name": "\u3075\u3046\u308a\u3087\u304f\u3067\u3093\u304d"
+        }
+    ],
+    "pokemon": [
+        {
+            "is_hidden": false,
+            "pokemon": {
+                "name": "wattrel",
+                "url": "/api/v2/pokemon/940/"
+            },
+            "slot": 1
+        },
+        {
+            "is_hidden": false,
+            "pokemon": {
+                "name": "kilowattrel",
+                "url": "/api/v2/pokemon/941/"
+            },
+            "slot": 1
+        }
+    ]
+}

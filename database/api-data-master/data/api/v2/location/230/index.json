@@ -1,0 +1,39 @@
+{
+    "areas": [
+        {
+            "name": "mahogany-town-area",
+            "url": "/api/v2/location-area/800/"
+        }
+    ],
+    "game_indices": [
+        {
+            "game_index": 134,
+            "generation": {
+                "name": "generation-iv",
+                "url": "/api/v2/generation/4/"
+            }
+        }
+    ],
+    "id": 230,
+    "name": "mahogany-town",
+    "names": [
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Acajou"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Mahogany Town"
+        }
+    ],
+    "region": {
+        "name": "johto",
+        "url": "/api/v2/region/2/"
+    }
+}

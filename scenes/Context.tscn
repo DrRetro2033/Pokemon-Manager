@@ -9,31 +9,45 @@ script/source = "extends PopupPanel
 # var b = \"text\"
 
 var current_area = null
+var pop_pos : Vector2 = Vector2(0,0)
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
-
+func _process(delta):
+	rect_global_position = get_viewport().get_mouse_position()
+	if get_viewport().get_mouse_position().x > (get_viewport().size.x/3)*2:
+		rect_position.x -= rect_size.x
+	if get_viewport().get_mouse_position().y > (get_viewport().size.y/3)*2:
+		rect_position.y -= rect_size.y
+	if pop_pos.distance_to(rect_position) > 5:
+		visible = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _on_Move1_pressed():
-	$RichTextLabel.text = $\"../GridContainer/Move1\".flavor_text
-	set_position(get_viewport().get_mouse_position())
 	popup()
+	$RichTextLabel.text = $\"../GridContainer/Move1\".flavor_text
+	pop_pos = rect_position
 
 func _on_Move2_pressed():
-	$RichTextLabel.text = $\"../GridContainer/Move2\".flavor_text
-	set_position(get_viewport().get_mouse_position())
 	popup()
+	$RichTextLabel.text = $\"../GridContainer/Move2\".flavor_text
+	pop_pos = rect_position
 
 func _on_Move3_pressed():
-	$RichTextLabel.text = $\"../GridContainer/Move3\".flavor_text
-	set_position(get_viewport().get_mouse_position())
 	popup()
+	$RichTextLabel.text = $\"../GridContainer/Move3\".flavor_text
+	pop_pos = rect_position
 
 func _on_Move4_pressed():
-	$RichTextLabel.text = $\"../GridContainer/Move4\".flavor_text
-	set_position(get_viewport().get_mouse_position())
 	popup()
+	$RichTextLabel.text = $\"../GridContainer/Move4\".flavor_text
+	pop_pos = rect_position
+
+
+func _on_AbilityButton_pressed():
+	popup()
+	$RichTextLabel.text = $\"../Ability\".flavor_text
+	pop_pos = rect_position
 "
 
 [sub_resource type="RichTextEffect" id=3]

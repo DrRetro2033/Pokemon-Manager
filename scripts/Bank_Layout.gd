@@ -4,32 +4,16 @@ onready var box = load("res://scenes/Box.tscn")
 var page = 0
 var max_per_page = 24
 var boxes = {}
+
 func loadPokemon(bank):
-	var overflow = int(bank.data.size() / max_per_page)
-	var array = bank.boxes.keys()
-	print(overflow)
-	while array.size() > 0: #if there are more pokemon that can't all fit into one box it creates new ones
-		var new_box = box.instance()
-		new_box.name = array.front()
-		array.remove(0)
-#		if bank.box_names.size() - 1 >= overflow:
-#			new_box.name = array.front()
-#			array.remove(0)
-#		else:
-#			new_box.name = "Box%s" % str(get_child_count() + 1)
-#			boxes.push_back(new_box.name)
-		add_child(new_box)
-		yield(get_tree().create_timer(0.01),"timeout")
-#		overflow -= 1
+	var boxes = bank.boxes
+	yield(get_tree().create_timer(0.1),"timeout")
 	print(boxes)
-	boxes = bank.boxes
-	for x in get_children():
-		x.setSlots(boxes[x.name])
-		yield(get_tree().create_timer(0.01),"timeout")
-	for x in get_children():
-		if x.isEmpty():
-			remove_child(x)
-			x.queue_free()
+	for n in boxes.keys():
+		var new_box = box.instance()
+		new_box.name = n
+		add_child(new_box,true)
+		new_box.setSlots(boxes[n])
 	$"../Loading Screen".finised()
 
 func _process(delta):
@@ -61,59 +45,42 @@ func _on_PopupMenu_new_box():
 		add_child(new_box)
 
 func save(bank):
-	var pos = 0
-	while pos <= get_tab_count()-1:
-		if not get_tab_control(pos).isEmpty():
-			boxes[get_tab_control(pos).name] = get_tab_control(pos).list_pokemon()
-		pos += 1
-	bank.boxes = boxes
+	for child in get_children():
+		bank.boxes[child.name] = child.get_slots()
 
 func _on_Rename_newName(new_name):
 	get_tab_control(current_tab).name = new_name
 	set_tab_title(current_tab,new_name)
 
-func addPokemon(pokemon,bank):
-	var array = bank.boxes.keys()
+func addPokemon(pokemon):
 	print(pokemon)
-	if array.size() > 0:
-		while array.size() > 0: #if there are more pokemon that can't all fit into one box it creates new ones
-			var new_box = box.instance()
-			new_box.name = array.front()
-			array.remove(0)
-			add_child(new_box)
-			yield(get_tree().create_timer(0.01),"timeout")
-#		print(boxes)
-		for child in get_children():
-			child.setSlots(bank.boxes[child.name])
-			yield(get_tree().create_timer(0.01),"timeout")
-		for x in pokemon:
-			var space_exists = false
-			for child in get_children():
-				if not child.isFull():
-					child.setEmpty(x)
-					space_exists = true
-					break
-			if not space_exists:
-				break
-			pokemon.erase(x)
-	elif not pokemon.empty():
-		var overflow = int(pokemon.size() / max_per_page)
-#		print(overflow)
-		while overflow >= 0: 
+	var current_box = null
+	while true:
+		if get_child_count() == 0:
 			var new_box = box.instance()
 			new_box.name = "Box%s" % str(get_child_count() + 1)
 			add_child(new_box)
-			yield(get_tree().create_timer(1),"timeout")
-			overflow -= 1
-		var current_pos = pokemon
-		for x in get_children():
-			if x.isEmpty():
-				current_pos = x.setSlots(current_pos)
-				yield(get_tree().create_timer(0.01),"timeout")
-	for x in get_children():
-		if x.isEmpty():
-			remove_child(x)
-			x.queue_free()
+			current_box = new_box
+		elif current_box == null:
+			for child in get_children():
+				if not child.isFull():
+					current_box = child
+					break
+			if current_box == null:
+				var new_box = box.instance()
+				new_box.name = "Box%s" % str(get_child_count() + 1)
+				add_child(new_box)
+				current_box = new_box
+		for x in pokemon:
+			if not current_box.isFull():
+				current_box.setEmpty(x)
+			else:
+				current_box = null
+				break
+			pokemon.erase(x)
+		if pokemon.empty():
+			break
+		yield(get_tree().create_timer(0.001),"timeout")
 	$"../Loading Screen".finised()
 
 func _on_PopupMenu_export_box():

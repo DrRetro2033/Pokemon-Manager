@@ -1,0 +1,15 @@
+{
+    "id": 521,
+    "item": {
+        "name": "tm26",
+        "url": "/api/v2/item/330/"
+    },
+    "move": {
+        "name": "scary-face",
+        "url": "/api/v2/move/184/"
+    },
+    "version_group": {
+        "name": "sword-shield",
+        "url": "/api/v2/version-group/20/"
+    }
+}

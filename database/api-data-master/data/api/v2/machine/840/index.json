@@ -1,0 +1,15 @@
+{
+    "id": 840,
+    "item": {
+        "name": "tm42",
+        "url": "/api/v2/item/346/"
+    },
+    "move": {
+        "name": "self-destruct",
+        "url": "/api/v2/move/120/"
+    },
+    "version_group": {
+        "name": "lets-go-pikachu-lets-go-eevee",
+        "url": "/api/v2/version-group/19/"
+    }
+}

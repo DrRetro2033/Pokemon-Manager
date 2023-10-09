@@ -1,0 +1,51 @@
+{
+    "id": 5,
+    "iso3166": "fr",
+    "iso639": "fr",
+    "name": "fr",
+    "names": [
+        {
+            "language": {
+                "name": "ja-Hrkt",
+                "url": "/api/v2/language/1/"
+            },
+            "name": "\u30d5\u30e9\u30f3\u30b9\u8a9e"
+        },
+        {
+            "language": {
+                "name": "ko",
+                "url": "/api/v2/language/3/"
+            },
+            "name": "\ud504\ub791\uc2a4\uc5b4"
+        },
+        {
+            "language": {
+                "name": "fr",
+                "url": "/api/v2/language/5/"
+            },
+            "name": "Fran\u00e7ais"
+        },
+        {
+            "language": {
+                "name": "de",
+                "url": "/api/v2/language/6/"
+            },
+            "name": "Franz\u00f6sisch"
+        },
+        {
+            "language": {
+                "name": "es",
+                "url": "/api/v2/language/7/"
+            },
+            "name": "Franc\u00e9s"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "French"
+        }
+    ],
+    "official": true
+}

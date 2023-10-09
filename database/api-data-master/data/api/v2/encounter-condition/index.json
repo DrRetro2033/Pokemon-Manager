@@ -1,0 +1,59 @@
+{
+    "count": 13,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "name": "swarm",
+            "url": "/api/v2/encounter-condition/1/"
+        },
+        {
+            "name": "time",
+            "url": "/api/v2/encounter-condition/2/"
+        },
+        {
+            "name": "radar",
+            "url": "/api/v2/encounter-condition/3/"
+        },
+        {
+            "name": "slot2",
+            "url": "/api/v2/encounter-condition/4/"
+        },
+        {
+            "name": "radio",
+            "url": "/api/v2/encounter-condition/5/"
+        },
+        {
+            "name": "season",
+            "url": "/api/v2/encounter-condition/6/"
+        },
+        {
+            "name": "starter",
+            "url": "/api/v2/encounter-condition/7/"
+        },
+        {
+            "name": "tv-option",
+            "url": "/api/v2/encounter-condition/8/"
+        },
+        {
+            "name": "story-progress",
+            "url": "/api/v2/encounter-condition/9/"
+        },
+        {
+            "name": "other",
+            "url": "/api/v2/encounter-condition/10/"
+        },
+        {
+            "name": "item",
+            "url": "/api/v2/encounter-condition/11/"
+        },
+        {
+            "name": "weekday",
+            "url": "/api/v2/encounter-condition/12/"
+        },
+        {
+            "name": "first-party-pokemon",
+            "url": "/api/v2/encounter-condition/13/"
+        }
+    ]
+}
