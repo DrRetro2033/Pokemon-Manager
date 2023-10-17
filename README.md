@@ -1,6 +1,9 @@
-![main_logo_2](https://github.com/DrRetro2033/Pokemon-Manager/assets/86109384/1940527b-ad54-46b6-a371-ed560df0df4f)
+<p align="center">
+  <img src="https://github.com/DrRetro2033/Pokemon-Manager/assets/86109384/1940527b-ad54-46b6-a371-ed560df0df4f" width="600" height="300" border="0"/>
+</p>
 
-View, organize, and manage your Pokémon.
+## <p align="center"> View, organize, and manage your Pokémon. </p>
+
 ![Untitled](https://user-images.githubusercontent.com/86109384/179224180-46bb607f-da88-4f87-8280-dcc0fba9d209.png)
 
 What is Pokémon Manager?
