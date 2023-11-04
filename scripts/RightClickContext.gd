@@ -31,16 +31,3 @@ func item_selected(id):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-
-
-func _on_VisibilityNotifier2D_viewport_entered(viewport):
-	print(name+" is true")
-
-
-func _on_VisibilityNotifier2D_viewport_exited(viewport):
-	print(name+" is false")
-
-
-
-func _on_VisibilityNotifier2D_visibility_changed():
-	print(name+" is "+str($VisibilityNotifier2D.visible))

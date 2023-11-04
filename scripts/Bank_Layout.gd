@@ -5,6 +5,9 @@ var page = 0
 var max_per_page = 24
 var boxes = {}
 
+func _ready():
+	pass
+
 func loadPokemon(bank):
 	var boxes = bank.boxes
 	yield(get_tree().create_timer(0.1),"timeout")
@@ -14,18 +17,20 @@ func loadPokemon(bank):
 		new_box.name = n
 		add_child(new_box,true)
 		new_box.setSlots(boxes[n])
+		$"../Tabs".add_tab(n)
 	$"../Loading Screen".finised()
 
 func _process(delta):
-	if !Trainer.first_time_setup and not get_focus_owner() is TextEdit:
-		if Input.is_action_just_pressed("ui_left") and current_tab != 0:
-			current_tab -= 1
-		elif Input.is_action_just_pressed("ui_right") and current_tab != get_child_count() - 1:
-			current_tab += 1
-		elif Input.is_action_just_pressed("ui_up"):
-			current_tab = 0
-		elif Input.is_action_just_pressed("ui_down"):
-			current_tab = get_child_count() - 1
+#	if !Trainer.first_time_setup and not get_focus_owner() is TextEdit:
+#		if Input.is_action_just_pressed("ui_left") and current_tab != 0:
+#			current_tab -= 1
+#		elif Input.is_action_just_pressed("ui_right") and current_tab != get_child_count() - 1:
+#			current_tab += 1
+#		elif Input.is_action_just_pressed("ui_up"):
+#			current_tab = 0
+#		elif Input.is_action_just_pressed("ui_down"):
+#			current_tab = get_child_count() - 1
+	pass
 
 
 func _on_PopupMenu_new_box():
@@ -94,3 +99,11 @@ func _on_PopupMenu_export_box():
 			box_to_showdown += PokemonShowdown.export_to_showdown(Pokemon.pokemon[id])
 	OS.clipboard = box_to_showdown
 	$"../Copied".popup()
+
+
+func _on_Tabs_tab_changed(tab):
+	current_tab = tab
+
+
+func _on_Tabs_drag_switch_tab(tab):
+	current_tab = tab

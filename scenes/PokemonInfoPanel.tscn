@@ -5,10 +5,14 @@
 [ext_resource path="res://scenes/RightClickArea.tscn" type="PackedScene" id=3]
 
 [node name="PokemonInfoPanel" type="WindowDialog"]
-anchor_left = 0.0551758
-anchor_top = 0.055
-anchor_right = 0.944824
-anchor_bottom = 0.945
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -455.5
+margin_top = -267.0
+margin_right = 455.5
+margin_bottom = 267.0
 rect_min_size = Vector2( 911, 534 )
 popup_exclusive = true
 resizable = true
@@ -20,8 +24,7 @@ __meta__ = {
 [node name="Panel" parent="." instance=ExtResource( 1 )]
 
 [node name="Area2D" parent="." instance=ExtResource( 3 )]
-z_index = 1
-z_as_relative = false
 items = [  ]
+is_active = true
 
 [connection signal="visibility_changed" from="." to="." method="_on_PokemonInfoPanel_visibility_changed"]

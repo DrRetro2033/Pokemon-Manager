@@ -201,22 +201,23 @@ func tutorial():
 	pass
 
 func _process(delta):
-	var gender = $Gender/Label.get_font(\"font\",\"Label\")
-	gender.size = 28 + int($Gender/Label.rect_size.y - default_scale)
-	$Gender/Label.add_font_override(\"font\",gender)
-	var font = $Type1/Label.get_font(\"font\",\"Label\").duplicate()
-	var text_font = $Name.get_font(\"font\",\"Label\").duplicate()
-	font.size = default_size + int($Type1/Label.rect_size.y - default_scale)
-	$Type1/Label.add_font_override(\"font\",font.duplicate())
-	$Type2/Label.add_font_override(\"font\",font.duplicate())
-	font.size = default_size + int($OnlyOneType/Label.rect_size.y - default_scale)
-	$OnlyOneType/Label.add_font_override(\"font\",font)
-	text_font.size = name_font_size + int($Name.rect_size.y - name_default_rect_size)
-	$Name.add_font_override(\"font\",text_font.duplicate())
-	text_font.size = species_font_size + int($Species.rect_size.y - species_default_rect_size)
-	$Species.add_font_override(\"font\",text_font.duplicate())
-	text_font.size = text_font_size + sqrt(float($RichTextLabel.rect_size.x - text_default_rect_size))
-	$RichTextLabel.add_font_override(\"normal_font\",text_font)
+#	var gender = $Gender/Label.get_font(\"font\",\"Label\")
+#	gender.size = 28 + int($Gender/Label.rect_size.y - default_scale)
+#	$Gender/Label.add_font_override(\"font\",gender)
+#	var font = $Type1/Label.get_font(\"font\",\"Label\").duplicate()
+#	var text_font = $Name.get_font(\"font\",\"Label\").duplicate()
+#	font.size = default_size + int($Type1/Label.rect_size.y - default_scale)
+#	$Type1/Label.add_font_override(\"font\",font.duplicate())
+#	$Type2/Label.add_font_override(\"font\",font.duplicate())
+#	font.size = default_size + int($OnlyOneType/Label.rect_size.y - default_scale)
+#	$OnlyOneType/Label.add_font_override(\"font\",font)
+#	text_font.size = name_font_size + int($Name.rect_size.y - name_default_rect_size)
+#	$Name.add_font_override(\"font\",text_font.duplicate())
+#	text_font.size = species_font_size + int($Species.rect_size.y - species_default_rect_size)
+#	$Species.add_font_override(\"font\",text_font.duplicate())
+#	text_font.size = text_font_size + sqrt(float($RichTextLabel.rect_size.x - text_default_rect_size))
+#	$RichTextLabel.add_font_override(\"normal_font\",text_font)
+	pass
 
 
 func _on_Share_pressed():
@@ -565,11 +566,15 @@ expand = true
 stretch_mode = 6
 
 [node name="TypeChart" parent="." instance=ExtResource( 10 )]
-margin_right = -884.0
-margin_bottom = -312.0
+anchor_right = 0.0
+margin_right = 140.0
 
 [node name="Chart" parent="." instance=ExtResource( 6 )]
 visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 200.0
+margin_bottom = 250.0
 
 [node name="Type1" type="PanelContainer" parent="."]
 anchor_left = 0.765625
@@ -1244,12 +1249,10 @@ custom_styles/normal = SubResource( 26 )
 text = "Blue"
 
 [node name="StatsInfo" type="PopupPanel" parent="."]
-anchor_right = 0.183594
-anchor_bottom = 0.186667
+visible = true
+margin_right = 188.0
+margin_bottom = 112.0
 script = SubResource( 51 )
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="StatsInfo"]
 anchor_right = 1.0

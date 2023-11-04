@@ -79,11 +79,14 @@ func change_background_music(): #Changes background music to what the user selec
 			var file = dir1.get_next()
 			if file == "":
 				break
+			elif file.ends_with("."):
+				continue
 			elif not file.ends_with(".import"):
 				files.append("res://sound/startup_background_music/"+file)
 		dir1.list_dir_end()
 		var rand = RandomNumberGenerator.new()
 		rand.randomize()
+		print(files)
 		music = files[rand.randi_range(0,files.size()-1)]
 	else:
 		music = ProjectSettings.get_setting("Settings/General/start_up_background_music_name")
@@ -177,22 +180,26 @@ func list_files_in_directory(path): #lists all the pk files in the pkmdb folder
 func _process(delta):
 	$RightClickContext.position = get_viewport().get_mouse_position()
 	if Input.is_action_just_pressed("right_click"):
-		$PopupMenu.visible = false
-		print($RightClickContext.get_overlapping_areas())
-		if $RightClickContext.get_overlapping_areas().size() > 0:
-			var areas = $RightClickContext.get_overlapping_areas()
-			areas.invert()
-			var x = 0
-			while x < $RightClickContext.get_overlapping_areas().size():
-				if not $RightClickContext.get_overlapping_areas()[x].is_usable():
-					x += 1
-					continue
-				else:
-					$PopupMenu.open_menu($RightClickContext.get_overlapping_areas()[x])
-					break
-			$PopupMenu.set_global_position(get_viewport().get_mouse_position())
+		right_click()
 	elif Input.is_action_just_pressed("dev_tool_menu_open"):
 		pass
+
+func right_click():
+	$PopupMenu.visible = false
+	if $RightClickContext.get_overlapping_areas().size() > 0:
+		print($RightClickContext.get_overlapping_areas())
+		var areas = $RightClickContext.get_overlapping_areas()
+		areas = $Windows.reorder_right_click_areas(areas)
+		print(areas)
+		var x = 0
+		while x < areas.size():
+			if not areas[x].is_usable():
+				x += 1
+				continue
+			else:
+				$PopupMenu.open_menu(areas[x])
+				break
+		$PopupMenu.set_global_position(get_viewport().get_mouse_position())
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
@@ -213,7 +220,6 @@ func _on_Search_pressed():
 
 func _on_Party_pressed():
 	$Windows/PartyCreator.show()
-	$Windows/PartyCreator.move_to_center()
 
 
 func _on_NativeDialogMessage_result_selected(result):

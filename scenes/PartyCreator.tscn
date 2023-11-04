@@ -96,7 +96,6 @@ text = "Successfully copied current party to your clipboard. Enjoy your battle!"
 choice = 0
 
 [connection signal="popup_hide" from="." to="." method="_on_PartyCreator_popup_hide"]
-[connection signal="visibility_changed" from="." to="." method="_on_PartyCreator_visibility_changed"]
 [connection signal="tab_changed" from="Panel/Parties" to="." method="_on_Parties_tab_changed"]
 [connection signal="pressed" from="Panel/AddParty" to="." method="_on_AddParty_pressed"]
 [connection signal="pressed" from="Panel/RemoveParty" to="." method="_on_RemoveParty_pressed"]

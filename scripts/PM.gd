@@ -1,10 +1,10 @@
 extends Node
 
+# This node is the communicator between Pokémon Manager and the user's computer.
+# It handles the dragging and droping of trading cards, saving and loading settings, etc.
 const warning = "{file} is either not compatible with Pokémon Manager, or has a high likelihood of being corrupted. PNG and PK (*.pk7, *.pk6, etc.) files are compatible and recommended.\n\nDo you still want to continue to read the file?"
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-const options_to_save = {
+
+const options_to_save = { # This dictionary states what project settings need to be saved and where to place them.
 	"General":[
 		"start_up_background_music_volume",
 		"always_ask_to_save",
@@ -16,7 +16,16 @@ const options_to_save = {
 	],
 }
 const CFG_TEMPLATE = "settings.cfg"
+
+var is_dragging = false
 # Called when the node enters the scene tree for the first time.
+
+func _notification(what):
+	if what == NOTIFICATION_DRAG_BEGIN:
+		is_dragging = true
+	elif what == NOTIFICATION_DRAG_END:
+		is_dragging = false
+
 func _ready():
 	OS.min_window_size = Vector2(1024,600)
 	get_tree().connect("files_dropped",self,"_on_files_dropped")
