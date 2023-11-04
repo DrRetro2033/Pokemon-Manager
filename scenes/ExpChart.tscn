@@ -14,6 +14,7 @@ bg_color = Color( 0, 0.513726, 1, 0.380392 )
 [sub_resource type="StyleBoxEmpty" id=4]
 
 [node name="Chart" type="PopupPanel"]
+visible = true
 anchor_right = 0.195312
 anchor_bottom = 0.416667
 margin_right = -200.0

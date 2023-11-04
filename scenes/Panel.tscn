@@ -67,6 +67,8 @@ func _on_Back_pressed():
 
 func types(var type, var node):
 	var style = node.get_stylebox(\"panel\").duplicate()
+	if not Pokemon.type_chars.has(type):
+		return
 	node.get_child(0).text = Pokemon.type_chars[type]
 	style.set_bg_color(Pokemon.type_colors[type])
 	node.add_stylebox_override(\"panel\",style)
@@ -189,6 +191,14 @@ func open(id):
 	ability_text = ability_text.replace(\"\\n \",\"\\n\")
 	$Ability/Control.hint_tooltip = ability_text
 	print(pokemon)
+	if not Trainer.has_had_tutorial(\"pokemon_view\"):
+		var tutor = Dialogic.start(\"PokemonPanelTutorial\")
+		get_tree().root.add_child(tutor)
+		tutor.set_layer(3)
+		Trainer.set_tutorial_to_finished(\"pokemon_view\")
+
+func tutorial():
+	pass
 
 func _process(delta):
 	var gender = $Gender/Label.get_font(\"font\",\"Label\")
@@ -536,6 +546,7 @@ func _on_GraphTool_pressed():
 [node name="Panel" type="Panel" groups=["Info Panel"]]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = SubResource( 1 )
@@ -558,6 +569,7 @@ margin_right = -884.0
 margin_bottom = -312.0
 
 [node name="Chart" parent="." instance=ExtResource( 6 )]
+visible = false
 
 [node name="Type1" type="PanelContainer" parent="."]
 anchor_left = 0.765625
@@ -742,6 +754,7 @@ __meta__ = {
 }
 
 [node name="Back" type="Button" parent="."]
+visible = false
 anchor_left = 0.0078125
 anchor_top = 0.92
 anchor_right = 0.101563
@@ -754,10 +767,10 @@ __meta__ = {
 }
 
 [node name="Share" type="Button" parent="."]
-anchor_left = 0.132812
-anchor_top = 0.92
-anchor_right = 0.171875
-anchor_bottom = 0.986667
+anchor_left = 0.0292969
+anchor_top = 0.891667
+anchor_right = 0.0683599
+anchor_bottom = 0.958334
 custom_styles/hover = SubResource( 47 )
 custom_styles/normal = SubResource( 48 )
 icon = ExtResource( 11 )
@@ -878,17 +891,20 @@ __meta__ = {
 }
 
 [node name="Control" type="TextureRect" parent="."]
-anchor_left = 0.448242
-anchor_top = 0.288333
-anchor_right = 0.645508
-anchor_bottom = 0.671667
+anchor_left = 0.401367
+anchor_top = 0.308333
+anchor_right = 0.598633
+anchor_bottom = 0.691667
 rect_min_size = Vector2( 202, 230 )
 mouse_filter = 0
 mouse_default_cursor_shape = 16
 input_pass_on_modal_close_click = false
 texture = SubResource( 49 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="GraphTool" type="ToolButton" parent="Control"]
 anchor_right = 1.0

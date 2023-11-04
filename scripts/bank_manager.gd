@@ -9,7 +9,7 @@ func save():
 	var bank := bank_loaded.new()
 	for node in get_tree().get_nodes_in_group("Parties"):
 		node.save(bank)
-	$"../PartyCreator".save(bank)
+	$"../Windows/PartyCreator".save(bank)
 	$"../TabContainer".save(bank)
 	bank.data = Pokemon.pokemon
 	Trainer.save(bank)

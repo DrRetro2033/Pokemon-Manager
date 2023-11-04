@@ -36,11 +36,13 @@ func _on_PopupMenu_id_pressed(id):
 #				tab.queue_free()
 #		6:
 #			$"../Trade".visible = true
-
-func _on_PopupMenu_about_to_show():
-	var tab = tabs.get_tab_control(tabs.current_tab)
-	if tab != null:
-		if tab.isEmpty():
-			set_item_disabled(2,false)
-		else:
-			set_item_disabled(2,true)
+func open_menu(context):
+	self.context = context
+	clear()
+	var items = context.get_items()
+	for item in items:
+		add_item(item)
+	if not items.empty():
+		popup()
+	else:
+		visible = false

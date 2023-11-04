@@ -17,7 +17,7 @@ func loadPokemon(bank):
 	$"../Loading Screen".finised()
 
 func _process(delta):
-	if !Trainer.first_time_setup:
+	if !Trainer.first_time_setup and not get_focus_owner() is TextEdit:
 		if Input.is_action_just_pressed("ui_left") and current_tab != 0:
 			current_tab -= 1
 		elif Input.is_action_just_pressed("ui_right") and current_tab != get_child_count() - 1:

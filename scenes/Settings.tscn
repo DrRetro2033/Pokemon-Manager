@@ -1,0 +1,536 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://sprites/tutorial/tag_search.png" type="Texture" id=1]
+[ext_resource path="res://sprites/tutorial/filter_search.png" type="Texture" id=2]
+[ext_resource path="res://fonts/OpenSans-VariableFont_wdth,wght.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scripts/Link.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Settings.gd" type="Script" id=5]
+[ext_resource path="res://addons/native_dialogs/bin/native_dialog_message.gdns" type="Script" id=6]
+[ext_resource path="res://sound/startup_background_music/Nintendo 3DS Internet Settings.mp3" type="AudioStream" id=7]
+[ext_resource path="res://sprites/ui/icons/play.png" type="Texture" id=8]
+[ext_resource path="res://sprites/ui/icons/volume_up.png" type="Texture" id=9]
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+outline_size = 1
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 3 )
+
+[sub_resource type="ButtonGroup" id=2]
+
+[sub_resource type="DynamicFont" id=4]
+size = 18
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 3 )
+
+[sub_resource type="ButtonGroup" id=1]
+
+[sub_resource type="DynamicFont" id=5]
+size = 11
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="Settings" type="WindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 163.0
+margin_top = 78.0
+margin_right = -163.0
+margin_bottom = -78.0
+rect_min_size = Vector2( 698, 444 )
+window_title = "Settings"
+resizable = true
+script = ExtResource( 5 )
+
+[node name="Cancel" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -75.0
+margin_top = -37.0
+margin_right = -21.0
+margin_bottom = -17.0
+text = "Cancel"
+
+[node name="Apply" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -138.0
+margin_top = -37.0
+margin_right = -84.0
+margin_bottom = -17.0
+text = "Apply"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_left = 0.0243553
+anchor_top = 0.0495495
+anchor_right = 0.998567
+anchor_bottom = 0.891892
+scroll_horizontal_enabled = false
+scroll_vertical = 100
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_top = -100.0
+margin_right = 680.0
+margin_bottom = 519.0
+size_flags_horizontal = 3
+
+[node name="General" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+margin_right = 667.0
+margin_bottom = 326.0
+
+[node name="Title" type="Label" parent="ScrollContainer/VBoxContainer/General"]
+margin_right = 667.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 3 )
+text = "General:"
+
+[node name="Control2" type="Control" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 32.0
+margin_right = 667.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 0, 7 )
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 43.0
+margin_right = 667.0
+margin_bottom = 57.0
+text = "Why would you use light mode?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 61.0
+margin_right = 667.0
+margin_bottom = 85.0
+
+[node name="Dark Mode" type="CheckBox" parent="ScrollContainer/VBoxContainer/General/HBoxContainer"]
+margin_right = 57.0
+margin_bottom = 24.0
+pressed = true
+group = SubResource( 2 )
+text = "Dark"
+
+[node name="Light Mode" type="CheckBox" parent="ScrollContainer/VBoxContainer/General/HBoxContainer"]
+margin_left = 61.0
+margin_right = 120.0
+margin_bottom = 24.0
+disabled = true
+group = SubResource( 2 )
+text = "Light"
+
+[node name="Control5" type="Control" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 89.0
+margin_right = 667.0
+margin_bottom = 94.0
+rect_min_size = Vector2( 0, 5 )
+
+[node name="Title2" type="Label" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 98.0
+margin_right = 667.0
+margin_bottom = 124.0
+custom_fonts/font = SubResource( 4 )
+text = "Start Up:"
+
+[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 128.0
+margin_right = 667.0
+margin_bottom = 128.0
+
+[node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 132.0
+margin_right = 667.0
+margin_bottom = 146.0
+text = "Background Music"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 150.0
+margin_right = 667.0
+margin_bottom = 170.0
+
+[node name="Button" type="Button" parent="ScrollContainer/VBoxContainer/General/HBoxContainer3"]
+margin_right = 28.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 28, 20 )
+toggle_mode = true
+icon = ExtResource( 8 )
+icon_align = 1
+expand_icon = true
+
+[node name="OptionButton" type="OptionButton" parent="ScrollContainer/VBoxContainer/General/HBoxContainer3"]
+margin_left = 32.0
+margin_right = 113.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
+text = "Random"
+items = [ "Random", null, false, 0, null ]
+selected = 0
+
+[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer/General/HBoxContainer3"]
+margin_left = 117.0
+margin_right = 137.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 174.0
+margin_right = 667.0
+margin_bottom = 194.0
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/General/HBoxContainer4"]
+margin_right = 20.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+texture = ExtResource( 9 )
+expand = true
+
+[node name="HSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/General/HBoxContainer4"]
+margin_left = 24.0
+margin_right = 280.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 256, 20 )
+value = 100.0
+rounded = true
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/General/HBoxContainer4"]
+margin_left = 284.0
+margin_right = 308.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+text = "100"
+align = 1
+valign = 1
+
+[node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 198.0
+margin_right = 667.0
+margin_bottom = 222.0
+disabled = true
+text = "Continue playing background music after start up."
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 226.0
+margin_right = 667.0
+margin_bottom = 250.0
+
+[node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer/General/HBoxContainer2"]
+margin_right = 164.0
+margin_bottom = 24.0
+disabled = true
+text = "After start up volume"
+
+[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer/General/HBoxContainer2"]
+margin_left = 168.0
+margin_right = 188.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/General/HBoxContainer2"]
+modulate = Color( 0.258824, 0.258824, 0.258824, 1 )
+margin_left = 192.0
+margin_right = 216.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 0 )
+texture = ExtResource( 9 )
+expand = true
+
+[node name="HSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/General/HBoxContainer2"]
+margin_left = 220.0
+margin_right = 476.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 256, 20 )
+size_flags_vertical = 1
+value = 100.0
+rounded = true
+editable = false
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/General/HBoxContainer2"]
+modulate = Color( 0.258824, 0.258824, 0.258824, 1 )
+margin_left = 480.0
+margin_right = 504.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_vertical = 5
+text = "100"
+align = 1
+valign = 1
+
+[node name="Control6" type="Control" parent="ScrollContainer/VBoxContainer/General"]
+visible = false
+margin_top = 174.0
+margin_right = 652.0
+margin_bottom = 184.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="Control3" type="Control" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 254.0
+margin_right = 667.0
+margin_bottom = 259.0
+rect_min_size = Vector2( 0, 5 )
+
+[node name="Title3" type="Label" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 263.0
+margin_right = 667.0
+margin_bottom = 289.0
+custom_fonts/font = SubResource( 4 )
+text = "Shut Down:"
+
+[node name="SaveChanges" type="CheckBox" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 293.0
+margin_right = 667.0
+margin_bottom = 317.0
+pressed = true
+text = "Always ask if you want to save your changes."
+
+[node name="Control4" type="Control" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 321.0
+margin_right = 667.0
+margin_bottom = 326.0
+rect_min_size = Vector2( 0, 5 )
+
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_top = 330.0
+margin_right = 667.0
+margin_bottom = 334.0
+
+[node name="Search" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+margin_top = 338.0
+margin_right = 667.0
+margin_bottom = 684.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="Title" type="Label" parent="ScrollContainer/VBoxContainer/Search"]
+margin_right = 667.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 3 )
+text = "Search:"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Search"]
+margin_top = 32.0
+margin_right = 667.0
+margin_bottom = 56.0
+
+[node name="Tag" type="CheckBox" parent="ScrollContainer/VBoxContainer/Search/HBoxContainer2"]
+margin_right = 128.0
+margin_bottom = 24.0
+pressed = true
+group = SubResource( 1 )
+text = "Use Tag Search."
+
+[node name="Filter" type="CheckBox" parent="ScrollContainer/VBoxContainer/Search/HBoxContainer2"]
+margin_left = 132.0
+margin_right = 272.0
+margin_bottom = 24.0
+shortcut_in_tooltip = false
+group = SubResource( 1 )
+text = "Use Filter Search."
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/VBoxContainer/Search"]
+margin_top = 60.0
+margin_right = 667.0
+margin_bottom = 346.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Search/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 660.0
+margin_bottom = 279.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Search/PanelContainer/VBoxContainer"]
+margin_right = 653.0
+margin_bottom = 51.0
+custom_fonts/normal_font = SubResource( 5 )
+text = "There are two types of searching in Pokémon Manager, Tag Searching and Filter Searching. Tag searching is recommended as it is faster and more configurable. However, if you prefer using dropdowns for more specific searching, you can use Filter Searching."
+fit_content_height = true
+
+[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer/Search/PanelContainer/VBoxContainer"]
+margin_top = 55.0
+margin_right = 653.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 15 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Search/PanelContainer/VBoxContainer"]
+margin_top = 74.0
+margin_right = 653.0
+margin_bottom = 272.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Search/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_right = 170.0
+margin_bottom = 198.0
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Search/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 170.0
+margin_bottom = 14.0
+text = "Tag Searching:"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Search/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 170.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 170, 180 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer/Search/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 174.0
+margin_right = 184.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Search/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 188.0
+margin_right = 412.0
+margin_bottom = 198.0
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Search/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 224.0
+margin_bottom = 14.0
+text = "Filter Searching:"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Search/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 18.0
+margin_right = 224.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 224, 180 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_top = 688.0
+margin_right = 667.0
+margin_bottom = 692.0
+
+[node name="Data Management" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+margin_top = 696.0
+margin_right = 667.0
+margin_bottom = 796.0
+
+[node name="Title" type="Label" parent="ScrollContainer/VBoxContainer/Data Management"]
+margin_right = 667.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 3 )
+text = "Data Management:"
+
+[node name="Reset Settings" type="Button" parent="ScrollContainer/VBoxContainer/Data Management"]
+margin_top = 32.0
+margin_right = 667.0
+margin_bottom = 52.0
+text = "Reset Settings"
+
+[node name="Import pkmdb" type="Button" parent="ScrollContainer/VBoxContainer/Data Management"]
+margin_top = 56.0
+margin_right = 667.0
+margin_bottom = 76.0
+disabled = true
+text = "Import pkmdb Folder"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/Data Management"]
+margin_top = 80.0
+margin_right = 667.0
+margin_bottom = 100.0
+text = "Reset Everything"
+
+[node name="HSeparator3" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_top = 800.0
+margin_right = 667.0
+margin_bottom = 804.0
+
+[node name="Credits" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+margin_top = 808.0
+margin_right = 667.0
+margin_bottom = 891.0
+
+[node name="Title" type="Label" parent="ScrollContainer/VBoxContainer/Credits"]
+margin_right = 667.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 3 )
+text = "Credits:"
+
+[node name="LinkButton" type="LinkButton" parent="ScrollContainer/VBoxContainer/Credits"]
+visible = false
+margin_right = 652.0
+margin_bottom = 14.0
+text = "About Pokémon Manager"
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/VBoxContainer/Credits"]
+margin_top = 32.0
+margin_right = 667.0
+margin_bottom = 83.0
+custom_constants/margin_left = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Credits/MarginContainer"]
+margin_left = 16.0
+margin_right = 667.0
+margin_bottom = 51.0
+
+[node name="LinkButton2" type="LinkButton" parent="ScrollContainer/VBoxContainer/Credits/MarginContainer/VBoxContainer"]
+margin_right = 651.0
+margin_bottom = 14.0
+text = "Copyright (c) © 2013-2021 Paul Hallett and PokéAPI contributors."
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
+link = "https://github.com/PokeAPI/pokeapi#contributing"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Credits/MarginContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 651.0
+margin_bottom = 33.0
+text = "Pokémon and Pokémon character names are trademarks of Nintendo. All rights reserved."
+fit_content_height = true
+
+[node name="Link" type="LinkButton" parent="ScrollContainer/VBoxContainer/Credits/MarginContainer/VBoxContainer"]
+margin_top = 37.0
+margin_right = 651.0
+margin_bottom = 51.0
+text = "PKHex Github Page"
+script = ExtResource( 4 )
+link = "https://github.com/kwsch/PKHeX"
+
+[node name="NativeDialogMessage" type="Node" parent="."]
+script = ExtResource( 6 )
+title = "Are you sure?"
+icon = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[connection signal="about_to_show" from="." to="." method="_on_Settings_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_Settings_popup_hide"]
+[connection signal="pressed" from="Cancel" to="." method="_on_Cancel_pressed"]
+[connection signal="pressed" from="Apply" to="." method="_on_Apply_pressed"]
+[connection signal="toggled" from="ScrollContainer/VBoxContainer/General/HBoxContainer3/Button" to="." method="_on_Button_toggled"]
+[connection signal="item_selected" from="ScrollContainer/VBoxContainer/General/HBoxContainer3/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="drag_ended" from="ScrollContainer/VBoxContainer/General/HBoxContainer4/HSlider" to="." method="_on_HSlider_drag_ended"]
+[connection signal="drag_started" from="ScrollContainer/VBoxContainer/General/HBoxContainer4/HSlider" to="." method="_on_HSlider_drag_started"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/General/HBoxContainer4/HSlider" to="." method="_on_HSlider_value_changed"]
+[connection signal="drag_ended" from="ScrollContainer/VBoxContainer/General/HBoxContainer2/HSlider" to="." method="_on_HSlider_drag_ended"]
+[connection signal="drag_started" from="ScrollContainer/VBoxContainer/General/HBoxContainer2/HSlider" to="." method="_on_HSlider_drag_started"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/General/HBoxContainer2/HSlider" to="." method="_on_HSlider_value_changed"]
+[connection signal="toggled" from="ScrollContainer/VBoxContainer/General/SaveChanges" to="." method="_on_SaveChanges_toggled"]
+[connection signal="toggled" from="ScrollContainer/VBoxContainer/Search/HBoxContainer2/Tag" to="." method="_on_Tag_toggled"]
+[connection signal="toggled" from="ScrollContainer/VBoxContainer/Search/HBoxContainer2/Filter" to="." method="_on_Filter_toggled"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Data Management/Reset Settings" to="." method="_on_Reset_Settings_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Data Management/Reset" to="." method="_on_Reset_pressed"]
+[connection signal="result_selected" from="NativeDialogMessage" to="." method="_on_NativeDialogMessage_result_selected"]

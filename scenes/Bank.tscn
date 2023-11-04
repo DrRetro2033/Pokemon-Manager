@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://scenes/Menu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Panel.tscn" type="PackedScene" id=2]
@@ -27,6 +27,9 @@
 [ext_resource path="res://addons/native_dialogs/bin/native_dialog_message.gdns" type="Script" id=25]
 [ext_resource path="res://addons/native_dialogs/bin/native_dialog_select_folder.gdns" type="Script" id=26]
 [ext_resource path="res://scenes/TagSearch.tscn" type="PackedScene" id=27]
+[ext_resource path="res://scenes/Settings.tscn" type="PackedScene" id=28]
+[ext_resource path="res://scripts/MusicPlayer.gd" type="Script" id=29]
+[ext_resource path="res://scripts/WindowManager.gd" type="Script" id=30]
 
 [sub_resource type="DynamicFont" id=11]
 font_data = ExtResource( 7 )
@@ -34,6 +37,7 @@ font_data = ExtResource( 7 )
 [sub_resource type="GDScript" id=7]
 script/source = "extends Panel
 
+signal have_tutorial
 var text = {
 	\"api\":\"Fetching info from the web...\",
 	\"extracting\":\"Saving updated data from PokéAPI...\",
@@ -62,10 +66,22 @@ func finised():
 	yield($Control/AnimationPlayer,\"animation_finished\")
 	visible = false
 	$\"../ColorRect\".visible = false
-	if Trainer.first_time_setup:
-		$\"../ProfileMaker\".popup()
 	OS.window_resizable = true
 	slowly_fade_background_music()
+	if Trainer.first_time_setup:
+		$\"../ProfileMaker\".popup()
+		$\"../ProfileMaker\".connect(\"hide\",self,\"ask_for_tutorial\")
+
+func ask_for_tutorial():
+	var new_dialog = Dialogic.start(\"Tutorial\")
+	new_dialog.connect(\"dialogic_signal\", self, \"dialog_listener\")
+	get_parent().add_child(new_dialog)
+
+func dialog_listener(value):
+	match str(value):
+		\"done\":
+			if Dialogic.get_variable(\"have_tutorial\"):
+				emit_signal(\"have_tutorial\")
 
 func slowly_fade_background_music():
 	while $AudioStreamPlayer.volume_db > -120:
@@ -606,10 +622,17 @@ margin_bottom = 146.0
 text = "Open Showdown!"
 
 [node name="Main Menu" type="Button" parent="PopupPanel/VBoxContainer"]
+visible = false
+margin_top = 126.0
+margin_right = 128.0
+margin_bottom = 146.0
+text = "Main Menu"
+
+[node name="Settings" type="Button" parent="PopupPanel/VBoxContainer"]
 margin_top = 150.0
 margin_right = 128.0
 margin_bottom = 170.0
-text = "Main Menu"
+text = "Settings"
 
 [node name="VFlowContainer" type="VFlowContainer" parent="."]
 anchor_left = 1.0
@@ -692,6 +715,9 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color( 0.145098, 0.145098, 0.164706, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Loading Screen" type="Panel" parent="."]
 anchor_left = 0.5
@@ -734,8 +760,8 @@ script = SubResource( 17 )
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 19456.0
-margin_bottom = 11400.0
+margin_right = 68608.0
+margin_bottom = 40200.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -796,6 +822,7 @@ step = 1.0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Loading Screen"]
 stream = ExtResource( 24 )
 autoplay = true
+script = ExtResource( 29 )
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="Loading Screen"]
 margin_right = 40.0
@@ -845,12 +872,6 @@ margin_right = 192.0
 margin_bottom = 12.0
 align = 1
 placeholder_text = "Box"
-
-[node name="Search" parent="." instance=ExtResource( 4 )]
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TagSearch" parent="." instance=ExtResource( 27 )]
 
 [node name="Login" parent="." instance=ExtResource( 20 )]
 
@@ -958,8 +979,21 @@ access = 2
 filters = PoolStringArray( "*.png ; PNG Images" )
 show_hidden_files = true
 
-[node name="PartyCreator" parent="." instance=ExtResource( 3 )]
-mouse_filter = 1
+[node name="Windows" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 30 )
+
+[node name="Settings" parent="Windows" instance=ExtResource( 28 )]
+
+[node name="PartyCreator" parent="Windows" instance=ExtResource( 3 )]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TagSearch" parent="Windows" instance=ExtResource( 27 )]
+
+[node name="Search" parent="Windows" instance=ExtResource( 4 )]
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -992,7 +1026,7 @@ show_hidden_files = true
 
 [node name="NativeDialogMessage" type="Node" parent="."]
 script = ExtResource( 25 )
-title = "Are you sure?"
+title = "Save your Changes?"
 text = "Do you want to save your changes?"
 choice = 3
 icon = 3
@@ -1009,11 +1043,12 @@ shape = SubResource( 18 )
 [connection signal="pressed" from="PopupPanel/VBoxContainer/Showdown" to="PopupPanel" method="_on_Showdown_pressed"]
 [connection signal="pressed" from="PopupPanel/VBoxContainer/Main Menu" to="PopupPanel" method="_on_Main_Menu_pressed"]
 [connection signal="pressed" from="PopupPanel/VBoxContainer/Main Menu" to="Menu" method="_on_Main_Menu_pressed"]
+[connection signal="pressed" from="PopupPanel/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="VFlowContainer/Search" to="." method="_on_Search_pressed"]
 [connection signal="pressed" from="VFlowContainer/Party" to="." method="_on_Party_pressed"]
 [connection signal="pressed" from="ProfilePic" to="PopupPanel" method="_on_ProfilePic_pressed"]
+[connection signal="have_tutorial" from="Loading Screen" to="." method="_on_Loading_Screen_have_tutorial"]
 [connection signal="animation_finished" from="Loading Screen/Control/Sprite/AnimationPlayer" to="Loading Screen/Control/Sprite" method="_on_AnimationPlayer_animation_finished"]
-[connection signal="about_to_show" from="PopupMenu" to="PopupMenu" method="_on_PopupMenu_about_to_show"]
 [connection signal="export_box" from="PopupMenu" to="TabContainer" method="_on_PopupMenu_export_box"]
 [connection signal="id_pressed" from="PopupMenu" to="PopupMenu" method="_on_PopupMenu_id_pressed"]
 [connection signal="new_box" from="PopupMenu" to="TabContainer" method="_on_PopupMenu_new_box"]
@@ -1022,4 +1057,6 @@ shape = SubResource( 18 )
 [connection signal="pressed" from="ProfileMaker/ProfilePic" to="ProfileMaker" method="_on_ProfilePic_pressed"]
 [connection signal="pressed" from="ProfileMaker/Button" to="ProfileMaker" method="_on_Button_pressed"]
 [connection signal="file_selected" from="FileDialog" to="ProfileMaker" method="_on_FileDialog_file_selected"]
+[connection signal="child_entered_tree" from="Windows" to="Windows" method="_on_Windows_child_entered_tree"]
+[connection signal="visibility_changed" from="CanvasLayer/Panel" to="Windows/TagSearch" method="_on_Panel_visibility_changed"]
 [connection signal="result_selected" from="NativeDialogMessage" to="." method="_on_NativeDialogMessage_result_selected"]

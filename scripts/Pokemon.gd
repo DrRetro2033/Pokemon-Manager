@@ -1020,15 +1020,26 @@ func tag_search(tags:Array):
 		if types.has(tag):
 			typing.append(types[tag])
 		elif str(tag).begins_with("trainer:"):
-			trainer = str(tag).split(':')[1]
+			trainer = {}
+			var t = str(tag).split(':')[1]
+			var x = t.split(',')
+			trainer["nickname"] = x[0]
+			trainer["id"] = x[1]
+			trainer["gender"] = x[2]
+			trainer["game"] = x[3]
 		elif str(tag).begins_with("gender:"):
 			gender = int(str(tag).split(':')[1])
 	typing.resize(2)
+	print(typing)
+	if tags.empty():
+		matches = []
+		return matches
 	for key in pokemon.keys():
+		print(key)
 		var passes = true
 		if typing[0] == null and typing[1] == null:
 			pass
-		if typing[1] != null:
+		elif typing[1] != null:
 			if typing[0] == pokemon[key].type1 and typing[1] == pokemon[key].type2:
 				pass
 			elif typing[1] == pokemon[key].type1 and typing[0] == pokemon[key].type2:
@@ -1038,17 +1049,30 @@ func tag_search(tags:Array):
 		elif typing[0] == pokemon[key].type1 or typing[0] == pokemon[key].type2:
 			pass
 		else:
+			print("Typing is incorrect.")
 			passes = false
 		if trainer != null:
-			if pokemon[key].ot.nickname != trainer:
+			print("Checking OT...")
+			if pokemon[key].ot.nickname != trainer.nickname:
+				print("OT Nickname is Incorrect")
+				print(pokemon[key].ot.nickname+" != "+trainer.nickname)
+				passes = false
+			elif pokemon[key].ot.id != int(trainer.id):
+				print("OT ID is Incorrect")
+				passes = false
+			elif pokemon[key].ot.gender != int(trainer.gender):
+				print("OT Gender is Incorrect")
+				passes = false
+			elif pokemon[key].ot.game != int(trainer.game):
+				print("OT Game is Incorrect")
 				passes = false
 		if gender != null:
+			print("Gender is Incorrect")
 			if pokemon[key].gender != gender:
 				passes = false
 		if passes:
 			matches.append(key)
-	if tags.empty():
-		matches = []
+		print('')
 	return matches
 
 func has_pokemon(id):

@@ -6,7 +6,10 @@ var button = load("res://scenes/Pokemon_Button.tscn")
 var party = load("res://scenes/Party.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body
+	for child in get_children():
+		if child is TextureButton:
+			child.connect("pressed",self,"disapper")
+	disapper()
 
 func showPartyMaker():
 	popup_centered()
@@ -66,7 +69,8 @@ func loadParties(bank):
 		parties.add_child(new_party)
 		new_party.set_pokemon_in_party(bank.parties[party_name])
 
-
+func move_to_center():
+	rect_position = OS.window_size/2 - rect_size/2
 
 func _on_Export_pressed():
 	var party = parties.get_tab_control(parties.current_tab).get_pokemon_in_party()
@@ -90,8 +94,15 @@ func _on_RemoveParty_pressed():
 		$Panel/Parties.remove_child(party)
 		party.queue_free()
 
-
 func _on_View_pressed():
 	var party = parties.get_tab_control(parties.current_tab)
 	var party_array = party.get_pokemon_in_party()
 	$PartyViewer.showParty(party_array)
+
+
+func _on_PartyCreator_visibility_changed():
+	pass
+
+func disapper():
+	print("Disapper!")
+	rect_position = Vector2(-2500,-2500)

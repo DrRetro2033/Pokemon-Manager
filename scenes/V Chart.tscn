@@ -111,7 +111,7 @@ rotate = false
 loop = false
 
 [node name="EVs Vis" type="Polygon2D" parent="Stats"]
-color = Color( 0, 0.529412, 1, 1 )
+color = Color( 0, 0.439216, 0.941176, 1 )
 polygon = PoolVector2Array( 0, -64, 56, -32, 56, 32, 0, 64, -56, 32, -56, -32 )
 uv = PoolVector2Array( 0, 0 )
 
@@ -194,7 +194,7 @@ __meta__ = {
 }
 
 [node name="IVs Vis" type="Polygon2D" parent="Stats"]
-color = Color( 0, 0.764706, 1, 1 )
+color = Color( 0, 0.858824, 0.8, 1 )
 polygon = PoolVector2Array( 0, -64, 56, -32, 56, 32, 0, 64, -56, 32, -56, -32 )
 uv = PoolVector2Array( 0, 0 )
 
@@ -277,7 +277,7 @@ __meta__ = {
 }
 
 [node name="Base Vis" type="Polygon2D" parent="Stats"]
-color = Color( 0, 1, 0.368627, 1 )
+color = Color( 0, 0.980392, 0.278431, 1 )
 polygon = PoolVector2Array( 0, -64, 56, -32, 56, 32, 0, 64, -56, 32, -56, -32 )
 uv = PoolVector2Array( 0, 0 )
 

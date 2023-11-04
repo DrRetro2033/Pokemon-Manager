@@ -8,11 +8,18 @@ var pk6 = load("res://scripts/pk6.gd").new()
 var pk7 = load("res://scripts/pk7.gd").new()
 var folder_path : String = "/"
 var existing_pokemon : Resource
+
 func _ready():
 	get_tree().set_auto_accept_quit(false)
+	PM.load_settings(OS.get_user_data_dir().plus_file("settings.cfg"))
+	if ProjectSettings.get_setting("Settings/General/start_up_background_music_volume") > 0.0:
+		$"Loading Screen/AudioStreamPlayer".volume_db = lerp(-30,0,ProjectSettings.get_setting("Settings/General/start_up_background_music_volume"))
+	else:
+		$"Loading Screen/AudioStreamPlayer".volume_db = -120
+	change_background_music()
 	print(BinaryTranslator.bin_to_int(BinaryTranslator.int_to_bin(2254250705))) #this is for testing the binary translator by having it convert this number to binary and back
-	var dir = Directory.new() #instances a new directory object
-	dir.open(folder_path)
+#	var dir = Directory.new() #instances a new directory object
+#	dir.open(folder_path)
 	$"Loading Screen".switch("reading")
 	var user_pokemon
 	existing_pokemon = bank.load() #loads the bank file of existing pokemon info
@@ -56,9 +63,32 @@ func _ready():
 		else:
 			Pokemon.set_data(existing_pokemon.data)
 			$TabContainer.loadPokemon(existing_pokemon)
-			$PartyCreator.loadParties(existing_pokemon)
+			$Windows/PartyCreator.loadParties(existing_pokemon)
 	else:
 		get_info(user_pokemon,existing_pokemon)
+
+func change_background_music(): #Changes background music to what the user selected.
+	$"Loading Screen/AudioStreamPlayer".stop()
+	var music
+	if ProjectSettings.get_setting("Settings/General/start_up_background_music_name") == "rando":
+		var files = []
+		var dir1 = Directory.new()
+		dir1.open("res://sound/startup_background_music/")
+		dir1.list_dir_begin()
+		while true:
+			var file = dir1.get_next()
+			if file == "":
+				break
+			elif not file.ends_with(".import"):
+				files.append("res://sound/startup_background_music/"+file)
+		dir1.list_dir_end()
+		var rand = RandomNumberGenerator.new()
+		rand.randomize()
+		music = files[rand.randi_range(0,files.size()-1)]
+	else:
+		music = ProjectSettings.get_setting("Settings/General/start_up_background_music_name")
+	$"Loading Screen/AudioStreamPlayer".stream = load(music)
+	$"Loading Screen/AudioStreamPlayer".play(0.0)
 
 func get_info(user_pokemon, existing_pokemon):
 	print(user_pokemon)
@@ -113,6 +143,7 @@ func get_info(user_pokemon, existing_pokemon):
 		#
 	if pokemon.empty():
 		print("Incorrect")
+		$NativeDialogSelectFolder.initial_path = OS.get_executable_path()
 		$NativeDialogSelectFolder.show()
 		folder_path = yield($NativeDialogSelectFolder,"folder_selected")
 		print(folder_path)
@@ -145,42 +176,44 @@ func list_files_in_directory(path): #lists all the pk files in the pkmdb folder
 
 func _process(delta):
 	$RightClickContext.position = get_viewport().get_mouse_position()
-	if Input.is_action_just_pressed("right_click") and $CanvasLayer/Panel.visible != true:
+	if Input.is_action_just_pressed("right_click"):
+		$PopupMenu.visible = false
 		print($RightClickContext.get_overlapping_areas())
 		if $RightClickContext.get_overlapping_areas().size() > 0:
 			var areas = $RightClickContext.get_overlapping_areas()
 			areas.invert()
 			var x = 0
 			while x < $RightClickContext.get_overlapping_areas().size():
-				if not $RightClickContext.get_overlapping_areas()[x].visible:
+				if not $RightClickContext.get_overlapping_areas()[x].is_usable():
 					x += 1
 					continue
 				else:
-					$PopupMenu.clear()
-					var items = $RightClickContext.get_overlapping_areas()[x].get_items()
-					for item in items:
-						$PopupMenu.add_item(item)
-					$PopupMenu.context = $RightClickContext.get_overlapping_areas()[x]
+					$PopupMenu.open_menu($RightClickContext.get_overlapping_areas()[x])
 					break
-			if $RightClickContext.get_overlapping_areas()[x].is_active and not $PopupMenu.items.empty():
-				$PopupMenu.popup()
-			else:
-				$PopupMenu.visible = false
 			$PopupMenu.set_global_position(get_viewport().get_mouse_position())
 	elif Input.is_action_just_pressed("dev_tool_menu_open"):
 		pass
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
-		$NativeDialogMessage.show()
+		if ProjectSettings.get_setting("Settings/General/always_ask_to_save"):
+			$NativeDialogMessage.show()
+		else:
+			var has_saved = bank.save()
+			PM.save_settings()
+			if has_saved:
+				get_tree().quit()
 
 func _on_Search_pressed():
-	$TagSearch.show()
-#	$Search.show()
+	if ProjectSettings.get_setting("Settings/Search/use_tags"):
+		$Windows/TagSearch.show()
+	elif ProjectSettings.get_setting("Settings/Search/use_filter"):
+		$Windows/Search.show()
 
 
 func _on_Party_pressed():
-	$PartyCreator.show()
+	$Windows/PartyCreator.show()
+	$Windows/PartyCreator.move_to_center()
 
 
 func _on_NativeDialogMessage_result_selected(result):
@@ -188,8 +221,25 @@ func _on_NativeDialogMessage_result_selected(result):
 	match result:
 		2:
 			bank.save()
+			PM.save_settings()
 			get_tree().quit()
 		3:
 			get_tree().quit()
 		1:
 			pass
+
+
+func _on_Loading_Screen_have_tutorial():
+	Trainer.have_tutorial = true
+
+
+func _on_Settings_pressed():
+	$PopupPanel.hide()
+	$Windows/Settings.refresh_settings()
+	$Windows/Settings.show()
+
+func create_new_info_panel(id):
+	var panel = load("res://scenes/PokemonInfoPanel.tscn").instance()
+	$Windows.add_child(panel)
+	panel.open(id)
+	panel.show()

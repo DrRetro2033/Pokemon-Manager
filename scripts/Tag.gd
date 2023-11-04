@@ -30,7 +30,9 @@ func set_tag(tag:String):
 	elif tag.begins_with("trainer:"):
 		$HBoxContainer/Name.visible = true
 		$HBoxContainer/TextureRect.visible = true
-		$HBoxContainer/Name.text = tag.split(':')[1]
+		var x = tag.split(':')[1]
+		x = x.split(',')[0]
+		$HBoxContainer/Name.text = x
 	elif tag.begins_with("gender:"):
 		$HBoxContainer/Type.visible = true
 		var font : DynamicFont = $HBoxContainer/Type.get_font("font").duplicate()

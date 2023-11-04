@@ -42,7 +42,8 @@ func auto_complete_list(text:String):
 	if not has_reach_limit_of_tag_type(trainers,1):
 		for train in Trainer.trainers:
 			if str(train.nickname).to_lower().begins_with(text.to_lower()):
-				matches.append('trainer:'+train.nickname)
+				var str_1 = 'trainer:'+train.nickname+','+str(train.id)+','+str(train.gender)+','+str(train.game)
+				matches.append(str_1)
 				print(train.nickname)
 	var genders = ["gender:0","gender:1","gender:2"]
 	if not has_reach_limit_of_tag_type(genders,1):
@@ -136,14 +137,16 @@ func showResults(database):
 	for x in database:
 		var new_button = button.instance()
 		new_button = new_button.duplicate()
-		new_button.rect_min_size = Vector2(0,50)
+		new_button.rect_min_size = Vector2(0,75)
 		new_button.can_drag = true
 		new_button.id = "search"
 		new_button.ids_allowed.clear()
-		new_button.set_size(Vector2(695,50))
+		new_button.set_size(Vector2(695,75))
 		new_button.set_v_size_flags(1)
 		new_button.pokeButton(x)
 		$Panel/VBoxContainer/ScrollContainer/VBoxContainer.add_child(new_button)
 
 func _on_Search_pressed():
 	showResults(Pokemon.tag_search(tags))
+	grab_focus()
+

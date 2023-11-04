@@ -1,11 +1,50 @@
 extends Node
+# This is API works some thing like this in python:
+#import requests
+#import os
+#
+#def check_and_clone_repo(username, repo_name):
+#    # Set your GitHub personal access token
+#    token = "YOUR_GITHUB_ACCESS_TOKEN"
+#
+#    # Define the API endpoint to check for repository updates
+#    api_url = f"https://api.github.com/repos/{username}/{repo_name}/commits"
+#
+#    # Make a request to the GitHub API using your access token
+#    response = requests.get(api_url, headers={"Authorization": f"token {token}"})
+#
+#    # Check if the request was successful
+#    if response.status_code == 200:
+#        # Get the SHA of the latest commit
+#        latest_commit_sha = response.json()[0]["sha"]
+#
+#        # Check if the latest commit SHA is different from the one stored locally
+#        if not os.path.exists(f"{repo_name}_commit.txt"):
+#            # If this is the first time, store the commit SHA locally
+#            with open(f"{repo_name}_commit.txt", "w") as file:
+#                file.write(latest_commit_sha)
+#        else:
+#            with open(f"{repo_name}_commit.txt", "r") as file:
+#                stored_commit_sha = file.read()
+#            if stored_commit_sha != latest_commit_sha:
+#                # Clone the repository if there's a new commit
+#                os.system(f"git clone https://github.com/{username}/{repo_name}.git")
+#
+#                # Update the stored commit SHA
+#                with open(f"{repo_name}_commit.txt", "w") as file:
+#                    file.write(latest_commit_sha)
+#                print(f"Repository {repo_name} has been updated.")
+#            else:
+#                print(f"Repository {repo_name} is already up to date.")
+#    else:
+#        print(f"Error: Unable to fetch data from GitHub API. Status code: {response.status_code}")
+#
+## Usage
+#check_and_clone_repo("username", "repository_name")
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 const url = "res://database/api-data-master/data/api/v2/"
-var moves : Dictionary #hold all known moves a pokemon has
+var moves : Dictionary #holds all known moves a pokemon has
 var flavor_text : String #the first pokedex entry that a pokemon has
 var form : int #what alt form the pokemon is
 var pokemon_url : String

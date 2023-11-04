@@ -1,13 +1,11 @@
 extends Node
 
-# Built to destroy f%$&#@! sh%^*& garbage characters, also known as stupid characters.
+# Built to destroy f%$&#@! sh%^ garbage characters, also known as stupid characters.
 const REPLACE = {
 	12:32,
 	10:32
 }
-const STUPID = [
-	
-]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

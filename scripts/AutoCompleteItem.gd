@@ -78,6 +78,7 @@ func set_item(lab:String):
 		lab = lab.capitalize()
 	elif lab.begins_with("trainer:"):
 		lab = lab.split(":")[1]
+		lab = lab.split(',')[0]
 		$Icons/TextureRect.visible = true
 	elif lab.begins_with("gender:"):
 		$Icons/Icon.visible = true

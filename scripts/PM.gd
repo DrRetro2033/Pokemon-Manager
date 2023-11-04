@@ -4,7 +4,18 @@ const warning = "{file} is either not compatible with Pokémon Manager, or has a
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+const options_to_save = {
+	"General":[
+		"start_up_background_music_volume",
+		"always_ask_to_save",
+		"start_up_background_music_name"
+	],
+	"Search":[
+		"use_tags",
+		"use_filter"
+	],
+}
+const CFG_TEMPLATE = "settings.cfg"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	OS.min_window_size = Vector2(1024,600)
@@ -180,3 +191,30 @@ func get_pixel_colors_as_colors(img:Image,rect:Rect2):
 				current_pos.x = rect.position.x
 				break
 	return pool
+
+func save_settings():
+	var save_path = OS.get_user_data_dir().plus_file(CFG_TEMPLATE)
+	var file = ConfigFile.new()
+	for section in options_to_save.keys():
+		for option in options_to_save[section]:
+			file.set_value(section,option,ProjectSettings.get_setting("Settings/"+section+'/'+option))
+	var error = file.save(save_path)
+
+func reset_settings():
+	var file = ConfigFile.new()
+	file.load("res://data/default_settings.cfg")
+	for section in file.get_sections():
+		for option in file.get_section_keys(section):
+			var value = file.get_value(section,option)
+			ProjectSettings.set_setting("Settings/"+section+'/'+option,value)
+
+func load_settings(path):
+	var file = ConfigFile.new()
+	if not File.new().file_exists(path):
+		file.load("res://data/default_settings.cfg")
+	else:
+		file.load(path)
+	for section in file.get_sections():
+		for option in file.get_section_keys(section):
+			var value = file.get_value(section,option)
+			ProjectSettings.set_setting("Settings/"+section+'/'+option,value)

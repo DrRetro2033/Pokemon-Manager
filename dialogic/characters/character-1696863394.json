@@ -1,0 +1,21 @@
+{
+	"color": "#ffffffff",
+	"description": "",
+	"display_name": "Oak",
+	"display_name_bool": false,
+	"id": "character-1696863394.json",
+	"mirror_portraits": false,
+	"name": "Oak",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": 240,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://sprites/professors/oak.png"
+		}
+	],
+	"scale": 50,
+	"theme": "theme-1696865062.cfg"
+}
