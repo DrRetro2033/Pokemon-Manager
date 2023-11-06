@@ -19,7 +19,8 @@ Setup:
 
 - Pre-requisites:
   - Have downloaded the latest version of [PKHeX](https://github.com/kwsch/PKHeX), opened a save file, and dumped Pokémon into the database.
-  - Pokémon Manager uses [PokéAPI](https://github.com/PokeAPI/pokeapi) to make the code cleaner and save space, but since it's on the internet, you require wifi or ethernet when adding new Pokémon.
+  - ~~Pokémon Manager uses [PokéAPI](https://github.com/PokeAPI/pokeapi) to make the code cleaner and save space, but since it's on the internet, you require wifi or ethernet when adding new Pokémon.~~
+    - Pokémon Manager now only needs the internet for first time setup! You can add new Pokémon without an internet connection!
 - Installing:
   1. Download the latest version of Pokémon Manager.
   2. Extract the zip file into the same folder as PKHeX.
