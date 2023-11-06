@@ -17,6 +17,8 @@ func move(parent,move,type,form,pp,power,text):
 	parent.types(type,$Row2/Type)
 	damage_form(form,$Row2/Form)
 	hint_tooltip = text
+	for x in PM.get_all_children(self):
+		x.hint_tooltip = text
 	if not move == "-":
 		$Label.visible = true
 		$Row1.visible = true

@@ -1,6 +1,6 @@
 extends Node
 #proud of this :)
-#This is a binary translator that is meant to do binary calculations
+#This is a binary translator that is meant to do binary calculations and covert integers to binary.
 func int_to_bin(number): 
 	var binary = ""
 	var num_div = float(number)

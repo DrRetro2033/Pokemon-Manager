@@ -26,11 +26,13 @@ func _physics_process(delta):
 
 func _on_Timer_timeout():
 	rand.randomize()
-	dir = Vector3(rand.randf_range(-1,1),0,0)
+	var new_dir = Vector3(rand.randf_range(-1,1),0,0)
 	rand.randomize()
-	dir.z = rand.randf_range(-1,1)
+	new_dir.z = rand.randf_range(-1,1)
+	new_dir.normalized()
+	get_tree().create_tween().tween_property(self,"dir",new_dir,0.5)
 	$Timer.start(rand.randf_range(min_dir_time,max_dir_time))
-	if dir.x < 0:
+	if new_dir.x < 0:
 		get_tree().create_tween().tween_property($Sprite3D,"rotation:y",deg2rad(0),0.5)
-	elif dir.x > 0:
+	elif new_dir.x > 0:
 		get_tree().create_tween().tween_property($Sprite3D,"rotation:y",deg2rad(-180),0.5)

@@ -1,7 +1,8 @@
 extends Node
 
-# This node is the communicator between Pokémon Manager and the user's computer.
-# It handles the dragging and droping of trading cards, saving and loading settings, etc.
+# This node is the communicator between Pokémon Manager and the user's computer, 
+# and contains some functions that are needed everywhere.
+# It handles the dragging and droping of trading cards, saving and loading settings, dragging etc.
 const warning = "{file} is either not compatible with Pokémon Manager, or has a high likelihood of being corrupted. PNG and PK (*.pk7, *.pk6, etc.) files are compatible and recommended.\n\nDo you still want to continue to read the file?"
 
 const options_to_save = { # This dictionary states what project settings need to be saved and where to place them.
@@ -227,3 +228,20 @@ func load_settings(path):
 		for option in file.get_section_keys(section):
 			var value = file.get_value(section,option)
 			ProjectSettings.set_setting("Settings/"+section+'/'+option,value)
+
+func get_all_children(node):
+	var children = []
+	var next_nodes = []
+	var current_nodes = node.get_children()
+	while true:
+		children.append_array(current_nodes)
+		next_nodes.clear()
+		for x in current_nodes:
+			print("Parent "+str(x)+" has children of "+str(x.get_children()))
+			if not x.get_children().empty():
+				next_nodes.append_array(x.get_children())
+		print("next_nodes: "+str(next_nodes))
+		current_nodes = next_nodes.duplicate()
+		if current_nodes.empty():
+			break
+	return children

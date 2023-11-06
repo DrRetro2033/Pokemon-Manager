@@ -4,7 +4,7 @@ extends Area2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+class_name RightClickArea
 signal item_selected(id)
 export var items : Array = []
 export var is_active : bool = false

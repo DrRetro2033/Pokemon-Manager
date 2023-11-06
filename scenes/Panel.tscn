@@ -190,7 +190,7 @@ func open(id):
 	ability_text = new_text.replace(\". \",\". \\n\")
 	ability_text = ability_text.replace(\"\\n \",\"\\n\")
 	$Ability/Control.hint_tooltip = ability_text
-	print(pokemon)
+	$Chart.current_exp = pokemon[\"exp\"]
 	if not Trainer.has_had_tutorial(\"pokemon_view\"):
 		var tutor = Dialogic.start(\"PokemonPanelTutorial\")
 		get_tree().root.add_child(tutor)
@@ -570,7 +570,6 @@ anchor_right = 0.0
 margin_right = 140.0
 
 [node name="Chart" parent="." instance=ExtResource( 6 )]
-visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 200.0
@@ -1249,7 +1248,6 @@ custom_styles/normal = SubResource( 26 )
 text = "Blue"
 
 [node name="StatsInfo" type="PopupPanel" parent="."]
-visible = true
 margin_right = 188.0
 margin_bottom = 112.0
 script = SubResource( 51 )

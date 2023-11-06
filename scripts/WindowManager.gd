@@ -10,28 +10,30 @@ var current_window = null
 func _ready():
 	pass
 
-
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.get_button_index() == BUTTON_LEFT:
+		if event.get_button_index() == BUTTON_LEFT: 
 			if current_window != null:
 				send_to_front(current_window)
 				current_window = null
 
-func entered_window(node):
-	print("Ent")
+func entered_window(node): # This fuction and the one preceding it is for when the user
+	# clicks on a window behind another window. In most OSs, the window will be sent to the front.
+	# Godot on the other hand, does not do this. So these two functions check to see what node is 
+	#currently being hovered over.
 	current_window = node
 
 func exited_window(node):
-	print("Ex")
 	current_window = node
 
-func send_to_front(node):
+func send_to_front(node): # Sends a window to the front of all other windows
 	print("Sending "+node.name+" to front.")
 	move_child(node,get_child_count()-1)
 
-func reorder_right_click_areas(areas:Array):
+func reorder_right_click_areas(areas:Array): #This function serves two purposes.
+	#One, it removes any right click areas that are not visible.
 	areas = are_areas_in_hidden_window(areas)
+	#Two, it sorts the areas by their parent's child order. 
 	areas.sort_custom(self,"sort_areas")
 	return areas
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -61,28 +63,23 @@ func _on_Windows_child_entered_tree(node):
 		node.connect("visibility_changed",self,"send_to_front",[node])
 		node.connect("mouse_entered",self,"entered_window",[node])
 		node.connect("mouse_exited",self,"exited_window",[node])
-	for x in node.get_children():
-		if x.has_signal("mouse_entered"):
-			x.connect("mouse_entered",self,"entered_window",[node])
-			x.connect("mouse_exited",self,"exited_window",[node])
-		for y in x.get_children():
-			if y.has_signal("mouse_entered"):
-				y.connect("mouse_entered",self,"entered_window",[node])
-				y.connect("mouse_exited",self,"exited_window",[node])
-			for z in y.get_children():
-				if z.has_signal("mouse_entered"):
-					z.connect("mouse_entered",self,"entered_window",[node])
-					z.connect("mouse_exited",self,"exited_window",[node])
+	var children = PM.get_all_children(node)
+	for child in children:
+		child.connect("mouse_entered",self,"entered_window",[node])
+		child.connect("mouse_exited",self,"exited_window",[node])
 
-func sort_areas(a, b):
+func sort_areas(a, b): 
 	var x = 0
 	var y = 0
 	while x < get_child_count():
 		var window = get_child(x)
-		if window.is_a_parent_of(a):
+		if window.is_a_parent_of(a): #Is this area a child of one of this node's children?
 			 break
 		x += 1
-	if x >= get_child_count():
+	if x >= get_child_count(): #If x is greater than the amount of children in this node,
+		# then we know that the area is not in any window, so set it's order to 0.
+		# Reason? Well if the area is not inside of this node, then it must be from the main bank view.
+		# Which means that it's behind all other windows, so it belongs behind all windows.
 		x = 0
 	while y < get_child_count():
 		var window = get_child(y)

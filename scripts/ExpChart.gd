@@ -1,10 +1,6 @@
 extends PopupPanel
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 export var res = 10
 var equations = {
 	"fast":"(4L³)/5 = EXP",
@@ -14,6 +10,7 @@ var equations = {
 	"slow":"(5L³)/4 = EXP"
 }
 var rate = ""
+var current_exp = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$VBoxContainer/Control/Label.visible = false
@@ -84,3 +81,8 @@ func _on_ExpLine_text_changed(new_text):
 		$VBoxContainer/TextureRect/ProgressBar.value = int(level)
 	else:
 		$VBoxContainer/Control.set_text("Error: Invalid Input")
+
+
+func _on_Button_pressed():
+	$VBoxContainer/ExpLine.text = str(current_exp)
+	$VBoxContainer/ExpLine.emit_signal("text_changed",str(current_exp))

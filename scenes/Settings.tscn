@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://sprites/tutorial/tag_search.png" type="Texture" id=1]
 [ext_resource path="res://sprites/tutorial/filter_search.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://sound/startup_background_music/Nintendo 3DS Internet Settings.mp3" type="AudioStream" id=7]
 [ext_resource path="res://sprites/ui/icons/play.png" type="Texture" id=8]
 [ext_resource path="res://sprites/ui/icons/volume_up.png" type="Texture" id=9]
+[ext_resource path="res://scenes/RightClickArea.tscn" type="PackedScene" id=10]
 
 [sub_resource type="DynamicFont" id=3]
 size = 20
@@ -79,9 +80,8 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_top = -100.0
 margin_right = 680.0
-margin_bottom = 519.0
+margin_bottom = 619.0
 size_flags_horizontal = 3
 
 [node name="General" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
@@ -512,6 +512,10 @@ link = "https://github.com/kwsch/PKHeX"
 script = ExtResource( 6 )
 title = "Are you sure?"
 icon = 1
+
+[node name="Area2D" parent="." instance=ExtResource( 10 )]
+items = [  ]
+is_active = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )

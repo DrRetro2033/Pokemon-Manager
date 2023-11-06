@@ -33,6 +33,7 @@ func _ready():
 		folder_path = existing_pokemon.folder_path
 		$ProfilePic/Pic.texture = existing_pokemon.trainer_picture
 		Trainer.trainers = existing_pokemon.trainers
+		Trainer.tutorials = existing_pokemon.tutorials
 	#this chunk of code's job is to get all of the pokemon that already exists in the bank and remove null/empty slots
 	var without_null = []
 	user_pokemon = list_files_in_directory(folder_path)
@@ -189,7 +190,7 @@ func right_click():
 	if $RightClickContext.get_overlapping_areas().size() > 0:
 		print($RightClickContext.get_overlapping_areas())
 		var areas = $RightClickContext.get_overlapping_areas()
-		areas = $Windows.reorder_right_click_areas(areas)
+		areas = $Windows.reorder_right_click_areas(areas) # Want to figure out how right click works, go to the windows node.
 		print(areas)
 		var x = 0
 		while x < areas.size():

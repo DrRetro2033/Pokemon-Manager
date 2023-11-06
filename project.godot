@@ -204,6 +204,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/silicon.util.custom_docs/doc_item/method_doc_item.gd"
 }, {
+"base": "EditorPlugin",
+"class": "NativeIntegration",
+"language": "GDScript",
+"path": "res://addons/native_integration/NativeIntegration.gd"
+}, {
+"base": "Control",
+"class": "NativeMain",
+"language": "GDScript",
+"path": "res://addons/native_integration/NativeMainWindow.gd"
+}, {
+"base": "Resource",
+"class": "NativeProject",
+"language": "GDScript",
+"path": "res://addons/native_integration/NativeProject.gd"
+}, {
 "base": "Node",
 "class": "PKM_FILE",
 "language": "GDScript",
@@ -213,6 +228,11 @@ _global_script_classes=[ {
 "class": "PropertyDocItem",
 "language": "GDScript",
 "path": "res://addons/silicon.util.custom_docs/doc_item/property_doc_item.gd"
+}, {
+"base": "Area2D",
+"class": "RightClickArea",
+"language": "GDScript",
+"path": "res://scripts/RightClickContext.gd"
 }, {
 "base": "DocItem",
 "class": "SignalDocItem",
@@ -279,8 +299,12 @@ _global_script_class_icons={
 "HistoryRow": "",
 "Link": "",
 "MethodDocItem": "",
+"NativeIntegration": "",
+"NativeMain": "",
+"NativeProject": "",
 "PKM_FILE": "",
 "PropertyDocItem": "",
+"RightClickArea": "",
 "SignalDocItem": "",
 "StorageReference": "",
 "StorageTask": "",
@@ -318,7 +342,11 @@ BankManager="*res://scenes/Bank Manager.tscn"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/native_dialogs/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/native_dialogs/plugin.cfg", "res://addons/native_integration/plugin.cfg" )
+
+[gui]
+
+theme/custom="res://themes/dark.tres"
 
 [importer_defaults]
 

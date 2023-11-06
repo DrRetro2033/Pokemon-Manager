@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://PanelTheme.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/Move.gd" type="Script" id=2]
 [ext_resource path="res://fonts/Essentiarum Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://sprites/ui/Special.png" type="Texture" id=4]
@@ -69,7 +68,7 @@ margin_bottom = 27.0
 rect_min_size = Vector2( 0, 27 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 1 )
+theme_type_variation = "RoundedFlatPanel"
 
 [node name="Label" type="Label" parent="Row2/Type"]
 margin_right = 56.0
@@ -91,7 +90,7 @@ margin_right = 117.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 1 )
+theme_type_variation = "RoundedFlatPanel"
 
 [node name="TextureRect" type="TextureRect" parent="Row2/Form"]
 margin_right = 57.0

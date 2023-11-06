@@ -14,7 +14,6 @@ bg_color = Color( 0, 0.513726, 1, 0.380392 )
 [sub_resource type="StyleBoxEmpty" id=4]
 
 [node name="Chart" type="PopupPanel"]
-visible = true
 anchor_right = 0.195312
 anchor_bottom = 0.416667
 margin_right = -200.0
@@ -53,7 +52,7 @@ size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
 margin_right = 192.0
-margin_bottom = 132.0
+margin_bottom = 108.0
 rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -69,17 +68,17 @@ custom_styles/bg = SubResource( 4 )
 percent_visible = false
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_top = 136.0
+margin_top = 112.0
 margin_right = 192.0
-margin_bottom = 159.0
+margin_bottom = 135.0
 custom_fonts/font = ExtResource( 2 )
 text = "Rate"
 align = 1
 
 [node name="Control" type="Control" parent="VBoxContainer"]
-margin_top = 163.0
+margin_top = 139.0
 margin_right = 192.0
-margin_bottom = 186.0
+margin_bottom = 162.0
 rect_min_size = Vector2( 192, 23 )
 rect_clip_content = true
 size_flags_horizontal = 0
@@ -102,19 +101,26 @@ __meta__ = {
 }
 
 [node name="LevelLine" type="LineEdit" parent="VBoxContainer"]
-margin_top = 190.0
+margin_top = 166.0
 margin_right = 192.0
-margin_bottom = 214.0
+margin_bottom = 190.0
 align = 1
 placeholder_text = "L(evel)="
 
 [node name="ExpLine" type="LineEdit" parent="VBoxContainer"]
-margin_top = 218.0
+margin_top = 194.0
 margin_right = 192.0
-margin_bottom = 242.0
+margin_bottom = 218.0
 align = 1
 placeholder_text = "EXP="
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_top = 222.0
+margin_right = 192.0
+margin_bottom = 242.0
+text = "Set to Current"
 
 [connection signal="about_to_show" from="." to="." method="_on_Chart_about_to_show"]
 [connection signal="text_changed" from="VBoxContainer/LevelLine" to="." method="_on_LineEdit_text_changed"]
 [connection signal="text_changed" from="VBoxContainer/ExpLine" to="." method="_on_ExpLine_text_changed"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
