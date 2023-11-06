@@ -27,26 +27,21 @@ Setup:
   3. Open Pokémon Manager and enjoy!
   
 ## Features:
- - [x] Displays Pokémon's PokéDex entry.
  - [x] Shows known moves with PP, Power, Type, and Damage class.
- - [x] Stats chart with base stats, EVs, IVs.
- - [x] Drag and drop Pokémon into a blank space or switch positions with another Pokémon.
- - [x] Search for specific Pokémon by nickname, typing, and gender.
+ - [x] Stats chart with Base Stats, EVs, IVs.
+ - [x] An new modular design! Currently, the only feature that shows the power of this design is the party creator, where you can drag Pokémon from anywhere and drop it in the party creator.
+ - [x] Brand new way of searching! Introducing, tag searching, a quick and simple way of finding Pokémon. ![tag_search](https://github.com/DrRetro2033/Pokemon-Manager/assets/86109384/98f66652-eaed-4b88-b3cc-f58d0ac1bd21)
  - [x] Rename, and add boxes to your liking (Empty boxes are not stored).
- - [x] By my understanding of the Godot Engine, you could theoretically keep Pokémon Manager, [PKHeX](https://github.com/kwsch/PKHeX), and your pokémon on a usb stick and plug it into a brand new computer and it should work. Although [PKHeX](https://github.com/kwsch/PKHeX) will not work unless you install .NET Core onto the computer
- - [x] Level of Pokémon is displayed next to the gender of the pokemon.
+ - [x] A experience calculator that allows you to easily see the total experance 
  - [x] Ability to make multiple parties.
  - [x] Compatibility with alternate forms (Currently, there are no PokéDex entries for alternate Pokémon in PokéAPI so alternate forms will show the first form's entry and not the correct form's entry. This will be fixed in a future update).
  - [x] Make a personalized profile.
  - [x] Copy parties and boxes to your clipboard and paste them into Pokémon Showdown.
- - [x] View a party and select two types to see type advantages and disadvantages.
+ - [x] Switched from requiring internet to having PokeAPI's database integrated with Pokémon Manager. 
 
   ### In progress/Planned:
-   - [ ] Stats chart with ivs, evs, and base stats.
-   - [ ] pk8, pk4, pk3, pk2, pk1 files will be supported soon.
+   - [ ] pk8, pk4, pk3, pk2, pk1 (and maybe pk9) files will be supported.
    - [ ] Transfer Pokémon with someone else online.
-   - [ ] Switch from requiring internet to having PokeAPI's database integrated with Pokémon Manager.
-   - [ ] Show trainer info (meaning the trainer's name and details) for each Pokémon and search by trainers.
    - [ ] Switch PokéDex entries when viewing Pokémon.
    - [ ] Switch icons between 3d models, home icons, and sprites.
    - [ ] More organization tools.
