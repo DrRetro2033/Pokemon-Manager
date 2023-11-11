@@ -23,7 +23,7 @@ Setup:
     - Pokémon Manager now only needs the internet for first time setup! You can add new Pokémon without an internet connection!
 - Installing:
   1. Download the latest version of Pokémon Manager.
-  2. Extract the zip file into the same folder as PKHeX.
+  2. Extract the zip file into the same folder as [PKHeX](https://github.com/kwsch/PKHeX).
   3. Open Pokémon Manager and enjoy!
   
 ## Features:
@@ -48,5 +48,12 @@ Setup:
 
 Credits:
 -
-Copyright (c) © 2013–2021 Paul Hallett and PokéAPI contributors (https://github.com/PokeAPI/pokeapi#contributing). Pokémon and Pokémon character names are trademarks of Nintendo.
-All rights reserved.
+Copyright (c) © 2013–2021 Paul Hallett and PokéAPI contributors (https://github.com/PokeAPI/pokeapi#contributing). Pokémon and Pokémon character names are trademarks of Nintendo. © 2007-2023 Juan Linietsky, Ariel Manzur and [contributors](https://github.com/godotengine/godot/blob/master/AUTHORS.md). All rights reserved. 
+
+#### Plugins Used:
+- [Gdunzip](https://git.sr.ht/~jelle/gdunzip)
+- [Native Dialogs](https://github.com/98teg/NativeDialogs)
+- [Dialogic](https://github.com/coppolaemilio/dialogic)
+#### Special Thanks:
+- To [Project Pokémon](https://projectpokemon.org/home/) for documenting the PKM files. Without it, this project would not be possible.
+
