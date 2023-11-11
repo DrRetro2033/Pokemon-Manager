@@ -319,6 +319,7 @@ General/start_up_background_music_volume=1.0
 Search/use_tags=true
 General/always_ask_to_save=true
 General/start_up_background_music_name="rando"
+General/hover_time_to_switch_tabs=1.0
 
 [application]
 
@@ -339,10 +340,11 @@ API="*res://scenes/API.tscn"
 StupidCharacters="*res://scripts/StupidCharacters.gd"
 PM="*res://scenes/PM.tscn"
 BankManager="*res://scenes/Bank Manager.tscn"
+ZIP="*res://addons/gdunzip/gdunzip.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/native_dialogs/plugin.cfg", "res://addons/native_integration/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/native_dialogs/plugin.cfg" )
 
 [gui]
 
@@ -423,3 +425,7 @@ translations=PoolStringArray(  )
 [physics]
 
 common/enable_pause_aware_picking=true
+
+[rendering]
+
+gles3/shaders/shader_compilation_mode=2

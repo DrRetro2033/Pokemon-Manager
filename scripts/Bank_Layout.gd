@@ -17,7 +17,7 @@ func loadPokemon(bank):
 		new_box.name = n
 		add_child(new_box,true)
 		new_box.setSlots(boxes[n])
-		$"../Tabs".add_tab(n)
+	refresh_tabs()
 	$"../Loading Screen".finised()
 
 func _process(delta):
@@ -48,6 +48,10 @@ func _on_PopupMenu_new_box():
 		new_box.name = "Box%s" % str(get_child_count() + count)
 		print(new_box.name)
 		add_child(new_box)
+
+func refresh_tabs():
+	for n in get_children():
+		$"../Tabs".add_tab(n.name)
 
 func save(bank):
 	for child in get_children():
@@ -85,7 +89,8 @@ func addPokemon(pokemon):
 			pokemon.erase(x)
 		if pokemon.empty():
 			break
-		yield(get_tree().create_timer(0.001),"timeout")
+		yield(get_tree(),"idle_frame")
+	refresh_tabs()
 	$"../Loading Screen".finised()
 
 func _on_PopupMenu_export_box():

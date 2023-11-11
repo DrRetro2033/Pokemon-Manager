@@ -126,10 +126,31 @@
 			"character": "character-1696863394.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Near the top right of the screen, you can find essential features like searching and the party creator. I will now let you decide what you want to learn about next. Try clicking anywhere."
+			"text": "Near the top right of the screen, you can find essential features like searching and the party creator. I will now let you decide what you want to learn about next. Try clicking on anything that you find intriguing."
 		},
 		{
 			"event_id": "dialogic_013"
+		},
+		{
+			"animation": "5-fade_out_down.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
 		},
 		{
 			"emit_signal": "done",

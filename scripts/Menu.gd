@@ -4,8 +4,6 @@ const warning = "Resetting Pokémon Manager means removing all Pokémon, Trainer
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-onready var reset_accept = $Panel/Reset
-onready var quit_accept = $Panel/Quit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

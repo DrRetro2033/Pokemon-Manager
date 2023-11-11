@@ -1,6 +1,6 @@
 extends WindowDialog
 
-onready var bank = $"../Bank Manager"
+onready var bank = get_tree().root.get_node("/root/BankManager")
 const settings_path = "user://save/"
 var play_image
 var stop_image
@@ -13,6 +13,8 @@ onready var always_ask_to_save_checkbox = $ScrollContainer/VBoxContainer/General
 onready var background_music_dropdown = $ScrollContainer/VBoxContainer/General/HBoxContainer3/OptionButton
 onready var background_music_play_button = $ScrollContainer/VBoxContainer/General/HBoxContainer3/Button
 onready var volume_icon_start_up = $ScrollContainer/VBoxContainer/General/HBoxContainer4/TextureRect
+onready var drag_delay_slider = $ScrollContainer/VBoxContainer/General/DragDelay/DragDelaySlider
+onready var drag_delay_label = $ScrollContainer/VBoxContainer/General/DragDelay/Label
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -49,6 +51,8 @@ func refresh_settings():
 	tag.set_pressed_no_signal(ProjectSettings.get_setting("Settings/Search/use_tags"))
 	volume_slider_background_music.value = ProjectSettings.get_setting("Settings/General/start_up_background_music_volume")*100
 	$ScrollContainer/VBoxContainer/General/HBoxContainer4/Label.text = str(ProjectSettings.get_setting("Settings/General/start_up_background_music_volume")*100)
+	drag_delay_slider.value = ProjectSettings.get_setting("Settings/General/hover_time_to_switch_tabs")
+	drag_delay_label.text = str(ProjectSettings.get_setting("Settings/General/hover_time_to_switch_tabs"))+" Seconds"
 	always_ask_to_save_checkbox.set_pressed_no_signal(ProjectSettings.get_setting("Settings/General/always_ask_to_save"))
 
 func _on_Tag_toggled(button_pressed):
@@ -73,6 +77,7 @@ func _on_Apply_pressed():
 	ProjectSettings.set_setting("Settings/Search/use_filter",filter.pressed)
 	ProjectSettings.set_setting("Settings/General/always_ask_to_save",always_ask_to_save_checkbox.pressed)
 	ProjectSettings.set_setting("Settings/General/start_up_background_music_volume",volume_slider_background_music.value/100)
+	ProjectSettings.set_setting("Settings/General/hover_time_to_switch_tabs",drag_delay_slider.value)
 	var music = ""
 	if background_music_dropdown.selected == 0:
 		music = "rando"
@@ -93,15 +98,22 @@ func refresh_music_choices():
 		var file = dir1.get_next()
 		if file == "":
 			break
-		elif not file.begins_with("."):
-			files.append(file)
+		files.append(file)
 	dir1.list_dir_end()
 	background_music_dropdown.add_item("Random")
 	print(files)
 	for path in files:
-		if not str(path).ends_with(".import"):
+		var mus_name = ""
+		if str(path) == '.' or str(path) == '..':
+			continue
+		elif not str(path).ends_with(".import"):
 			background_music_files.append("res://sound/startup_background_music/"+path)
-			background_music_dropdown.add_item(path.get_basename())
+			mus_name = path.get_basename()
+		else:
+			background_music_files.append(StupidCharacters.removeImportNonsense("res://sound/startup_background_music/"+path))
+			mus_name = StupidCharacters.removeImportNonsense(path).get_basename()
+		if not background_music_dropdown.items.has(mus_name):
+			background_music_dropdown.add_item(mus_name)
 	if background_music_files.has(ProjectSettings.get_setting("Settings/General/start_up_background_music_name")):
 		var x = background_music_files.find(ProjectSettings.get_setting("Settings/General/start_up_background_music_name"))
 		background_music_dropdown.select(x+1)
@@ -172,3 +184,29 @@ func _on_Reset_Settings_pressed():
 	PM.reset_settings()
 	refresh_settings()
 
+func dialog_listener(value):
+	match str(value):
+		"done":
+			print(Dialogic.get_variable("have_tutorial"))
+			match Dialogic.get_variable("have_tutorial"):
+				"True":
+					Trainer.have_tutorial = true
+				"true":
+					Trainer.have_tutorial = true
+				"False":
+					Trainer.have_tutorial = false 
+				"false":
+					Trainer.have_tutorial = false
+
+func _on_Button_pressed():
+	var new_dialog = Dialogic.start("Tutorial")
+	get_tree().root.get_node("Control").add_child(new_dialog)
+	get_tree().root.get_node("Control").move_child(new_dialog,get_tree().root.get_node("Control").get_child_count()-1)
+	new_dialog.set_layer(3)
+	new_dialog.connect("dialogic_signal", self, "dialog_listener")
+	get_parent().close_all_windows()
+	Trainer.reset_tutorials()
+
+
+func _on_DragDelaySlider_value_changed(value):
+	drag_delay_label.text = str(value)+" Seconds"

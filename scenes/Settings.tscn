@@ -35,6 +35,7 @@ use_filter = true
 font_data = ExtResource( 3 )
 
 [node name="Settings" type="WindowDialog"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 163.0
@@ -74,19 +75,18 @@ anchor_top = 0.0495495
 anchor_right = 0.998567
 anchor_bottom = 0.891892
 scroll_horizontal_enabled = false
-scroll_vertical = 100
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 680.0
-margin_bottom = 619.0
+margin_right = 668.0
+margin_bottom = 996.0
 size_flags_horizontal = 3
 
 [node name="General" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_right = 667.0
-margin_bottom = 326.0
+margin_bottom = 431.0
 
 [node name="Title" type="Label" parent="ScrollContainer/VBoxContainer/General"]
 margin_right = 667.0
@@ -132,28 +132,65 @@ margin_right = 667.0
 margin_bottom = 94.0
 rect_min_size = Vector2( 0, 5 )
 
-[node name="Title2" type="Label" parent="ScrollContainer/VBoxContainer/General"]
+[node name="DragDelayTitle" type="Label" parent="ScrollContainer/VBoxContainer/General"]
 margin_top = 98.0
 margin_right = 667.0
-margin_bottom = 124.0
+margin_bottom = 112.0
+text = "Drag to Tab Delay:"
+
+[node name="DragDelay" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 116.0
+margin_right = 667.0
+margin_bottom = 136.0
+
+[node name="DragDelaySlider" type="HSlider" parent="ScrollContainer/VBoxContainer/General/DragDelay"]
+margin_right = 360.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 360, 0 )
+min_value = 0.1
+max_value = 2.0
+step = 0.05
+value = 1.0
+tick_count = 20
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/General/DragDelay"]
+margin_left = 364.0
+margin_right = 441.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+text = "1.0 Seconds"
+align = 1
+valign = 1
+
+[node name="Control7" type="Control" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 140.0
+margin_right = 667.0
+margin_bottom = 145.0
+rect_min_size = Vector2( 0, 5 )
+
+[node name="Title2" type="Label" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 149.0
+margin_right = 667.0
+margin_bottom = 175.0
 custom_fonts/font = SubResource( 4 )
 text = "Start Up:"
 
 [node name="Control" type="Control" parent="ScrollContainer/VBoxContainer/General"]
-margin_top = 128.0
+margin_top = 179.0
 margin_right = 667.0
-margin_bottom = 128.0
+margin_bottom = 179.0
 
 [node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer/General"]
-margin_top = 132.0
+margin_top = 183.0
 margin_right = 667.0
-margin_bottom = 146.0
+margin_bottom = 197.0
 text = "Background Music"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/General"]
-margin_top = 150.0
+margin_top = 201.0
 margin_right = 667.0
-margin_bottom = 170.0
+margin_bottom = 221.0
 
 [node name="Button" type="Button" parent="ScrollContainer/VBoxContainer/General/HBoxContainer3"]
 margin_right = 28.0
@@ -180,9 +217,9 @@ margin_bottom = 20.0
 rect_min_size = Vector2( 20, 0 )
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/General"]
-margin_top = 174.0
+margin_top = 225.0
 margin_right = 667.0
-margin_bottom = 194.0
+margin_bottom = 245.0
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/General/HBoxContainer4"]
 margin_right = 20.0
@@ -211,16 +248,16 @@ align = 1
 valign = 1
 
 [node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer/General"]
-margin_top = 198.0
+margin_top = 249.0
 margin_right = 667.0
-margin_bottom = 222.0
+margin_bottom = 273.0
 disabled = true
 text = "Continue playing background music after start up."
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/General"]
-margin_top = 226.0
+margin_top = 277.0
 margin_right = 667.0
-margin_bottom = 250.0
+margin_bottom = 301.0
 
 [node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer/General/HBoxContainer2"]
 margin_right = 164.0
@@ -274,40 +311,54 @@ margin_bottom = 184.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="Control3" type="Control" parent="ScrollContainer/VBoxContainer/General"]
-margin_top = 254.0
+margin_top = 305.0
 margin_right = 667.0
-margin_bottom = 259.0
+margin_bottom = 310.0
 rect_min_size = Vector2( 0, 5 )
 
 [node name="Title3" type="Label" parent="ScrollContainer/VBoxContainer/General"]
-margin_top = 263.0
+margin_top = 314.0
 margin_right = 667.0
-margin_bottom = 289.0
+margin_bottom = 340.0
 custom_fonts/font = SubResource( 4 )
 text = "Shut Down:"
 
 [node name="SaveChanges" type="CheckBox" parent="ScrollContainer/VBoxContainer/General"]
-margin_top = 293.0
+margin_top = 344.0
 margin_right = 667.0
-margin_bottom = 317.0
+margin_bottom = 368.0
 pressed = true
 text = "Always ask if you want to save your changes."
 
 [node name="Control4" type="Control" parent="ScrollContainer/VBoxContainer/General"]
-margin_top = 321.0
+margin_top = 372.0
 margin_right = 667.0
-margin_bottom = 326.0
+margin_bottom = 377.0
 rect_min_size = Vector2( 0, 5 )
 
-[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
-margin_top = 330.0
+[node name="Title4" type="Label" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 381.0
 margin_right = 667.0
-margin_bottom = 334.0
+margin_bottom = 407.0
+custom_fonts/font = SubResource( 4 )
+text = "Tutorial:"
+
+[node name="Button" type="Button" parent="ScrollContainer/VBoxContainer/General"]
+margin_top = 411.0
+margin_right = 109.0
+margin_bottom = 431.0
+size_flags_horizontal = 0
+text = "Restart Tutorial"
+
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_top = 435.0
+margin_right = 667.0
+margin_bottom = 439.0
 
 [node name="Search" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 338.0
+margin_top = 443.0
 margin_right = 667.0
-margin_bottom = 684.0
+margin_bottom = 789.0
 size_flags_horizontal = 3
 size_flags_vertical = 8
 
@@ -416,14 +467,14 @@ expand = true
 stretch_mode = 5
 
 [node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
-margin_top = 688.0
+margin_top = 793.0
 margin_right = 667.0
-margin_bottom = 692.0
+margin_bottom = 797.0
 
 [node name="Data Management" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 696.0
+margin_top = 801.0
 margin_right = 667.0
-margin_bottom = 796.0
+margin_bottom = 901.0
 
 [node name="Title" type="Label" parent="ScrollContainer/VBoxContainer/Data Management"]
 margin_right = 667.0
@@ -451,14 +502,14 @@ margin_bottom = 100.0
 text = "Reset Everything"
 
 [node name="HSeparator3" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
-margin_top = 800.0
+margin_top = 905.0
 margin_right = 667.0
-margin_bottom = 804.0
+margin_bottom = 909.0
 
 [node name="Credits" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 808.0
+margin_top = 913.0
 margin_right = 667.0
-margin_bottom = 891.0
+margin_bottom = 996.0
 
 [node name="Title" type="Label" parent="ScrollContainer/VBoxContainer/Credits"]
 margin_right = 667.0
@@ -524,6 +575,7 @@ stream = ExtResource( 7 )
 [connection signal="popup_hide" from="." to="." method="_on_Settings_popup_hide"]
 [connection signal="pressed" from="Cancel" to="." method="_on_Cancel_pressed"]
 [connection signal="pressed" from="Apply" to="." method="_on_Apply_pressed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/General/DragDelay/DragDelaySlider" to="." method="_on_DragDelaySlider_value_changed"]
 [connection signal="toggled" from="ScrollContainer/VBoxContainer/General/HBoxContainer3/Button" to="." method="_on_Button_toggled"]
 [connection signal="item_selected" from="ScrollContainer/VBoxContainer/General/HBoxContainer3/OptionButton" to="." method="_on_OptionButton_item_selected"]
 [connection signal="drag_ended" from="ScrollContainer/VBoxContainer/General/HBoxContainer4/HSlider" to="." method="_on_HSlider_drag_ended"]
@@ -533,6 +585,7 @@ stream = ExtResource( 7 )
 [connection signal="drag_started" from="ScrollContainer/VBoxContainer/General/HBoxContainer2/HSlider" to="." method="_on_HSlider_drag_started"]
 [connection signal="value_changed" from="ScrollContainer/VBoxContainer/General/HBoxContainer2/HSlider" to="." method="_on_HSlider_value_changed"]
 [connection signal="toggled" from="ScrollContainer/VBoxContainer/General/SaveChanges" to="." method="_on_SaveChanges_toggled"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/General/Button" to="." method="_on_Button_pressed"]
 [connection signal="toggled" from="ScrollContainer/VBoxContainer/Search/HBoxContainer2/Tag" to="." method="_on_Tag_toggled"]
 [connection signal="toggled" from="ScrollContainer/VBoxContainer/Search/HBoxContainer2/Filter" to="." method="_on_Filter_toggled"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/Data Management/Reset Settings" to="." method="_on_Reset_Settings_pressed"]

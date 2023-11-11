@@ -9,7 +9,7 @@ script = ExtResource( 1 )
 max_redirects = -1
 
 [node name="FileRequest" type="HTTPRequest" parent="."]
-download_file = "res://database/database"
+download_file = "user://database/database"
 use_threads = true
 max_redirects = -1
 

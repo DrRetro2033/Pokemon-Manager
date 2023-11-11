@@ -69,13 +69,13 @@ func set_item(lab:String):
 	item = lab
 	$Icons/Icon.visible = false
 	$Icons/TextureRect.visible = false
-	if Pokemon.types.has(lab):
+	if lab.begins_with("type:"):
 		$Icons/Icon.visible = true
 		var font : DynamicFont = $Icons/Icon.get_font("font").duplicate()
 		font.font_data = load(element_font_path)
 		$Icons/Icon.add_font_override("font",font)
-		types(Pokemon.types[lab],$Icons/Icon)
-		lab = lab.capitalize()
+		types(Pokemon.types[lab.split(':')[1]],$Icons/Icon)
+		lab = lab.split(':')[1].capitalize()
 	elif lab.begins_with("trainer:"):
 		lab = lab.split(":")[1]
 		lab = lab.split(',')[0]

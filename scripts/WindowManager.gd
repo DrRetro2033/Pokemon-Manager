@@ -30,6 +30,11 @@ func send_to_front(node): # Sends a window to the front of all other windows
 	print("Sending "+node.name+" to front.")
 	move_child(node,get_child_count()-1)
 
+func close_all_windows():
+	for child in get_children():
+		if child is WindowDialog:
+			child.hide()
+
 func reorder_right_click_areas(areas:Array): #This function serves two purposes.
 	#One, it removes any right click areas that are not visible.
 	areas = are_areas_in_hidden_window(areas)
@@ -65,8 +70,9 @@ func _on_Windows_child_entered_tree(node):
 		node.connect("mouse_exited",self,"exited_window",[node])
 	var children = PM.get_all_children(node)
 	for child in children:
-		child.connect("mouse_entered",self,"entered_window",[node])
-		child.connect("mouse_exited",self,"exited_window",[node])
+		if child.has_signal("mouse_entered"):
+			child.connect("mouse_entered",self,"entered_window",[node])
+			child.connect("mouse_exited",self,"exited_window",[node])
 
 func sort_areas(a, b): 
 	var x = 0

@@ -1,6 +1,7 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://scenes/Menu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/native_dialogs/bin/native_dialog_open_file.gdns" type="Script" id=2]
 [ext_resource path="res://scenes/PartyCreator.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Search.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/pkm.gd" type="Script" id=5]
@@ -49,9 +50,9 @@ func _ready():
 
 
 func _on_Tabs_tab_hover(tab):
-	$Timer.start()
+	$Timer.start(ProjectSettings.get_setting(\"Settings/General/hover_time_to_switch_tabs\") )
 	yield($Timer,\"timeout\")
-	if PM.is_dragging:
+	if PM.is_dragging and tab >= 0:
 		current_tab = tab
 	pass # Replace with function body.
 
@@ -65,10 +66,10 @@ font_data = ExtResource( 7 )
 [sub_resource type="GDScript" id=7]
 script/source = "extends Panel
 
-signal have_tutorial
 var text = {
 	\"api\":\"Fetching info from the web...\",
-	\"extracting\":\"Saving updated data from PokéAPI...\",
+	\"saving\":\"Saving updated data from PokéAPI...\",
+	\"extracting\":\"Extracting updated data, this might take awhile...\",
 	\"moving\":\"Moving Pokémon to boxes...\",
 	\"reading\":\"Reading bank file...\",
 	\"layout\":\"Organizing the bank...\",
@@ -84,10 +85,11 @@ func switch(x):
 
 func finised():
 	$Label.text = text[\"welcome\"]
-	$ProgressBar.visible = false
+	$CanvasLayer/ProgressBar.visible = false
 	if $Control/Sprite != null:
 		$Control/Sprite.queue_free()
 	$Control/AnimationPlayer.play(\"Finished\")
+	OS.request_attention()
 	yield($Control/AnimationPlayer,\"animation_finished\")
 	$WalkingPokemon.visible = false
 	$Control/AnimationPlayer.play(\"FinishedClose\")
@@ -108,8 +110,16 @@ func ask_for_tutorial():
 func dialog_listener(value):
 	match str(value):
 		\"done\":
-			if Dialogic.get_variable(\"have_tutorial\"):
-				emit_signal(\"have_tutorial\")
+			print(Dialogic.get_variable(\"have_tutorial\"))
+			match Dialogic.get_variable(\"have_tutorial\"):
+				\"True\":
+					Trainer.have_tutorial = true
+				\"true\":
+					Trainer.have_tutorial = true
+				\"False\":
+					Trainer.have_tutorial = false
+				\"false\":
+					Trainer.have_tutorial = false
 
 func slowly_fade_background_music():
 	while $AudioStreamPlayer.volume_db > -120:
@@ -181,18 +191,21 @@ script/source = "extends Sprite
 # var b = \"text\"
 const folder_path = \"res://sprites/pokemon/icons/\"
 var last_animation : int = 0
+var rng = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rand_animation()
 	var sprites = list_files_in_directory(folder_path)
-	var path = \"\"
+	var path : String = \"\"
 	while true:
-		var rng = RandomNumberGenerator.new()
 		rng.randomize()
 		var rand = rng.randi_range(0,sprites.size()-1)
-		print(rand)
 		path = sprites[rand]
 		if path.get_extension() == \"png\":
+			break
+		elif path.get_extension() == \"import\":
+			path.erase(path.length()-7,7)
+			print(path)
 			break
 		else:
 			continue
@@ -200,9 +213,8 @@ func _ready():
 	set_texture(load(folder_path+path))
 
 func rand_animation():
-	var rng = RandomNumberGenerator.new()
+	rng.randomize()
 	while true:
-		rng.randomize()
 		var rand = rng.randi_range(0,$AnimationPlayer.get_animation_list().size()-1)
 		print(rand)
 		if last_animation == rand or $AnimationPlayer.get_animation_list()[rand] == \"RESET\":
@@ -796,7 +808,6 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 script = SubResource( 7 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -823,8 +834,8 @@ script = SubResource( 17 )
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 77824.0
-margin_bottom = 45600.0
+margin_right = 101376.0
+margin_bottom = 59400.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -840,23 +851,23 @@ anims/Roll = SubResource( 15 )
 "anims/Wrap Around" = SubResource( 16 )
 
 [node name="Folder2" type="Sprite" parent="Loading Screen/Control"]
-light_mask = 2
 position = Vector2( 704, 384 )
 rotation = -1.5708
-scale = Vector2( 0.05, 0.05 )
+scale = Vector2( 0.055487, 0.055487 )
+z_index = 2
 texture = ExtResource( 16 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Loading Screen/Control/Folder2"]
 show_behind_parent = true
 position = Vector2( 8699.21, -14049.1 )
 rotation = 1.5708
-scale = Vector2( 19.9629, 22.6087 )
+scale = Vector2( 19.963, 23.778 )
 color = Color( 0.145098, 0.145098, 0.164706, 1 )
 polygon = PoolVector2Array( 752, 305, 1344, 305, 1344, 424, 752, 424 )
 
 [node name="Top" type="Sprite" parent="Loading Screen/Control/Folder2"]
 visible = false
-modulate = Color( 1, 1, 1, 0.333333 )
+modulate = Color( 1, 1, 1, 0.666667 )
 position = Vector2( 0, -1160 )
 texture = ExtResource( 18 )
 
@@ -871,7 +882,10 @@ anims/Finished = SubResource( 12 )
 anims/FinishedClose = SubResource( 13 )
 anims/RESET = SubResource( 14 )
 
-[node name="ProgressBar" type="ProgressBar" parent="Loading Screen"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Loading Screen"]
+layer = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Loading Screen/CanvasLayer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -1074,6 +1088,11 @@ icon = 3
 script = ExtResource( 26 )
 title = "Select pkmdb folder."
 
+[node name="NativeDialogOpenFile" type="Node" parent="."]
+script = ExtResource( 2 )
+title = "Select a Profile Picture"
+filters = PoolStringArray( "*.png, *jpg ; Image files" )
+
 [node name="RightClickContext" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightClickContext"]
@@ -1082,7 +1101,6 @@ shape = SubResource( 18 )
 [connection signal="mouse_exited" from="Tabs" to="Tabs" method="_on_Tabs_mouse_exited"]
 [connection signal="tab_changed" from="Tabs" to="TabContainer" method="_on_Tabs_tab_changed"]
 [connection signal="tab_hover" from="Tabs" to="Tabs" method="_on_Tabs_tab_hover"]
-[connection signal="timeout" from="Tabs/Timer" to="Tabs" method="_on_Timer_timeout"]
 [connection signal="pressed" from="PopupPanel/VBoxContainer/Showdown" to="PopupPanel" method="_on_Showdown_pressed"]
 [connection signal="pressed" from="PopupPanel/VBoxContainer/Main Menu" to="PopupPanel" method="_on_Main_Menu_pressed"]
 [connection signal="pressed" from="PopupPanel/VBoxContainer/Main Menu" to="Menu" method="_on_Main_Menu_pressed"]
@@ -1092,7 +1110,6 @@ shape = SubResource( 18 )
 [connection signal="pressed" from="ProfilePic" to="PopupPanel" method="_on_ProfilePic_pressed"]
 [connection signal="child_entered_tree" from="Windows" to="Windows" method="_on_Windows_child_entered_tree"]
 [connection signal="about_to_show" from="Windows/PartyCreator" to="Windows/PartyCreator" method="_on_PartyCreator_about_to_show"]
-[connection signal="have_tutorial" from="Loading Screen" to="." method="_on_Loading_Screen_have_tutorial"]
 [connection signal="animation_finished" from="Loading Screen/Control/Sprite/AnimationPlayer" to="Loading Screen/Control/Sprite" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="export_box" from="PopupMenu" to="TabContainer" method="_on_PopupMenu_export_box"]
 [connection signal="id_pressed" from="PopupMenu" to="PopupMenu" method="_on_PopupMenu_id_pressed"]
@@ -1103,3 +1120,4 @@ shape = SubResource( 18 )
 [connection signal="pressed" from="ProfileMaker/Button" to="ProfileMaker" method="_on_Button_pressed"]
 [connection signal="file_selected" from="FileDialog" to="ProfileMaker" method="_on_FileDialog_file_selected"]
 [connection signal="result_selected" from="NativeDialogMessage" to="." method="_on_NativeDialogMessage_result_selected"]
+[connection signal="files_selected" from="NativeDialogOpenFile" to="ProfileMaker" method="_on_NativeDialogOpenFile_files_selected"]

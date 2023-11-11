@@ -191,10 +191,12 @@ func open(id):
 	ability_text = ability_text.replace(\"\\n \",\"\\n\")
 	$Ability/Control.hint_tooltip = ability_text
 	$Chart.current_exp = pokemon[\"exp\"]
-	if not Trainer.has_had_tutorial(\"pokemon_view\"):
+	if (not Trainer.has_had_tutorial(\"pokemon_view\")) and Trainer.have_tutorial:
 		var tutor = Dialogic.start(\"PokemonPanelTutorial\")
 		get_tree().root.add_child(tutor)
 		tutor.set_layer(3)
+		Trainer.set_tutorial_to_finished(\"pokemon_view\")
+	elif not Trainer.have_tutorial:
 		Trainer.set_tutorial_to_finished(\"pokemon_view\")
 
 func tutorial():
@@ -771,6 +773,7 @@ __meta__ = {
 }
 
 [node name="Share" type="Button" parent="."]
+visible = false
 anchor_left = 0.0292969
 anchor_top = 0.891667
 anchor_right = 0.0683599

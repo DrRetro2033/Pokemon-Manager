@@ -1013,12 +1013,13 @@ func getLocation(location_id,game):
 
 func tag_search(tags:Array):
 	var typing = []
+	var match_name = null
 	var trainer = null
 	var matches = []
 	var gender = null
 	for tag in tags:
-		if types.has(tag):
-			typing.append(types[tag])
+		if str(tag).begins_with("type:"):
+			typing.append(types[tag.split(':')[1]])
 		elif str(tag).begins_with("trainer:"):
 			trainer = {}
 			var t = str(tag).split(':')[1]
@@ -1029,7 +1030,10 @@ func tag_search(tags:Array):
 			trainer["game"] = x[3]
 		elif str(tag).begins_with("gender:"):
 			gender = int(str(tag).split(':')[1])
+		else:
+			match_name = tag
 	typing.resize(2)
+	var x = 0
 	print(typing)
 	if tags.empty():
 		matches = []
@@ -1069,6 +1073,9 @@ func tag_search(tags:Array):
 		if gender != null:
 			print("Gender is Incorrect")
 			if pokemon[key].gender != gender:
+				passes = false
+		if match_name != null:
+			if not pokemon[key].nickname.to_lower().begins_with(match_name.to_lower()):
 				passes = false
 		if passes:
 			matches.append(key)

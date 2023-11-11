@@ -21,12 +21,12 @@ func set_tag(tag:String):
 	$HBoxContainer/Type.visible = false
 	$HBoxContainer/Name.visible = false
 	$HBoxContainer/TextureRect.visible = false
-	if Pokemon.types.has(tag):
+	if tag.begins_with("type:"):
 		$HBoxContainer/Type.visible = true
 		var font : DynamicFont = $HBoxContainer/Type.get_font("font").duplicate()
 		font.font_data = load(element_font_path)
 		$HBoxContainer/Type.add_font_override("font",font)
-		types(Pokemon.types[tag])
+		types(Pokemon.types[tag.split(':')[1]])
 	elif tag.begins_with("trainer:"):
 		$HBoxContainer/Name.visible = true
 		$HBoxContainer/TextureRect.visible = true
@@ -39,6 +39,9 @@ func set_tag(tag:String):
 		font.font_data = load(gender_font_path)
 		$HBoxContainer/Type.add_font_override("font",font)
 		gender(int(tag.split(':')[1]))
+	else:
+		$HBoxContainer/Name.visible = true
+		$HBoxContainer/Name.text = tag
 
 func gender(var gender : int):
 	var gender_styles = get_stylebox("panel").duplicate()

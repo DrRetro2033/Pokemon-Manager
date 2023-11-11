@@ -38,7 +38,8 @@ func pokeButton(data):
 		label.text = pokemon[\"nickname\"]
 		var path_name = str(pokemon[\"sprite\"])
 		var temp_path = path+path_name
-		if File.new().file_exists(temp_path):
+		var file = File.new()
+		if ResourceLoader.exists(temp_path):
 			sprite.set_texture(load(temp_path))
 		else:
 			sprite.set_texture(load(\"res://sprites/ui/icons/error.svg\"))
@@ -145,7 +146,6 @@ wait_time = 2.0
 [node name="Area2D" parent="." instance=ExtResource( 2 )]
 
 [connection signal="button_down" from="." to="." method="_on_Button_button_down"]
-[connection signal="button_up" from="." to="." method="_on_Button_button_up"]
 [connection signal="pressed" from="." to="." method="_on_Button_pressed"]
 [connection signal="visibility_changed" from="." to="." method="_on_Button_visibility_changed"]
 [connection signal="item_selected" from="Area2D" to="." method="_on_Area2D_item_selected"]

@@ -34,6 +34,7 @@ anchor_top = 0.0533333
 anchor_right = 0.938477
 anchor_bottom = 0.841667
 margin_bottom = 3.05176e-05
+drag_to_rearrange_enabled = true
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": true

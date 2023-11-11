@@ -42,8 +42,8 @@ extends Node
 ## Usage
 #check_and_clone_repo("username", "repository_name")
 
-
-const url = "res://database/api-data-master/data/api/v2/"
+const gdunzip_path = "res://addons/gdunzip/gdunzip.gd"
+const url = "api-data-master/data/api/v2/"
 var moves : Dictionary #holds all known moves a pokemon has
 var flavor_text : String #the first pokedex entry that a pokemon has
 var form : int #what alt form the pokemon is
@@ -51,6 +51,10 @@ var pokemon_url : String
 var ability 
 var data_translate = load("res://scripts/Pokemon_Database.gd").new()
 var needs_update = false
+var gdunzip = load(gdunzip_path).new() # This script is amazing and doesn't require the termial or any library for zip files.
+#Also, you might notice that in the code below, the zip file is not extracted.
+#This is because that gdunzip has a feature that allows you to get the data of a specific file, without extracting everything.
+#So I decided to not extract the file and keep it as is.
 signal done(info)
 signal finished_updating
 signal loading_bar_max_value(value)
@@ -71,23 +75,19 @@ func check_for_update():
 
 func update_database():
 	$FileRequest.request_raw("https://github.com/PokeAPI/api-data/archive/refs/heads/master.zip")
-	yield($FileRequest,"request_completed")
-	emit_signal("finished_updating")
-
 
 func format_path(folder,idx):
 	return url+folder+'/'+str(idx)+"/index.json"
 
 func get_info(array):
 	form = array["form"] #tells the species request which form the pokemon is
-	var file = File.new()
-#	print(format_path("pokemon-species",array["species"]))
-	var error = file.open(format_path("pokemon-species",array["species"]),File.READ)
-	if error != OK:
-		return
-	var body = file.get_as_text()
-	var json = JSON.parse(body)
+	print(format_path("pokemon-species",array["species"]))
+	if gdunzip.buffer_size == null:
+		gdunzip.load(ProjectSettings.globalize_path("user://database/")+"/database.zip")
+	var body : PoolByteArray = gdunzip.uncompress(format_path("pokemon-species",array["species"]))
+	var json = JSON.parse(body.get_string_from_utf8())
 	var data = json.result
+	yield(get_tree(),"idle_frame")
 	var text = data.flavor_text_entries
 	for x in text:
 		var characters = "abcdefghijklmnopqrstuvwxyz.,'`é?!1234567890-’" #will be removed
@@ -103,10 +103,11 @@ func get_info(array):
 	array["egg_groups"] = Pokemon.EggGroups(data.egg_groups)
 	array["level"] = Pokemon.level(array["exp"],array["growth"]) #converts the pokemon total exp and converts it the pokemon's level
 	print(format_path("pokemon",pokemon_url))
-	file.open(format_path("pokemon",pokemon_url),File.READ)
-	body = file.get_as_text()
-	json = JSON.parse(body)
+	yield(get_tree(),"idle_frame")
+	body = gdunzip.uncompress(format_path("pokemon",pokemon_url))
+	json = JSON.parse(body.get_string_from_utf8())
 	data = json.result
+	yield(get_tree(),"idle_frame")
 	var species = data.name
 	var hp = data.stats[0]
 	var atk = data.stats[1]
@@ -155,9 +156,10 @@ func get_info(array):
 	for x in move_names:
 		var move_id = int(array[x])
 		if array[x] > 0:
-			file.open(format_path("move",str(int(array[x]))),File.READ)
-			body = file.get_as_text()
-			json = JSON.parse(body)
+			yield(get_tree(),"idle_frame")
+			body = gdunzip.uncompress(format_path("move",str(int(array[x]))))
+			json = JSON.parse(body.get_string_from_utf8())
+			yield(get_tree(),"idle_frame")
 			data = json.result
 			moves["typing"] = data_translate.typing(str(data.type.name))
 			moves["form"] = data_translate.damageClass(str(data.damage_class.name))
@@ -217,44 +219,55 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 #	print("Response: "+str(response_code))
 #	print(headers[6])
 #	print(headers)
+	var dir = Directory.new()
 	var json = JSON.parse(body.get_string_from_utf8())
 	var data = json.result
 	if response_code == 200:
 		if data != null:
 			print(data.pushed_at)
 			var file = File.new()
-			file.open("res://database/api-data-master/version.txt",File.READ_WRITE)
-			if file.get_line() != data.pushed_at:
+			if not file.file_exists("user://database/version.txt"):
 				needs_update = true
-				file.seek(0)
+				if not dir.dir_exists("user://database/"):
+					dir.make_dir("user://database/")
+				file.open("user://database/version.txt",File.WRITE)
 				file.store_line(data.pushed_at)
+				file.close()
 			else:
-				needs_update = false
-			file.close()
+				file.open("user://database/version.txt",File.READ_WRITE)
+				if file.is_open() and file.get_line() != data.pushed_at:
+					needs_update = true
+					file.seek(0)
+					file.store_line(data.pushed_at)
+				else:
+					needs_update = false
+				file.close()
 	else:
 		needs_update = false
 	print("Needs Update: "+str(needs_update))
 	$HTTPRequest.cancel_request()
 
 func get_data(url:String):
-	var file = File.new()
+	if gdunzip.buffer_size == null:
+		gdunzip.load(ProjectSettings.globalize_path("user://database/")+"/database.zip")
 	if url.begins_with("/api/v2/"):
 		url = url.replace("/api/v2/","")
 	print(self.url+url+"index.json")
-	var error = file.open(self.url+url+"index.json",File.READ)
-	if error != OK:
-		return
-	var body = file.get_as_text()
-	var json = JSON.parse(body)
+	var body : PoolByteArray = gdunzip.uncompress(self.url+url+"index.json")
+	var json = JSON.parse(body.get_string_from_utf8())
 	var data = json.result
 	return data.duplicate()
 
 func _on_FileRequest_request_completed(result, response_code, headers, body):
 	var exit_code = 0
+	print(ProjectSettings.globalize_path("user://database/"))
 	match OS.get_name():
 		"Linux":
-			exit_code = OS.execute(ProjectSettings.globalize_path("res://database/"),["unzip","database"])
+			exit_code = OS.execute(ProjectSettings.globalize_path("user://database/"),["unzip","database"])
 		"Windows":
-			exit_code = OS.execute(ProjectSettings.globalize_path("res://database/"),["tar","-xf","database"])
+			gdunzip.load(ProjectSettings.globalize_path("user://database/")+"/database.zip")
 	print("Exit Code: "+str(exit_code))
 	$FileRequest.cancel_request()
+	emit_signal("finished_updating")
+
+

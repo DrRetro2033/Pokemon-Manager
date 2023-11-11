@@ -22,6 +22,13 @@ func save(bank):
 	bank.tutorials = tutorials
 	bank.have_tutorial = have_tutorial
 
+func load(bank):
+	trainer_name = bank.trainer_name
+	trainer_picture = bank.trainer_picture
+	have_tutorial = bank.have_tutorial
+	trainers = bank.trainers
+	tutorials = bank.tutorials
+
 func has_had_tutorial(key):
 	if tutorials.keys().has(key):
 		return tutorials[key]
@@ -30,6 +37,10 @@ func has_had_tutorial(key):
 func set_tutorial_to_finished(key):
 	if tutorials.keys().has(key):
 		tutorials[key] = true
+
+func reset_tutorials():
+	for tur in tutorials.keys():
+		tutorials[tur] = false
 
 func addTrainer(info):
 	print(trainers)

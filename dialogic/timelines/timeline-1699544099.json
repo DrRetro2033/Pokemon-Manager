@@ -1,0 +1,42 @@
+{
+	"events": [
+		{
+			"animation": "2-fade_in_up.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "This is the party maker in Pokémon Manager. You can create a party by dragging your Pokémon from anywhere and placing it into the desired slot."
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "You can even copy parties to your clipboard and use it in Pokémon Showdown! Go ahead, try it!"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.5",
+		"file": "timeline-1699544099.json",
+		"name": "PartyCreator"
+	}
+}

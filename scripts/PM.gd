@@ -4,12 +4,12 @@ extends Node
 # and contains some functions that are needed everywhere.
 # It handles the dragging and droping of trading cards, saving and loading settings, dragging etc.
 const warning = "{file} is either not compatible with Pokémon Manager, or has a high likelihood of being corrupted. PNG and PK (*.pk7, *.pk6, etc.) files are compatible and recommended.\n\nDo you still want to continue to read the file?"
-
 const options_to_save = { # This dictionary states what project settings need to be saved and where to place them.
 	"General":[
 		"start_up_background_music_volume",
 		"always_ask_to_save",
-		"start_up_background_music_name"
+		"start_up_background_music_name",
+		"hover_time_to_switch_tabs"
 	],
 	"Search":[
 		"use_tags",
@@ -17,8 +17,8 @@ const options_to_save = { # This dictionary states what project settings need to
 	],
 }
 const CFG_TEMPLATE = "settings.cfg"
-
 var is_dragging = false
+signal finished_extracting
 # Called when the node enters the scene tree for the first time.
 
 func _notification(what):
@@ -237,10 +237,8 @@ func get_all_children(node):
 		children.append_array(current_nodes)
 		next_nodes.clear()
 		for x in current_nodes:
-			print("Parent "+str(x)+" has children of "+str(x.get_children()))
 			if not x.get_children().empty():
 				next_nodes.append_array(x.get_children())
-		print("next_nodes: "+str(next_nodes))
 		current_nodes = next_nodes.duplicate()
 		if current_nodes.empty():
 			break

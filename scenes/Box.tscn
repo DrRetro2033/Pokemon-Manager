@@ -7,9 +7,6 @@
 [sub_resource type="GDScript" id=2]
 script/source = "extends GridContainer
 signal open(info)
-onready var panel = $\"../../CanvasLayer/Panel\"
-onready var left = $\"../../Left\"
-onready var right = $\"../../Right\"
 func _ready():
 	pass # Replace with function body.
 

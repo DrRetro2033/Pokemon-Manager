@@ -21,7 +21,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("ui_down"):
-		if search_bar.has_focus():
+		if search_bar.has_focus() and search_bar.get_child_count() > 0:
 			$PopupPanel/ScrollContainer/VBoxContainer.get_child(0).grab_focus()
 	elif Input.is_action_just_pressed("ui_accept"):
 		if search_bar.has_focus():
@@ -29,11 +29,15 @@ func _process(delta):
 
 func auto_complete_list(text:String):
 	var matches = []
-	if not has_reach_limit_of_tag_type(Pokemon.types.keys(),2):
-		var array = Pokemon.types.keys()
-		array.erase("NULL")
+	var array = Pokemon.types.keys()
+	array.erase("NULL")
+	var x = 0
+	while x < array.size():
+		array[x] = "type:"+array[x]
+		x += 1
+	if not has_reach_limit_of_tag_type(array,2):
 		for key in array: #Search for types.
-			if str(key).to_lower().begins_with(text.to_lower()):
+			if key.to_lower().split(':')[1].begins_with(text.to_lower()):
 				if not tags.has(key):
 					matches.append(key)
 	var trainers = []
@@ -116,7 +120,10 @@ func auto_complete():
 	search_bar.grab_focus()
 
 func on_auto_complete_selected(node):
-	tags.append(node.item)
+	if Input.is_key_pressed(KEY_SHIFT):
+		tags.append(search_bar.text)
+	else:
+		tags.append(node.item)
 	show_tags()
 	search_bar.text = ""
 	auto_complete()
@@ -147,6 +154,22 @@ func showResults(database):
 		$Panel/VBoxContainer/ScrollContainer/VBoxContainer.add_child(new_button)
 
 func _on_Search_pressed():
+	if not search_bar.text.empty():
+		tags.append(search_bar.text)
+	show_tags()
+	search_bar.text = ""
+	auto_complete()
 	showResults(Pokemon.tag_search(tags))
 	grab_focus()
 
+
+
+func check_tutorial():
+	if (not Trainer.has_had_tutorial("search")) and Trainer.have_tutorial:
+		var tutor = Dialogic.start("Search")
+		get_tree().root.get_node("Control").add_child(tutor)
+		tutor.set_layer(3)
+		get_tree().root.get_node("Control").move_child(tutor,get_tree().root.get_node("Control").get_child_count()-1)
+		Trainer.set_tutorial_to_finished("search")
+	elif not Trainer.have_tutorial:
+		Trainer.set_tutorial_to_finished("search")

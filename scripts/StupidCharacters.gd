@@ -14,6 +14,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+func removeImportNonsense(path):
+	path.erase(path.length()-7,7) #removes godots ".import" at the end of a file path.
+	return path
+
 func removeEscapechars(text): #removes all escape charaters that messes up the pokedex entries
 	var ascii_text = Array(text.to_utf8())
 	while ascii_text.has(12):

@@ -17,6 +17,7 @@ func _ready():
 	else:
 		$"Loading Screen/AudioStreamPlayer".volume_db = -120
 	change_background_music()
+	print(BinaryTranslator.bin_to_int("11011110"))
 	print(BinaryTranslator.bin_to_int(BinaryTranslator.int_to_bin(2254250705))) #this is for testing the binary translator by having it convert this number to binary and back
 #	var dir = Directory.new() #instances a new directory object
 #	dir.open(folder_path)
@@ -27,13 +28,10 @@ func _ready():
 	if existing_pokemon.first_time_setup: #checks to see if this the first time the user is using pokemon manager 
 		Trainer.first_time_setup = true
 	else:
-		Trainer.trainer_name = existing_pokemon.trainer_name
-		Trainer.trainer_picture = existing_pokemon.trainer_picture
 		Trainer.first_time_setup = false
+		Trainer.load(existing_pokemon)
 		folder_path = existing_pokemon.folder_path
 		$ProfilePic/Pic.texture = existing_pokemon.trainer_picture
-		Trainer.trainers = existing_pokemon.trainers
-		Trainer.tutorials = existing_pokemon.tutorials
 	#this chunk of code's job is to get all of the pokemon that already exists in the bank and remove null/empty slots
 	var without_null = []
 	user_pokemon = list_files_in_directory(folder_path)
@@ -72,23 +70,14 @@ func change_background_music(): #Changes background music to what the user selec
 	$"Loading Screen/AudioStreamPlayer".stop()
 	var music
 	if ProjectSettings.get_setting("Settings/General/start_up_background_music_name") == "rando":
-		var files = []
-		var dir1 = Directory.new()
-		dir1.open("res://sound/startup_background_music/")
-		dir1.list_dir_begin()
-		while true:
-			var file = dir1.get_next()
-			if file == "":
-				break
-			elif file.ends_with("."):
-				continue
-			elif not file.ends_with(".import"):
-				files.append("res://sound/startup_background_music/"+file)
-		dir1.list_dir_end()
+		var files = list_files_in_directory("res://sound/startup_background_music/")
 		var rand = RandomNumberGenerator.new()
 		rand.randomize()
 		print(files)
 		music = files[rand.randi_range(0,files.size()-1)]
+		if music.ends_with(".import"):
+			music = StupidCharacters.removeImportNonsense(music)
+		music = "res://sound/startup_background_music/"+music
 	else:
 		music = ProjectSettings.get_setting("Settings/General/start_up_background_music_name")
 	$"Loading Screen/AudioStreamPlayer".stream = load(music)
@@ -104,11 +93,11 @@ func get_info(user_pokemon, existing_pokemon):
 	var needs_update = yield(API,"finished_checking")
 	print("Needs Update: "+str(needs_update))
 	if needs_update:
-		$"Loading Screen".switch("extracting")
+		$"Loading Screen".switch("saving")
 		API.update_database()
 		yield(API,"finished_updating")
-	$"Loading Screen/ProgressBar".max_value = user_pokemon.size() #sets the progress bar's max value to the amount of pokemon the user has
-	$"Loading Screen/ProgressBar".value = 0
+	$"Loading Screen/CanvasLayer/ProgressBar".max_value = user_pokemon.size() #sets the progress bar's max value to the amount of pokemon the user has
+	$"Loading Screen/CanvasLayer/ProgressBar".value = 0
 	if existing_pokemon != null and not existing_pokemon.data.empty(): #checks to see if there is any existing pokemon in the bank file and if there is then add them to the database
 		pokemon = existing_pokemon.data
 	while user_pokemon.size() > 0:
@@ -129,7 +118,7 @@ func get_info(user_pokemon, existing_pokemon):
 				continue
 		elif array != null and not array.empty(): #asks PokeAPI for infomation about the pokemons species and known moves
 			$"Loading Screen".switch("moving") #changes loading screen text
-			var info = API.get_info(array).duplicate()
+			var info = yield(API.get_info(array),"completed").duplicate()
 			#this should be removed in the future
 			if existing_pokemon != null and existing_pokemon.data.has(array["id"]): 
 				id += 1
@@ -141,9 +130,9 @@ func get_info(user_pokemon, existing_pokemon):
 				#this part creates and starts the walking pokemon
 				$"Loading Screen/WalkingPokemon".add_pokemon(array)
 #			print(array)
-			$"Loading Screen/ProgressBar".value += 1
+			$"Loading Screen/CanvasLayer/ProgressBar".value += 1
 			id += 1
-			yield(get_tree().create_timer(1),"timeout")
+			yield(get_tree().create_timer(0.75),"timeout")
 		#
 	if pokemon.empty():
 		print("Incorrect")
@@ -215,12 +204,14 @@ func _notification(what):
 func _on_Search_pressed():
 	if ProjectSettings.get_setting("Settings/Search/use_tags"):
 		$Windows/TagSearch.show()
+		$Windows/TagSearch.check_tutorial()
 	elif ProjectSettings.get_setting("Settings/Search/use_filter"):
 		$Windows/Search.show()
 
 
 func _on_Party_pressed():
 	$Windows/PartyCreator.show()
+	$Windows/PartyCreator.check_tutorial()
 
 
 func _on_NativeDialogMessage_result_selected(result):
@@ -235,11 +226,6 @@ func _on_NativeDialogMessage_result_selected(result):
 		1:
 			pass
 
-
-func _on_Loading_Screen_have_tutorial():
-	Trainer.have_tutorial = true
-
-
 func _on_Settings_pressed():
 	$PopupPanel.hide()
 	$Windows/Settings.refresh_settings()
@@ -250,3 +236,4 @@ func create_new_info_panel(id):
 	$Windows.add_child(panel)
 	panel.open(id)
 	panel.show()
+
