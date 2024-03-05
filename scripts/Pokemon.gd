@@ -1,4 +1,13 @@
 extends Node
+
+#This is the heart of most features in Pokémon Manager.
+#By the way, if you are wondering what constant "rates" purpose is, its for converting exp to level.
+#You see, the games store the pokemon's total exp, instead of their level.
+#So the games have to calulate what a Pokémon's level is.
+#The calulations for this is large and even has some logic as well.
+#So instead of writing code to do calulations, I instead typed down the required amount of exp for level.
+#Then when converting to levels, the program will check to see if their is enough exp to go to the next level.
+#If not, then that means that the highest possible level is the Pokémon's true level.
 const rates = {
 	"erratic":[
 		15,   
@@ -202,7 +211,7 @@ const rates = {
 		23286,
 		23761
 	],
-	"medium_fast":[
+	"medium-fast":[
 		8,    
 		19,
 		37,  
@@ -303,7 +312,108 @@ const rates = {
 		29107,
 		29701
 	],
-	"medium_slow":[
+	"medium":[
+		8,    
+		19,
+		37,  
+		61,  
+		91,  
+		127,  
+		169,  
+		217,
+		271,
+		331,
+		397,
+		469,
+		547,
+		631,
+		721,
+		817,
+		919,
+		1027,
+		1141,
+		1261,
+		1387,
+		1519,
+		1657,
+		1801,
+		1951,
+		2107,
+		2269,
+		2437,
+		2611,
+		2791,
+		2977,
+		3169,
+		3367,
+		3571,
+		3781,
+		3997,
+		4219,
+		4447,
+		4681,
+		4921,
+		5167,
+		5419,
+		5677,
+		5941,
+		6211,
+		6487,
+		6769,
+		7057,
+		7351,
+		7651,
+		7957,
+		8269,
+		8587,
+		8911,
+		9241,
+		9577,
+		9919,
+		10267,
+		10621,
+		10981,
+		11347,
+		11719,
+		12097,
+		12481,
+		12871,
+		13267,
+		13669,
+		14077,
+		14491,
+		14911,
+		15337,
+		15769,
+		16207,
+		16651,
+		17101,
+		17557,
+		18019,
+		18487,
+		18961,
+		19441,
+		19927,
+		20419,
+		20917,
+		21421,
+		21931,
+		22447,
+		22969,
+		23497,
+		24031,
+		24571,
+		25117,
+		25669,
+		26227,
+		26791,
+		27361,
+		27937,
+		28519,
+		29107,
+		29701
+	],
+	"medium-slow":[
 		9,	  
 		48,
 		39,
@@ -627,11 +737,13 @@ const types_def = {
 		17:{"normal":0.5,"fire":2,"grass":0.5,"ice":0.5,"fighting":2,"poison":0,"ground":2,"flying":0.5,"psychic":0.5,"bug":0.5,"rock":0.5,"dragon":0.5,"steel":0.5,"fairy":0.5},
 		18:{"fighting":0.5,"poison":2,"bug":0.5,"dragon":0,"dark":0.5,"steel":2}
 }
-const types_atk = {
-	"normal":[13,14,17],
-	"fire":[2,3,4,6,12,16],
-	"water":[2,3,4,9,16],
-	"grass":[2,3,4]
+const offical_artwork_path = "res://sprites/pokemon/official-artwork/"
+enum exp_candy {
+	XS = 100,
+	S = 800,
+	M = 3000,
+	L = 10000,
+	XL = 30000
 }
 enum {
 	# Pokémon Sapphire (GBA)
@@ -701,6 +813,8 @@ enum {
 	UM = 33,
 }
 var pokemon = {}
+var trainers = {}
+signal refresh_bank(new_pokemon)
 func set_data(data):
 	pokemon = data.duplicate()
 
@@ -741,60 +855,40 @@ func search(search):
 				print("Erased "+x+" because of "+str(pokemon[x]["ot"]))
 				results.erase(x)
 	print(results)
+	results.sort_custom(Sorter,"sort_ascending")
 	return results
 
+class Sorter:
+	static func sort_ascending(a,b):
+		if Pokemon.pokemon[a]["nickname"] < Pokemon.pokemon[b]["nickname"]:
+			return true
+		return false
+
 func level(var Exp, var rate):
-	var level = 0
-	match rate:
-		"slow":
-			for exp_required in rates.slow:
-				Exp -= exp_required
-				level += 1
-				if Exp <=0:
-					break
-				else:
-					continue
-		"medium":
-			for exp_required in rates.medium_fast:
-				Exp -= exp_required
-				level += 1
-				if Exp <=0:
-					break
-				else:
-					continue
-		"fast":
-			for exp_required in rates.fast:
-				Exp -= exp_required
-				level += 1
-				if Exp <=0:
-					break
-				else:
-					continue
-		"medium-slow":
-			for exp_required in rates.medium_slow:
-				Exp -= exp_required
-				level += 1
-				if Exp <=0:
-					break
-				else:
-					continue
-		"slow then very fast":
-			for exp_required in rates.erratic:
-				Exp -= exp_required
-				level += 1
-				if Exp <=0:
-					break
-				else:
-					continue
-		"fast then very slow":
-			for exp_required in rates.fluctuating:
-				Exp -= exp_required
-				level += 1
-				if Exp < 0:
-					break
-				else:
-					continue
+	var level = 1
+	for exp_required in rates[rate]:
+		Exp -= exp_required
+		if Exp <=0:
+			break
+		level += 1
+		
 	return level
+
+func experience(var level, var rate):
+	var Exp = 0
+	if level > 99:
+		level = 99
+	while level > 0:
+		Exp += rates[rate][level-1]
+		level -= 1
+	return Exp
+
+func exp_until_next_level(level,rate,Exp):
+	var x = 0
+	while x < level-1:
+		Exp -= rates[rate][x]
+		x += 1
+	return Exp
 
 func EggGroups(var egg_groups):
 	var array = []
@@ -851,6 +945,71 @@ func gameVersion(id):
 			version = "Pokémon Ultra Moon (3DS)"
 	return version
 
+enum types {
+	NULL,
+	NORMAL,
+	FIRE,
+	WATER,
+	GRASS,
+	ELECTRIC,
+	ICE,
+	FIGHTING,
+	POISON,
+	GROUND,
+	FLYING,
+	PSYCHIC,
+	BUG,
+	ROCK,
+	GHOST,
+	DARK,
+	DRAGON,
+	STEEL,
+	FAIRY
+}
+
+const type_chars = {
+	types.NULL:"n/a",
+	types.NORMAL:"c",
+	types.FIRE:"r",
+	types.WATER:"w",
+	types.GRASS:"g",
+	types.ELECTRIC:"l",
+	types.ICE:"i",
+	types.FIGHTING:"f",
+	types.POISON:"o",
+	types.GROUND:"a",
+	types.FLYING:"v",
+	types.PSYCHIC:"p",
+	types.BUG:"b",
+	types.ROCK:"k",
+	types.GHOST:"h",
+	types.DARK:"d",
+	types.DRAGON:"n",
+	types.STEEL:"m",
+	types.FAIRY:"y"
+}
+
+const type_colors = {
+	types.NULL:Color8(66,66,66,255),
+	types.NORMAL:Color("#c3c2a4"),
+	types.FIRE:Color("#df2c04"),
+	types.WATER:Color("#3578f4"),
+	types.GRASS:Color("#57a031"),
+	types.ELECTRIC:Color("#f8c81d"),
+	types.ICE:Color("#81e0e5"),
+	types.FIGHTING:Color("#6d2818"),
+	types.POISON:Color("#9345b3"),
+	types.GROUND:Color("#d1b85e"),
+	types.FLYING:Color("#84afff"),
+	types.PSYCHIC:Color("#ff398b"),
+	types.BUG:Color("#bdc45b"),
+	types.ROCK:Color("#b29e59"),
+	types.GHOST:Color("#5d66a6"),
+	types.DARK:Color("#442d04"),
+	types.DRAGON:Color("#8c79dc"),
+	types.STEEL:Color("#b7b7ce"),
+	types.FAIRY:Color("#f0aee1")
+}
 func getLocation(location_id,game):
 	var file = File.new()
 	match game:
@@ -868,3 +1027,96 @@ func getLocation(location_id,game):
 	print(location)
 	file.close()
 	return location
+
+func candy(exp_to_convert,candy_type):
+	var x = ceil(exp_to_convert/exp_candy[candy_type])
+	if x == 0:
+		x = 1
+	return x
+
+func level_candy_needed(starting_level:int,target_level:int,rate,candy_type):
+	var start_exp = experience(starting_level,rate)
+	var end_exp = experience(target_level,rate)
+	var difference = abs(start_exp-end_exp)
+	return candy(difference,candy_type)
+
+
+func tag_search(tags:Array):
+	var typing = []
+	var match_name = null
+	var trainer = null
+	var matches = []
+	var gender = null
+	for tag in tags:
+		if str(tag).begins_with("type:"):
+			typing.append(types[tag.split(':')[1]])
+		elif str(tag).begins_with("trainer:"):
+			trainer = {}
+			var t = str(tag).split(':')[1]
+			var x = t.split(',')
+			trainer["nickname"] = x[0]
+			trainer["id"] = x[1]
+			trainer["gender"] = x[2]
+			trainer["game"] = x[3]
+		elif str(tag).begins_with("gender:"):
+			gender = int(str(tag).split(':')[1])
+		else:
+			match_name = tag
+	typing.resize(2)
+	var x = 0
+	print(typing)
+	if tags.empty():
+		matches = []
+		return matches
+	for key in pokemon.keys():
+		print(key)
+		var passes = true
+		if typing[0] == null and typing[1] == null:
+			pass
+		elif typing[1] != null:
+			if typing[0] == pokemon[key].type1 and typing[1] == pokemon[key].type2:
+				pass
+			elif typing[1] == pokemon[key].type1 and typing[0] == pokemon[key].type2:
+				pass
+			else:
+				passes = false
+		elif typing[0] == pokemon[key].type1 or typing[0] == pokemon[key].type2:
+			pass
+		else:
+			print("Typing is incorrect.")
+			passes = false
+		if trainer != null:
+			print("Checking OT...")
+			if pokemon[key].ot.nickname != trainer.nickname:
+				print("OT Nickname is Incorrect")
+				print(pokemon[key].ot.nickname+" != "+trainer.nickname)
+				passes = false
+			elif pokemon[key].ot.id != int(trainer.id):
+				print("OT ID is Incorrect")
+				passes = false
+			elif pokemon[key].ot.gender != int(trainer.gender):
+				print("OT Gender is Incorrect")
+				passes = false
+			elif pokemon[key].ot.game != int(trainer.game):
+				print("OT Game is Incorrect")
+				passes = false
+		if gender != null:
+			print("Gender is Incorrect")
+			if pokemon[key].gender != gender:
+				passes = false
+		if match_name != null:
+			if not pokemon[key].nickname.to_lower().begins_with(match_name.to_lower()):
+				passes = false
+		if passes:
+			matches.append(key)
+		print('')
+	return matches
+
+func has_pokemon(id):
+	if pokemon.has(id):
+		return true
+	return false
+
+func add_pokemon(new_pokemon):
+	pokemon.merge(new_pokemon)
+	emit_signal("refresh_bank",new_pokemon.keys())

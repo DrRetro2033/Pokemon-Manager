@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends PopupPanel
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+var current_area = null
+var pop_pos : Vector2 = Vector2(0,0)
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+
+func _process(delta):
+	rect_global_position = get_viewport().get_mouse_position()
+	if get_viewport().get_mouse_position().x > (get_viewport().size.x/3)*2:
+		rect_position.x -= rect_size.x
+	if get_viewport().get_mouse_position().y > (get_viewport().size.y/3)*2:
+		rect_position.y -= rect_size.y
+	if pop_pos.distance_to(rect_position) > 5:
+		visible = false
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _on_Move1_pressed():
+	popup()
+	$RichTextLabel.text = $\"../GridContainer/Move1\".flavor_text
+	pop_pos = rect_position
+
+func _on_Move2_pressed():
+	popup()
+	$RichTextLabel.text = $\"../GridContainer/Move2\".flavor_text
+	pop_pos = rect_position
+
+func _on_Move3_pressed():
+	popup()
+	$RichTextLabel.text = $\"../GridContainer/Move3\".flavor_text
+	pop_pos = rect_position
+
+func _on_Move4_pressed():
+	popup()
+	$RichTextLabel.text = $\"../GridContainer/Move4\".flavor_text
+	pop_pos = rect_position
+
+
+func _on_AbilityButton_pressed():
+	popup()
+	$RichTextLabel.text = $\"../Ability\".flavor_text
+	pop_pos = rect_position
+"
+
+[sub_resource type="RichTextEffect" id=3]
+
+[node name="Popup" type="PopupPanel"]
+margin_right = 65.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 75, 50 )
+size_flags_vertical = 15
+script = SubResource( 2 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_vertical = 3
+fit_content_height = true
+scroll_active = false
+custom_effects = [ SubResource( 3 ) ]

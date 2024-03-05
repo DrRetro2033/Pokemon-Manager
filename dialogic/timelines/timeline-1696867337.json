@@ -1,0 +1,186 @@
+{
+	"events": [
+		{
+			"animation": "2-fade_in_up.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "This panel is where you can read and learn about your Pokémon's stats, moves, experience, you name it."
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "On the left of the screen, from top to bottom, is your Pokémon's nickname, species, and PokéDex entry, including the location and time they met their original trainer."
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "In the center of the screen is a hexagonal chart that represents the stats of the Pokémon. The top of the polygon is the health points of the Pokémon, to the right is its attack and defense.\nThe bottom shows its speed, and the left shows special defense and special attack."
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "There are three layers to the graph, the [color=#00fa47]Pokémon's base stats in green,[/color][color=#00dbcc]its IVs in a more bluish green,[/color] and its [color=#0070f0]EVs in blue.[/color]"
+		},
+		{
+			"animation": "5-fade_out_down.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 0.1,
+			"waiting_skippable": false
+		},
+		{
+			"animation": "2-fade_in_up.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": true,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 1
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "To the right of the screen is where the Pokémon's ability, typing, moves, gender, and level is shown. You can hover over it's ability or moves to get a short description."
+		},
+		{
+			"animation": "5-fade_out_down.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1,
+			"waiting_skippable": true
+		},
+		{
+			"animation": "2-fade_in_up.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 1
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Oh! I just remembered about a vital tool for researching Pokémon! \nIf you see a '?' next to your cursor, then it means that you can right click on the current data to get a detailed view."
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "These special menus can range from exact stats, to an entire experience calculator! Remember, If you see a question mark next to your cursor, try right clicking."
+		},
+		{
+			"animation": "5-fade_out_down.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.5",
+		"file": "timeline-1696867337.json",
+		"name": "PokemonPanelTutorial"
+	}
+}

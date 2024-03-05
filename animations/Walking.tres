@@ -1,0 +1,41 @@
+[gd_resource type="Animation" format=2]
+
+[resource]
+resource_name = "Walking"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("PokemonWalking:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 0.9, 1.2, 1.55, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 320, 392 ), Vector2( 320, 392 ), Vector2( 342, 345 ), Vector2( 360, 333 ), Vector2( 397, 356 ), Vector2( 433, 391 ), Vector2( 704, 391 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PokemonWalking:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 0.9, 1.2, 1.55, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Water:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}

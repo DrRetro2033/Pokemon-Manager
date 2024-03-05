@@ -1,0 +1,147 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/Search.gd" type="Script" id=1]
+[ext_resource path="res://scenes/RightClickArea.tscn" type="PackedScene" id=2]
+
+[node name="Search" type="WindowDialog"]
+anchor_left = 0.239258
+anchor_top = 0.153333
+anchor_right = 0.744141
+anchor_bottom = 0.811667
+margin_bottom = -0.000213623
+rect_min_size = Vector2( 517, 395 )
+popup_exclusive = true
+window_title = "Search"
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Area2D" parent="." instance=ExtResource( 2 )]
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+anchor_left = 0.0126953
+anchor_top = 0.0283333
+anchor_right = 0.488281
+anchor_bottom = 0.881667
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+margin_right = 245.878
+margin_bottom = 337.067
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Back" type="Button" parent="Panel"]
+anchor_left = 0.0117188
+anchor_top = 0.893333
+anchor_right = 0.203125
+anchor_bottom = 0.98
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Search" type="Button" parent="Panel"]
+anchor_left = 0.722656
+anchor_top = 0.893333
+anchor_right = 0.972656
+anchor_bottom = 0.98
+text = "Search!"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="NoResults" type="Label" parent="Panel"]
+anchor_left = 0.160156
+anchor_top = 0.075
+anchor_right = 0.378906
+anchor_bottom = 0.171667
+margin_bottom = -10.0
+text = "Oops... You have no Pokémon that matches search criteria!
+"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HFlowContainer" type="VBoxContainer" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.0283333
+anchor_right = 0.979492
+anchor_bottom = 0.883333
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Nickname" type="LineEdit" parent="Panel/HFlowContainer"]
+margin_right = 256.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 256, 0 )
+size_flags_horizontal = 3
+placeholder_text = "Nickname"
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HFlowContainer" type="HBoxContainer" parent="Panel/HFlowContainer"]
+margin_top = 28.0
+margin_right = 256.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+
+[node name="Type 1" type="OptionButton" parent="Panel/HFlowContainer/HFlowContainer"]
+margin_right = 126.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "All"
+items = [ "All", null, false, 0, null, "Normal", null, false, 1, null, "Fire", null, false, 2, null, "Water", null, false, 3, null, "Grass", null, false, 4, null, "Electric", null, false, 5, null, "Ice", null, false, 6, null, "Fighting", null, false, 7, null, "Poison", null, false, 8, null, "Ground", null, false, 9, null, "Flying", null, false, 10, null, "Psychic", null, false, 11, null, "Bug", null, false, 12, null, "Rock", null, false, 13, null, "Ghost", null, false, 14, null, "Dark", null, false, 15, null, "Dragon", null, false, 16, null, "Steel", null, false, 17, null, "Fairy", null, false, 18, null ]
+selected = 0
+
+[node name="Type 2" type="OptionButton" parent="Panel/HFlowContainer/HFlowContainer"]
+margin_left = 130.0
+margin_right = 256.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "All"
+items = [ "All", null, false, 0, null, "Normal", null, false, 1, null, "Fire", null, false, 2, null, "Water", null, false, 3, null, "Grass", null, false, 4, null, "Electric", null, false, 5, null, "Ice", null, false, 6, null, "Fighting", null, false, 7, null, "Poison", null, false, 8, null, "Ground", null, false, 9, null, "Flying", null, false, 10, null, "Psychic", null, false, 11, null, "Bug", null, false, 12, null, "Rock", null, false, 13, null, "Ghost", null, false, 14, null, "Dark", null, false, 15, null, "Dragon", null, false, 16, null, "Steel", null, false, 17, null, "Fairy", null, false, 18, null ]
+selected = 0
+
+[node name="Gender" type="OptionButton" parent="Panel/HFlowContainer"]
+margin_top = 52.0
+margin_right = 256.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+text = "All"
+items = [ "All", null, false, 3, null, "Male", null, false, 0, null, "Female", null, false, 1, null, "N/A", null, false, 2, null ]
+selected = 0
+
+[node name="Trainer" type="OptionButton" parent="Panel/HFlowContainer"]
+margin_top = 76.0
+margin_right = 256.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+text = "All Trainers"
+items = [ "All Trainers", null, false, 0, null ]
+selected = 0
+
+[connection signal="visibility_changed" from="." to="." method="_on_Search_visibility_changed"]
+[connection signal="pressed" from="Panel/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="Panel/Search" to="." method="_on_Search_pressed"]
+[connection signal="text_entered" from="Panel/HFlowContainer/Nickname" to="." method="_on_LineEdit_text_entered"]

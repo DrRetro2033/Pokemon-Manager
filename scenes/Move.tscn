@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://PanelTheme.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/Move.gd" type="Script" id=2]
+[ext_resource path="res://fonts/Essentiarum Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://sprites/ui/Special.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=48]
+size = 22
+font_data = ExtResource( 3 )
+
+[node name="Move1" type="VBoxContainer"]
+anchor_right = 0.115234
+anchor_bottom = 0.19
+mouse_default_cursor_shape = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 117.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Move1"
+align = 1
+valign = 1
+
+[node name="Row1" type="HBoxContainer" parent="."]
+margin_top = 56.0
+margin_right = 117.0
+margin_bottom = 83.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Power" type="Label" parent="Row1"]
+margin_right = 56.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Power"
+align = 1
+valign = 1
+
+[node name="PP" type="Label" parent="Row1"]
+margin_left = 60.0
+margin_right = 117.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "PP"
+align = 1
+valign = 1
+
+[node name="Row2" type="HBoxContainer" parent="."]
+margin_top = 87.0
+margin_right = 117.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Type" type="PanelContainer" parent="Row2"]
+margin_right = 56.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+theme_type_variation = "RoundedFlatPanel"
+
+[node name="Label" type="Label" parent="Row2/Type"]
+margin_right = 56.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 27 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 48 )
+text = "g"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="PanelContainer" parent="Row2"]
+margin_left = 60.0
+margin_right = 117.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+theme_type_variation = "RoundedFlatPanel"
+
+[node name="TextureRect" type="TextureRect" parent="Row2/Form"]
+margin_right = 57.0
+margin_bottom = 27.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}

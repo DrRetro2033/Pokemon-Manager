@@ -1,0 +1,346 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://abomasnow.png" type="Texture" id=1]
+[ext_resource path="res://fonts/Essentiarum Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://fonts/Futura Condensed Extra Bold.otf" type="DynamicFontData" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Panel
+
+const path = \"res://sprites/pokemon/official-artwork/\"
+onready var sprite = $TextureRect
+onready var type1_color = $Type1
+onready var type2_color = $Type2
+onready var type1 = $Type1/Label
+onready var type2 = $Type2/Label
+onready var one_type = $OnlyOneType/Label
+onready var one_type_color = $OnlyOneType
+onready var text = $RichTextLabel
+onready var poke_name = $Name
+onready var species = $Species
+onready var gender = $Gender/Label
+onready var gender_color = $Gender
+onready var lv = $LV/Label
+enum types {
+	NULL,
+	NORMAL,
+	FIRE,
+	WATER,
+	GRASS,
+	ELECTRIC,
+	ICE,
+	FIGHTING,
+	POISON,
+	GROUND,
+	FLYING,
+	PSYCHIC,
+	BUG,
+	ROCK,
+	GHOST,
+	DARK,
+	DRAGON,
+	STEEL,
+	FAIRY
+}
+
+
+func _on_Back_pressed():
+	visible = false
+
+func types(var type, var node):
+	match type: #sets the text and color for the type2
+		types.NULL:
+			node.get_child(0).text = \"n/a\"
+			node.color = Color8(66,66,66,255)
+		types.NORMAL:
+			node.get_child(0).text = \"c\"
+			node.color = Color(\"#c3c2a4\")
+		types.FIRE:
+			node.get_child(0).text = \"r\"
+			node.color = Color(\"#df2c04\")
+		types.WATER:
+			node.get_child(0).text = \"w\"
+			node.color = Color(\"#3578f4\")
+		types.GRASS:
+			node.get_child(0).text = \"g\"
+			node.color = Color(\"#57a031\")
+		types.ELECTRIC:
+			node.get_child(0).text = \"l\"
+			node.color = Color(\"#f8c81d\")
+		types.ICE:
+			node.get_child(0).text = \"i\"
+			node.color = Color(\"#81e0e5\")
+		types.FIGHTING:
+			node.get_child(0).text = \"f\"
+			node.color = Color(\"#6d2818\")
+		types.POISON:
+			node.get_child(0).text = \"o\"
+			node.color = Color(\"#9345b3\")
+		types.GROUND:
+			node.get_child(0).text = \"a\"
+			node.color = Color(\"#d1b85e\")
+		types.FLYING:
+			node.get_child(0).text = \"v\"
+			node.color = Color(\"#84afff\")
+		types.PSYCHIC:
+			node.get_child(0).text = \"p\"
+			node.color = Color(\"#ff398b\")
+		types.BUG:
+			node.get_child(0).text = \"b\"
+			node.color = Color(\"#bdc45b\")
+		types.ROCK:
+			node.get_child(0).text = \"k\"
+			node.color = Color(\"#b29e59\")
+		types.GHOST:
+			node.get_child(0).text = \"h\"
+			node.color = Color(\"#5d66a6\")
+		types.DARK:
+			node.get_child(0).text = \"d\"
+			node.color = Color(\"#442d04\")
+		types.DRAGON:
+			node.get_child(0).text = \"n\"
+			node.color = Color(\"#8c79dc\")
+		types.STEEL:
+			node.get_child(0).text = \"m\"
+			node.color = Color(\"#b7b7ce\")
+		types.FAIRY:
+			node.get_child(0).text = \"y\"
+			node.color = Color(\"#f0aee1\")
+
+
+func open(info):
+	var pokemon = Pokemon.pokemon[info]
+	visible = true
+	types(pokemon[\"type1\"],type1_color)
+	one_type_color.color = type1_color.color
+	one_type.text = type1.text
+	types(pokemon[\"type2\"],type2_color)
+	if type2.text == \"n/a\":
+		one_type_color.visible = true
+		type1_color.visible = false
+		type2_color.visible = false
+	else:
+		one_type_color.visible = false
+		type1_color.visible = true
+		type2_color.visible = true
+	poke_name.text = pokemon[\"nickname\"]
+	var species_name = pokemon[\"species-name\"]
+	species_name[0] = species_name.left(1).to_upper()
+	species.text = species_name
+	match pokemon[\"gender\"]:
+		0:
+			gender.text = \"male\"
+			gender_color.color = Color(\"#12a7da\")
+		1:
+			gender.text = \"female\"
+			gender_color.color = Color(\"#fc92ff\")
+		2:
+			gender.text = \"n/a\"
+			gender_color.color = Color(\"#424242\")
+	var moves = 4
+	while moves > 0:
+		var move
+		var child
+		match moves:
+			1:
+				move = pokemon[\"move1\"]
+				child = get_node(\"GridContainer/Move1\")
+			2:
+				move = pokemon[\"move2\"]
+				child = get_node(\"GridContainer/Move2\")
+			3:
+				move = pokemon[\"move3\"]
+				child = get_node(\"GridContainer/Move3\")
+			4:
+				move = pokemon[\"move4\"]
+				child = get_node(\"GridContainer/Move4\")
+		child.move(move[\"name\"],move[\"typing\"],move[\"form\"],move[\"pp\"],move[\"power\"])
+		moves -= 1
+	text.text = pokemon[\"text\"]
+	lv.text = \"Lv. \"+str(pokemon[\"level\"])
+	var path_name = str(pokemon[\"species\"])
+	var temp_path = path+path_name+\".png\"
+	sprite.set_texture(load(temp_path))
+	$\"Control/V Chart\".EvSet(pokemon)
+	print(pokemon)
+"
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 18
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 12
+font_data = ExtResource( 3 )
+
+[node name="Panel" type="Panel"]
+margin_right = 160.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -64.0
+margin_bottom = 46.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="Type1" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -240.0
+margin_top = 300.0
+margin_right = -132.0
+margin_bottom = 336.0
+color = Color( 0.258824, 0.258824, 0.258824, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Type1"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -52.0
+margin_top = -18.0
+margin_right = 52.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 6 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="Type2" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -124.0
+margin_top = 300.0
+margin_right = -16.0
+margin_bottom = 336.0
+color = Color( 0.258824, 0.258824, 0.258824, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Type2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -52.0
+margin_top = -18.0
+margin_right = 52.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 6 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="OnlyOneType" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -240.0
+margin_top = 300.0
+margin_right = -16.0
+margin_bottom = 336.0
+color = Color( 0.258824, 0.258824, 0.258824, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="OnlyOneType"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -52.0
+margin_top = -18.0
+margin_right = 52.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 6 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="Gender" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -240.0
+margin_top = 256.0
+margin_right = -132.0
+margin_bottom = 292.0
+color = Color( 0.988235, 0.572549, 1, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Gender"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -52.0
+margin_top = -18.0
+margin_right = 52.0
+margin_bottom = 18.0
+text = "n/a"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="LV" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -124.0
+margin_top = 256.0
+margin_right = -16.0
+margin_bottom = 292.0
+color = Color( 0.258824, 0.258824, 0.258824, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="LV"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -52.0
+margin_top = -18.0
+margin_right = 52.0
+margin_bottom = 18.0
+text = "Lv. "
+align = 1
+valign = 1
+
+[node name="Name" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -52.0
+margin_bottom = -72.0
+custom_fonts/font = SubResource( 3 )
+text = "Name"
+valign = 1
+
+[node name="Species" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 16.0
+margin_right = -80.0
+margin_bottom = -64.0
+custom_fonts/font = SubResource( 4 )
+text = "Species"
+valign = 1

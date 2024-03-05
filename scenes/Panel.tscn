@@ -1,0 +1,1288 @@
+[gd_scene load_steps=43 format=2]
+
+[ext_resource path="res://scenes/Move.tscn" type="PackedScene" id=1]
+[ext_resource path="res://abomasnow.png" type="Texture" id=2]
+[ext_resource path="res://fonts/Futura Condensed Extra Bold.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://fonts/Essentiarum Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://scenes/V Chart.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/ExpChart.tscn" type="PackedScene" id=6]
+[ext_resource path="res://fonts/FemaleAndMaleSymbols-BLql.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://addons/native_dialogs/bin/native_dialog_save_file.gdns" type="Script" id=8]
+[ext_resource path="res://PanelTheme.tres" type="Theme" id=9]
+[ext_resource path="res://scenes/Types.tscn" type="PackedScene" id=10]
+[ext_resource path="res://sprites/ui/icons/share.png" type="Texture" id=11]
+[ext_resource path="res://fonts/OpenSans-VariableFont_wdth,wght.ttf" type="DynamicFontData" id=12]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Panel
+const default_scale = 28
+const default_size = 24
+const species_font_size = 28
+const species_default_rect_size = 48
+const name_font_size = 40
+const name_default_rect_size = 88
+const text_font_size = 16
+const text_default_rect_size = 312
+const alpha = 255
+const user_path_windows = \"\"
+onready var sprite = $TextureRect
+onready var type1_color = $Type1
+onready var type2_color = $Type2
+onready var type1 = $Type1/Label
+onready var type2 = $Type2/Label
+onready var one_type = $OnlyOneType/Label
+onready var one_type_color = $OnlyOneType
+onready var text = $RichTextLabel
+onready var poke_name = $Name
+onready var species = $Species
+onready var gender = $Gender/Label
+onready var gender_color = $Gender
+onready var lv = $LV/Label
+var info = {}
+var sprite_path = \"\"
+func _on_Back_pressed():
+	visible = false
+
+func types(var type, var node):
+	var style = node.get_stylebox(\"panel\").duplicate()
+	if not Pokemon.type_chars.has(type):
+		return
+	node.get_child(0).text = Pokemon.type_chars[type]
+	style.set_bg_color(Pokemon.type_colors[type])
+	node.add_stylebox_override(\"panel\",style)
+
+
+func open(id):
+	var pokemon = Pokemon.pokemon[id]
+	print(pokemon)
+	info = pokemon
+	visible = true
+	if pokemon.has(\"type1\"):
+		types(pokemon[\"type1\"],type1_color)
+		types(pokemon[\"type1\"],one_type_color)
+		one_type.text = type1.text
+	else:
+		ErrorCorrection.add_warning(one_type)
+		return
+	types(pokemon[\"type2\"],type2_color)
+	if type2.text == \"n/a\":
+		one_type_color.visible = true
+		type1_color.visible = false
+		type2_color.visible = false
+	else:
+		one_type_color.visible = false
+		type1_color.visible = true
+		type2_color.visible = true
+	$TypeChart.setChart(pokemon[\"type1\"],pokemon[\"type2\"])
+	poke_name.text = pokemon[\"nickname\"]
+	var species_name = pokemon[\"species-name\"]
+	species_name[0] = species_name.left(1).to_upper()
+	species.text = species_name
+	var gender_styles = gender_color.get_stylebox(\"panel\").duplicate()
+	match pokemon[\"gender\"]:
+		0:
+			gender.text = \"m\"
+			gender_styles.set_bg_color(Color(\"#12a7da\"))
+		1:
+			gender.text = \"f\"
+			gender_styles.set_bg_color(Color(\"#fc92ff\"))
+		2:
+			gender.text = \"h\"
+			gender_styles.set_bg_color(Color(\"#424242\"))
+	gender_color.add_stylebox_override(\"panel\",gender_styles)
+	var moves = 4
+	while moves > 0:
+		var move
+		var child
+		match moves:
+			1:
+				move = pokemon[\"move1\"]
+				child = get_node(\"GridContainer/Move1\")
+			2:
+				move = pokemon[\"move2\"]
+				child = get_node(\"GridContainer/Move2\")
+			3:
+				move = pokemon[\"move3\"]
+				child = get_node(\"GridContainer/Move3\")
+			4:
+				move = pokemon[\"move4\"]
+				child = get_node(\"GridContainer/Move4\")
+		child.move(self,move[\"name\"],move[\"typing\"],move[\"form\"],move[\"pp\"],move[\"power\"],move[\"text\"])
+		moves -= 1
+	text.text = pokemon[\"text\"]
+	lv.text = \"Lv. \"+str(pokemon[\"level\"])
+	$LV/Panel/ProgressBar.max_value = Pokemon.rates[pokemon[\"growth\"]][pokemon[\"level\"]]
+	$LV/Panel/ProgressBar.value = Pokemon.exp_until_next_level(pokemon[\"level\"],pokemon[\"growth\"],pokemon[\"exp\"])
+	$Popup/Chart.set_chart(pokemon[\"growth\"])
+	$Popup/Chart.set_default_def_rate()
+	var path_name = str(pokemon[\"species\"])
+	var temp_path = Pokemon.offical_artwork_path+path_name+\".png\"
+	sprite.set_texture(load(temp_path))
+	sprite_path = temp_path
+	$\"Viewport/V Chart\".EvSet(pokemon)
+	$StatsInfo/RichTextLabel.text = (\"Base:\\n\\tHP: \"+str(pokemon[\"hp\"])+
+		\"\\n\\tAtk: \"+str(pokemon[\"atk\"])+
+		\"\\n\\tDef: \"+str(pokemon[\"def\"])+
+		\"\\n\\tSpe: \"+str(pokemon[\"spe\"])+
+		\"\\n\\tSpD: \"+str(pokemon[\"spd\"])+
+		\"\\n\\tSpA: \"+str(pokemon[\"spa\"])+
+		\"\\nIVs:\\n\\tHP: \"+str(pokemon[\"iv_hp\"])+
+		\"\\n\\tAtk: \"+str(pokemon[\"iv_atk\"])+
+		\"\\n\\tDef: \"+str(pokemon[\"iv_def\"])+
+		\"\\n\\tSpe: \"+str(pokemon[\"iv_spe\"])+
+		\"\\n\\tSpD: \"+str(pokemon[\"iv_spd\"])+
+		\"\\n\\tSpA: \"+str(pokemon[\"iv_spa\"])+
+		\"\\nEVs:\\n\\tHP: \"+str(pokemon[\"ev_hp\"])+
+		\"\\n\\tAtk: \"+str(pokemon[\"ev_atk\"])+
+		\"\\n\\tDef: \"+str(pokemon[\"ev_def\"])+
+		\"\\n\\tSpe: \"+str(pokemon[\"ev_spe\"])+
+		\"\\n\\tSpD: \"+str(pokemon[\"ev_spd\"])+
+		\"\\n\\tSpA: \"+str(pokemon[\"ev_spa\"])
+		)
+	var location = Pokemon.getLocation(pokemon[\"met_location\"],pokemon[\"ot\"][\"game\"])
+	if location.findn(\"route\") != -1:
+		location = \" on \"+location
+	else:
+		location = \" in \"+location
+	$\"OT Info\".text = (pokemon[\"nickname\"]+
+	\" met \"+pokemon[\"ot\"][\"nickname\"]+
+	\" at level \"+str(pokemon[\"met_level\"])+
+	location+\".\")
+	$Ability/Label.text = pokemon[\"ability\"][\"ability\"][\"name\"].capitalize()
+	var file = File.new()
+	var data = API.get_data(pokemon[\"ability\"][\"ability\"][\"url\"])
+	for entry in data.effect_entries:
+		if entry.language.name == 'en':
+			$Ability/Control.hint_tooltip = entry.short_effect
+			break
+	var ability_text : String = $Ability/Control.hint_tooltip
+	var new_text = \"\"
+	var words = ability_text.split(\" \")
+	var len_str_check = \"\"
+	var word_buffer = []
+	for word in words:
+		len_str_check += word
+		if len_str_check.length() > 35:
+			len_str_check = \"\"
+			for x in word_buffer:
+				new_text += x+\" \"
+			word_buffer.clear()
+			new_text += '\\n'
+		word_buffer.append(word)
+	for x in word_buffer:
+		new_text += x+\" \"
+	ability_text = new_text.replace(\". \",\". \\n\")
+	ability_text = ability_text.replace(\"\\n \",\"\\n\")
+	$Ability/Control.hint_tooltip = ability_text
+	$Popup/Chart.current_exp = pokemon[\"exp\"]
+	if (not Trainer.has_had_tutorial(\"pokemon_view\")) and Trainer.have_tutorial:
+		var tutor = Dialogic.start(\"PokemonPanelTutorial\")
+		get_tree().root.add_child(tutor)
+		tutor.set_layer(3)
+		Trainer.set_tutorial_to_finished(\"pokemon_view\")
+	elif not Trainer.have_tutorial:
+		Trainer.set_tutorial_to_finished(\"pokemon_view\")
+
+func tutorial():
+	pass
+
+func _process(delta):
+#	var gender = $Gender/Label.get_font(\"font\",\"Label\")
+#	gender.size = 28 + int($Gender/Label.rect_size.y - default_scale)
+#	$Gender/Label.add_font_override(\"font\",gender)
+#	var font = $Type1/Label.get_font(\"font\",\"Label\").duplicate()
+#	var text_font = $Name.get_font(\"font\",\"Label\").duplicate()
+#	font.size = default_size + int($Type1/Label.rect_size.y - default_scale)
+#	$Type1/Label.add_font_override(\"font\",font.duplicate())
+#	$Type2/Label.add_font_override(\"font\",font.duplicate())
+#	font.size = default_size + int($OnlyOneType/Label.rect_size.y - default_scale)
+#	$OnlyOneType/Label.add_font_override(\"font\",font)
+#	text_font.size = name_font_size + int($Name.rect_size.y - name_default_rect_size)
+#	$Name.add_font_override(\"font\",text_font.duplicate())
+#	text_font.size = species_font_size + int($Species.rect_size.y - species_default_rect_size)
+#	$Species.add_font_override(\"font\",text_font.duplicate())
+#	text_font.size = text_font_size + sqrt(float($RichTextLabel.rect_size.x - text_default_rect_size))
+#	$RichTextLabel.add_font_override(\"normal_font\",text_font)
+	pass
+
+
+func _on_Share_pressed():
+	var file_save = $NativeDialogSaveFile
+	print(OS.get_system_dir(OS.SYSTEM_DIR_PICTURES))
+	file_save.initial_path = OS.get_system_dir(OS.SYSTEM_DIR_PICTURES)+'/'+info.id.split('.')[0]+\".png\"
+	file_save.show()
+
+func on_select_save_pos(path):
+	var pixels = convert_info_to_pixels(info)
+	var x_pos = 0
+	var checksum = pixels.hash()
+	print(\"HASH: \"+str(checksum))
+	pixels = add_new_colors_to_array(pixels,convert_multiple_bytes_to_colors(BinaryTranslator.int_to_hex(checksum)),\"checksum\")
+	var card = load(\"res://scenes/TradingCard.tscn\").instance()
+	add_child(card)
+	card.set_card(info)
+	yield(VisualServer,\"frame_post_draw\")
+	card.set_code(pixels)
+	yield(VisualServer,\"frame_post_draw\")
+	var vis_card = card.get_card()
+	var img : Image = vis_card
+	img.convert(Image.FORMAT_RGBA8)
+	img.resize(img.get_width(),img.get_height()+1)
+	img.lock()
+	img.flip_y()
+	for pixel in pixels:
+		img.set_pixel(x_pos,img.get_height()-1,pixel)
+		x_pos += 1
+	img.save_png(path)
+	card.queue_free()
+	print(path)
+
+func convert_info_to_bars(info):
+	var array = []
+	array.append_array(convert_string_to_bars(info.nickname))
+	var exper = BinaryTranslator.int_to_bin(info.exp)
+	array.append_array(convert_bin_to_bars(exper))
+	return array
+
+func convert_string_to_bars(string:String):
+	var pool = string.to_utf8()
+	var bars : Array = []
+	for charater in pool:
+		var bin : String = BinaryTranslator.int_to_bin(charater)
+		bars.append(convert_bin_to_bars(bin))
+	return bars
+
+func convert_bin_to_bars(string:String):
+	var byte : PoolByteArray = []
+	var x = 0
+	while x < string.length():
+		if string[x] == '1':
+			byte.append(wrapi(x+1,1,8))
+		x += 1
+	return byte
+
+func convert_info_to_pixels(info):
+	var array : Array = []
+	var pos = 0
+	var nickname : String = info.nickname
+	array = add_new_colors_to_array(array,convert_string_to_colors(nickname,12),\"nickname\")
+	print(array)
+	array = add_new_colors_to_array(array,convert_string_to_colors(info.ot.nickname,12),\"ot-nickname\")
+	var color : PoolColorArray = [Color8(info.ot.game,info.ot.gender,info.gender,alpha)]
+	array = add_new_colors_to_array(array,color,\"ot_info and gender\")
+	var id = BinaryTranslator.int_to_hex(info.ot.id)
+	array = add_new_colors_to_array(array,convert_multiple_bytes_to_colors(id),\"ot-id\")
+	id = BinaryTranslator.int_to_bin(id[0])+BinaryTranslator.int_to_bin(id[1])
+	print(id)
+	id = BinaryTranslator.int_to_hex(info.met_location)
+	id.append(info.met_level)
+	array = add_new_colors_to_array(array,convert_multiple_bytes_to_colors(id),\"met_info\")
+	var stat_array = [
+		Color8(info.atk,info.def,info.hp,alpha),
+		Color8(info.spe,info.spa,info.spd,alpha)
+	]
+	array = add_new_colors_to_array(array,stat_array,\"base_stats\")
+	stat_array = [
+		Color8(info.iv_atk,info.iv_def,info.iv_hp,alpha),
+		Color8(info.iv_spe,info.iv_spa,info.iv_spd,alpha)
+	]
+	array = add_new_colors_to_array(array,stat_array,\"iv-stats\")
+	stat_array = [
+		Color8(info.ev_atk,info.ev_def,info.ev_hp,alpha),
+		Color8(info.ev_spe,info.ev_spa,info.ev_spd,alpha)
+	]
+	array = add_new_colors_to_array(array,stat_array,\"ev-stats\")
+	var moves = [\"move1\",\"move2\",\"move3\",\"move4\"]
+	for move in moves:
+		var bytes = BinaryTranslator.int_to_hex(info[move].id)
+		array = add_new_colors_to_array(array,convert_multiple_bytes_to_colors(bytes),move)
+	id = BinaryTranslator.int_to_hex(info.exp)
+	if id.size() != 4:
+		var start = id.size()-1
+		id.resize(4)
+		while start < id.size():
+			id[start] = 0
+			start += 1
+	array = add_new_colors_to_array(array,convert_multiple_bytes_to_colors(id),\"exp\")
+	id = BinaryTranslator.int_to_hex(info.species)
+	if id.size() == 1:
+		id.resize(2)
+		id[1] = 0
+	color = [Color8(id[0],id[1],info[\"form\"],alpha)]
+	array = add_new_colors_to_array(array,color,\"species\")
+	color = [Color8(info[\"ability_number\"],0,0,alpha)]
+	array = add_new_colors_to_array(array,color,\"ability_number\")
+	array = add_new_colors_to_array(array,convert_string_to_colors(info.id.trim_prefix(' ').get_slice('-',2),12),\"hash\")
+	return array
+
+func add_new_colors_to_array(array:PoolColorArray, new_colors:PoolColorArray, id:String):
+	var size = array.size()
+	print(\"Pixel Location: \"+str(size)+\"-\"+str((size)+new_colors.size())+\" ID: \"+id)
+	for color in new_colors:
+		array.append(color)
+	return array
+
+func convert_multiple_bytes_to_colors(pool:PoolByteArray):
+	var array : PoolColorArray = []
+	while not pool.empty():
+		if pool.size() == 2:
+			print(\"Only two bytes left\")
+			array.append(Color8(pool[0],pool[1],0,alpha))
+			pool.remove(0)
+			pool.remove(0)
+		elif pool.size() == 1:
+			print(\"Only one byte left\")
+			array.append(Color8(pool[0],0,0,alpha))
+			pool.remove(0)
+		else:
+			array.append(Color8(pool[0],pool[1],pool[2],alpha))
+			pool.remove(0)
+			pool.remove(0)
+			pool.remove(0)
+	print(array)
+	return array
+
+func convert_string_to_colors(string:String,max_chars:int):
+	var pool = string.to_utf8()
+	print(pool)
+	while pool.size() < max_chars:
+		pool.append(0)
+	var array : PoolColorArray = []
+	while not pool.empty():
+		if pool.size() == 2:
+			print(\"Only two bytes left\")
+			array.append(Color8(pool[0],pool[1],0,alpha))
+			pool.remove(0)
+			pool.remove(0)
+		elif pool.size() == 1:
+			print(\"Only one byte left\")
+			array.append(Color8(pool[0],0,0,alpha))
+			pool.remove(0)
+		else:
+			array.append(Color8(pool[0],pool[1],pool[2],alpha))
+			pool.remove(0)
+			pool.remove(0)
+			pool.remove(0)
+	print(array)
+	return array
+
+
+func _on_ExpButton_pressed():
+	$Popup.rect_global_position = get_global_mouse_position()
+	$Popup.popup()
+
+"
+
+[sub_resource type="DynamicFont" id=53]
+size = 26
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxEmpty" id=60]
+
+[sub_resource type="StyleBoxEmpty" id=61]
+
+[sub_resource type="StyleBoxEmpty" id=62]
+
+[sub_resource type="StyleBoxEmpty" id=63]
+
+[sub_resource type="DynamicFont" id=50]
+size = 28
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=57]
+bg_color = Color( 0.145098, 0.145098, 0.164706, 1 )
+draw_center = false
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color( 0.145098, 0.145098, 0.164706, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+expand_margin_left = 20.0
+expand_margin_right = 20.0
+expand_margin_top = 20.0
+expand_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxFlat" id=56]
+bg_color = Color( 0, 0.6, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=55]
+bg_color = Color( 0.258824, 0.258824, 0.258824, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id=59]
+bg_color = Color( 0.258824, 0.258824, 0.258824, 1 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="DynamicFont" id=58]
+font_data = ExtResource( 12 )
+
+[sub_resource type="StyleBoxFlat" id=47]
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=48]
+bg_color = Color( 0.258824, 0.258824, 0.258824, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="DynamicFont" id=45]
+size = 48
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=46]
+size = 30
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=54]
+font_data = ExtResource( 3 )
+
+[sub_resource type="ViewportTexture" id=49]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="StyleBoxEmpty" id=64]
+
+[sub_resource type="StyleBoxEmpty" id=65]
+
+[sub_resource type="StyleBoxEmpty" id=66]
+
+[sub_resource type="StyleBoxEmpty" id=67]
+
+[sub_resource type="StyleBoxFlat" id=24]
+
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0.815686, 0, 0, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id=26]
+bg_color = Color( 0, 0.211765, 0.815686, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id=35]
+bg_color = Color( 0.976471, 0.984314, 0, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id=36]
+bg_color = Color( 0.831373, 0.721569, 0, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id=37]
+bg_color = Color( 0.65098, 0.65098, 0.65098, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id=38]
+bg_color = Color( 0, 0.831373, 0.796078, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="GDScript" id=51]
+script/source = "extends PopupPanel
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+
+func _on_GraphTool_pressed():
+	set_global_position(get_viewport().get_mouse_position())
+	$RichTextLabel.scroll_to_line(0) 
+	popup()
+
+"
+
+[node name="Panel" type="Panel" groups=["Info Panel"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.75
+anchor_right = 1.0
+anchor_bottom = 0.427
+margin_left = -6.10352e-05
+margin_bottom = -0.200012
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="TypeChart" parent="." instance=ExtResource( 10 )]
+anchor_right = 0.0
+margin_right = 140.0
+
+[node name="Type1" type="PanelContainer" parent="."]
+anchor_left = 0.765625
+anchor_top = 0.546667
+anchor_right = 0.871094
+anchor_bottom = 0.593333
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Type1"]
+margin_right = 108.0
+margin_bottom = 27.9996
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 53 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="Type2" type="PanelContainer" parent="."]
+anchor_left = 0.878906
+anchor_top = 0.546667
+anchor_right = 0.984375
+anchor_bottom = 0.593333
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Type2"]
+margin_right = 108.0
+margin_bottom = 27.9996
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 53 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="OnlyOneType" type="PanelContainer" parent="."]
+anchor_left = 0.765625
+anchor_top = 0.546667
+anchor_right = 0.984375
+anchor_bottom = 0.593333
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="OnlyOneType"]
+margin_right = 224.0
+margin_bottom = 27.9996
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 53 )
+text = "g"
+align = 1
+valign = 2
+
+[node name="TypeButton" type="ToolButton" parent="."]
+anchor_left = 0.765625
+anchor_top = 0.546666
+anchor_right = 0.984375
+anchor_bottom = 0.593332
+mouse_default_cursor_shape = 16
+custom_styles/hover = SubResource( 60 )
+custom_styles/pressed = SubResource( 61 )
+custom_styles/focus = SubResource( 62 )
+custom_styles/disabled = SubResource( 63 )
+action_mode = 0
+button_mask = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Gender" type="PanelContainer" parent="."]
+anchor_left = 0.765625
+anchor_top = 0.486667
+anchor_right = 0.871094
+anchor_bottom = 0.533333
+margin_bottom = 3.05176e-05
+theme = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Gender"]
+margin_right = 108.0
+margin_bottom = 27.9996
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 50 )
+text = "f"
+align = 1
+valign = 1
+
+[node name="LV" type="PanelContainer" parent="."]
+anchor_left = 0.878906
+anchor_top = 0.486667
+anchor_right = 0.984375
+anchor_bottom = 0.533333
+margin_bottom = 3.05176e-05
+theme = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Panel" type="Panel" parent="LV"]
+margin_right = 108.0
+margin_bottom = 27.9996
+rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 57 )
+
+[node name="ProgressBar" type="ProgressBar" parent="LV/Panel"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/fg = SubResource( 56 )
+custom_styles/bg = SubResource( 55 )
+percent_visible = false
+
+[node name="Label" type="Label" parent="LV"]
+margin_top = 6.0
+margin_right = 108.0
+margin_bottom = 20.0
+text = "Lv. "
+align = 1
+valign = 1
+
+[node name="Ability" type="PanelContainer" parent="."]
+anchor_left = 0.765625
+anchor_top = 0.426667
+anchor_right = 0.984375
+anchor_bottom = 0.473333
+rect_min_size = Vector2( 0, 20 )
+mouse_default_cursor_shape = 16
+custom_styles/panel = SubResource( 59 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Ability"]
+margin_right = 224.0
+margin_bottom = 27.9996
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 58 )
+text = "Ability"
+align = 1
+valign = 1
+
+[node name="Control" type="Control" parent="Ability"]
+margin_right = 224.0
+margin_bottom = 27.9996
+
+[node name="ExpButton" type="ToolButton" parent="."]
+anchor_left = 0.878906
+anchor_top = 0.486667
+anchor_right = 0.984375
+anchor_bottom = 0.533333
+mouse_default_cursor_shape = 16
+action_mode = 0
+button_mask = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Back" type="Button" parent="."]
+visible = false
+anchor_left = 0.0078125
+anchor_top = 0.92
+anchor_right = 0.101563
+anchor_bottom = 0.986667
+custom_styles/hover = SubResource( 47 )
+custom_styles/normal = SubResource( 48 )
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Share" type="Button" parent="."]
+visible = false
+anchor_left = 0.0292969
+anchor_top = 0.891667
+anchor_right = 0.0683599
+anchor_bottom = 0.958334
+custom_styles/hover = SubResource( 47 )
+custom_styles/normal = SubResource( 48 )
+icon = ExtResource( 11 )
+icon_align = 1
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Name" type="Label" parent="."]
+anchor_left = 0.046875
+anchor_top = 0.04
+anchor_right = 0.546875
+anchor_bottom = 0.186667
+rect_min_size = Vector2( 0, 88 )
+custom_fonts/font = SubResource( 45 )
+text = "Name"
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Species" type="Label" parent="."]
+anchor_left = 0.046875
+anchor_top = 0.18
+anchor_right = 0.546875
+anchor_bottom = 0.26
+margin_bottom = -1.52588e-05
+rect_min_size = Vector2( 0, 48 )
+custom_fonts/font = SubResource( 46 )
+text = "Species"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchor_left = 0.765625
+anchor_top = 0.608333
+anchor_right = 0.984375
+anchor_bottom = 0.914999
+custom_constants/vseparation = 12
+columns = 2
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Move1" parent="GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 110.0
+margin_bottom = 86.0
+mouse_default_cursor_shape = 0
+
+[node name="Move2" parent="GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 114.0
+margin_right = 224.0
+margin_bottom = 86.0
+mouse_default_cursor_shape = 0
+
+[node name="Move3" parent="GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 98.0
+margin_right = 110.0
+margin_bottom = 183.0
+mouse_default_cursor_shape = 0
+
+[node name="Move4" parent="GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 114.0
+margin_top = 98.0
+margin_right = 224.0
+margin_bottom = 183.0
+mouse_default_cursor_shape = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_left = 0.046875
+anchor_top = 0.28
+anchor_right = 0.351563
+anchor_bottom = 0.553333
+rect_min_size = Vector2( 312, 162 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+custom_fonts/normal_font = SubResource( 54 )
+meta_underlined = false
+text = "This is for the pokedex's entry"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 896, 1024 )
+transparent_bg = true
+handle_input_locally = false
+hdr = false
+disable_3d = true
+usage = 0
+render_target_v_flip = true
+render_target_update_mode = 3
+
+[node name="V Chart" parent="Viewport" instance=ExtResource( 5 )]
+
+[node name="OT Info" type="Label" parent="."]
+anchor_left = 0.046875
+anchor_top = 0.553333
+anchor_right = 0.3125
+anchor_bottom = 0.576667
+text = "Caught by in"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Control" type="TextureRect" parent="."]
+anchor_left = 0.401367
+anchor_top = 0.308333
+anchor_right = 0.598633
+anchor_bottom = 0.691667
+rect_min_size = Vector2( 202, 230 )
+mouse_filter = 0
+mouse_default_cursor_shape = 16
+input_pass_on_modal_close_click = false
+texture = SubResource( 49 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="GraphTool" type="ToolButton" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_default_cursor_shape = 16
+custom_styles/hover = SubResource( 64 )
+custom_styles/pressed = SubResource( 65 )
+custom_styles/focus = SubResource( 66 )
+custom_styles/disabled = SubResource( 67 )
+action_mode = 0
+button_mask = 2
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+margin_right = 112.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Games" type="VBoxContainer" parent="PopupPanel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 108.0
+margin_bottom = 324.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Gen1" type="VBoxContainer" parent="PopupPanel/Games"]
+margin_right = 104.0
+margin_bottom = 50.0
+
+[node name="Gen Name" type="Label" parent="PopupPanel/Games/Gen1"]
+margin_right = 104.0
+margin_bottom = 14.0
+text = "Gen 1"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupPanel/Games/Gen1"]
+margin_top = 18.0
+margin_right = 104.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Red" type="Button" parent="PopupPanel/Games/Gen1/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 24 )
+custom_styles/normal = SubResource( 25 )
+
+[node name="Blue" type="Button" parent="PopupPanel/Games/Gen1/HBoxContainer"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = SubResource( 26 )
+
+[node name="Yellow" type="Button" parent="PopupPanel/Games/Gen1"]
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/hover = SubResource( 24 )
+custom_styles/normal = SubResource( 35 )
+
+[node name="Gen2" type="VBoxContainer" parent="PopupPanel/Games"]
+margin_top = 54.0
+margin_right = 104.0
+margin_bottom = 104.0
+
+[node name="Gen Name" type="Label" parent="PopupPanel/Games/Gen2"]
+margin_right = 104.0
+margin_bottom = 14.0
+text = "Gen 2"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupPanel/Games/Gen2"]
+margin_top = 18.0
+margin_right = 104.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Gold" type="Button" parent="PopupPanel/Games/Gen2/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 24 )
+custom_styles/normal = SubResource( 36 )
+
+[node name="Sliver" type="Button" parent="PopupPanel/Games/Gen2/HBoxContainer"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = SubResource( 37 )
+
+[node name="Crystal" type="Button" parent="PopupPanel/Games/Gen2"]
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/hover = SubResource( 24 )
+custom_styles/normal = SubResource( 38 )
+text = "Crystal"
+
+[node name="Gen3" type="VBoxContainer" parent="PopupPanel/Games"]
+margin_top = 108.0
+margin_right = 104.0
+margin_bottom = 140.0
+
+[node name="Gen Name" type="Label" parent="PopupPanel/Games/Gen3"]
+margin_right = 104.0
+margin_bottom = 14.0
+text = "Gen 3"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupPanel/Games/Gen3"]
+margin_top = 18.0
+margin_right = 104.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Red" type="Button" parent="PopupPanel/Games/Gen3/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 24 )
+custom_styles/normal = SubResource( 25 )
+text = "Red"
+
+[node name="Blue" type="Button" parent="PopupPanel/Games/Gen3/HBoxContainer"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = SubResource( 26 )
+text = "Blue"
+
+[node name="Gen4" type="VBoxContainer" parent="PopupPanel/Games"]
+margin_top = 144.0
+margin_right = 104.0
+margin_bottom = 176.0
+
+[node name="Gen Name" type="Label" parent="PopupPanel/Games/Gen4"]
+margin_right = 104.0
+margin_bottom = 14.0
+text = "Gen 4"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupPanel/Games/Gen4"]
+margin_top = 18.0
+margin_right = 104.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Red" type="Button" parent="PopupPanel/Games/Gen4/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 24 )
+custom_styles/normal = SubResource( 25 )
+text = "Red"
+
+[node name="Blue" type="Button" parent="PopupPanel/Games/Gen4/HBoxContainer"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = SubResource( 26 )
+text = "Blue"
+
+[node name="Gen5" type="VBoxContainer" parent="PopupPanel/Games"]
+margin_top = 180.0
+margin_right = 104.0
+margin_bottom = 212.0
+
+[node name="Gen Name" type="Label" parent="PopupPanel/Games/Gen5"]
+margin_right = 104.0
+margin_bottom = 14.0
+text = "Gen 5"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupPanel/Games/Gen5"]
+margin_top = 18.0
+margin_right = 104.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Red" type="Button" parent="PopupPanel/Games/Gen5/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 24 )
+custom_styles/normal = SubResource( 25 )
+text = "Red"
+
+[node name="Blue" type="Button" parent="PopupPanel/Games/Gen5/HBoxContainer"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = SubResource( 26 )
+text = "Blue"
+
+[node name="Gen6" type="VBoxContainer" parent="PopupPanel/Games"]
+margin_top = 216.0
+margin_right = 104.0
+margin_bottom = 248.0
+
+[node name="Gen Name" type="Label" parent="PopupPanel/Games/Gen6"]
+margin_right = 104.0
+margin_bottom = 14.0
+text = "Gen 6"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupPanel/Games/Gen6"]
+margin_top = 18.0
+margin_right = 104.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Red" type="Button" parent="PopupPanel/Games/Gen6/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 24 )
+custom_styles/normal = SubResource( 25 )
+text = "Red"
+
+[node name="Blue" type="Button" parent="PopupPanel/Games/Gen6/HBoxContainer"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = SubResource( 26 )
+text = "Blue"
+
+[node name="Gen7" type="VBoxContainer" parent="PopupPanel/Games"]
+margin_top = 252.0
+margin_right = 104.0
+margin_bottom = 284.0
+
+[node name="Gen Name" type="Label" parent="PopupPanel/Games/Gen7"]
+margin_right = 104.0
+margin_bottom = 14.0
+text = "Gen 7"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupPanel/Games/Gen7"]
+margin_top = 18.0
+margin_right = 104.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Red" type="Button" parent="PopupPanel/Games/Gen7/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 24 )
+custom_styles/normal = SubResource( 25 )
+text = "Red"
+
+[node name="Blue" type="Button" parent="PopupPanel/Games/Gen7/HBoxContainer"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = SubResource( 26 )
+text = "Blue"
+
+[node name="Gen8" type="VBoxContainer" parent="PopupPanel/Games"]
+margin_top = 288.0
+margin_right = 104.0
+margin_bottom = 320.0
+
+[node name="Gen Name" type="Label" parent="PopupPanel/Games/Gen8"]
+margin_right = 104.0
+margin_bottom = 14.0
+text = "Gen 8"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupPanel/Games/Gen8"]
+margin_top = 18.0
+margin_right = 104.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Red" type="Button" parent="PopupPanel/Games/Gen8/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 24 )
+custom_styles/normal = SubResource( 25 )
+text = "Red"
+
+[node name="Blue" type="Button" parent="PopupPanel/Games/Gen8/HBoxContainer"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = SubResource( 26 )
+text = "Blue"
+
+[node name="StatsInfo" type="PopupPanel" parent="."]
+margin_right = 188.0
+margin_bottom = 112.0
+script = SubResource( 51 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StatsInfo"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+text = "Base:
+	HP: 1
+	Atk: 1
+	Def: 1
+	Spe: 1
+	Spd: 1
+	SpA: 1
+IVs:
+	HP: 1
+	Atk: 1
+	Def: 1
+	Spe: 1
+	Spd: 1
+	SpA: 1
+EVs:
+	HP: 1
+	Atk: 1
+	Def: 1
+	Spe: 1
+	Spd: 1
+	SpA: 1"
+
+[node name="Popup" type="PopupPanel" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 200, 346 )
+
+[node name="Chart" parent="Popup" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 204.0
+margin_bottom = 350.0
+
+[node name="NativeDialogSaveFile" type="Node" parent="."]
+script = ExtResource( 8 )
+title = "Save Pokémon"
+filters = PoolStringArray( "*.png ; PNG Image", "* ; All Files" )
+
+[connection signal="pressed" from="TypeButton" to="TypeChart" method="_on_TypeButton_pressed"]
+[connection signal="pressed" from="ExpButton" to="." method="_on_ExpButton_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="Share" to="." method="_on_Share_pressed"]
+[connection signal="pressed" from="Control/GraphTool" to="StatsInfo" method="_on_GraphTool_pressed"]

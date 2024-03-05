@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/ExpChart.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/RightClickArea.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+resource_name = "CalculatorWindow"
+script/source = "extends WindowDialog
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$Chart.set_rate($Chart.rate)
+	$Chart.set_default_def_rate()
+	$Chart.set_chart($Chart.rate)
+	$Chart/VBoxContainer/Button.disabled = true
+	$Chart/VBoxContainer/Control.restart_scroll()
+	$Chart.allow_exp_change = true
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+
+func _on_Calculator_about_to_show():
+	pass
+
+
+
+func _on_Calculator_popup_hide():
+	queue_free()
+"
+
+[node name="Calculator" type="WindowDialog"]
+anchor_left = 0.402344
+anchor_top = 0.210833
+anchor_right = 0.597656
+anchor_bottom = 0.789167
+rect_min_size = Vector2( 200, 347 )
+window_title = "Calculator"
+resizable = true
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Chart" parent="." instance=ExtResource( 1 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Area2D" parent="." instance=ExtResource( 2 )]
+items = [  ]
+is_active = true
+
+[connection signal="about_to_show" from="." to="." method="_on_Calculator_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_Calculator_popup_hide"]

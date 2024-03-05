@@ -1,0 +1,86 @@
+{
+	"events": [
+		{
+			"animation": "2-fade_in_up.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "This is the search window in Pokémon Manager, and it is a quick and easy way for finding Pokémon in your Boxes."
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "When you start typing, a list of items will appear as you type. Selecting any item will create a [i]tag[/i] below the search bar."
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "You can select them by clicking on them or by using the [b]arrow keys[/b] and [b]enter[/b]. "
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "If your desired [i]tag[/i] is at the top of the list, you can just press [b]enter[/b] to select it. If you want to search by nicknames, you can press [b]shift[/b] and [b]enter[/b] to create a name [i]tag[/i]."
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "These [i]tags[/i] can be used in combination with each other, and they range from a Pokémon's typing, gender, to their original trainer. "
+		},
+		{
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Go ahead, try it!"
+		},
+		{
+			"animation": "5-fade_out_down.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1696863394.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.5",
+		"file": "timeline-1699539658.json",
+		"name": "Search"
+	}
+}

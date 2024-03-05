@@ -4,3 +4,8 @@ save/
 sprites/
 .import/
 *.import
+*~
+.vs/
+.vscode/
+export_presets.cfg
+export_presets-Dell_G15.cfg

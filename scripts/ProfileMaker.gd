@@ -15,12 +15,23 @@ func _on_Button_pressed():
 		visible = false
 
 func _on_ProfilePic_pressed():
-	$"../FileDialog".popup()
+	$"../NativeDialogOpenFile".show()
 
 
 func _on_FileDialog_file_selected(path):
 	var img = Image.new()
 	img.load(path)
+	var tex = ImageTexture.new()
+	tex.create_from_image(img)
+	pic = tex
+	$ProfilePic/Pic.texture = tex
+
+
+func _on_NativeDialogOpenFile_files_selected(files):
+	if files.empty():
+		return
+	var img = Image.new()
+	img.load(files[0])
 	var tex = ImageTexture.new()
 	tex.create_from_image(img)
 	pic = tex

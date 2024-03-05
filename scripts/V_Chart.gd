@@ -10,7 +10,6 @@ enum stats {
 	SP_ATK,
 	VIS
 }
-onready var ev = $EV
 func _ready():
 	pass # Replace with function body.
 

@@ -1,0 +1,163 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://abomasnow.png" type="Texture" id=1]
+[ext_resource path="res://scenes/RightClickArea.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Button
+signal dragged_and_dropped(node)
+signal on_right_click(id)
+const path = \"res://sprites/pokemon/icons/\"
+const path_to_info_window = \"res://scenes/PokemonInfoPanel.tscn\"
+onready var label = $VBoxContainer/Label
+onready var sprite = $VBoxContainer/TextureRect
+onready var hold_timer = $Timer
+## For drag and drop. Are users allowed to start dragging from this button?
+export var can_drag = true 
+## For drag and drop. Defines what \"Pokemon_Button\" IDs are allowed to get a copy of this one's pokémon.
+export var make_a_copy_for = [\"party\"] 
+## For drag and drop. Defines what \"Pokemon_Button\" IDs are allowed to switch their pokémon with this one.
+export var ids_allowed = [ 
+	\"bank\"
+]
+export var id = \"bank\"
+export var right_click_items : PoolStringArray = []
+var info
+func _ready():
+	$Area2D.items = right_click_items
+
+func _process(delta):
+	pass
+
+func pokeButton(data):
+	label = $VBoxContainer/Label
+	sprite = $VBoxContainer/TextureRect
+	if data != null:
+		info = data
+		var pokemon = Pokemon.pokemon[data]
+		disabled = false
+		label.visible = true
+		sprite.visible = true
+		label.text = pokemon[\"nickname\"]
+		if pokemon.has(\"sprite\"):
+			var path_name = str(pokemon[\"sprite\"])
+			var temp_path = path+path_name
+			var file = File.new()
+			if ResourceLoader.exists(temp_path):
+				sprite.set_texture(load(temp_path))
+			else:
+				sprite.set_texture(load(\"res://sprites/ui/icons/error.svg\"))
+		else:
+			sprite.set_texture(load(\"res://sprites/ui/icons/error.svg\"))
+		$Area2D.is_active = true
+		$Area2D/CollisionShape2D.disabled = false
+	else:
+		$Area2D/CollisionShape2D.disabled = true
+		info = null
+		disabled = true
+		label.visible = false
+		sprite.visible = false
+		$Area2D.is_active = false
+
+
+func _on_Button_pressed():
+	get_tree().root.get_node(\"Control\").create_new_info_panel(info)
+	hold_timer.stop()
+
+
+func _on_Button_button_down():
+#	yield(get_tree().create_timer(2.0), \"timeout\")
+	get_drag_data(Vector2(0.0,0.0))
+
+func get_drag_data(position):
+	if not disabled and can_drag:
+		var data = {}
+		data[\"origin\"] = self
+		data[\"pokemon\"] = info
+		var drag_button = TextureRect.new()
+		drag_button.texture = get_child(0).get_child(0).texture
+		drag_button.rect_size = Vector2(100,100)
+		var control = Control.new()
+		control.add_child(drag_button)
+		drag_button.rect_position = -0.5 * drag_button.rect_size
+		set_drag_preview(control)
+		return data
+
+func can_drop_data(position, data):
+	if not ids_allowed.has(data[\"origin\"].id):
+		return false
+	return true
+
+func drop_data(position, data):
+	if not data[\"origin\"].make_a_copy_for.has(id):
+		data[\"origin\"].pokeButton(info)
+	pokeButton(data[\"pokemon\"])
+	emit_signal(\"dragged_and_dropped\",self)
+
+
+
+func _on_Area2D_item_selected(id):
+	print(\"Item: \"+str(id))
+	match self.id:
+		\"party\":
+			match id:
+				0:
+					pokeButton(null)
+		\"bank\":
+			match id:
+				0:
+					print(info)
+					print(Trainer.folder_path)
+					OS.shell_open(\"explorer \"+str(Trainer.folder_path+info))
+	emit_signal(\"on_right_click\",id)
+
+
+
+func _on_Button_visibility_changed():
+	pass # Replace with function body.
+"
+
+[node name="Button" type="Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+script = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+visible = false
+margin_right = 1024.0
+margin_bottom = 470.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.75
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+visible = false
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Name"
+align = 1
+valign = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Area2D" parent="." instance=ExtResource( 2 )]
+
+[connection signal="button_down" from="." to="." method="_on_Button_button_down"]
+[connection signal="pressed" from="." to="." method="_on_Button_pressed"]
+[connection signal="visibility_changed" from="." to="." method="_on_Button_visibility_changed"]
+[connection signal="item_selected" from="Area2D" to="." method="_on_Area2D_item_selected"]

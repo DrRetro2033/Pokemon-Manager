@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/OpenPK.gd" type="Script" id=1]
+
+[node name="Control" type="FileDialog"]
+anchor_left = 0.0976562
+anchor_top = 0.0975
+anchor_right = 0.902344
+anchor_bottom = 0.9025
+window_title = "Open a File"
+dialog_hide_on_ok = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.png;PNG File", "*.pka;Pokémon Manager File" )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[connection signal="file_selected" from="." to="." method="_on_Control_file_selected"]

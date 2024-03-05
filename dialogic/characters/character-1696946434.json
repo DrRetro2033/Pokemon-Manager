@@ -1,0 +1,21 @@
+{
+	"color": "#ffffffff",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1696946434.json",
+	"mirror_portraits": false,
+	"name": "Juniper",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 40,
+	"offset_y": 0,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://sprites/professors/juniper.png"
+		}
+	],
+	"scale": 100,
+	"theme": "theme-1696865062.cfg"
+}
