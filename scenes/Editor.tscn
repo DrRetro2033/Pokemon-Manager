@@ -32,24 +32,25 @@ margin_bottom = 24.0
 hint_tooltip = "Name"
 placeholder_text = "Name"
 
-[node name="Species" type="LineEdit" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 margin_top = 28.0
 margin_right = 1008.0
-margin_bottom = 52.0
-hint_tooltip = "Species"
-placeholder_text = "Species"
+margin_bottom = 48.0
+text = "Nothing"
+items = [ "Nothing", null, false, 0, null ]
+selected = 0
 
 [node name="Ability" type="LineEdit" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-margin_top = 56.0
+margin_top = 52.0
 margin_right = 1008.0
-margin_bottom = 80.0
+margin_bottom = 76.0
 hint_tooltip = "Ability"
 placeholder_text = "Ability"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-margin_top = 84.0
+margin_top = 80.0
 margin_right = 1008.0
-margin_bottom = 108.0
+margin_bottom = 104.0
 
 [node name="Exp" type="SpinBox" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_right = 964.0
@@ -73,9 +74,9 @@ icon_align = 1
 expand_icon = true
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-margin_top = 112.0
+margin_top = 108.0
 margin_right = 1008.0
-margin_bottom = 164.0
+margin_bottom = 160.0
 columns = 2
 
 [node name="Move 1" type="LineEdit" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]

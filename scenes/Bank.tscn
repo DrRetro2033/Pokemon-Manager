@@ -987,8 +987,8 @@ script = SubResource( 17 )
 [node name="Control" type="Control" parent="Loading Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 114688.0
-margin_bottom = 67200.0
+margin_right = 118784.0
+margin_bottom = 69600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 

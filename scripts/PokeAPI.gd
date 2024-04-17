@@ -76,13 +76,15 @@ func check_for_update():
 #	pass
 
 func update_database():
-	$FileRequest.request_raw("https://github.com/PokeAPI/api-data/archive/refs/heads/master.zip")
+	# Who needs an access token when you have the download button? HA!
+	$FileRequest.request_raw("https://github.com/PokeAPI/api-data/archive/refs/heads/master.zip") 
 
 func format_path(folder,idx):
 	return url+folder+'/'+str(idx)+"/index.json"
 
 func get_info(array):
-	var report : ErrorCorrection.ErrorReport = ErrorCorrection.check_for_errors(array)
+	var report : ErrorReport = ErrorReport.new()
+	report.check_for_errors(array)
 	print(report.report)
 	form = array["form"] #tells the species request which form the pokemon is
 	print(format_path("pokemon-species",array["species"]))

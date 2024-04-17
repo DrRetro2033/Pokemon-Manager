@@ -57,12 +57,14 @@ func open(id):
 	print(pokemon)
 	info = pokemon
 	visible = true
+	var report = ErrorReport.new()
+	report.check_for_errors(pokemon)
+	print(report)
 	if pokemon.has(\"type1\"):
 		types(pokemon[\"type1\"],type1_color)
 		types(pokemon[\"type1\"],one_type_color)
 		one_type.text = type1.text
 	else:
-		ErrorCorrection.add_warning(one_type)
 		return
 	types(pokemon[\"type2\"],type2_color)
 	if type2.text == \"n/a\":

@@ -1,90 +1,49 @@
-extends Node2D
+extends Control
 
 var error_rect = []
 var errors = []
 
 func _ready():
-	z_index = 1
-
-func check_for_errors(array):
-	var report = ErrorReport.new()
-	if array.species == 0:
-		report.set_check(ErrorReport.Checks.SPECIES,ErrorReport.FAILED)
-	else:
-		report.set_check(ErrorReport.Checks.SPECIES,ErrorReport.PASSED)
-	
-	var error_in_moves = false
-	#Move 1 Check
-	if array.move1 == 0:
-		report.set_check(ErrorReport.Checks.MOVE_1,ErrorReport.FAILED)
-		error_in_moves = true
-	else:
-		report.set_check(ErrorReport.Checks.MOVE_1,ErrorReport.PASSED)
-	
-	#Move 2 Check
-	if array.move2 == 0:
-		report.set_check(ErrorReport.Checks.MOVE_2,ErrorReport.FAILED)
-		error_in_moves = true
-	else:
-		report.set_check(ErrorReport.Checks.MOVE_2,ErrorReport.PASSED)
-	
-	#Move 3 Check
-	if array.move3 == 0:
-		report.set_check(ErrorReport.Checks.MOVE_3,ErrorReport.FAILED)
-		error_in_moves = true
-	else:
-		report.set_check(ErrorReport.Checks.MOVE_3,ErrorReport.PASSED)
-
-	#Move 4 Check
-	if array.move4 == 0:
-		report.set_check(ErrorReport.Checks.MOVE_4,ErrorReport.FAILED)
-		error_in_moves = true
-	else:
-		report.set_check(ErrorReport.Checks.MOVE_4,ErrorReport.PASSED)
-
-	if error_in_moves:
-		report.set_check(ErrorReport.Checks.MOVES,ErrorReport.FAILED)
-	else:
-		report.set_check(ErrorReport.Checks.MOVES,ErrorReport.PASSED)
-	return report
-
-func add_warning(node:Control):
-	errors.append(node)
+	get_child(0).visible = false
+	get_tree().root.call_deferred("move_child",self,get_tree().root.get_child_count()-1)
 
 func _process(delta):
-	pass
+	display_warnings()
+	yield(VisualServer,"frame_post_draw")
 
-
-func _draw():
-	for node in errors:
-		display_warning(node)
-
-func display_warning(node:Control):
-	var color = Color.red
-	color.a = 0.2
-	var rect = node.get_rect()
-	rect.position = node.rect_global_position
-	draw_rect(rect,color)
-
-class ErrorReport:
-	enum {
-		PASSED,
-		FAILED
+func add_warning(node:Control):
+	var error = {
+		"error_hash":randi(),
+		"node":node.get_path()
 	}
-	enum Checks {
-		SPECIES,
-		MOVES,
-		MOVE_1,
-		MOVE_2,
-		MOVE_3,
-		MOVE_4
-	}
-	var report = {}
+	var error_rect : ColorRect = get_child(0).duplicate()
+	add_child(error_rect)
+	print(node.get_global_rect())
+	error_rect.name = str(error.error_hash)
+	errors.append(error)
 
-	func set_check(check:int,status:int):
-		report[check] = status
-	
-	func check_passed(check:int):
-		if report[check] == PASSED:
-			return true
-		return false
+func display_warnings():
+	for error in errors:
+		if error == null:
+			continue
+		var node : Control = get_node_or_null(error.node)
+		if node == null:
+			remove_error_with_hash(error.error_hash)
+			break
+		var error_rect = get_node(str(error.error_hash))
+		if node != null:
+			error_rect.rect_global_position = node.get_global_rect().position
+			error_rect.rect_size = node.get_global_rect().size
+			error_rect.visible = node.visible
+	return
+
+func remove_error_with_hash(error_hash:int):
+	var x = 0
+	while x < errors.size():
+		var error = errors[x]
+		if error.error_hash == error_hash:
+			errors.remove(x)
+			get_node(str(error_hash)).queue_free()
+			break
+		x += 1
+	return
